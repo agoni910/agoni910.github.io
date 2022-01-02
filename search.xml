@@ -18,22 +18,4 @@
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
   </entry>
-  <entry>
-    <title>postName</title>
-    <url>/2021/12/30/postName/</url>
-    <content><![CDATA[<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">codeblock:</span><br><span class="line">  copy_button:</span><br><span class="line">    enable: false      # 增加复制按钮的开关</span><br><span class="line">    show_result: false # 点击复制完后是否显示 复制成功 结果提示</span><br></pre></td></tr></table></figure>
-]]></content>
-  </entry>
-  <entry>
-    <title>test</title>
-    <url>/2022/01/02/test/</url>
-    <content><![CDATA[<h1 id="测试啊"><a href="#测试啊" class="headerlink" title="测试啊"></a>测试啊</h1><h2 id="是吧"><a href="#是吧" class="headerlink" title="是吧"></a>是吧</h2><p>###超好<br>[] zhendehaow</p>
-]]></content>
-      <categories>
-        <category>a</category>
-      </categories>
-      <tags>
-        <tag>tags</tag>
-      </tags>
-  </entry>
 </search>
