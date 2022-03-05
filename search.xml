@@ -38,7 +38,7 @@
   </entry>
   <entry>
     <title>cs193p_note5 Properties Layout @ViewBuilder</title>
-    <url>/2022/03/03/cs193p-note5/</url>
+    <url>/2022/01/25/cs193p-note5/</url>
     <content><![CDATA[<h2 id="Computed-Properties-计算属性"><a href="#Computed-Properties-计算属性" class="headerlink" title="Computed Properties 计算属性"></a>Computed Properties 计算属性</h2><p>不提供存储值，提供读取器和设置器，接收和设置其他属性</p>
 <p>get用来接收数据，并且返回值，set用来设置其他属性或值</p>
 <h2 id="State"><a href="#State" class="headerlink" title="@State"></a>@State</h2><p>变化会在必要时重新绘制，相当于@ObservedObject</p>
