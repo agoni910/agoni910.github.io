@@ -20,29 +20,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
-<meta name="description" content="Computed Properties 计算属性不提供存储值，提供读取器和设置器，接收和设置其他属性 get用来接收数据，并且返回值，set用来设置其他属性或值 @State变化会在必要时重新绘制，相当于@ObservedObject">
+<meta name="description" content="前言信息收集的方法有很多，例如不与攻击目标直接接触，从公开信息入手了解攻击，称为被动信息收集，也可以使用网络扫描等手段主动与攻击对象发生接触，称主动信息收集。 信息收集内容，技术相关信息：IP地址、子域名、数据库的类型、开放的端口，非技术信息：公司信息、个人信息、习惯、发表的东西 目标基本信息目标基本信息指企业概况、企业理念、规模、产品、工商注册等信息。通过对目标基本信息的收集，攻击者可以对目标形">
 <meta property="og:type" content="article">
-<meta property="og:title" content="cs193p_note5 Properties Layout @ViewBuilder">
-<meta property="og:url" content="http://example.com/2022/01/25/cs193p-note5/index.html">
+<meta property="og:title" content="信息搜集">
+<meta property="og:url" content="http://example.com/2022/03/08/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/index.html">
 <meta property="og:site_name" content="J’s blogs">
-<meta property="og:description" content="Computed Properties 计算属性不提供存储值，提供读取器和设置器，接收和设置其他属性 get用来接收数据，并且返回值，set用来设置其他属性或值 @State变化会在必要时重新绘制，相当于@ObservedObject">
+<meta property="og:description" content="前言信息收集的方法有很多，例如不与攻击目标直接接触，从公开信息入手了解攻击，称为被动信息收集，也可以使用网络扫描等手段主动与攻击对象发生接触，称主动信息收集。 信息收集内容，技术相关信息：IP地址、子域名、数据库的类型、开放的端口，非技术信息：公司信息、个人信息、习惯、发表的东西 目标基本信息目标基本信息指企业概况、企业理念、规模、产品、工商注册等信息。通过对目标基本信息的收集，攻击者可以对目标形">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-01-25T02:49:16.000Z">
-<meta property="article:modified_time" content="2022-03-05T13:58:54.389Z">
+<meta property="article:published_time" content="2022-03-08T07:30:46.000Z">
+<meta property="article:modified_time" content="2022-03-11T10:25:56.684Z">
 <meta property="article:author" content="Wenrong Jiang">
-<meta property="article:tag" content="swift">
-<meta property="article:tag" content="cs193p">
+<meta property="article:tag" content="信息搜集">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2022/01/25/cs193p-note5/">
+<link rel="canonical" href="http://example.com/2022/03/08/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/01/25/cs193p-note5/","path":"2022/01/25/cs193p-note5/","title":"cs193p_note5 Properties Layout @ViewBuilder"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/03/08/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/","path":"2022/03/08/信息搜集/","title":"信息搜集"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>cs193p_note5 Properties Layout @ViewBuilder | J’s blogs</title>
+<title>信息搜集 | J’s blogs</title>
   
 
 
@@ -147,7 +146,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Computed-Properties-%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7"><span class="nav-number">1.</span> <span class="nav-text">Computed Properties 计算属性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#State"><span class="nav-number">2.</span> <span class="nav-text">@State</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Layout"><span class="nav-number">3.</span> <span class="nav-text">Layout</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HStack-amp-VStack"><span class="nav-number">3.1.</span> <span class="nav-text">HStack &amp; VStack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LazyHStack-amp-LazyVStack"><span class="nav-number">3.2.</span> <span class="nav-text">LazyHStack &amp; LazyVStack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ScrollView"><span class="nav-number">3.3.</span> <span class="nav-text">ScrollView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LazyHGrid-amp-LazyVGrid"><span class="nav-number">3.4.</span> <span class="nav-text">LazyHGrid &amp; LazyVGrid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ZStack"><span class="nav-number">3.5.</span> <span class="nav-text">ZStack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GeometryReader"><span class="nav-number">3.6.</span> <span class="nav-text">GeometryReader</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ViewBuilder"><span class="nav-number">4.</span> <span class="nav-text">@ViewBuilder</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%9B%B6%E6%95%A3%E7%9A%84%E4%B8%9C%E8%A5%BF"><span class="nav-number">5.</span> <span class="nav-text">零散的东西</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%9F%BA%E6%9C%AC%E4%BF%A1%E6%81%AF"><span class="nav-number">2.</span> <span class="nav-text">目标基本信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E7%BB%84%E7%BB%87%E6%9E%B6%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">目标组织架构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%85%B6%E4%BB%96%E5%85%AC%E5%BC%80%E4%BF%A1%E6%81%AF"><span class="nav-number">4.</span> <span class="nav-text">目标其他公开信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%9F%9F%E5%90%8D%E4%BF%A1%E6%81%AF"><span class="nav-number">5.</span> <span class="nav-text">目标域名信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87%E5%AD%90%E5%9F%9F%E5%90%8D"><span class="nav-number">6.</span> <span class="nav-text">目标子域名</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87IP"><span class="nav-number">7.</span> <span class="nav-text">目标IP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%82%AE%E4%BB%B6%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-number">8.</span> <span class="nav-text">邮件信息收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%8A%E5%A4%A9%E7%BE%A4%E7%BB%84"><span class="nav-number">9.</span> <span class="nav-text">聊天群组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%86%E5%8F%B2%E6%BC%8F%E6%B4%9E"><span class="nav-number">10.</span> <span class="nav-text">历史漏洞</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E6%89%AB%E6%8F%8F"><span class="nav-number">11.</span> <span class="nav-text">网络扫描</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -226,7 +225,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/01/25/cs193p-note5/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/03/08/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/imga.png">
@@ -239,7 +238,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          cs193p_note5 Properties Layout @ViewBuilder
+          信息搜集
         </h1>
 
         <div class="post-meta-container">
@@ -250,7 +249,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2022-01-25 10:49:16" itemprop="dateCreated datePublished" datetime="2022-01-25T10:49:16+08:00">2022-01-25</time>
+      <time title="创建时间：2022-03-08 15:30:46" itemprop="dateCreated datePublished" datetime="2022-03-08T15:30:46+08:00">2022-03-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -258,7 +257,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/IOS/" itemprop="url" rel="index"><span itemprop="name">IOS</span></a>
+          <a href="/categories/%E7%BD%91%E7%BB%9C%E6%94%BB%E5%87%BB%E4%B8%8E%E9%98%B2%E6%8A%A4/" itemprop="url" rel="index"><span itemprop="name">网络攻击与防护</span></a>
         </span>
     </span>
 
@@ -268,7 +267,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.1k</span>
+      <span>1.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -286,30 +285,39 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h2 id="Computed-Properties-计算属性"><a href="#Computed-Properties-计算属性" class="headerlink" title="Computed Properties 计算属性"></a>Computed Properties 计算属性</h2><p>不提供存储值，提供读取器和设置器，接收和设置其他属性</p>
-<p>get用来接收数据，并且返回值，set用来设置其他属性或值</p>
-<h2 id="State"><a href="#State" class="headerlink" title="@State"></a>@State</h2><p>变化会在必要时重新绘制，相当于@ObservedObject</p>
-<span id="more"></span>
-
-<h2 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h2><h3 id="HStack-amp-VStack"><a href="#HStack-amp-VStack" class="headerlink" title="HStack &amp; VStack"></a>HStack &amp; VStack</h3><p>从最不灵活的视图先分配，text如果空间不够会自动省略</p>
-<p><code>Spacer()</code>非常灵活</p>
-<p><code>Divide()</code> 画一条线分割视图</p>
-<p><code>.layoutPriority()</code> 先获得视图的分配，alig对齐</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">VStack</span>(alignment: .leading) &#123; <span class="operator">...</span> &#125; <span class="comment">//.leading .trailing</span></span><br><span class="line"><span class="type">VStack</span>(alignment: .firstTextBaseline) &#123;&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="LazyHStack-amp-LazyVStack"><a href="#LazyHStack-amp-LazyVStack" class="headerlink" title="LazyHStack &amp; LazyVStack"></a>LazyHStack &amp; LazyVStack</h3><p>不构建不在屏幕上显示的视图，只构建ScrollView中显示在屏幕上的，不灵活</p>
-<h3 id="ScrollView"><a href="#ScrollView" class="headerlink" title="ScrollView"></a>ScrollView</h3><p>接收任何视图在其中滚动</p>
-<h3 id="LazyHGrid-amp-LazyVGrid"><a href="#LazyHGrid-amp-LazyVGrid" class="headerlink" title="LazyHGrid &amp; LazyVGrid"></a>LazyHGrid &amp; LazyVGrid</h3><p>控制多少列或者多少行</p>
-<h3 id="ZStack"><a href="#ZStack" class="headerlink" title="ZStack"></a>ZStack</h3><p>调整自己的大小合适子项</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Text</span>(<span class="string">&quot;hello&quot;</span>).background(<span class="type">Rectangle</span>().foregroundColor(.red))</span><br><span class="line"><span class="comment">//背景大小取决于文字</span></span><br><span class="line"><span class="type">Circle</span>().overlay(<span class="type">Text</span>(<span class="string">&quot;hello&quot;</span>), alignment: .center)</span><br><span class="line"><span class="comment">//文字不重要，很灵活</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="GeometryReader"><a href="#GeometryReader" class="headerlink" title="GeometryReader"></a>GeometryReader</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Geometryreader</span>&#123; geometry <span class="keyword">in</span> </span><br><span class="line">		<span class="operator">...</span></span><br><span class="line">&#125;<span class="comment">//放在视图里 计算视图大小</span></span><br><span class="line"><span class="type">ZStack</span> &#123;&#125;.edgesIgnoringSafeArea([.top]) <span class="comment">//画入安全区域</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="ViewBuilder"><a href="#ViewBuilder" class="headerlink" title="@ViewBuilder"></a>@ViewBuilder</h2><p>将函数返回成很对个视图组成的一个视图</p>
-<p>任意<code>func</code>或<code>只读的计算属性</code>都可以标识为<code>@ViewBuilder</code>，一旦标识，它里面的内容将会被解析为<code>a list of Views</code></p>
-<h2 id="零散的东西"><a href="#零散的东西" class="headerlink" title="零散的东西"></a>零散的东西</h2><p>函数式编程</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> faceUpCardIndices <span class="operator">=</span> cards.indices.filter(&#123; cards[<span class="variable">$0</span>].isFaceUp &#125;)</span><br><span class="line"><span class="comment">//cards.indices是0..&lt;cards.count filter返回一个满足条件的数组</span></span><br><span class="line"><span class="keyword">var</span> faceUpCardIndices <span class="operator">=</span> [<span class="type">Int</span>]()</span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> cards.indices &#123;</span><br><span class="line">		<span class="keyword">if</span> cards[index].isFaceUp &#123;</span><br><span class="line">		faceUpCardIndices.append(index)</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>信息收集的方法有很多，例如不与攻击目标直接接触，从公开信息入手了解攻击，称为被动信息收集，也可以使用网络扫描等手段主动与攻击对象发生接触，称主动信息收集。</p>
+<p>信息收集内容，技术相关信息：IP地址、子域名、数据库的类型、开放的端口，非技术信息：公司信息、个人信息、习惯、发表的东西</p>
+<h3 id="目标基本信息"><a href="#目标基本信息" class="headerlink" title="目标基本信息"></a>目标基本信息</h3><p>目标基本信息指企业概况、企业理念、规模、产品、工商注册等信息。通过对目标基本信息的收集，攻击者可以对目标形成初步了解，定位其核心价值资产</p>
+<p>公司的官网会介绍公司的组织结构、核心成员、地理位置等信息，“关于”、“了解”、ICP备案证书等，获取了公司地址可以尝试连接无认证或采用WEP加密的wifi热点，准备假wifi让员工加入等。获取法人代表信息，查询同一人名的多个公司，进行突破，可以用来钓鱼</p>
+<h3 id="目标组织架构"><a href="#目标组织架构" class="headerlink" title="目标组织架构"></a>目标组织架构</h3><p>目标组织架构是进行企业流程运转、部门设置及职能规划等最基本的结构依据，对子公司、母公司等进行信息收集，可以扩大攻击面，增加成功率</p>
+<h3 id="目标其他公开信息"><a href="#目标其他公开信息" class="headerlink" title="目标其他公开信息"></a>目标其他公开信息</h3><p>包括新闻、招投标信息</p>
+<h3 id="目标域名信息"><a href="#目标域名信息" class="headerlink" title="目标域名信息"></a>目标域名信息</h3><p>目标域名信息收集包括对目标域名的whois信息、域名历史信息收集、注册人&#x2F;注册邮箱&#x2F;注册电话反查等。技术手段信息等第一个步骤。</p>
+<p>通过whois反查可以通过邮箱查找到同一个邮箱备案的多个域名</p>
+<h3 id="目标子域名"><a href="#目标子域名" class="headerlink" title="目标子域名"></a>目标子域名</h3><p>目标子域名收集包括对目标的二级域名、三级域名、四级域名等进行收集。发现隐藏的、被遗忘的子域名上的应用程序可能意味着发现关键漏洞。子域名收集深度和广度决定了进行攻击时的范围，在一定程度上也决定是否可以成功突破目标边界系统。</p>
+<p>常见的子域名收集手段：</p>
+<ul>
+<li>搜索引擎接口查询，表达式： site:example.com</li>
+<li>一些网站 如dnsdb提供查询子域名的服务</li>
+<li>Ssl证书的Subject Alternative Name字段提供对应的子域名 如 <a target="_blank" rel="noopener" href="http://censys.io.certificates/">http://censys.io.certificates</a></li>
+<li>子域名暴力破解，使用暴力破解工具遍历各种子域名</li>
+</ul>
+<h3 id="目标IP"><a href="#目标IP" class="headerlink" title="目标IP"></a>目标IP</h3><p>目标IP即测试目标对外开放的应用于对外服务的IP地址。当子域名无法突破目标时，通过对ip及其开放端口和服务进行攻击，甚至有些不在管理及保护范围内的地址。</p>
+<h3 id="邮件信息收集"><a href="#邮件信息收集" class="headerlink" title="邮件信息收集"></a>邮件信息收集</h3><p>利用邮件系统对目标口令暴力破解或钓鱼</p>
+<h3 id="聊天群组"><a href="#聊天群组" class="headerlink" title="聊天群组"></a>聊天群组</h3><p>群文件等关键信息 搜索公司关键字</p>
+<h3 id="历史漏洞"><a href="#历史漏洞" class="headerlink" title="历史漏洞"></a>历史漏洞</h3><p>以往在互联网公开的目标的各系统漏洞信息。可收集域名信息、IP信息、系统结构等</p>
+<p>通过搜索引擎收集</p>
+<h3 id="网络扫描"><a href="#网络扫描" class="headerlink" title="网络扫描"></a>网络扫描</h3><p>![image-20220311182005093](&#x2F;Users&#x2F;jiangwenrong&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20220311182005093.png)</p>
+<ul>
+<li><p>主机发现</p>
+<p>  ![image-20220311182552226](&#x2F;Users&#x2F;jiangwenrong&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20220311182552226.png)</p>
+</li>
+<li><p>主机识别</p>
+</li>
+<li><p>端口扫描</p>
+</li>
+<li><p>服务识别</p>
+</li>
+</ul>
 
     </div>
 
@@ -319,22 +327,18 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/swift/" rel="tag"># swift</a>
-              <a href="/tags/cs193p/" rel="tag"># cs193p</a>
+              <a href="/tags/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/" rel="tag"># 信息搜集</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/01/20/cs193p-ls/" rel="prev" title="CS193p_assignment2">
-                  <i class="fa fa-chevron-left"></i> CS193p_assignment2
+                <a href="/2022/02/05/cs193p-note6/" rel="prev" title="cs193p_note6 Protocols Shapes">
+                  <i class="fa fa-chevron-left"></i> cs193p_note6 Protocols Shapes
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/02/05/cs193p-note6/" rel="next" title="cs193p_note6 Protocols Shapes">
-                  cs193p_note6 Protocols Shapes <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
