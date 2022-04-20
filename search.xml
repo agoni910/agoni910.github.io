@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>CS193p_assignment2</title>
-    <url>/2022/01/20/cs193p-ls/</url>
+    <url>/2022/02/18/cs193p-ls/</url>
     <content><![CDATA[<p>​    一个历时很久的blog，学完Lesson4之后，自己码的Assignment2的代码，也不知道对不对（毕竟没有参考代码），仅供参考啊</p>
 <h3 id="Task1-amp-2-省略"><a href="#Task1-amp-2-省略" class="headerlink" title="Task1&amp;2: 省略"></a>Task1&amp;2: 省略</h3><h3 id="Task3：将主题添加到模型中，包括主题的名称、一组表情符号、要展示的卡片对数和适当的背景颜色"><a href="#Task3：将主题添加到模型中，包括主题的名称、一组表情符号、要展示的卡片对数和适当的背景颜色" class="headerlink" title="Task3：将主题添加到模型中，包括主题的名称、一组表情符号、要展示的卡片对数和适当的背景颜色"></a>Task3：将主题添加到模型中，包括主题的名称、一组表情符号、要展示的卡片对数和适当的背景颜色</h3><p>创建一个结构体存储主题</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Theme</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">var</span> name: <span class="type">String</span></span><br><span class="line">    <span class="keyword">var</span> emojis: [<span class="type">String</span>]</span><br><span class="line">    <span class="keyword">var</span> numberOfPairsOfCards: <span class="type">Int</span></span><br><span class="line">    <span class="keyword">var</span> color: <span class="type">String</span></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -38,7 +38,7 @@
   </entry>
   <entry>
     <title>cs193p_note5 Properties Layout @ViewBuilder</title>
-    <url>/2022/01/25/cs193p-note5/</url>
+    <url>/2022/02/28/cs193p-note5/</url>
     <content><![CDATA[<h2 id="Computed-Properties-计算属性"><a href="#Computed-Properties-计算属性" class="headerlink" title="Computed Properties 计算属性"></a>Computed Properties 计算属性</h2><p>不提供存储值，提供读取器和设置器，接收和设置其他属性</p>
 <p>get用来接收数据，并且返回值，set用来设置其他属性或值</p>
 <h2 id="State"><a href="#State" class="headerlink" title="@State"></a>@State</h2><p>变化会在必要时重新绘制，相当于@ObservedObject</p>
@@ -74,11 +74,13 @@
   </entry>
   <entry>
     <title>cs193p_note6 Protocols Shapes</title>
-    <url>/2022/02/05/cs193p-note6/</url>
+    <url>/2022/03/05/cs193p-note6/</url>
     <content><![CDATA[<h2 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h2><p>协议是一个精简的<code>class</code>或<code>struct</code></p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Moveable</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">func</span> <span class="title">move</span>(<span class="params">by</span>: <span class="type">Int</span>)</span></span><br><span class="line">    <span class="keyword">var</span> hasMoved: <span class="type">Bool</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">    <span class="keyword">var</span> distanceFromStart: <span class="type">Int</span> &#123; <span class="keyword">get</span> <span class="keyword">set</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>若协议要求一个属性为可读和可写的，那么该属性要求不能用常量存储属性或只读计算属性来满足。若协议只要求属性为可读的，那么任何种类的属性都能满足这个要求，而且如果你的代码需要的话，该属性也可以是可写的。</p>
+<span id="more"></span>
+
 <p>func和var没有任何实现</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ProtableThing</span>: <span class="title">Moveable</span> </span>&#123;</span><br><span class="line">	<span class="comment">//必须执行move(by: Int),hasMoved,distanceFromStart</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Vehicle</span>: <span class="title">Moveable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> passengerCount: <span class="type">Int</span> &#123; <span class="keyword">get</span> <span class="keyword">set</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span>: <span class="title">Vehiche</span>, <span class="title">Leasable</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -110,6 +112,8 @@
     <url>/2022/03/08/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/</url>
     <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>信息收集的方法有很多，例如不与攻击目标直接接触，从公开信息入手了解攻击，称为被动信息收集，也可以使用网络扫描等手段主动与攻击对象发生接触，称主动信息收集。</p>
 <p>信息收集内容，技术相关信息：IP地址、子域名、数据库的类型、开放的端口，非技术信息：公司信息、个人信息、习惯、发表的东西</p>
+<span id="more"></span>
+
 <h3 id="目标基本信息"><a href="#目标基本信息" class="headerlink" title="目标基本信息"></a>目标基本信息</h3><p>目标基本信息指企业概况、企业理念、规模、产品、工商注册等信息。通过对目标基本信息的收集，攻击者可以对目标形成初步了解，定位其核心价值资产</p>
 <p>公司的官网会介绍公司的组织结构、核心成员、地理位置等信息，“关于”、“了解”、ICP备案证书等，获取了公司地址可以尝试连接无认证或采用WEP加密的wifi热点，准备假wifi让员工加入等。获取法人代表信息，查询同一人名的多个公司，进行突破，可以用来钓鱼</p>
 <h3 id="目标组织架构"><a href="#目标组织架构" class="headerlink" title="目标组织架构"></a>目标组织架构</h3><p>目标组织架构是进行企业流程运转、部门设置及职能规划等最基本的结构依据，对子公司、母公司等进行信息收集，可以扩大攻击面，增加成功率</p>
@@ -169,13 +173,15 @@
   </entry>
   <entry>
     <title>CS193p_assignment3</title>
-    <url>/2022/02/07/cs193-a3/</url>
+    <url>/2022/03/20/cs193-a3/</url>
     <content><![CDATA[<h3 id="Task-1"><a href="#Task-1" class="headerlink" title="Task 1"></a>Task 1</h3><blockquote>
 <p>实施一个单人游戏Set</p>
 </blockquote>
 <h3 id="Task-2"><a href="#Task-2" class="headerlink" title="Task 2"></a>Task 2</h3><blockquote>
 <p>所有卡片可见，卡片尽可能的大。也可以增加一个最小尺寸，然后恢复滚动。所有的卡片都必须可识别</p>
 </blockquote>
+<span id="more"></span>
+
 <h3 id="Task-3"><a href="#Task-3" class="headerlink" title="Task 3"></a>Task 3</h3><blockquote>
 <p>有相同的长宽比</p>
 </blockquote>
@@ -228,10 +234,10 @@
   </entry>
   <entry>
     <title>cs193_note 1-4</title>
-    <url>/2022/04/16/cs193-note1-2/</url>
+    <url>/2022/02/20/cs193-note1-2/</url>
     <content><![CDATA[<h3 id="RoundedRectangle"><a href="#RoundedRectangle" class="headerlink" title="RoundedRectangle"></a>RoundedRectangle</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">RoundedRectangle</span>(cornerRadius: <span class="number">20</span>)</span><br><span class="line">	.fill() <span class="comment">//填满</span></span><br><span class="line">	.foregroundColor(.red) <span class="comment">//前景颜色</span></span><br><span class="line">	.stroke(lineWidth: <span class="number">3</span>) <span class="comment">//边框宽度</span></span><br><span class="line">	.strokeBorder</span><br></pre></td></tr></table></figure>
 
-
+<span id="more"></span>
 
 <h3 id="ZStack"><a href="#ZStack" class="headerlink" title="ZStack"></a>ZStack</h3><p>在z轴叠加视图，返回一整个视图内容</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">ZStack</span>(alignment: .top)&#123;</span><br><span class="line">    <span class="comment">//在顶部对齐</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
