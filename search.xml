@@ -29,7 +29,7 @@
 <p>参考代码：<a href="https://github.com/sk-ruban/CS193p">https://github.com/sk-ruban/CS193p</a></p>
 ]]></content>
       <categories>
-        <category>IOS</category>
+        <category>iOS</category>
       </categories>
       <tags>
         <tag>swift</tag>
@@ -37,7 +37,7 @@
       </tags>
   </entry>
   <entry>
-    <title>cs193p_note5 Properties Layout @ViewBuilder</title>
+    <title>CS193p_note5 Properties Layout @ViewBuilder</title>
     <url>/2022/02/28/cs193p-note5/</url>
     <content><![CDATA[<h2 id="Computed-Properties-计算属性"><a href="#Computed-Properties-计算属性" class="headerlink" title="Computed Properties 计算属性"></a>Computed Properties 计算属性</h2><p>不提供存储值，提供读取器和设置器，接收和设置其他属性</p>
 <p>get用来接收数据，并且返回值，set用来设置其他属性或值</p>
@@ -65,7 +65,7 @@
 
 ]]></content>
       <categories>
-        <category>IOS</category>
+        <category>iOS</category>
       </categories>
       <tags>
         <tag>swift</tag>
@@ -73,7 +73,7 @@
       </tags>
   </entry>
   <entry>
-    <title>cs193p_note6 Protocols Shapes</title>
+    <title>CS193p_note6 Protocols Shapes</title>
     <url>/2022/03/05/cs193p-note6/</url>
     <content><![CDATA[<h2 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h2><p>协议是一个精简的<code>class</code>或<code>struct</code></p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Moveable</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">func</span> <span class="title">move</span>(<span class="params">by</span>: <span class="type">Int</span>)</span></span><br><span class="line">    <span class="keyword">var</span> hasMoved: <span class="type">Bool</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">    <span class="keyword">var</span> distanceFromStart: <span class="type">Int</span> &#123; <span class="keyword">get</span> <span class="keyword">set</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -100,7 +100,7 @@
 <p>绘图坐标系，非笛卡尔坐标系，零坐标在左上角，顺逆时针会相反</p>
 ]]></content>
       <categories>
-        <category>IOS</category>
+        <category>iOS</category>
       </categories>
       <tags>
         <tag>swift</tag>
@@ -225,7 +225,7 @@
 </blockquote>
 ]]></content>
       <categories>
-        <category>IOS</category>
+        <category>iOS</category>
       </categories>
       <tags>
         <tag>swift</tag>
@@ -233,7 +233,7 @@
       </tags>
   </entry>
   <entry>
-    <title>cs193_note 1-4</title>
+    <title>CS193_note 1-4</title>
     <url>/2022/02/20/cs193-note1-2/</url>
     <content><![CDATA[<h3 id="RoundedRectangle"><a href="#RoundedRectangle" class="headerlink" title="RoundedRectangle"></a>RoundedRectangle</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">RoundedRectangle</span>(cornerRadius: <span class="number">20</span>)</span><br><span class="line">	.fill() <span class="comment">//填满</span></span><br><span class="line">	.foregroundColor(.red) <span class="comment">//前景颜色</span></span><br><span class="line">	.stroke(lineWidth: <span class="number">3</span>) <span class="comment">//边框宽度</span></span><br><span class="line">	.strokeBorder</span><br></pre></td></tr></table></figure>
 
@@ -248,10 +248,90 @@
 
 <h3 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h3><p>分离了用户界面代码</p>
 <h4 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h4><p>完全独立于UI data 和 logic，app实际上做什么</p>
-<h4 id="View"><a href="#View" class="headerlink" title="View"></a>View</h4><p>反映model内容</p>
-<h4 id="ModelView"><a href="#ModelView" class="headerlink" title="ModelView"></a>ModelView</h4>]]></content>
+<h4 id="View"><a href="#View" class="headerlink" title="View"></a>View</h4><p>反映model内容 响应式</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ObservedObject</span></span><br><span class="line"><span class="meta">@Binding</span></span><br><span class="line">.onReceive</span><br><span class="line"><span class="meta">@EnvironmentObject</span></span><br><span class="line">.environmentObject()</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="ModelView"><a href="#ModelView" class="headerlink" title="ModelView"></a>ModelView</h4><p>绑定view和model，解释器。View通过ViewModel获取Model的数据，从来不储存数据。</p>
+<p>ViewModel不断观察Model中的变化，发布变化，视图subscribing（订阅），发布的内容。使用class</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ObservableObject</span></span><br><span class="line"><span class="meta">@Published</span></span><br><span class="line">objectWillChange.send()</span><br></pre></td></tr></table></figure>
+
+<p>处理用户意图，修改Model内容</p>
+<h3 id="Types"><a href="#Types" class="headerlink" title="Types"></a>Types</h3><h4 id="struct-amp-amp-class"><a href="#struct-amp-amp-class" class="headerlink" title="struct &amp;&amp; class"></a>struct &amp;&amp; class</h4><p>储存变量和计算变量、函数、初始化器</p>
+<p>ViewModel使用class，在所有视图中共享</p>
+<table>
+<thead>
+<tr>
+<th align="center">struct</th>
+<th align="center">class</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">值类型</td>
+<td align="center">引用类型</td>
+</tr>
+<tr>
+<td align="center">传递或分配变量时复制内容</td>
+<td align="center">传递时只传递指向它的指针</td>
+</tr>
+<tr>
+<td align="center">写时复制，直到修改才会复制完整内容</td>
+<td align="center">自动引用计数，跟踪有多少指向某事物的指针，没人指向时，从内存中删除</td>
+</tr>
+<tr>
+<td align="center">函数式编程</td>
+<td align="center">面对对象编程</td>
+</tr>
+<tr>
+<td align="center">没有继承</td>
+<td align="center">单一继承</td>
+</tr>
+<tr>
+<td align="center">免费初始化所有变量，如果没有编写init函数</td>
+<td align="center">不能初始化变量</td>
+</tr>
+<tr>
+<td align="center">明确的定义 var let</td>
+<td align="center">总是可变的</td>
+</tr>
+</tbody></table>
+<h4 id="Generics"><a href="#Generics" class="headerlink" title="Generics"></a>Generics</h4><p>对不知道类型上的数据，不在乎它是什么类型</p>
+<p>类型参数</p>
+<h4 id="Function"><a href="#Function" class="headerlink" title="Function"></a>Function</h4><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> operation: (<span class="type">Double</span>) -&gt; <span class="type">Double</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">square</span>(<span class="params">operand</span>: <span class="type">Double</span>)</span> -&gt; <span class="type">Double</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> operand <span class="operator">*</span> operand</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">operation <span class="operator">=</span> square</span><br><span class="line"><span class="keyword">let</span> result1 <span class="operator">=</span> operation(<span class="number">4</span>) <span class="comment">//16 	调用时不使用标签</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="反应"><a href="#反应" class="headerlink" title="反应"></a>反应</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="meta">@ObservableObject</span> <span class="comment">//向世界发布有所改变</span></span><br><span class="line"><span class="comment">//得到一个看不见的var</span></span><br><span class="line"><span class="keyword">var</span> objectWillChange: <span class="type">ObservableObjectPublisher</span></span><br><span class="line">objectWillChange.send() <span class="comment">//向世界发送改变</span></span><br><span class="line"><span class="meta">@Published</span> <span class="comment">//放在变量前无论何时发生变化都发送</span></span><br><span class="line"><span class="meta">@ObservedObject</span> <span class="comment">//放在变量前，发生改变时重建body</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="enum"><a href="#enum" class="headerlink" title="enum"></a>enum</h3><p>数据结构，离散的值</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">FastFoodMenuItem</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> hamburger</span><br><span class="line">    <span class="keyword">case</span> fries</span><br><span class="line">    <span class="keyword">case</span> drink</span><br><span class="line">    <span class="keyword">case</span> cookie</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>值传递，会被复制</li>
+</ul>
+<p>每个状态都可以有一些关联数据</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">FastFoodMenuItem</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> hamburger(numberOfPatties: <span class="type">Int</span>)</span><br><span class="line">    <span class="keyword">case</span> fries(size: <span class="type">FryOrderSize</span>)</span><br><span class="line">    <span class="keyword">case</span> drink (<span class="type">String</span>, ounces: <span class="type">Int</span>) <span class="comment">//string没有标签</span></span><br><span class="line">    <span class="keyword">case</span> cookie</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">FryOrderSize</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> large</span><br><span class="line">    <span class="keyword">case</span> small</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> menuItem: <span class="type">FastFoodMenuItem</span> <span class="operator">=</span> <span class="type">FastFoodMenuItem</span>.hamburger(patties: <span class="number">2</span>)</span><br><span class="line"><span class="keyword">var</span> otherItem: <span class="type">FastFoodMenuItem</span> <span class="operator">=</span> .cookie</span><br></pre></td></tr></table></figure>
+
+<p>检查值</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> menuItem: <span class="type">FastFoodMenuItem</span> <span class="operator">=</span> <span class="type">FastFoodMenuItem</span>.hamburger(patties: <span class="number">2</span>)</span><br><span class="line"><span class="keyword">switch</span> menuItem &#123;</span><br><span class="line">    <span class="keyword">case</span> .hamburger(<span class="keyword">let</span> pattyCount): <span class="built_in">print</span>(<span class="string">&quot;a burger with <span class="subst">\(pattyCOunt)</span> patties!&quot;</span>)</span><br><span class="line">    <span class="keyword">case</span> .fries: <span class="built_in">print</span>(<span class="string">&quot;fries&quot;</span>)</span><br><span class="line">    <span class="keyword">case</span> .drink: <span class="built_in">print</span>(<span class="string">&quot;drink&quot;</span>)</span><br><span class="line">    <span class="keyword">case</span> .cookie: <span class="built_in">print</span>(<span class="string">&quot;cookie&quot;</span>)</span><br><span class="line">    <span class="keyword">default</span>: <span class="built_in">print</span>(<span class="string">&quot;other&quot;</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>switch也适用于其他类型</p>
+<p>enum允许有方法和计算变量，不能有实际存储的变量</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">FastFoodMenuItem</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    fun isIncludeInSpeciaOrder(number: <span class="type">Int</span>) -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">        <span class="keyword">switch</span> <span class="keyword">self</span> &#123;</span><br><span class="line">            <span class="keyword">case</span> .hamburger(<span class="keyword">let</span> pattyCount): <span class="keyword">return</span> pattyCount <span class="operator">==</span> number</span><br><span class="line">            <span class="keyword">case</span> .fries, .cookie: <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">            <span class="keyword">case</span>.drink(<span class="keyword">_</span>, <span class="keyword">let</span> ounces): <span class="keyword">return</span> ounces <span class="operator">==</span> <span class="number">16</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>遍历所有状态，迭代</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">TeslaModel</span>: <span class="title">CaseIterable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">X</span></span><br><span class="line">    <span class="keyword">case</span> <span class="type">S</span></span><br><span class="line">    <span class="keyword">case</span> <span class="type">Three</span></span><br><span class="line">    <span class="keyword">case</span> <span class="type">Y</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> model <span class="keyword">in</span> <span class="type">TeslaModel</span>.allCase &#123;</span><br><span class="line">    reportSalesNumber(for: model)</span><br><span class="line">&#125;</span><br><span class="line">fun reportSalesNumber(<span class="keyword">for</span> model: <span class="type">TeslaModel</span>) &#123;</span><br><span class="line">    <span class="keyword">switch</span> model &#123; <span class="operator">...</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Optionals"><a href="#Optionals" class="headerlink" title="Optionals"></a>Optionals</h3><p>两种枚举：存在和不存在</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">Optional</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> none</span><br><span class="line">    <span class="keyword">case</span> <span class="keyword">some</span>(<span class="type">T</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> hello: <span class="type">String</span>?</span><br><span class="line"><span class="keyword">var</span> hello: <span class="type">String</span>? <span class="operator">=</span> <span class="string">&quot;hello&quot;</span></span><br><span class="line"><span class="keyword">var</span> hello: <span class="type">Striong</span>? <span class="operator">=</span> <span class="literal">nil</span>	<span class="keyword">var</span> hello: <span class="type">Optional</span>&lt;<span class="type">String</span>&gt; <span class="operator">=</span> .none</span><br></pre></td></tr></table></figure>
+
+<p>强制解包 !  或者使用if let</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> <span class="keyword">let</span> safehello <span class="operator">=</span> hello &#123;</span><br><span class="line">	<span class="built_in">print</span>(safehello)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> y <span class="operator">=</span> x <span class="operator">??</span> <span class="string">&quot;foo&quot;</span> <span class="comment">//如果未设置为foo</span></span><br><span class="line"><span class="keyword">let</span> y <span class="operator">=</span> x<span class="operator">?</span>.foo()<span class="operator">?</span>.bar<span class="operator">?</span>.z <span class="comment">//只要有一个是nil 全是nil</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
       <categories>
-        <category>IOS</category>
+        <category>iOS</category>
       </categories>
       <tags>
         <tag>swift</tag>
