@@ -44,11 +44,26 @@
 <h2 id="State"><a href="#State" class="headerlink" title="@State"></a>@State</h2><p>变化会在必要时重新绘制，相当于@ObservedObject</p>
 <span id="more"></span>
 
-<h2 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h2><h3 id="HStack-amp-VStack"><a href="#HStack-amp-VStack" class="headerlink" title="HStack &amp; VStack"></a>HStack &amp; VStack</h3><p>从最不灵活的视图先分配，text如果空间不够会自动省略</p>
-<p><code>Spacer()</code>非常灵活</p>
-<p><code>Divide()</code> 画一条线分割视图</p>
-<p><code>.layoutPriority()</code> 先获得视图的分配，alig对齐</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">VStack</span>(alignment: .leading) &#123; <span class="operator">...</span> &#125; <span class="comment">//.leading .trailing</span></span><br><span class="line"><span class="type">VStack</span>(alignment: .firstTextBaseline) &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h2><p>屏幕的空间如何分配给所有视图</p>
+<ol>
+<li>视图容器为其中的视图提供空间</li>
+<li>视图根据提供给他们的空间选择自己的尺寸，不是被分配</li>
+<li>一旦视图调整了自己的大小，将视图放置在视图容器里</li>
+<li>视图容器选择大小，基于里面的视图</li>
+</ol>
+<h3 id="HStack-amp-VStack"><a href="#HStack-amp-VStack" class="headerlink" title="HStack &amp; VStack"></a>HStack &amp; VStack</h3><p>最不灵活的视图</p>
+<p>例如，Image和Text有固定大小，Image的自然大小，Text将字符串放进去，不灵活；RoundedRectangle非常灵活，如果你给他空间，他会占据全部空间，填满。</p>
+<p>从最不灵活的视图先分配，text如果空间不够会自动省略，如果stack里面的视图非常灵活，那么本身就会变灵活</p>
+<ul>
+<li><p><code>Spacer(miniLength: CGFloat)</code>非常灵活，需要尽可能多的空间</p>
+</li>
+<li><p><code>Divide()</code> 画一条线分割视图</p>
+</li>
+<li><p><code>.layoutPriority()</code> 先获得视图的分配，默认是0</p>
+</li>
+</ul>
+<p>Vstack生成一列视图，默认居中     </p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">VStack</span>(alignment: .leading) &#123; <span class="operator">...</span> &#125; <span class="comment">//.leading .trailing</span></span><br><span class="line"><span class="type">VStack</span>(alignment: .firstTextBaseline) &#123;&#125; <span class="comment">//文本基线</span></span><br><span class="line"><span class="comment">//定义自己的排列方式</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="LazyHStack-amp-LazyVStack"><a href="#LazyHStack-amp-LazyVStack" class="headerlink" title="LazyHStack &amp; LazyVStack"></a>LazyHStack &amp; LazyVStack</h3><p>不构建不在屏幕上显示的视图，只构建ScrollView中显示在屏幕上的，不灵活</p>
 <h3 id="ScrollView"><a href="#ScrollView" class="headerlink" title="ScrollView"></a>ScrollView</h3><p>接收任何视图在其中滚动</p>
