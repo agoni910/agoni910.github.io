@@ -439,10 +439,11 @@
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Cardify</span>: <span class="title">ViewModifier</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> isFaceUp: <span class="type">Bool</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">body</span>(<span class="params">content</span>: <span class="type">Content</span>)</span> -&gt; <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">ZStack</span> &#123;</span><br><span class="line">            <span class="operator">...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">Text</span>(<span class="string">&quot; &quot;</span>).modifier(<span class="type">Cardify</span>(isFaceUp: <span class="literal">true</span>))</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">cardify</span>(<span class="params">isFaceUp</span>: <span class="type">Bool</span>)</span> -&gt; <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span>.modifier(<span class="type">Cardify</span>(isFaceUp: isFaceUp))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><h3 id="GeometryEffect"><a href="#GeometryEffect" class="headerlink" title="GeometryEffect"></a>GeometryEffect</h3><p>使事物旋转，移动物体，调整物体大小等</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">.rotationEffect(<span class="type">Angle</span>.degrees(card.isMatched <span class="operator">?</span> <span class="number">360</span> : <span class="number">0</span>))</span><br><span class="line">.animation(<span class="type">Animation</span>.easeInOut(duration: <span class="number">3</span>).repeatForever(autoreverses: <span class="literal">false</span>))<span class="comment">//不会自动反转</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">.rotationEffect(<span class="type">Angle</span>.degrees(card.isMatched <span class="operator">?</span> <span class="number">360</span> : <span class="number">0</span>))</span><br><span class="line">.animation(<span class="type">Animation</span>.easeInOut(duration: <span class="number">3</span>).repeatForever(autoreverses: <span class="literal">false</span>))<span class="comment">//不会自动反转</span></span><br><span class="line">.animation(<span class="type">Animation</span>.linear(duration: <span class="number">1</span>).repeatForever(autoreverses: <span class="literal">false</span>), value: card.isMatched) <span class="comment">//iOS15.0推荐用法</span></span><br></pre></td></tr></table></figure>
 
 <p>旋转匹配成功的内容，，这么只会旋转第一个内容，而且旋转时字体大小改变，字体不能进行动画，旋转时有多个动画一起发生，要使用固定大小字体。</p>
 <p>创建动画时注意三个原则，可以通过opacity使内容在屏幕上隐藏。</p>
+<p>animation参考：<a href="https://juejin.cn/post/7067340603494924296">https://juejin.cn/post/7067340603494924296</a></p>
 ]]></content>
       <categories>
         <category>iOS</category>
@@ -454,7 +455,7 @@
   </entry>
   <entry>
     <title>cs193p_note8 Animation Demostrastion</title>
-    <url>/2022/07/06/cs193p-note8/</url>
+    <url>/2022/05/02/cs193p-note8/</url>
     <content><![CDATA[<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><h4 id="实现洗牌动画"><a href="#实现洗牌动画" class="headerlink" title="实现洗牌动画"></a>实现洗牌动画</h4><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> shuffle: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">    <span class="type">Button</span>(<span class="string">&quot;Shuffle&quot;</span>) &#123;</span><br><span class="line">        withAnimation &#123;</span><br><span class="line">            game.shuffle()</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>快速点击shuffle按钮，未完成的动画会自动暂停并继续新的操作，上面图案旋转使用的是隐式动画，独立于显示，所以能在旋转的时候完成洗牌操作。</p>
@@ -468,6 +469,9 @@
 <p>使用isFaceUp对旋转角度进行初始化。</p>
 <p>使用Animatable，对旋转角度进行逐步变化，实现到达90度才会发生变化，自定义ViewModifier</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> animatableData: <span class="type">Double</span> &#123;</span><br><span class="line">    <span class="keyword">get</span> &#123; rotation &#125;</span><br><span class="line">    <span class="keyword">set</span> &#123; rotation <span class="operator">=</span> newValue &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Transition"><a href="#Transition" class="headerlink" title="Transition"></a>Transition</h4><p>匹配成功时，卡片消失时使用了过渡，是淡入淡出的形式消失的</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">.transition(<span class="type">AnyTransition</span>.scale) <span class="comment">//使视图缩小并逐渐消失</span></span><br></pre></td></tr></table></figure>
 
 ]]></content>
       <categories>
