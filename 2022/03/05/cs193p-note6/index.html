@@ -28,7 +28,7 @@
 <meta property="og:description" content="Protocol协议是一个精简的class或struct 12345protocol Moveable &amp;#123;	func move(by: Int)    var hasMoved: Bool &amp;#123; get &amp;#125;    var distanceFromStart: Int &amp;#123; get set &amp;#125;&amp;#125;  若协议要求一个属性为可读和可写的，那么该属性要">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-03-05T14:01:17.000Z">
-<meta property="article:modified_time" content="2022-05-03T13:37:38.846Z">
+<meta property="article:modified_time" content="2022-05-15T08:15:41.082Z">
 <meta property="article:author" content="Wenrong Jiang">
 <meta property="article:tag" content="swift">
 <meta property="article:tag" content="cs193p">
@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Protocol"><span class="nav-number">1.</span> <span class="nav-text">Protocol</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">使用方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shape"><span class="nav-number">2.</span> <span class="nav-text">Shape</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Protocol"><span class="nav-number">1.</span> <span class="nav-text">Protocol</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Identifiable"><span class="nav-number">1.2.</span> <span class="nav-text">Identifiable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hashable"><span class="nav-number">1.3.</span> <span class="nav-text">Hashable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Equatable"><span class="nav-number">1.4.</span> <span class="nav-text">Equatable</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shape"><span class="nav-number">2.</span> <span class="nav-text">Shape</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -162,7 +162,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives">
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">8</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -268,7 +268,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>906</span>
+      <span>1.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -298,12 +298,26 @@
 <h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">travelAround</span>(<span class="params">using</span> <span class="params">moveable</span>: <span class="type">Moveable</span>)</span></span><br><span class="line"><span class="keyword">let</span> foo <span class="operator">=</span> [<span class="type">Moveable</span>]</span><br></pre></td></tr></table></figure>
 
 <p>让don’t care变得有一点在乎 <code>struct MemoryGame&lt;CardContent&gt; where CardContent: Equatable</code></p>
-<p>将extension扩展为仅使用某些事情</p>
+<p>将extension扩展为仅使用某些事情，也可以限制个别功能</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">init</span>(<span class="params">data</span>: <span class="type">Data</span>)</span> <span class="keyword">where</span> <span class="type">Date</span>: <span class="type">Collection</span>, <span class="type">Data</span>.<span class="type">Element</span>: <span class="type">Identifiable</span></span><br></pre></td></tr></table></figure>
+
 <p>只为接收到特定类型数据进行初始化</p>
-<p>协议可以通过创建extension来实施，可以在扩展中添加默认实施</p>
+<p>&#x3D;&#x3D;协议可以通过创建extension来实施，可以在扩展中添加默认实施&#x3D;&#x3D;</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">filter</span>(<span class="keyword">_</span> <span class="params">isInclude</span>: (<span class="type">Element</span>) -&gt; <span class="type">Bool</span>)</span> -&gt; <span class="type">Array</span>&lt;<span class="type">Element</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>适用于数组、字符串、范围等，被添加到基础库中，作为Sequence协议的扩展</p>
+<h3 id="Identifiable"><a href="#Identifiable" class="headerlink" title="Identifiable"></a>Identifiable</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Identifiable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">associatedtype</span> <span class="type">ID</span>: <span class="type">Hashable</span> <span class="comment">//关联类型</span></span><br><span class="line">    <span class="keyword">var</span> id: <span class="type">ID</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Hashable"><a href="#Hashable" class="headerlink" title="Hashable"></a>Hashable</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Hashable</span>: <span class="title">Equatable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">hash</span>(<span class="params">into</span> <span class="params">hasher</span>: <span class="keyword">inout</span> <span class="type">Hasher</span>)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Equatable"><a href="#Equatable" class="headerlink" title="Equatable"></a>Equatable</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Equatable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">==</span>(<span class="params">lhs</span>: <span class="keyword">Self</span>, <span class="params">rhs</span>: <span class="keyword">Self</span>)</span> -&gt; <span class="type">Bool</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自引用协议不能作为普通类型使用</p>
 <h2 id="Shape"><a href="#Shape" class="headerlink" title="Shape"></a>Shape</h2><p>Shape is a <code>protocol</code> that inherits from View</p>
 <p>RoundedRectangle,Circle,Capsule</p>
-<p>默认被填满颜色，可以通过<code>.stock()</code>和<code>.fill()</code>改变</p>
+<p> 默认被填满颜色，可以通过<code>.stock()</code>和<code>.fill()</code>改变</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">fill</span>&lt;<span class="type">S</span>&gt;(<span class="keyword">_</span> <span class="params">whatToFillWith</span>: <span class="type">S</span>)</span> -&gt; <span class="keyword">some</span> <span class="type">View</span> <span class="keyword">where</span> <span class="type">S</span>: <span class="type">ShapeStyle</span></span><br></pre></td></tr></table></figure>
+
 <p>创建自己的Shape</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">path</span>(<span class="params">in</span> <span class="params">rect</span>: <span class="type">CGRect</span>)</span> -&gt; <span class="type">Path</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a <span class="type">Path</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -365,13 +379,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">18k</span>
+    <span title="站点总字数">19k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">17 分钟</span>
+    <span title="站点阅读时长">18 分钟</span>
   </span>
 </div>
 

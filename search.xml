@@ -65,15 +65,33 @@
 <p>Vstack生成一列视图，默认居中     </p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">VStack</span>(alignment: .leading) &#123; <span class="operator">...</span> &#125; <span class="comment">//.leading .trailing</span></span><br><span class="line"><span class="type">VStack</span>(alignment: .firstTextBaseline) &#123;&#125; <span class="comment">//文本基线</span></span><br><span class="line"><span class="comment">//定义自己的排列方式</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="LazyHStack-amp-LazyVStack"><a href="#LazyHStack-amp-LazyVStack" class="headerlink" title="LazyHStack &amp; LazyVStack"></a>LazyHStack &amp; LazyVStack</h3><p>不构建不在屏幕上显示的视图，只构建ScrollView中显示在屏幕上的，不灵活</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Hstack &#123;</span><br><span class="line">	ForEach(viewModel.cards)&#123; card in</span><br><span class="line">		CardView(card: card).aspectRatio(2/3, contentMode: .fit)</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">.foregroundColor(Color.orange)</span><br><span class="line">.padding(10)</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="LazyHStack-amp-LazyVStack"><a href="#LazyHStack-amp-LazyVStack" class="headerlink" title="LazyHStack &amp; LazyVStack"></a>LazyHStack &amp; LazyVStack</h3><ul>
+<li><p>不构建不在屏幕上显示的视图，只构建ScrollView中显示在屏幕上的</p>
+</li>
+<li><p>不灵活，如果有灵活视图，不能给所有空间，会尽可能的小</p>
+</li>
+</ul>
 <h3 id="ScrollView"><a href="#ScrollView" class="headerlink" title="ScrollView"></a>ScrollView</h3><p>接收任何视图在其中滚动</p>
 <h3 id="LazyHGrid-amp-LazyVGrid"><a href="#LazyHGrid-amp-LazyVGrid" class="headerlink" title="LazyHGrid &amp; LazyVGrid"></a>LazyHGrid &amp; LazyVGrid</h3><p>控制多少列或者多少行</p>
 <h3 id="ZStack"><a href="#ZStack" class="headerlink" title="ZStack"></a>ZStack</h3><p>调整自己的大小合适子项</p>
-<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">Text</span>(<span class="string">&quot;hello&quot;</span>).background(<span class="type">Rectangle</span>().foregroundColor(.red))</span><br><span class="line"><span class="comment">//背景大小取决于文字</span></span><br><span class="line"><span class="type">Circle</span>().overlay(<span class="type">Text</span>(<span class="string">&quot;hello&quot;</span>), alignment: .center)</span><br><span class="line"><span class="comment">//文字不重要，很灵活</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">Text</span>(<span class="string">&quot;hello&quot;</span>).background(<span class="type">Rectangle</span>().foregroundColor(.red))</span><br><span class="line"><span class="comment">//背景大小取决于文字，不是灵活的尺寸</span></span><br><span class="line"><span class="type">Circle</span>().overlay(<span class="type">Text</span>(<span class="string">&quot;hello&quot;</span>), alignment: .center)</span><br><span class="line"><span class="comment">//文字不重要，很灵活</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="GeometryReader"><a href="#GeometryReader" class="headerlink" title="GeometryReader"></a>GeometryReader</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">Geometryreader</span>&#123; geometry <span class="keyword">in</span> </span><br><span class="line">		<span class="operator">...</span></span><br><span class="line">&#125;<span class="comment">//放在视图里 计算视图大小</span></span><br><span class="line"><span class="type">ZStack</span> &#123;&#125;.edgesIgnoringSafeArea([.top]) <span class="comment">//画入安全区域</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">Hstack</span>&#123;</span><br><span class="line">    <span class="type">ForEach</span>(viewmodel.cards) &#123; card <span class="keyword">in</span></span><br><span class="line">    	<span class="type">CardView</span>(card: card).aspectRatio(<span class="number">2</span><span class="operator">/</span><span class="number">3</span>, contentMode: .fit)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">.foregroundColor(<span class="type">Color</span>.orange)</span><br><span class="line">.padding(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
 
-<h2 id="ViewBuilder"><a href="#ViewBuilder" class="headerlink" title="@ViewBuilder"></a>@ViewBuilder</h2><p>将函数返回成很对个视图组成的一个视图</p>
+<ol>
+<li>首先提供padding的空间，容器最外层的空间，将空间-10后提供给foregroundColor</li>
+<li>foregroundColor提供相同的空间给Hstack</li>
+<li>Hstack将空间平均分给aspectRatio</li>
+<li>提供空间给CardView</li>
+</ol>
+<h3 id="GeometryReader"><a href="#GeometryReader" class="headerlink" title="GeometryReader"></a>GeometryReader</h3><p>本身总是适应提供的空间</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">GeometryReader</span>&#123; geometry <span class="keyword">in</span> </span><br><span class="line">		<span class="operator">...</span></span><br><span class="line">&#125;<span class="comment">//放在视图里 计算视图大小</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GrometryProxy</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> size: <span class="type">CGSize</span> <span class="comment">//提供视图大小</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">frame</span>(<span class="params">in</span>: <span class="type">CoordinateSpace</span>)</span> -&gt; <span class="type">CGRect</span></span><br><span class="line">    <span class="keyword">var</span> safeAreaInsets: <span class="type">EdgeInsets</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="type">ZStack</span> &#123;&#125;.edgesIgnoringSafeArea([.top]) <span class="comment">//画入安全区域</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="ViewBuilder"><a href="#ViewBuilder" class="headerlink" title="@ViewBuilder"></a>@ViewBuilder</h2><p>将函数返回成很对个视图组成的一个视图，创建的视图被称为TupleView</p>
 <p>任意<code>func</code>或<code>只读的计算属性</code>都可以标识为<code>@ViewBuilder</code>，一旦标识，它里面的内容将会被解析为<code>a list of Views</code></p>
 <h2 id="零散的东西"><a href="#零散的东西" class="headerlink" title="零散的东西"></a>零散的东西</h2><p>函数式编程</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> faceUpCardIndices <span class="operator">=</span> cards.indices.filter(&#123; cards[<span class="variable">$0</span>].isFaceUp &#125;)</span><br><span class="line"><span class="comment">//cards.indices是0..&lt;cards.count filter返回一个满足条件的数组</span></span><br><span class="line"><span class="keyword">var</span> faceUpCardIndices <span class="operator">=</span> [<span class="type">Int</span>]()</span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> cards.indices &#123;</span><br><span class="line">		<span class="keyword">if</span> cards[index].isFaceUp &#123;</span><br><span class="line">		faceUpCardIndices.append(index)</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -102,12 +120,26 @@
 <h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">travelAround</span>(<span class="params">using</span> <span class="params">moveable</span>: <span class="type">Moveable</span>)</span></span><br><span class="line"><span class="keyword">let</span> foo <span class="operator">=</span> [<span class="type">Moveable</span>]</span><br></pre></td></tr></table></figure>
 
 <p>让don’t care变得有一点在乎 <code>struct MemoryGame&lt;CardContent&gt; where CardContent: Equatable</code></p>
-<p>将extension扩展为仅使用某些事情</p>
+<p>将extension扩展为仅使用某些事情，也可以限制个别功能</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">init</span>(<span class="params">data</span>: <span class="type">Data</span>)</span> <span class="keyword">where</span> <span class="type">Date</span>: <span class="type">Collection</span>, <span class="type">Data</span>.<span class="type">Element</span>: <span class="type">Identifiable</span></span><br></pre></td></tr></table></figure>
+
 <p>只为接收到特定类型数据进行初始化</p>
-<p>协议可以通过创建extension来实施，可以在扩展中添加默认实施</p>
+<p>&#x3D;&#x3D;协议可以通过创建extension来实施，可以在扩展中添加默认实施&#x3D;&#x3D;</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">filter</span>(<span class="keyword">_</span> <span class="params">isInclude</span>: (<span class="type">Element</span>) -&gt; <span class="type">Bool</span>)</span> -&gt; <span class="type">Array</span>&lt;<span class="type">Element</span>&gt;</span><br></pre></td></tr></table></figure>
+
+<p>适用于数组、字符串、范围等，被添加到基础库中，作为Sequence协议的扩展</p>
+<h3 id="Identifiable"><a href="#Identifiable" class="headerlink" title="Identifiable"></a>Identifiable</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Identifiable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">associatedtype</span> <span class="type">ID</span>: <span class="type">Hashable</span> <span class="comment">//关联类型</span></span><br><span class="line">    <span class="keyword">var</span> id: <span class="type">ID</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Hashable"><a href="#Hashable" class="headerlink" title="Hashable"></a>Hashable</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Hashable</span>: <span class="title">Equatable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">hash</span>(<span class="params">into</span> <span class="params">hasher</span>: <span class="keyword">inout</span> <span class="type">Hasher</span>)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Equatable"><a href="#Equatable" class="headerlink" title="Equatable"></a>Equatable</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Equatable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">==</span>(<span class="params">lhs</span>: <span class="keyword">Self</span>, <span class="params">rhs</span>: <span class="keyword">Self</span>)</span> -&gt; <span class="type">Bool</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>自引用协议不能作为普通类型使用</p>
 <h2 id="Shape"><a href="#Shape" class="headerlink" title="Shape"></a>Shape</h2><p>Shape is a <code>protocol</code> that inherits from View</p>
 <p>RoundedRectangle,Circle,Capsule</p>
-<p>默认被填满颜色，可以通过<code>.stock()</code>和<code>.fill()</code>改变</p>
+<p> 默认被填满颜色，可以通过<code>.stock()</code>和<code>.fill()</code>改变</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">fill</span>&lt;<span class="type">S</span>&gt;(<span class="keyword">_</span> <span class="params">whatToFillWith</span>: <span class="type">S</span>)</span> -&gt; <span class="keyword">some</span> <span class="type">View</span> <span class="keyword">where</span> <span class="type">S</span>: <span class="type">ShapeStyle</span></span><br></pre></td></tr></table></figure>
+
 <p>创建自己的Shape</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">path</span>(<span class="params">in</span> <span class="params">rect</span>: <span class="type">CGRect</span>)</span> -&gt; <span class="type">Path</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> a <span class="type">Path</span> </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -345,6 +377,18 @@
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> y <span class="operator">=</span> x <span class="operator">??</span> <span class="string">&quot;foo&quot;</span> <span class="comment">//如果未设置为foo</span></span><br><span class="line"><span class="keyword">let</span> y <span class="operator">=</span> x<span class="operator">?</span>.foo()<span class="operator">?</span>.bar<span class="operator">?</span>.z <span class="comment">//只要有一个是nil 全是nil</span></span><br></pre></td></tr></table></figure>
 
 ]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>swift</tag>
+        <tag>cs193p</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs193p_note7 ViewModifier Animation</title>
+    <url>/2022/04/15/cs193p-note7/</url>
+    <content><![CDATA[<h2 id=""><a href="#" class="headerlink" title=""></a></h2>]]></content>
       <categories>
         <category>iOS</category>
       </categories>
