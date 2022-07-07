@@ -262,7 +262,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>756</span>
+      <span>1.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -280,24 +280,17 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><h4 id="实现洗牌动画"><a href="#实现洗牌动画" class="headerlink" title="实现洗牌动画"></a>实现洗牌动画</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> shuffle: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">    <span class="type">Button</span>(<span class="string">&quot;Shuffle&quot;</span>) &#123;</span><br><span class="line">        withAnimation &#123;</span><br><span class="line">            game.shuffle()</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><h4 id="实现洗牌动画"><a href="#实现洗牌动画" class="headerlink" title="实现洗牌动画"></a>实现洗牌动画</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> shuffle: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">    <span class="type">Button</span>(<span class="string">&quot;Shuffle&quot;</span>) &#123;</span><br><span class="line">        withAnimation &#123;</span><br><span class="line">            game.shuffle()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>快速点击shuffle按钮，未完成的动画会自动暂停并继续新的操作，上面图案旋转使用的是隐式动画，独立于显示，所以能在旋转的时候完成洗牌操作。</p>
-<h4 id="什么时候使用显示动画"><a href="#什么时候使用显示动画" class="headerlink" title="什么时候使用显示动画"></a>什么时候使用显示动画</h4><p>用于Intent函数，当你表达你的意图时，总是要修改模型。在因为反应而对模型修改，变动视图时使用</p>
-<p>一边使用<code>withAnimation() &#123;&#125;</code>包裹在Intent周围</p>
-<h4 id="为卡片翻转做动画"><a href="#为卡片翻转做动画" class="headerlink" title="为卡片翻转做动画"></a>为卡片翻转做动画</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.rotation3DEffect(<span class="type">Angle</span>.degrees(isFaceUp <span class="operator">?</span> <span class="number">0</span> : <span class="number">180</span>), axis: (<span class="number">0</span>, <span class="number">1</span>, <span class="number">0</span>))</span><br></pre></td></tr></table></figure>
-
-<p>使用时，还没翻转90度，就会出现图案，不合理。因为动画是淡入淡出，没翻转90度时，红色的背面会变淡，而表情符号会慢慢显现，所以要跟踪旋转多少角度，进行突然显示</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">init</span>(<span class="params">isFaceUp</span>: <span class="type">Bool</span>)</span> &#123;</span><br><span class="line">	rotation <span class="operator">=</span> isFaceUp <span class="operator">?</span> <span class="number">0</span> : <span class="number">180</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>使用isFaceUp对旋转角度进行初始化。</p>
-<p>使用Animatable，对旋转角度进行逐步变化，实现到达90度才会发生变化，自定义ViewModifier</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> animatableData: <span class="type">Double</span> &#123;</span><br><span class="line">    <span class="keyword">get</span> &#123; rotation &#125;</span><br><span class="line">    <span class="keyword">set</span> &#123; rotation <span class="operator">=</span> newValue &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h4 id="Transition"><a href="#Transition" class="headerlink" title="Transition"></a>Transition</h4><p>匹配成功时，卡片消失时使用了过渡，是淡入淡出的形式消失的</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.transition(<span class="type">AnyTransition</span>.scale) <span class="comment">//使视图缩小并逐渐消失</span></span><br></pre></td></tr></table></figure>
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/05/02/cs193p-note8/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -1098,13 +1091,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">22k</span>
+    <span title="站点总字数">23k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">20 分钟</span>
+    <span title="站点阅读时长">21 分钟</span>
   </span>
 </div>
 
