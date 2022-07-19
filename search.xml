@@ -507,4 +507,98 @@
         <tag>cs193p</tag>
       </tags>
   </entry>
+  <entry>
+    <title>cs193p_note10</title>
+    <url>/2022/07/19/cs193p-note10/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>cs193p_note9_EmojiArt Drag and Drop Multithreading</title>
+    <url>/2022/05/04/cs193p-note9/</url>
+    <content><![CDATA[<h2 id="Collection-of-Identifiables"><a href="#Collection-of-Identifiables" class="headerlink" title="Collection of Identifiables"></a>Collection of Identifiables</h2><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">choose</span>(<span class="keyword">_</span> <span class="params">card</span>: <span class="type">Card</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> index <span class="operator">=</span> cards.firstIndex(where: &#123; <span class="variable">$0</span>.id <span class="operator">==</span> card,id&#125;) &#123;</span><br><span class="line">        cards[index].isFaceUp <span class="operator">=</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Card是一个结构体，结构体是值类型，在传递时会被复制，所以想要改变卡片的isFaceUp需要获取索引，在数组中找到修改的位置。</p>
+<span id="more"></span>
+
+<p>在数组中存结构体时很常见，可以利用一个小函数解决。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">index</span>(<span class="params">matching</span> <span class="params">element</span>: <span class="type">Element</span>)</span> -&gt; <span class="type">Int</span>? &#123;</span><br><span class="line">    <span class="keyword">return</span> firstIndex(where: &#123; <span class="variable">$0</span>.id <span class="operator">==</span> element.id &#125;)</span><br><span class="line">&#125;</span><br><span class="line">card.index(matching: card)</span><br></pre></td></tr></table></figure>
+
+<p>将函数放在扩展Array中（也适用于Set）</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Array</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">Identifiable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">index</span>(<span class="params">matching</span> <span class="params">element</span>: <span class="type">Element</span>)</span> -&gt; <span class="type">Int</span>? &#123;</span><br><span class="line">        <span class="keyword">return</span> firstIndex(where: &#123; <span class="variable">$0</span>.id <span class="operator">==</span> element.id &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然，我们也可以把代码放在Collection协议中，Set和Array都实现</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Collection</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">Identifiable</span> </span>&#123;<span class="comment">//不可变集合</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">index</span>(<span class="params">matching</span> <span class="params">element</span>: <span class="type">Element</span>)</span> -&gt; <span class="keyword">Self</span>.<span class="type">Index</span>? &#123;<span class="comment">//索引不一定是Int，是个泛型</span></span><br><span class="line">        firstIndex(where: &#123; <span class="variable">$0</span>.id <span class="operator">==</span> element.id &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="comment">//Collection中不包括remove，所以把内容添加到RangeReplaceableCollection</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">RangeReplaceableCollection</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">Identifiable</span> </span>&#123;<span class="comment">//可变集合</span></span><br><span class="line">    <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">remove</span>(<span class="keyword">_</span> <span class="params">element</span>: <span class="type">Element</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> index <span class="operator">=</span> index(matching: element) &#123;</span><br><span class="line">            remove(at: index)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>RangeReplaceCollection可以添加下标，可以使用数组下标或可识别的集合变成可识别的，<code>cards[card].isFaceUp = true</code></p>
+<h2 id="Color-amp-UIColor-amp-CGColor"><a href="#Color-amp-UIColor-amp-CGColor" class="headerlink" title="Color&amp;UIColor&amp;CGColor"></a>Color&amp;UIColor&amp;CGColor</h2><h4 id="Color"><a href="#Color" class="headerlink" title="Color"></a>Color</h4><ul>
+<li>用来指定颜色 <code>.foregroundColor(Color.green)</code></li>
+<li>作为ShapeStyle，填充，<code>.fill(Color.blue)</code></li>
+<li>像视图一样，<code>Color.white</code></li>
+</ul>
+<h4 id="UIColor"><a href="#UIColor" class="headerlink" title="UIColor"></a>UIColor</h4><ul>
+<li>有很多API，能获取并调整RGB，颜色饱和度，亮度</li>
+<li>拥有UIColor，可以用Color使用，<code>Color(uiColor: )</code></li>
+</ul>
+<h4 id="CGColor"><a href="#CGColor" class="headerlink" title="CGColor"></a>CGColor</h4><ul>
+<li>Core Graphic中基础的颜色表示</li>
+<li>使用<code>color.cgColor</code>表示 不能保证每一个都能被表示</li>
+<li>如果将Color变成UIColor可能会使用</li>
+</ul>
+<h2 id="Image-amp-UIImage"><a href="#Image-amp-UIImage" class="headerlink" title="Image&amp;UIImage"></a>Image&amp;UIImage</h2><h4 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h4><ul>
+<li>主要是一个视图</li>
+<li>不是容纳图片的类型，是显示图片的视图</li>
+<li>可以在Assets.xcassets中访问图片 <code>Image(_ name: String)</code></li>
+<li>使用<code>Image(systemName:)</code>创建SF符号，使用<code>.imageScale()</code>调整SF符号大小，SF视图受字体影响，可以当蒙版使用</li>
+</ul>
+<h4 id="UIImage"><a href="#UIImage" class="headerlink" title="UIImage"></a>UIImage</h4><ul>
+<li>能缩放调整大小等，是用来存储图片的变量</li>
+<li>使用<code>Image(uiImage:)</code>来显示</li>
+</ul>
+<h2 id="Drag-and-Drop"><a href="#Drag-and-Drop" class="headerlink" title="Drag and Drop"></a>Drag and Drop</h2><p>从一个应用拖到另一个应用传输数据，从Safari拖动图片到app。核心类是<code>NSItemProvider</code>类，进程之间的数据传输。</p>
+<p>便利地转移不同数据类型</p>
+<ul>
+<li>NSAttributedString具有格式的字符串  NSString</li>
+<li>NSURL</li>
+<li>UIImage UIColor</li>
+</ul>
+<p>使用连接数据类型和NS类型，String as NSString</p>
+<h2 id="Dome"><a href="#Dome" class="headerlink" title="Dome"></a>Dome</h2><h4 id="拖放"><a href="#拖放" class="headerlink" title="拖放"></a>拖放</h4><p>借助OC中内容完成拖放，使用as转换数据类型，NSItemProvider将数据提供给别人</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">Text</span>(emoji)</span><br><span class="line">	.onDrag &#123; <span class="type">NSItemProvider</span>(object: emoji <span class="keyword">as</span> <span class="type">NSString</span>) &#125;</span><br></pre></td></tr></table></figure>
+
+<p>放下时，需要将整个Vstack下放置drop</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="comment">//of后添加可放下的类型</span></span><br><span class="line">.onDrop(of: [.plainText], isTargeted: <span class="literal">nil</span>) &#123; providers, location <span class="keyword">in</span></span><br><span class="line">	<span class="keyword">return</span> drop(providers: providers, at: location)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">drop</span>(<span class="params">providers</span>: [<span class="type">NSItemProvider</span>], <span class="params">at</span> <span class="params">location</span>: <span class="type">CGPoint</span>, <span class="params">in</span> <span class="params">geometry</span>: <span class="type">GeometryProxy</span>)</span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> providers.loadObjects(ofType: <span class="type">String</span>.<span class="keyword">self</span>) &#123; string <span class="keyword">in</span> <span class="comment">//提供者是否有字符串,将异步操作内容,因为提供者可能采用多线程提供信息,脱离主线程</span></span><br><span class="line">		<span class="keyword">if</span> <span class="keyword">let</span> emoji <span class="operator">=</span> string.first, emoji.isEmoji &#123;</span><br><span class="line">			document.addEmoji(</span><br><span class="line">				<span class="type">String</span>(emoji),</span><br><span class="line">				at: convertToEmojiCoordinates(location, in: geometry), <span class="comment">//将CGPoint转换成元组</span></span><br><span class="line">				size: defaultEmojiFontSize)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="多线程-Multithreading"><a href="#多线程-Multithreading" class="headerlink" title="多线程 Multithreading"></a>多线程 Multithreading</h2><p>从浏览器找到图片拖进去，但是从互联网下载图片可能需要几秒钟，可能会影响UI响应。</p>
+<p>UI需要响应用户内容，但有些操作需要比较长的时间，我们需要在不同的线程上执行操作，才能保证UI响应</p>
+<h4 id="线程-treads"><a href="#线程-treads" class="headerlink" title="线程 treads"></a>线程 treads</h4><p>可以指定线程用于哪些代码，快速切换线程看起来像同时在运行。有一些线程拥有更高的优先级</p>
+<p>使用队列管理复杂的线程</p>
+<h4 id="Queues-Closures"><a href="#Queues-Closures" class="headerlink" title="Queues Closures"></a>Queues Closures</h4><p>队列只是一堆排队等待线程执行的代码块。指定在队列里等待的代码块是闭包。</p>
+<p>多线程API的核心是&#x3D;&#x3D;将闭包放进队列&#x3D;&#x3D;</p>
+<h4 id="Main-Queue"><a href="#Main-Queue" class="headerlink" title="Main Queue"></a>Main Queue</h4><p>最重要的队列是main queue，是包含所有可能破坏UI界面的代码块，所有的UI的操作都需要主队列</p>
+<p>系统使用单线程执行处理所有在主队列中的代码块，所以可以使用主队列作为同步点(synchronize)。可以对数据结构的写入在主队列，你的读取可以发生在任何队列。</p>
+<h4 id="Background-Queues"><a href="#Background-Queues" class="headerlink" title="Background Queues"></a>Background Queues</h4><p>有一堆后台队列用来执行长期的、非UI任务，例如请求网络、机器学习。</p>
+<p>系统有一堆可用的线程执行后台队列上的代码块，可以并行执行</p>
+<h4 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h4><p>处理队列的基础API是GCD(Grand Central Dispatch)</p>
+<p>基础功能</p>
+<ul>
+<li>访问队列</li>
+<li>将一段代码添加到队列中</li>
+</ul>
+<h4 id="创建一个队列"><a href="#创建一个队列" class="headerlink" title="创建一个队列"></a>创建一个队列</h4><p>main queue是DispatchQueue上的静态变量</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">DispatchQueue</span>.main <span class="comment">//所有的UI代码必须放在这里发布</span></span><br><span class="line"><span class="type">DispatchQueue</span>.global(qos: <span class="type">QoS</span>) <span class="comment">//服务质量</span></span><br><span class="line">qos</span><br><span class="line">	.userInteractive <span class="comment">//几乎和主队列一样重要，与用户进行实时交互，计算内容更新到UI上，速度最快</span></span><br><span class="line">	.userInitiated   <span class="comment">//用户触发级，用户点击按钮，在网上点击下载等现在马上要做的内容 UI界面依然活跃</span></span><br><span class="line">	.utility	  	 <span class="comment">//实用级 清理数据库等，不需要马上去做</span></span><br><span class="line">	.background		 <span class="comment">//背景级 自动任务或定时处理任务等</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="在队列上放置闭包"><a href="#在队列上放置闭包" class="headerlink" title="在队列上放置闭包"></a>在队列上放置闭包</h4><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> queue <span class="operator">=</span> <span class="type">DispatchQueue</span>.main</span><br><span class="line">queue.async &#123; &#125; <span class="comment">//异步</span></span><br><span class="line">queue.sync &#123; &#125;<span class="comment">//同步</span></span><br></pre></td></tr></table></figure>
+
+<p>同步，代码执行完才会返回，阻塞当前线程，不在主队列中使用</p>
+<p>异步，将代码块放到队列中，立刻返回</p>
+<p>可以把延时放在队列中</p>
+<h4 id="URLSession"><a href="#URLSession" class="headerlink" title="URLSession"></a>URLSession</h4>]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>swift</tag>
+        <tag>cs193p</tag>
+      </tags>
+  </entry>
 </search>

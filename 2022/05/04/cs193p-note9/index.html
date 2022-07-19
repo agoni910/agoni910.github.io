@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic%7CRoboto+Slab:300,300italic,400,400italic,700,700italic%7CPT+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Collection of Identifiables12345func choose(_ card: Card) &amp;#123;    if let index &#x3D; cards.firstIndex(where: &amp;#123; $0.id &#x3D;&#x3D; card,id&amp;#125;) &amp;#123;        cards[index].isFaceUp &#x3D; true    &amp;#125;&amp;#125;  Ca">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs193p_note9_EmojiArt Drag and Drop Multithreading">
+<meta property="og:url" content="http://example.com/2022/05/04/cs193p-note9/index.html">
+<meta property="og:site_name" content="J’s blogs">
+<meta property="og:description" content="Collection of Identifiables12345func choose(_ card: Card) &amp;#123;    if let index &#x3D; cards.firstIndex(where: &amp;#123; $0.id &#x3D;&#x3D; card,id&amp;#125;) &amp;#123;        cards[index].isFaceUp &#x3D; true    &amp;#125;&amp;#125;  Ca">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-05-04T13:26:04.000Z">
+<meta property="article:modified_time" content="2022-07-19T11:07:50.044Z">
+<meta property="article:author" content="Wenrong Jiang">
+<meta property="article:tag" content="swift">
+<meta property="article:tag" content="cs193p">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/05/04/cs193p-note9/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/05/04/cs193p-note9/","path":"2022/05/04/cs193p-note9/","title":"cs193p_note9_EmojiArt Drag and Drop Multithreading"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>cs193p_note9_EmojiArt Drag and Drop Multithreading | J’s blogs</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">J’s blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives" rel="section">归档</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories" rel="section">分类</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags" rel="section">标签</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Collection-of-Identifiables"><span class="nav-number">1.</span> <span class="nav-text">Collection of Identifiables</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Color-amp-UIColor-amp-CGColor"><span class="nav-number">2.</span> <span class="nav-text">Color&amp;UIColor&amp;CGColor</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Color"><span class="nav-number">2.0.1.</span> <span class="nav-text">Color</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UIColor"><span class="nav-number">2.0.2.</span> <span class="nav-text">UIColor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CGColor"><span class="nav-number">2.0.3.</span> <span class="nav-text">CGColor</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Image-amp-UIImage"><span class="nav-number">3.</span> <span class="nav-text">Image&amp;UIImage</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Image"><span class="nav-number">3.0.1.</span> <span class="nav-text">Image</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UIImage"><span class="nav-number">3.0.2.</span> <span class="nav-text">UIImage</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Drag-and-Drop"><span class="nav-number">4.</span> <span class="nav-text">Drag and Drop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dome"><span class="nav-number">5.</span> <span class="nav-text">Dome</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%96%E6%94%BE"><span class="nav-number">5.0.1.</span> <span class="nav-text">拖放</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B-Multithreading"><span class="nav-number">6.</span> <span class="nav-text">多线程 Multithreading</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B-treads"><span class="nav-number">6.0.1.</span> <span class="nav-text">线程 treads</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Queues-Closures"><span class="nav-number">6.0.2.</span> <span class="nav-text">Queues Closures</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Main-Queue"><span class="nav-number">6.0.3.</span> <span class="nav-text">Main Queue</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Background-Queues"><span class="nav-number">6.0.4.</span> <span class="nav-text">Background Queues</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GCD"><span class="nav-number">6.0.5.</span> <span class="nav-text">GCD</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E9%98%9F%E5%88%97"><span class="nav-number">6.0.6.</span> <span class="nav-text">创建一个队列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E9%98%9F%E5%88%97%E4%B8%8A%E6%94%BE%E7%BD%AE%E9%97%AD%E5%8C%85"><span class="nav-number">6.0.7.</span> <span class="nav-text">在队列上放置闭包</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#URLSession"><span class="nav-number">6.0.8.</span> <span class="nav-text">URLSession</span></a></li></ol></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Wenrong Jiang"
+      src="/images/imga.png">
+  <p class="site-author-name" itemprop="name">Wenrong Jiang</p>
+  <div class="site-description" itemprop="description">一个可爱的blog</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives">
+          <span class="site-state-item-count">11</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/agoni910" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;agoni910" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:selever2002@163.com" title="E-Mail → mailto:selever2002@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/selever2" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;selever2" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/91777499" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;91777499" rel="noopener" target="_blank"><i class="fab fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/05/04/cs193p-note9/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/imga.png">
+      <meta itemprop="name" content="Wenrong Jiang">
+      <meta itemprop="description" content="一个可爱的blog">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="J’s blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cs193p_note9_EmojiArt Drag and Drop Multithreading
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-05-04 21:26:04" itemprop="dateCreated datePublished" datetime="2022-05-04T21:26:04+08:00">2022-05-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>3.4k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>3 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="Collection-of-Identifiables"><a href="#Collection-of-Identifiables" class="headerlink" title="Collection of Identifiables"></a>Collection of Identifiables</h2><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">choose</span>(<span class="keyword">_</span> <span class="params">card</span>: <span class="type">Card</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> index <span class="operator">=</span> cards.firstIndex(where: &#123; <span class="variable">$0</span>.id <span class="operator">==</span> card,id&#125;) &#123;</span><br><span class="line">        cards[index].isFaceUp <span class="operator">=</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Card是一个结构体，结构体是值类型，在传递时会被复制，所以想要改变卡片的isFaceUp需要获取索引，在数组中找到修改的位置。</p>
+<span id="more"></span>
+
+<p>在数组中存结构体时很常见，可以利用一个小函数解决。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">index</span>(<span class="params">matching</span> <span class="params">element</span>: <span class="type">Element</span>)</span> -&gt; <span class="type">Int</span>? &#123;</span><br><span class="line">    <span class="keyword">return</span> firstIndex(where: &#123; <span class="variable">$0</span>.id <span class="operator">==</span> element.id &#125;)</span><br><span class="line">&#125;</span><br><span class="line">card.index(matching: card)</span><br></pre></td></tr></table></figure>
+
+<p>将函数放在扩展Array中（也适用于Set）</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Array</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">Identifiable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">index</span>(<span class="params">matching</span> <span class="params">element</span>: <span class="type">Element</span>)</span> -&gt; <span class="type">Int</span>? &#123;</span><br><span class="line">        <span class="keyword">return</span> firstIndex(where: &#123; <span class="variable">$0</span>.id <span class="operator">==</span> element.id &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当然，我们也可以把代码放在Collection协议中，Set和Array都实现</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Collection</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">Identifiable</span> </span>&#123;<span class="comment">//不可变集合</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">index</span>(<span class="params">matching</span> <span class="params">element</span>: <span class="type">Element</span>)</span> -&gt; <span class="keyword">Self</span>.<span class="type">Index</span>? &#123;<span class="comment">//索引不一定是Int，是个泛型</span></span><br><span class="line">        firstIndex(where: &#123; <span class="variable">$0</span>.id <span class="operator">==</span> element.id &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="comment">//Collection中不包括remove，所以把内容添加到RangeReplaceableCollection</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">RangeReplaceableCollection</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">Identifiable</span> </span>&#123;<span class="comment">//可变集合</span></span><br><span class="line">    <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">remove</span>(<span class="keyword">_</span> <span class="params">element</span>: <span class="type">Element</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> index <span class="operator">=</span> index(matching: element) &#123;</span><br><span class="line">            remove(at: index)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>RangeReplaceCollection可以添加下标，可以使用数组下标或可识别的集合变成可识别的，<code>cards[card].isFaceUp = true</code></p>
+<h2 id="Color-amp-UIColor-amp-CGColor"><a href="#Color-amp-UIColor-amp-CGColor" class="headerlink" title="Color&amp;UIColor&amp;CGColor"></a>Color&amp;UIColor&amp;CGColor</h2><h4 id="Color"><a href="#Color" class="headerlink" title="Color"></a>Color</h4><ul>
+<li>用来指定颜色 <code>.foregroundColor(Color.green)</code></li>
+<li>作为ShapeStyle，填充，<code>.fill(Color.blue)</code></li>
+<li>像视图一样，<code>Color.white</code></li>
+</ul>
+<h4 id="UIColor"><a href="#UIColor" class="headerlink" title="UIColor"></a>UIColor</h4><ul>
+<li>有很多API，能获取并调整RGB，颜色饱和度，亮度</li>
+<li>拥有UIColor，可以用Color使用，<code>Color(uiColor: )</code></li>
+</ul>
+<h4 id="CGColor"><a href="#CGColor" class="headerlink" title="CGColor"></a>CGColor</h4><ul>
+<li>Core Graphic中基础的颜色表示</li>
+<li>使用<code>color.cgColor</code>表示 不能保证每一个都能被表示</li>
+<li>如果将Color变成UIColor可能会使用</li>
+</ul>
+<h2 id="Image-amp-UIImage"><a href="#Image-amp-UIImage" class="headerlink" title="Image&amp;UIImage"></a>Image&amp;UIImage</h2><h4 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h4><ul>
+<li>主要是一个视图</li>
+<li>不是容纳图片的类型，是显示图片的视图</li>
+<li>可以在Assets.xcassets中访问图片 <code>Image(_ name: String)</code></li>
+<li>使用<code>Image(systemName:)</code>创建SF符号，使用<code>.imageScale()</code>调整SF符号大小，SF视图受字体影响，可以当蒙版使用</li>
+</ul>
+<h4 id="UIImage"><a href="#UIImage" class="headerlink" title="UIImage"></a>UIImage</h4><ul>
+<li>能缩放调整大小等，是用来存储图片的变量</li>
+<li>使用<code>Image(uiImage:)</code>来显示</li>
+</ul>
+<h2 id="Drag-and-Drop"><a href="#Drag-and-Drop" class="headerlink" title="Drag and Drop"></a>Drag and Drop</h2><p>从一个应用拖到另一个应用传输数据，从Safari拖动图片到app。核心类是<code>NSItemProvider</code>类，进程之间的数据传输。</p>
+<p>便利地转移不同数据类型</p>
+<ul>
+<li>NSAttributedString具有格式的字符串  NSString</li>
+<li>NSURL</li>
+<li>UIImage UIColor</li>
+</ul>
+<p>使用连接数据类型和NS类型，String as NSString</p>
+<h2 id="Dome"><a href="#Dome" class="headerlink" title="Dome"></a>Dome</h2><h4 id="拖放"><a href="#拖放" class="headerlink" title="拖放"></a>拖放</h4><p>借助OC中内容完成拖放，使用as转换数据类型，NSItemProvider将数据提供给别人</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Text</span>(emoji)</span><br><span class="line">	.onDrag &#123; <span class="type">NSItemProvider</span>(object: emoji <span class="keyword">as</span> <span class="type">NSString</span>) &#125;</span><br></pre></td></tr></table></figure>
+
+<p>放下时，需要将整个Vstack下放置drop</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//of后添加可放下的类型</span></span><br><span class="line">.onDrop(of: [.plainText], isTargeted: <span class="literal">nil</span>) &#123; providers, location <span class="keyword">in</span></span><br><span class="line">	<span class="keyword">return</span> drop(providers: providers, at: location)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">drop</span>(<span class="params">providers</span>: [<span class="type">NSItemProvider</span>], <span class="params">at</span> <span class="params">location</span>: <span class="type">CGPoint</span>, <span class="params">in</span> <span class="params">geometry</span>: <span class="type">GeometryProxy</span>)</span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> providers.loadObjects(ofType: <span class="type">String</span>.<span class="keyword">self</span>) &#123; string <span class="keyword">in</span> <span class="comment">//提供者是否有字符串,将异步操作内容,因为提供者可能采用多线程提供信息,脱离主线程</span></span><br><span class="line">		<span class="keyword">if</span> <span class="keyword">let</span> emoji <span class="operator">=</span> string.first, emoji.isEmoji &#123;</span><br><span class="line">			document.addEmoji(</span><br><span class="line">				<span class="type">String</span>(emoji),</span><br><span class="line">				at: convertToEmojiCoordinates(location, in: geometry), <span class="comment">//将CGPoint转换成元组</span></span><br><span class="line">				size: defaultEmojiFontSize)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="多线程-Multithreading"><a href="#多线程-Multithreading" class="headerlink" title="多线程 Multithreading"></a>多线程 Multithreading</h2><p>从浏览器找到图片拖进去，但是从互联网下载图片可能需要几秒钟，可能会影响UI响应。</p>
+<p>UI需要响应用户内容，但有些操作需要比较长的时间，我们需要在不同的线程上执行操作，才能保证UI响应</p>
+<h4 id="线程-treads"><a href="#线程-treads" class="headerlink" title="线程 treads"></a>线程 treads</h4><p>可以指定线程用于哪些代码，快速切换线程看起来像同时在运行。有一些线程拥有更高的优先级</p>
+<p>使用队列管理复杂的线程</p>
+<h4 id="Queues-Closures"><a href="#Queues-Closures" class="headerlink" title="Queues Closures"></a>Queues Closures</h4><p>队列只是一堆排队等待线程执行的代码块。指定在队列里等待的代码块是闭包。</p>
+<p>多线程API的核心是&#x3D;&#x3D;将闭包放进队列&#x3D;&#x3D;</p>
+<h4 id="Main-Queue"><a href="#Main-Queue" class="headerlink" title="Main Queue"></a>Main Queue</h4><p>最重要的队列是main queue，是包含所有可能破坏UI界面的代码块，所有的UI的操作都需要主队列</p>
+<p>系统使用单线程执行处理所有在主队列中的代码块，所以可以使用主队列作为同步点(synchronize)。可以对数据结构的写入在主队列，你的读取可以发生在任何队列。</p>
+<h4 id="Background-Queues"><a href="#Background-Queues" class="headerlink" title="Background Queues"></a>Background Queues</h4><p>有一堆后台队列用来执行长期的、非UI任务，例如请求网络、机器学习。</p>
+<p>系统有一堆可用的线程执行后台队列上的代码块，可以并行执行</p>
+<h4 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h4><p>处理队列的基础API是GCD(Grand Central Dispatch)</p>
+<p>基础功能</p>
+<ul>
+<li>访问队列</li>
+<li>将一段代码添加到队列中</li>
+</ul>
+<h4 id="创建一个队列"><a href="#创建一个队列" class="headerlink" title="创建一个队列"></a>创建一个队列</h4><p>main queue是DispatchQueue上的静态变量</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">DispatchQueue</span>.main <span class="comment">//所有的UI代码必须放在这里发布</span></span><br><span class="line"><span class="type">DispatchQueue</span>.global(qos: <span class="type">QoS</span>) <span class="comment">//服务质量</span></span><br><span class="line">qos</span><br><span class="line">	.userInteractive <span class="comment">//几乎和主队列一样重要，与用户进行实时交互，计算内容更新到UI上，速度最快</span></span><br><span class="line">	.userInitiated   <span class="comment">//用户触发级，用户点击按钮，在网上点击下载等现在马上要做的内容 UI界面依然活跃</span></span><br><span class="line">	.utility	  	 <span class="comment">//实用级 清理数据库等，不需要马上去做</span></span><br><span class="line">	.background		 <span class="comment">//背景级 自动任务或定时处理任务等</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="在队列上放置闭包"><a href="#在队列上放置闭包" class="headerlink" title="在队列上放置闭包"></a>在队列上放置闭包</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> queue <span class="operator">=</span> <span class="type">DispatchQueue</span>.main</span><br><span class="line">queue.async &#123; &#125; <span class="comment">//异步</span></span><br><span class="line">queue.sync &#123; &#125;<span class="comment">//同步</span></span><br></pre></td></tr></table></figure>
+
+<p>同步，代码执行完才会返回，阻塞当前线程，不在主队列中使用</p>
+<p>异步，将代码块放到队列中，立刻返回</p>
+<p>可以把延时放在队列中</p>
+<h4 id="URLSession"><a href="#URLSession" class="headerlink" title="URLSession"></a>URLSession</h4>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/swift/" rel="tag"># swift</a>
+              <a href="/tags/cs193p/" rel="tag"># cs193p</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/05/02/cs193p-note8/" rel="prev" title="cs193p_note8 Animation Demostrastion">
+                  <i class="fa fa-chevron-left"></i> cs193p_note8 Animation Demostrastion
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/07/19/cs193p-note10/" rel="next" title="cs193p_note10">
+                  cs193p_note10 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wenrong Jiang</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">28k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">26 分钟</span>
+  </span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+-->
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
