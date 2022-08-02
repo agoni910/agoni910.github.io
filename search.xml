@@ -509,7 +509,7 @@
   </entry>
   <entry>
     <title>cs193p_note10_Multithreading Demo Gestures</title>
-    <url>/2022/07/19/cs193p-note10/</url>
+    <url>/2022/05/19/cs193p-note10/</url>
     <content><![CDATA[<h4 id="设置图片背景"><a href="#设置图片背景" class="headerlink" title="设置图片背景"></a>设置图片背景</h4><p>接收url和image</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> found <span class="operator">=</span> providers.loadObjects(ofType: <span class="type">URL</span>.<span class="keyword">self</span>) &#123; url <span class="keyword">in</span></span><br><span class="line">           document.setBackground(.url(url.imageURL))</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> <span class="operator">!</span>found &#123;</span><br><span class="line">           found <span class="operator">=</span> providers.loadObjects(ofType: <span class="type">UIImage</span>.<span class="keyword">self</span>) &#123; image <span class="keyword">in</span></span><br><span class="line">               <span class="keyword">if</span> <span class="keyword">let</span> data <span class="operator">=</span> image.jpegData(compressionQuality: <span class="number">1.0</span>) &#123;</span><br><span class="line">                   document.setBackground(.imageData(data))</span><br><span class="line">               &#125;<span class="comment">//如果是jpg 无损压缩</span></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
 
