@@ -508,9 +508,42 @@
       </tags>
   </entry>
   <entry>
-    <title>cs193p_note10</title>
+    <title>cs193p_note10_Multithreading Demo Gestures</title>
     <url>/2022/07/19/cs193p-note10/</url>
-    <content><![CDATA[]]></content>
+    <content><![CDATA[<h4 id="设置图片背景"><a href="#设置图片背景" class="headerlink" title="设置图片背景"></a>设置图片背景</h4><p>接收url和image</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> found <span class="operator">=</span> providers.loadObjects(ofType: <span class="type">URL</span>.<span class="keyword">self</span>) &#123; url <span class="keyword">in</span></span><br><span class="line">           document.setBackground(.url(url.imageURL))</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> <span class="operator">!</span>found &#123;</span><br><span class="line">           found <span class="operator">=</span> providers.loadObjects(ofType: <span class="type">UIImage</span>.<span class="keyword">self</span>) &#123; image <span class="keyword">in</span></span><br><span class="line">               <span class="keyword">if</span> <span class="keyword">let</span> data <span class="operator">=</span> image.jpegData(compressionQuality: <span class="number">1.0</span>) &#123;</span><br><span class="line">                   document.setBackground(.imageData(data))</span><br><span class="line">               &#125;<span class="comment">//如果是jpg 无损压缩</span></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+
+<p>更新背景图片，不能把backgroundImage变成计算属性，因为在缓慢地网络被获取需要几秒或许一分钟</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Published</span> <span class="keyword">private(set)</span> <span class="keyword">var</span> emojiArt: <span class="type">EmojiArtModel</span> &#123;</span><br><span class="line">    <span class="keyword">didSet</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> emojiArt.background <span class="operator">!=</span> oldValue.background &#123;</span><br><span class="line">            fetchBackgroundImageDataIfNecessary()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>使用try来解决抛出错误</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">fetchBackgroundImageDataIfNecessary</span>()</span> &#123;</span><br><span class="line">    backgroundImage <span class="operator">=</span> <span class="literal">nil</span></span><br><span class="line">    <span class="keyword">switch</span> emojiArt.background &#123;</span><br><span class="line">        <span class="keyword">case</span> .url(<span class="keyword">let</span> url):</span><br><span class="line">        <span class="comment">//获取url</span></span><br><span class="line">        <span class="keyword">let</span> imageData <span class="operator">=</span> <span class="keyword">try?</span> <span class="type">Data</span>(contentsOf: url) <span class="comment">//会阻塞UI</span></span><br><span class="line">        <span class="keyword">if</span> imageData <span class="operator">!=</span> <span class="literal">nil</span> &#123;</span><br><span class="line">            backgroundImage <span class="operator">=</span> <span class="type">UIImage</span>(data: imageData<span class="operator">!</span>)</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">case</span> .imageData(<span class="keyword">let</span> image):</span><br><span class="line">        backgroundImage <span class="operator">=</span> <span class="type">UIImage</span>(data: image)</span><br><span class="line">        <span class="keyword">case</span> .blank:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>但是，url耗时很长，要使用多线程解决问题</p>
+<ul>
+<li>self:内部是一个闭包，被放入内存并且坚持到这件事完成运行，闭包是引用类型。通过self把闭包存入内存并指向viewmodel，被保存在堆中，即使关闭文档也无法退出</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">DispatchQueue</span>.global(qos: .userInitiated).async &#123;</span><br><span class="line">    <span class="keyword">let</span> imageData <span class="operator">=</span> <span class="keyword">try?</span> <span class="type">Data</span>(contentsOf: url) <span class="comment">//会阻塞UI</span></span><br><span class="line">    <span class="type">DispatchQueue</span>.main.asunc&#123;</span><br><span class="line">        <span class="keyword">if</span> imageData <span class="operator">!=</span> <span class="literal">nil</span> &#123;</span><br><span class="line">            <span class="keyword">self</span>.backgroundImage <span class="operator">=</span> <span class="type">UIImage</span>(data: imageData<span class="operator">!</span>) <span class="comment">//不在后台线程中修改UI</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>弱引用:不强制self在堆中，没有其他人把它放入堆中就会消失，变成nil</li>
+</ul>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">DispatchQueue</span>.main.asunc&#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] <span class="keyword">in</span> </span><br><span class="line">    <span class="keyword">if</span> imageData <span class="operator">!=</span> <span class="literal">nil</span> &#123;</span><br><span class="line">   		<span class="keyword">self</span><span class="operator">?</span>.backgroundImage <span class="operator">=</span> <span class="type">UIImage</span>(data: imageData<span class="operator">!</span>) <span class="comment">//如果self为nil不进行语句操作</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果图片加载时间过长，用户可能会拖动别的图片进入，代码会被再次运行，等第一个图片加载完成时，可能会加载第一张图片。关于异步多线程编程，需要注意每当你从某事回来需要很长知识时，检查世界还是不是你离开时的亚子。</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">DispatchQueue</span>.main.async &#123; [<span class="keyword">weak</span> <span class="keyword">self</span>] <span class="keyword">in</span></span><br><span class="line">	<span class="keyword">if</span> <span class="keyword">self</span><span class="operator">?</span>.emojiArt.background <span class="operator">==</span> <span class="type">EmojiArtModel</span>.<span class="type">Background</span>.url(url) &#123;</span><br><span class="line">		<span class="keyword">if</span> imageData <span class="operator">!=</span> <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">self</span><span class="operator">?</span>.backgroundImage <span class="operator">=</span> <span class="type">UIImage</span>(data: imageData<span class="operator">!</span>)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>给用户正在加载的反馈</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Published</span> <span class="keyword">var</span> backgroundImageFetchStatus <span class="operator">=</span> <span class="type">BackgroundImageFetchStatus</span>.idle <span class="comment">//监测加载状态</span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">BackgroundImageFetchStatus</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> idle <span class="comment">//闲置</span></span><br><span class="line">    <span class="keyword">case</span> fetching <span class="comment">//加载</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Gestures"><a href="#Gestures" class="headerlink" title="Gestures"></a>Gestures</h2><h4 id="理论知识"><a href="#理论知识" class="headerlink" title="理论知识"></a>理论知识</h4><h4 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h4>]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>swift</tag>
+        <tag>cs193p</tag>
+      </tags>
   </entry>
   <entry>
     <title>cs193p_note9_EmojiArt Drag and Drop Multithreading</title>
