@@ -1,67 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CS193p_assignment3</title>
-    <url>/2022/03/20/cs193-a3/</url>
-    <content><![CDATA[<h3 id="Task-1"><a href="#Task-1" class="headerlink" title="Task 1"></a>Task 1</h3><blockquote>
-<p>实施一个单人游戏Set</p>
-</blockquote>
-<h3 id="Task-2"><a href="#Task-2" class="headerlink" title="Task 2"></a>Task 2</h3><blockquote>
-<p>所有卡片可见，卡片尽可能的大。也可以增加一个最小尺寸，然后恢复滚动。所有的卡片都必须可识别</p>
-</blockquote>
-<span id="more"></span>
-
-<h3 id="Task-3"><a href="#Task-3" class="headerlink" title="Task 3"></a>Task 3</h3><blockquote>
-<p>有相同的长宽比</p>
-</blockquote>
-<h3 id="Task-4"><a href="#Task-4" class="headerlink" title="Task 4"></a>Task 4</h3><blockquote>
-<p>符号的大小根据卡片大小决定</p>
-</blockquote>
-<h3 id="Task-5"><a href="#Task-5" class="headerlink" title="Task 5"></a>Task 5</h3><blockquote>
-<p>选择三张牌匹配，能够看到哪些牌已经被选中</p>
-</blockquote>
-<h3 id="Task-6"><a href="#Task-6" class="headerlink" title="Task 6"></a>Task 6</h3><blockquote>
-<p>只要有三张牌被选中，要显示是否匹配，不匹配的三个和只选择1或2张牌时看起来不一样</p>
-</blockquote>
-<h3 id="Task-7"><a href="#Task-7" class="headerlink" title="Task 7"></a>Task 7</h3><blockquote>
-<p>支持点击已经选中的牌取消选中，只选择1或2时</p>
-</blockquote>
-<h3 id="Task-8"><a href="#Task-8" class="headerlink" title="Task 8"></a>Task 8</h3><blockquote>
-<p>没读明白啊，回头再说</p>
-<p>当任何一张牌被触摸到，并且已经有3张相匹配的套装牌被选中。<br>那么…<br>a. 按照 “套牌 “的规则，用新的 “套牌 “替换这3张匹配的牌。牌<br>b. 如果这副牌是空的，那么就把那些匹配的牌所空出来的位置（因为没有更多的牌，所以不能被替换）。b. 如果这副牌是空的，那么这副牌所腾出的空间（因为没有更多的牌，所以不能被替换）就应该让给剩余的 的牌（也就是说，这些牌很可能会变大）。<br>c. 如果被碰的牌不属于匹配的牌组，则选择该牌。<br>d. 如果被摸到的牌是匹配组的一部分，那么就不选择任何牌。</p>
-</blockquote>
-<h3 id="Task-9"><a href="#Task-9" class="headerlink" title="Task 9"></a>Task 9</h3><blockquote>
-<p>有三张不匹配的牌被选中，取消这三张牌，选中点击的牌</p>
-</blockquote>
-<h3 id="Task-10"><a href="#Task-10" class="headerlink" title="Task 10"></a>Task 10</h3><blockquote>
-<p>有“Deal 3 More Cards”按钮</p>
-<p>你需要有一个 “再发3张牌 “的按钮（根据Set的规则）。<br>a. 当它被触动时，如果所选的牌组成了一套牌，则替换所选的牌。<br>b. 或者，如果所选的牌不组成一套牌（或者所选的牌少于3张，包括没有），则增加3张新牌，加入屏幕上已经出现的牌（并且不影响选择）。<br>c. 如果牌组是空的，则禁用此按钮。</p>
-</blockquote>
-<h3 id="Task-11"><a href="#Task-11" class="headerlink" title="Task 11"></a>Task 11</h3><blockquote>
-<p>有一个“New Game”按钮，开始新游戏，回到12个随机卡</p>
-</blockquote>
-<h3 id="Task-12"><a href="#Task-12" class="headerlink" title="Task 12"></a>Task 12</h3><blockquote>
-<p>用长方形代替弯曲</p>
-</blockquote>
-<h3 id="Task-13"><a href="#Task-13" class="headerlink" title="Task 13"></a>Task 13</h3><blockquote>
-<p>自己编写Shape结构制作“diamond”</p>
-</blockquote>
-<h3 id="Task-14"><a href="#Task-14" class="headerlink" title="Task 14"></a>Task 14</h3><blockquote>
-<p>条纹表示为半透明，和纯色区分开</p>
-</blockquote>
-<h3 id="Task-15-amp-16"><a href="#Task-15-amp-16" class="headerlink" title="Task 15&amp;16"></a>Task 15&amp;16</h3><blockquote>
-<p>使用枚举作为方案中有意义的部分，使用闭包(一个作为参数的函数)，三个不同颜色</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>swift</tag>
-        <tag>cs193p</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CS193_note 1-4</title>
     <url>/2022/02/20/cs193-note1-2/</url>
     <content><![CDATA[<h3 id="RoundedRectangle"><a href="#RoundedRectangle" class="headerlink" title="RoundedRectangle"></a>RoundedRectangle</h3><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">RoundedRectangle</span><span class="token punctuation">(</span>cornerRadius<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">)</span>
@@ -621,6 +560,98 @@ fun <span class="token function">reportSalesNumber</span><span class="token punc
       </tags>
   </entry>
   <entry>
+    <title>CS193p_assignment3</title>
+    <url>/2022/03/20/cs193-a3/</url>
+    <content><![CDATA[<h3 id="Task-1"><a href="#Task-1" class="headerlink" title="Task 1"></a>Task 1</h3><blockquote>
+<p>实施一个单人游戏Set</p>
+</blockquote>
+<h3 id="Task-2"><a href="#Task-2" class="headerlink" title="Task 2"></a>Task 2</h3><blockquote>
+<p>所有卡片可见，卡片尽可能的大。也可以增加一个最小尺寸，然后恢复滚动。所有的卡片都必须可识别</p>
+</blockquote>
+<span id="more"></span>
+
+<h3 id="Task-3"><a href="#Task-3" class="headerlink" title="Task 3"></a>Task 3</h3><blockquote>
+<p>有相同的长宽比</p>
+</blockquote>
+<h3 id="Task-4"><a href="#Task-4" class="headerlink" title="Task 4"></a>Task 4</h3><blockquote>
+<p>符号的大小根据卡片大小决定</p>
+</blockquote>
+<h3 id="Task-5"><a href="#Task-5" class="headerlink" title="Task 5"></a>Task 5</h3><blockquote>
+<p>选择三张牌匹配，能够看到哪些牌已经被选中</p>
+</blockquote>
+<h3 id="Task-6"><a href="#Task-6" class="headerlink" title="Task 6"></a>Task 6</h3><blockquote>
+<p>只要有三张牌被选中，要显示是否匹配，不匹配的三个和只选择1或2张牌时看起来不一样</p>
+</blockquote>
+<h3 id="Task-7"><a href="#Task-7" class="headerlink" title="Task 7"></a>Task 7</h3><blockquote>
+<p>支持点击已经选中的牌取消选中，只选择1或2时</p>
+</blockquote>
+<h3 id="Task-8"><a href="#Task-8" class="headerlink" title="Task 8"></a>Task 8</h3><blockquote>
+<p>没读明白啊，回头再说</p>
+<p>当任何一张牌被触摸到，并且已经有3张相匹配的套装牌被选中。<br>那么…<br>a. 按照 “套牌 “的规则，用新的 “套牌 “替换这3张匹配的牌。牌<br>b. 如果这副牌是空的，那么就把那些匹配的牌所空出来的位置（因为没有更多的牌，所以不能被替换）。b. 如果这副牌是空的，那么这副牌所腾出的空间（因为没有更多的牌，所以不能被替换）就应该让给剩余的 的牌（也就是说，这些牌很可能会变大）。<br>c. 如果被碰的牌不属于匹配的牌组，则选择该牌。<br>d. 如果被摸到的牌是匹配组的一部分，那么就不选择任何牌。</p>
+</blockquote>
+<h3 id="Task-9"><a href="#Task-9" class="headerlink" title="Task 9"></a>Task 9</h3><blockquote>
+<p>有三张不匹配的牌被选中，取消这三张牌，选中点击的牌</p>
+</blockquote>
+<h3 id="Task-10"><a href="#Task-10" class="headerlink" title="Task 10"></a>Task 10</h3><blockquote>
+<p>有“Deal 3 More Cards”按钮</p>
+<p>你需要有一个 “再发3张牌 “的按钮（根据Set的规则）。<br>a. 当它被触动时，如果所选的牌组成了一套牌，则替换所选的牌。<br>b. 或者，如果所选的牌不组成一套牌（或者所选的牌少于3张，包括没有），则增加3张新牌，加入屏幕上已经出现的牌（并且不影响选择）。<br>c. 如果牌组是空的，则禁用此按钮。</p>
+</blockquote>
+<h3 id="Task-11"><a href="#Task-11" class="headerlink" title="Task 11"></a>Task 11</h3><blockquote>
+<p>有一个“New Game”按钮，开始新游戏，回到12个随机卡</p>
+</blockquote>
+<h3 id="Task-12"><a href="#Task-12" class="headerlink" title="Task 12"></a>Task 12</h3><blockquote>
+<p>用长方形代替弯曲</p>
+</blockquote>
+<h3 id="Task-13"><a href="#Task-13" class="headerlink" title="Task 13"></a>Task 13</h3><blockquote>
+<p>自己编写Shape结构制作“diamond”</p>
+</blockquote>
+<h3 id="Task-14"><a href="#Task-14" class="headerlink" title="Task 14"></a>Task 14</h3><blockquote>
+<p>条纹表示为半透明，和纯色区分开</p>
+</blockquote>
+<h3 id="Task-15-amp-16"><a href="#Task-15-amp-16" class="headerlink" title="Task 15&amp;16"></a>Task 15&amp;16</h3><blockquote>
+<p>使用枚举作为方案中有意义的部分，使用闭包(一个作为参数的函数)，三个不同颜色</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>swift</tag>
+        <tag>cs193p</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs193p_note11_Error Persistence</title>
+    <url>/2022/06/02/cs193p-note11/</url>
+    <content><![CDATA[<h3 id="Error-Handing"><a href="#Error-Handing" class="headerlink" title="Error Handing"></a>Error Handing</h3><h4 id="Throwing-errors"><a href="#Throwing-errors" class="headerlink" title="Throwing errors"></a>Throwing errors</h4><p>很多函数都有<code>throws</code>关键字，你可以抛出错误</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">attendLecture</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> sleptIn <span class="token punctuation">&#123;</span>
+        <span class="token keyword">throw</span> <span class="token class-name">CS193pError</span><span class="token punctuation">.</span>missedLecture
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">askQuestion</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//如果抛出错误，函数后续无法完成</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">enum</span> <span class="token class-name">CS193pError</span><span class="token punctuation">:</span> <span class="token class-name">Error</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">case</span> <span class="token class-name">LateHomework</span><span class="token punctuation">(</span>daysLate<span class="token punctuation">:</span> <span class="token class-name">Int</span><span class="token punctuation">)</span>
+    <span class="token keyword">case</span> missedLecture
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<p>使用try调用能抛出错误的函数，<code>try head(from: url)</code></p>
+<h4 id="处理抛出错误"><a href="#处理抛出错误" class="headerlink" title="处理抛出错误"></a>处理抛出错误</h4><ul>
+<li>try? 忽略发生的任何错误，如果抛出错误只会返回nil</li>
+<li>try! 如果遇到错误，使程序崩溃</li>
+</ul>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>swift</tag>
+        <tag>cs193p</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>cs193p_note10_Multithreading Demo Gestures</title>
     <url>/2022/05/19/cs193p-note10/</url>
     <content><![CDATA[<h3 id="设置图片背景"><a href="#设置图片背景" class="headerlink" title="设置图片背景"></a>设置图片背景</h3><p>接收url和image</p>
@@ -796,37 +827,6 @@ myview<span class="token punctuation">.</span><span class="token function">onLon
 
 <p>  组合两个不同手势</p>
   <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span><span class="token function">gesture</span><span class="token punctuation">(</span><span class="token function">panGesture</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">simultaneously</span><span class="token punctuation">(</span>with<span class="token punctuation">:</span> <span class="token function">zoomGesture</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">//组合两个不同手势</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-</ul>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>swift</tag>
-        <tag>cs193p</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cs193p_note11_Error Persistence</title>
-    <url>/2022/06/02/cs193p-note11/</url>
-    <content><![CDATA[<h3 id="Error-Handing"><a href="#Error-Handing" class="headerlink" title="Error Handing"></a>Error Handing</h3><h4 id="Throwing-errors"><a href="#Throwing-errors" class="headerlink" title="Throwing errors"></a>Throwing errors</h4><p>很多函数都有<code>throws</code>关键字，你可以抛出错误</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">attendLecture</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">if</span> sleptIn <span class="token punctuation">&#123;</span>
-        <span class="token keyword">throw</span> <span class="token class-name">CS193pError</span><span class="token punctuation">.</span>missedLecture
-    <span class="token punctuation">&#125;</span>
-    <span class="token function">askQuestion</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//如果抛出错误，函数后续无法完成</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">enum</span> <span class="token class-name">CS193pError</span><span class="token punctuation">:</span> <span class="token class-name">Error</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">case</span> <span class="token class-name">LateHomework</span><span class="token punctuation">(</span>daysLate<span class="token punctuation">:</span> <span class="token class-name">Int</span><span class="token punctuation">)</span>
-    <span class="token keyword">case</span> missedLecture
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<span id="more"></span>
-
-<p>使用try调用能抛出错误的函数，<code>try head(from: url)</code></p>
-<h4 id="处理抛出错误"><a href="#处理抛出错误" class="headerlink" title="处理抛出错误"></a>处理抛出错误</h4><ul>
-<li>try? 忽略发生的任何错误，如果抛出错误只会返回nil</li>
-<li>try! 如果遇到错误，使程序崩溃</li>
 </ul>
 ]]></content>
       <categories>
