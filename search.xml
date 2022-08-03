@@ -692,8 +692,16 @@
   <entry>
     <title>cs193p_note11_Error Persistence</title>
     <url>/2022/06/02/cs193p-note11/</url>
-    <content><![CDATA[<h2 id="Error-Handing"><a href="#Error-Handing" class="headerlink" title="Error Handing"></a>Error Handing</h2><span id="more"></span>
+    <content><![CDATA[<h3 id="Error-Handing"><a href="#Error-Handing" class="headerlink" title="Error Handing"></a>Error Handing</h3><h4 id="Throwing-errors"><a href="#Throwing-errors" class="headerlink" title="Throwing errors"></a>Throwing errors</h4><p>很多函数都有<code>throws</code>关键字，你可以抛出错误</p>
+<figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">attendLecture</span>()</span> <span class="keyword">throws</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> sleptIn &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="type">CS193pError</span>.missedLecture</span><br><span class="line">    &#125;</span><br><span class="line">    askQuestion() <span class="comment">//如果抛出错误，函数后续无法完成</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">CS193pError</span>: <span class="title">Error</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">LateHomework</span>(daysLate: <span class="type">Int</span>)</span><br><span class="line">    <span class="keyword">case</span> missedLecture</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<span id="more"></span>
+
+<p>使用try调用能抛出错误的函数，<code>try head(from: url)</code></p>
+<h4 id="处理抛出错误"><a href="#处理抛出错误" class="headerlink" title="处理抛出错误"></a>处理抛出错误</h4><ul>
+<li>try? 忽略发生的任何错误，如果抛出错误只会返回nil</li>
+<li>try! 如果遇到错误，使程序崩溃</li>
+</ul>
 ]]></content>
       <categories>
         <category>iOS</category>
