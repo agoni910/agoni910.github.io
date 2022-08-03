@@ -39,19 +39,19 @@
   <entry>
     <title>CS193p_note5 Properties Layout @ViewBuilder</title>
     <url>/2022/02/28/cs193p-note5/</url>
-    <content><![CDATA[<h2 id="Computed-Properties-计算属性"><a href="#Computed-Properties-计算属性" class="headerlink" title="Computed Properties 计算属性"></a>Computed Properties 计算属性</h2><p>不提供存储值，提供读取器和设置器，接收和设置其他属性</p>
+    <content><![CDATA[<h3 id="Computed-Properties-计算属性"><a href="#Computed-Properties-计算属性" class="headerlink" title="Computed Properties 计算属性"></a>Computed Properties 计算属性</h3><p>不提供存储值，提供读取器和设置器，接收和设置其他属性</p>
 <p>get用来接收数据，并且返回值，set用来设置其他属性或值</p>
-<h2 id="State"><a href="#State" class="headerlink" title="@State"></a>@State</h2><p>变化会在必要时重新绘制，相当于@ObservedObject</p>
+<h3 id="State"><a href="#State" class="headerlink" title="@State"></a>@State</h3><p>变化会在必要时重新绘制，相当于@ObservedObject</p>
 <span id="more"></span>
 
-<h2 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h2><p>屏幕的空间如何分配给所有视图</p>
+<h3 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h3><p>屏幕的空间如何分配给所有视图</p>
 <ol>
 <li>视图容器为其中的视图提供空间</li>
 <li>视图根据提供给他们的空间选择自己的尺寸，不是被分配</li>
 <li>一旦视图调整了自己的大小，将视图放置在视图容器里</li>
 <li>视图容器选择大小，基于里面的视图</li>
 </ol>
-<h3 id="HStack-amp-VStack"><a href="#HStack-amp-VStack" class="headerlink" title="HStack &amp; VStack"></a>HStack &amp; VStack</h3><p>最不灵活的视图</p>
+<h4 id="HStack-amp-VStack"><a href="#HStack-amp-VStack" class="headerlink" title="HStack &amp; VStack"></a>HStack &amp; VStack</h4><p>最不灵活的视图</p>
 <p>例如，Image和Text有固定大小，Image的自然大小，Text将字符串放进去，不灵活；RoundedRectangle非常灵活，如果你给他空间，他会占据全部空间，填满。</p>
 <p>从最不灵活的视图先分配，text如果空间不够会自动省略，如果stack里面的视图非常灵活，那么本身就会变灵活</p>
 <ul>
@@ -69,15 +69,15 @@
 
 
 
-<h3 id="LazyHStack-amp-LazyVStack"><a href="#LazyHStack-amp-LazyVStack" class="headerlink" title="LazyHStack &amp; LazyVStack"></a>LazyHStack &amp; LazyVStack</h3><ul>
+<h4 id="LazyHStack-amp-LazyVStack"><a href="#LazyHStack-amp-LazyVStack" class="headerlink" title="LazyHStack &amp; LazyVStack"></a>LazyHStack &amp; LazyVStack</h4><ul>
 <li><p>不构建不在屏幕上显示的视图，只构建ScrollView中显示在屏幕上的</p>
 </li>
 <li><p>不灵活，如果有灵活视图，不能给所有空间，会尽可能的小</p>
 </li>
 </ul>
-<h3 id="ScrollView"><a href="#ScrollView" class="headerlink" title="ScrollView"></a>ScrollView</h3><p>接收任何视图在其中滚动</p>
-<h3 id="LazyHGrid-amp-LazyVGrid"><a href="#LazyHGrid-amp-LazyVGrid" class="headerlink" title="LazyHGrid &amp; LazyVGrid"></a>LazyHGrid &amp; LazyVGrid</h3><p>控制多少列或者多少行</p>
-<h3 id="ZStack"><a href="#ZStack" class="headerlink" title="ZStack"></a>ZStack</h3><p>调整自己的大小合适子项</p>
+<h4 id="ScrollView"><a href="#ScrollView" class="headerlink" title="ScrollView"></a>ScrollView</h4><p>接收任何视图在其中滚动</p>
+<h4 id="LazyHGrid-amp-LazyVGrid"><a href="#LazyHGrid-amp-LazyVGrid" class="headerlink" title="LazyHGrid &amp; LazyVGrid"></a>LazyHGrid &amp; LazyVGrid</h4><p>控制多少列或者多少行</p>
+<h4 id="ZStack"><a href="#ZStack" class="headerlink" title="ZStack"></a>ZStack</h4><p>调整自己的大小合适子项</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">Text</span>(<span class="string">&quot;hello&quot;</span>).background(<span class="type">Rectangle</span>().foregroundColor(.red))</span><br><span class="line"><span class="comment">//背景大小取决于文字，不是灵活的尺寸</span></span><br><span class="line"><span class="type">Circle</span>().overlay(<span class="type">Text</span>(<span class="string">&quot;hello&quot;</span>), alignment: .center)</span><br><span class="line"><span class="comment">//文字不重要，很灵活</span></span><br></pre></td></tr></table></figure>
 
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">Hstack</span>&#123;</span><br><span class="line">    <span class="type">ForEach</span>(viewmodel.cards) &#123; card <span class="keyword">in</span></span><br><span class="line">    	<span class="type">CardView</span>(card: card).aspectRatio(<span class="number">2</span><span class="operator">/</span><span class="number">3</span>, contentMode: .fit)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">.foregroundColor(<span class="type">Color</span>.orange)</span><br><span class="line">.padding(<span class="number">10</span>)</span><br></pre></td></tr></table></figure>
@@ -88,12 +88,12 @@
 <li>Hstack将空间平均分给aspectRatio</li>
 <li>提供空间给CardView</li>
 </ol>
-<h3 id="GeometryReader"><a href="#GeometryReader" class="headerlink" title="GeometryReader"></a>GeometryReader</h3><p>本身总是适应提供的空间</p>
+<h4 id="GeometryReader"><a href="#GeometryReader" class="headerlink" title="GeometryReader"></a>GeometryReader</h4><p>本身总是适应提供的空间</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">GeometryReader</span>&#123; geometry <span class="keyword">in</span> </span><br><span class="line">		<span class="operator">...</span></span><br><span class="line">&#125;<span class="comment">//放在视图里 计算视图大小</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">GrometryProxy</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> size: <span class="type">CGSize</span> <span class="comment">//提供视图大小</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">frame</span>(<span class="params">in</span>: <span class="type">CoordinateSpace</span>)</span> -&gt; <span class="type">CGRect</span></span><br><span class="line">    <span class="keyword">var</span> safeAreaInsets: <span class="type">EdgeInsets</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="type">ZStack</span> &#123;&#125;.edgesIgnoringSafeArea([.top]) <span class="comment">//画入安全区域</span></span><br></pre></td></tr></table></figure>
 
-<h2 id="ViewBuilder"><a href="#ViewBuilder" class="headerlink" title="@ViewBuilder"></a>@ViewBuilder</h2><p>将函数返回成很对个视图组成的一个视图，创建的视图被称为TupleView</p>
+<h3 id="ViewBuilder"><a href="#ViewBuilder" class="headerlink" title="@ViewBuilder"></a>@ViewBuilder</h3><p>将函数返回成很对个视图组成的一个视图，创建的视图被称为TupleView</p>
 <p>任意<code>func</code>或<code>只读的计算属性</code>都可以标识为<code>@ViewBuilder</code>，一旦标识，它里面的内容将会被解析为<code>a list of Views</code></p>
-<h2 id="零散的东西"><a href="#零散的东西" class="headerlink" title="零散的东西"></a>零散的东西</h2><p>函数式编程</p>
+<h3 id="零散的东西"><a href="#零散的东西" class="headerlink" title="零散的东西"></a>零散的东西</h3><p>函数式编程</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> faceUpCardIndices <span class="operator">=</span> cards.indices.filter(&#123; cards[<span class="variable">$0</span>].isFaceUp &#125;)</span><br><span class="line"><span class="comment">//cards.indices是0..&lt;cards.count filter返回一个满足条件的数组</span></span><br><span class="line"><span class="keyword">var</span> faceUpCardIndices <span class="operator">=</span> [<span class="type">Int</span>]()</span><br><span class="line"><span class="keyword">for</span> index <span class="keyword">in</span> cards.indices &#123;</span><br><span class="line">		<span class="keyword">if</span> cards[index].isFaceUp &#123;</span><br><span class="line">		faceUpCardIndices.append(index)</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 ]]></content>
@@ -108,7 +108,7 @@
   <entry>
     <title>CS193p_note6 Protocols Shapes</title>
     <url>/2022/03/05/cs193p-note6/</url>
-    <content><![CDATA[<h2 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h2><p>协议是一个精简的<code>class</code>或<code>struct</code></p>
+    <content><![CDATA[<h3 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h3><p>协议是一个精简的<code>class</code>或<code>struct</code></p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Moveable</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">func</span> <span class="title">move</span>(<span class="params">by</span>: <span class="type">Int</span>)</span></span><br><span class="line">    <span class="keyword">var</span> hasMoved: <span class="type">Bool</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">    <span class="keyword">var</span> distanceFromStart: <span class="type">Int</span> &#123; <span class="keyword">get</span> <span class="keyword">set</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>若协议要求一个属性为可读和可写的，那么该属性要求不能用常量存储属性或只读计算属性来满足。若协议只要求属性为可读的，那么任何种类的属性都能满足这个要求，而且如果你的代码需要的话，该属性也可以是可写的。</p>
@@ -117,7 +117,7 @@
 <p>func和var没有任何实现</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">ProtableThing</span>: <span class="title">Moveable</span> </span>&#123;</span><br><span class="line">	<span class="comment">//必须执行move(by: Int),hasMoved,distanceFromStart</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Vehicle</span>: <span class="title">Moveable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> passengerCount: <span class="type">Int</span> &#123; <span class="keyword">get</span> <span class="keyword">set</span>&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span>: <span class="title">Vehiche</span>, <span class="title">Leasable</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">travelAround</span>(<span class="params">using</span> <span class="params">moveable</span>: <span class="type">Moveable</span>)</span></span><br><span class="line"><span class="keyword">let</span> foo <span class="operator">=</span> [<span class="type">Moveable</span>]</span><br></pre></td></tr></table></figure>
+<h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">travelAround</span>(<span class="params">using</span> <span class="params">moveable</span>: <span class="type">Moveable</span>)</span></span><br><span class="line"><span class="keyword">let</span> foo <span class="operator">=</span> [<span class="type">Moveable</span>]</span><br></pre></td></tr></table></figure>
 
 <p>让don’t care变得有一点在乎 <code>struct MemoryGame&lt;CardContent&gt; where CardContent: Equatable</code></p>
 <p>将extension扩展为仅使用某些事情，也可以限制个别功能</p>
@@ -128,14 +128,14 @@
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">filter</span>(<span class="keyword">_</span> <span class="params">isInclude</span>: (<span class="type">Element</span>) -&gt; <span class="type">Bool</span>)</span> -&gt; <span class="type">Array</span>&lt;<span class="type">Element</span>&gt;</span><br></pre></td></tr></table></figure>
 
 <p>适用于数组、字符串、范围等，被添加到基础库中，作为Sequence协议的扩展</p>
-<h3 id="Identifiable"><a href="#Identifiable" class="headerlink" title="Identifiable"></a>Identifiable</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Identifiable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">associatedtype</span> <span class="type">ID</span>: <span class="type">Hashable</span> <span class="comment">//关联类型</span></span><br><span class="line">    <span class="keyword">var</span> id: <span class="type">ID</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Identifiable"><a href="#Identifiable" class="headerlink" title="Identifiable"></a>Identifiable</h4><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Identifiable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">associatedtype</span> <span class="type">ID</span>: <span class="type">Hashable</span> <span class="comment">//关联类型</span></span><br><span class="line">    <span class="keyword">var</span> id: <span class="type">ID</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="Hashable"><a href="#Hashable" class="headerlink" title="Hashable"></a>Hashable</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Hashable</span>: <span class="title">Equatable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">hash</span>(<span class="params">into</span> <span class="params">hasher</span>: <span class="keyword">inout</span> <span class="type">Hasher</span>)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Hashable"><a href="#Hashable" class="headerlink" title="Hashable"></a>Hashable</h4><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Hashable</span>: <span class="title">Equatable</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">hash</span>(<span class="params">into</span> <span class="params">hasher</span>: <span class="keyword">inout</span> <span class="type">Hasher</span>)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="Equatable"><a href="#Equatable" class="headerlink" title="Equatable"></a>Equatable</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Equatable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">==</span>(<span class="params">lhs</span>: <span class="keyword">Self</span>, <span class="params">rhs</span>: <span class="keyword">Self</span>)</span> -&gt; <span class="type">Bool</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Equatable"><a href="#Equatable" class="headerlink" title="Equatable"></a>Equatable</h4><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Equatable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> <span class="title">==</span>(<span class="params">lhs</span>: <span class="keyword">Self</span>, <span class="params">rhs</span>: <span class="keyword">Self</span>)</span> -&gt; <span class="type">Bool</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>自引用协议不能作为普通类型使用</p>
-<h2 id="Shape"><a href="#Shape" class="headerlink" title="Shape"></a>Shape</h2><p>Shape is a <code>protocol</code> that inherits from View</p>
+<h3 id="Shape"><a href="#Shape" class="headerlink" title="Shape"></a>Shape</h3><p>Shape is a <code>protocol</code> that inherits from View</p>
 <p>RoundedRectangle,Circle,Capsule</p>
 <p> 默认被填满颜色，可以通过<code>.stock()</code>和<code>.fill()</code>改变</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">fill</span>&lt;<span class="type">S</span>&gt;(<span class="keyword">_</span> <span class="params">whatToFillWith</span>: <span class="type">S</span>)</span> -&gt; <span class="keyword">some</span> <span class="type">View</span> <span class="keyword">where</span> <span class="type">S</span>: <span class="type">ShapeStyle</span></span><br></pre></td></tr></table></figure>
@@ -388,7 +388,7 @@
   <entry>
     <title>cs193p_note7 ViewModifier Animation</title>
     <url>/2022/04/15/cs193p-note7/</url>
-    <content><![CDATA[<h2 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h2><ul>
+    <content><![CDATA[<h3 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h3><ul>
 <li>为Shape设置动画</li>
 <li>使用ViewModifier做动画</li>
 </ul>
@@ -398,7 +398,7 @@
 
 <p>ViewModifier是主要的变更代理，更改参数必须在View放入UI之后</p>
 <p>视图加入或离开一个已经在用户界面的容器时，才会被动画。如果一个视图带着容器一起出现在屏幕上，容器会被动画化，而不是视图</p>
-<h3 id="如何制作动画"><a href="#如何制作动画" class="headerlink" title="如何制作动画"></a>如何制作动画</h3><ol>
+<h4 id="如何制作动画"><a href="#如何制作动画" class="headerlink" title="如何制作动画"></a>如何制作动画</h4><ol>
 <li><p>Implicitly 隐含的自动的，通过使用<code>.animation(Animation)</code> </p>
 </li>
 <li><p>Explicitly 想要整个UI协调变化的动画 <code>withAnimation(Animation) &#123;&#125;</code> </p>
@@ -407,29 +407,29 @@
 <p> 所有的只发生在视图已经存在于UI中或或容器在UI中</p>
 </li>
 </ol>
-<h3 id="Implicit-Animation"><a href="#Implicit-Animation" class="headerlink" title="Implicit Animation"></a>Implicit Animation</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">Text</span>(<span class="string">&quot; &quot;</span>)</span><br><span class="line">	.opacity(scary <span class="operator">?</span> <span class="number">1</span> : <span class="number">0</span>)</span><br><span class="line">	.rotationEffect(<span class="type">Angle</span>.degrees(upsideDown <span class="operator">?</span> <span class="number">180</span> : <span class="number">0</span>))</span><br><span class="line">	.animation(<span class="type">Animation</span>.easeInOut)</span><br></pre></td></tr></table></figure>
+<h4 id="Implicit-Animation"><a href="#Implicit-Animation" class="headerlink" title="Implicit Animation"></a>Implicit Animation</h4><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">Text</span>(<span class="string">&quot; &quot;</span>)</span><br><span class="line">	.opacity(scary <span class="operator">?</span> <span class="number">1</span> : <span class="number">0</span>)</span><br><span class="line">	.rotationEffect(<span class="type">Angle</span>.degrees(upsideDown <span class="operator">?</span> <span class="number">180</span> : <span class="number">0</span>))</span><br><span class="line">	.animation(<span class="type">Animation</span>.easeInOut)</span><br></pre></td></tr></table></figure>
 
 <p>让上面的变化变成动画</p>
 <ul>
 <li>不适用于任何容器，容器会传播到里面的视图中</li>
 <li>其中的参数是一个Animation结构，duration持续时间，delay调用一个小函数，repeat重复一定次数或永久重复(repeatForever)，curve动画曲线</li>
 </ul>
-<h4 id="Animation-Curve"><a href="#Animation-Curve" class="headerlink" title="Animation Curve"></a>Animation Curve</h4><ul>
+<h5 id="Animation-Curve"><a href="#Animation-Curve" class="headerlink" title="Animation Curve"></a>Animation Curve</h5><ul>
 <li>linear线性的方式旋转或淡入淡出</li>
 <li>easeInOut 开始和结束放慢速度</li>
 <li>spring 结束时震荡，提供自然的落地效果</li>
 </ul>
-<h3 id="Explicit-Animation"><a href="#Explicit-Animation" class="headerlink" title="Explicit Animation"></a>Explicit Animation</h3><p>创建一个动画事务(transaction)，所有符合条件的更改一起制作动画</p>
+<h4 id="Explicit-Animation"><a href="#Explicit-Animation" class="headerlink" title="Explicit Animation"></a>Explicit Animation</h4><p>创建一个动画事务(transaction)，所有符合条件的更改一起制作动画</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">withAnimation(.linear(dutation: <span class="number">2</span>)) &#123;&#125;</span><br></pre></td></tr></table></figure>
 
 <p>显式动画总是围绕着ViewModel Intent functions，很有可能改变模型。</p>
 <p>&#x3D;&#x3D;<strong>显式动画不会覆盖隐式动画</strong>&#x3D;&#x3D;</p>
-<h3 id="transition"><a href="#transition" class="headerlink" title="transition"></a>transition</h3><p>视图的来去，仅适用于已经出现在屏幕上的视图</p>
+<h4 id="transition"><a href="#transition" class="headerlink" title="transition"></a>transition</h4><p>视图的来去，仅适用于已经出现在屏幕上的视图</p>
 <p>大多数情况使用预先罐装(opacity, scaling, moving across the screen)，是在AnyTransition结构上的静态函数和变量</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> isFaceUp &#123;</span><br><span class="line">    <span class="type">RoundedRectangle</span>(cornerRadius: <span class="number">10</span>).stroke()</span><br><span class="line">    <span class="type">Text</span>(<span class="string">&quot;👻&quot;</span>).transition(<span class="type">AnyTransition</span>.scale)</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="type">RoundedRectangle</span>(cornerRadius: <span class="number">10</span>).transition(<span class="type">AnyTransition</span>.identity)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="onAppear"><a href="#onAppear" class="headerlink" title=".onAppear"></a>.onAppear</h4><p>当视图出现在屏幕时执行一个闭包，在容器视图上使用<code>.onAppear&#123;&#125;</code>，当视图出现在屏幕时可以执行一系列代码</p>
-<h2 id="ViewModifier"><a href="#ViewModifier" class="headerlink" title="ViewModifier"></a>ViewModifier</h2><p>修改视图的小功能，例如<code>.aspectRatio(2/3)</code></p>
+<h5 id="onAppear"><a href="#onAppear" class="headerlink" title=".onAppear"></a>.onAppear</h5><p>当视图出现在屏幕时执行一个闭包，在容器视图上使用<code>.onAppear&#123;&#125;</code>，当视图出现在屏幕时可以执行一系列代码</p>
+<h3 id="ViewModifier"><a href="#ViewModifier" class="headerlink" title="ViewModifier"></a>ViewModifier</h3><p>修改视图的小功能，例如<code>.aspectRatio(2/3)</code></p>
 <p>唯一的工作就是修改视图</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">ViewModifier</span> </span>&#123;</span><br><span class="line">    <span class="keyword">typealias</span> <span class="type">Content</span><span class="comment">//正在修改的视图</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">body</span>(<span class="params">content</span>: <span class="type">Content</span>)</span> -&gt; someView &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">some</span> <span class="type">View</span> that almost certainly contains the <span class="type">View</span> content</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -438,7 +438,7 @@
 </ul>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Cardify</span>: <span class="title">ViewModifier</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> isFaceUp: <span class="type">Bool</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">body</span>(<span class="params">content</span>: <span class="type">Content</span>)</span> -&gt; <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="type">ZStack</span> &#123;</span><br><span class="line">            <span class="operator">...</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="type">Text</span>(<span class="string">&quot; &quot;</span>).modifier(<span class="type">Cardify</span>(isFaceUp: <span class="literal">true</span>))</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">View</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">cardify</span>(<span class="params">isFaceUp</span>: <span class="type">Bool</span>)</span> -&gt; <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">self</span>.modifier(<span class="type">Cardify</span>(isFaceUp: isFaceUp))</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><h3 id="GeometryEffect"><a href="#GeometryEffect" class="headerlink" title="GeometryEffect"></a>GeometryEffect</h3><p>使事物旋转，移动物体，调整物体大小等</p>
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><h4 id="GeometryEffect"><a href="#GeometryEffect" class="headerlink" title="GeometryEffect"></a>GeometryEffect</h4><p>使事物旋转，移动物体，调整物体大小等</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line">.rotationEffect(<span class="type">Angle</span>.degrees(card.isMatched <span class="operator">?</span> <span class="number">360</span> : <span class="number">0</span>))</span><br><span class="line">.animation(<span class="type">Animation</span>.easeInOut(duration: <span class="number">3</span>).repeatForever(autoreverses: <span class="literal">false</span>))<span class="comment">//不会自动反转</span></span><br><span class="line">.animation(<span class="type">Animation</span>.linear(duration: <span class="number">1</span>).repeatForever(autoreverses: <span class="literal">false</span>), value: card.isMatched) <span class="comment">//iOS15.0推荐用法</span></span><br></pre></td></tr></table></figure>
 
 <p>旋转匹配成功的内容，，这么只会旋转第一个内容，而且旋转时字体大小改变，字体不能进行动画，旋转时有多个动画一起发生，要使用固定大小字体。</p>
@@ -456,7 +456,7 @@
   <entry>
     <title>cs193p_note8 Animation Demostrastion</title>
     <url>/2022/05/02/cs193p-note8/</url>
-    <content><![CDATA[<h2 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h2><h4 id="实现洗牌动画"><a href="#实现洗牌动画" class="headerlink" title="实现洗牌动画"></a>实现洗牌动画</h4><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> shuffle: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">    <span class="type">Button</span>(<span class="string">&quot;Shuffle&quot;</span>) &#123;</span><br><span class="line">        withAnimation &#123;</span><br><span class="line">            game.shuffle()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><h4 id="实现洗牌动画"><a href="#实现洗牌动画" class="headerlink" title="实现洗牌动画"></a>实现洗牌动画</h4><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> shuffle: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">    <span class="type">Button</span>(<span class="string">&quot;Shuffle&quot;</span>) &#123;</span><br><span class="line">        withAnimation &#123;</span><br><span class="line">            game.shuffle()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>快速点击shuffle按钮，未完成的动画会自动暂停并继续新的操作，上面图案旋转使用的是隐式动画，独立于显示，所以能在旋转的时候完成洗牌操作。</p>
 <span id="more"></span>
@@ -510,7 +510,7 @@
   <entry>
     <title>cs193p_note10_Multithreading Demo Gestures</title>
     <url>/2022/05/19/cs193p-note10/</url>
-    <content><![CDATA[<h4 id="设置图片背景"><a href="#设置图片背景" class="headerlink" title="设置图片背景"></a>设置图片背景</h4><p>接收url和image</p>
+    <content><![CDATA[<h3 id="设置图片背景"><a href="#设置图片背景" class="headerlink" title="设置图片背景"></a>设置图片背景</h3><p>接收url和image</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> found <span class="operator">=</span> providers.loadObjects(ofType: <span class="type">URL</span>.<span class="keyword">self</span>) &#123; url <span class="keyword">in</span></span><br><span class="line">           document.setBackground(.url(url.imageURL))</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> <span class="operator">!</span>found &#123;</span><br><span class="line">           found <span class="operator">=</span> providers.loadObjects(ofType: <span class="type">UIImage</span>.<span class="keyword">self</span>) &#123; image <span class="keyword">in</span></span><br><span class="line">               <span class="keyword">if</span> <span class="keyword">let</span> data <span class="operator">=</span> image.jpegData(compressionQuality: <span class="number">1.0</span>) &#123;</span><br><span class="line">                   document.setBackground(.imageData(data))</span><br><span class="line">               &#125;<span class="comment">//如果是jpg 无损压缩</span></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
 
 <span id="more"></span>
@@ -536,7 +536,7 @@
 <p>给用户正在加载的反馈</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="meta">@Published</span> <span class="keyword">var</span> backgroundImageFetchStatus <span class="operator">=</span> <span class="type">BackgroundImageFetchStatus</span>.idle <span class="comment">//监测加载状态</span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">BackgroundImageFetchStatus</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> idle <span class="comment">//闲置</span></span><br><span class="line">    <span class="keyword">case</span> fetching <span class="comment">//加载</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Gestures"><a href="#Gestures" class="headerlink" title="Gestures"></a>Gestures</h2><h4 id="理论知识"><a href="#理论知识" class="headerlink" title="理论知识"></a>理论知识</h4><ul>
+<h3 id="Gestures"><a href="#Gestures" class="headerlink" title="Gestures"></a>Gestures</h3><h4 id="理论知识"><a href="#理论知识" class="headerlink" title="理论知识"></a>理论知识</h4><ul>
 <li><p>使用手势视图修改器让视图识别手势</p>
 <p>  <code>myview.gesture(theGesture)</code>  手势协议</p>
 </li>
@@ -603,7 +603,7 @@
   <entry>
     <title>cs193p_note9_EmojiArt Drag and Drop Multithreading</title>
     <url>/2022/05/04/cs193p-note9/</url>
-    <content><![CDATA[<h2 id="Collection-of-Identifiables"><a href="#Collection-of-Identifiables" class="headerlink" title="Collection of Identifiables"></a>Collection of Identifiables</h2><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">choose</span>(<span class="keyword">_</span> <span class="params">card</span>: <span class="type">Card</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> index <span class="operator">=</span> cards.firstIndex(where: &#123; <span class="variable">$0</span>.id <span class="operator">==</span> card,id&#125;) &#123;</span><br><span class="line">        cards[index].isFaceUp <span class="operator">=</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+    <content><![CDATA[<h3 id="Collection-of-Identifiables"><a href="#Collection-of-Identifiables" class="headerlink" title="Collection of Identifiables"></a>Collection of Identifiables</h3><figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">choose</span>(<span class="keyword">_</span> <span class="params">card</span>: <span class="type">Card</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> index <span class="operator">=</span> cards.firstIndex(where: &#123; <span class="variable">$0</span>.id <span class="operator">==</span> card,id&#125;) &#123;</span><br><span class="line">        cards[index].isFaceUp <span class="operator">=</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>Card是一个结构体，结构体是值类型，在传递时会被复制，所以想要改变卡片的isFaceUp需要获取索引，在数组中找到修改的位置。</p>
 <span id="more"></span>
@@ -618,7 +618,7 @@
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Collection</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">Identifiable</span> </span>&#123;<span class="comment">//不可变集合</span></span><br><span class="line">    <span class="function"><span class="keyword">func</span> <span class="title">index</span>(<span class="params">matching</span> <span class="params">element</span>: <span class="type">Element</span>)</span> -&gt; <span class="keyword">Self</span>.<span class="type">Index</span>? &#123;<span class="comment">//索引不一定是Int，是个泛型</span></span><br><span class="line">        firstIndex(where: &#123; <span class="variable">$0</span>.id <span class="operator">==</span> element.id &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">    <span class="comment">//Collection中不包括remove，所以把内容添加到RangeReplaceableCollection</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">RangeReplaceableCollection</span> <span class="title">where</span> <span class="title">Element</span>: <span class="title">Identifiable</span> </span>&#123;<span class="comment">//可变集合</span></span><br><span class="line">    <span class="keyword">mutating</span> <span class="function"><span class="keyword">func</span> <span class="title">remove</span>(<span class="keyword">_</span> <span class="params">element</span>: <span class="type">Element</span>)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">let</span> index <span class="operator">=</span> index(matching: element) &#123;</span><br><span class="line">            remove(at: index)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>RangeReplaceCollection可以添加下标，可以使用数组下标或可识别的集合变成可识别的，<code>cards[card].isFaceUp = true</code></p>
-<h2 id="Color-amp-UIColor-amp-CGColor"><a href="#Color-amp-UIColor-amp-CGColor" class="headerlink" title="Color&amp;UIColor&amp;CGColor"></a>Color&amp;UIColor&amp;CGColor</h2><h4 id="Color"><a href="#Color" class="headerlink" title="Color"></a>Color</h4><ul>
+<h3 id="Color-amp-UIColor-amp-CGColor"><a href="#Color-amp-UIColor-amp-CGColor" class="headerlink" title="Color&amp;UIColor&amp;CGColor"></a>Color&amp;UIColor&amp;CGColor</h3><h4 id="Color"><a href="#Color" class="headerlink" title="Color"></a>Color</h4><ul>
 <li>用来指定颜色 <code>.foregroundColor(Color.green)</code></li>
 <li>作为ShapeStyle，填充，<code>.fill(Color.blue)</code></li>
 <li>像视图一样，<code>Color.white</code></li>
@@ -632,7 +632,7 @@
 <li>使用<code>color.cgColor</code>表示 不能保证每一个都能被表示</li>
 <li>如果将Color变成UIColor可能会使用</li>
 </ul>
-<h2 id="Image-amp-UIImage"><a href="#Image-amp-UIImage" class="headerlink" title="Image&amp;UIImage"></a>Image&amp;UIImage</h2><h4 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h4><ul>
+<h3 id="Image-amp-UIImage"><a href="#Image-amp-UIImage" class="headerlink" title="Image&amp;UIImage"></a>Image&amp;UIImage</h3><h4 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h4><ul>
 <li>主要是一个视图</li>
 <li>不是容纳图片的类型，是显示图片的视图</li>
 <li>可以在Assets.xcassets中访问图片 <code>Image(_ name: String)</code></li>
@@ -642,7 +642,7 @@
 <li>能缩放调整大小等，是用来存储图片的变量</li>
 <li>使用<code>Image(uiImage:)</code>来显示</li>
 </ul>
-<h2 id="Drag-and-Drop"><a href="#Drag-and-Drop" class="headerlink" title="Drag and Drop"></a>Drag and Drop</h2><p>从一个应用拖到另一个应用传输数据，从Safari拖动图片到app。核心类是<code>NSItemProvider</code>类，进程之间的数据传输。</p>
+<h3 id="Drag-and-Drop"><a href="#Drag-and-Drop" class="headerlink" title="Drag and Drop"></a>Drag and Drop</h3><p>从一个应用拖到另一个应用传输数据，从Safari拖动图片到app。核心类是<code>NSItemProvider</code>类，进程之间的数据传输。</p>
 <p>便利地转移不同数据类型</p>
 <ul>
 <li>NSAttributedString具有格式的字符串  NSString</li>
@@ -650,13 +650,13 @@
 <li>UIImage UIColor</li>
 </ul>
 <p>使用连接数据类型和NS类型，String as NSString</p>
-<h2 id="Dome"><a href="#Dome" class="headerlink" title="Dome"></a>Dome</h2><h4 id="拖放"><a href="#拖放" class="headerlink" title="拖放"></a>拖放</h4><p>借助OC中内容完成拖放，使用as转换数据类型，NSItemProvider将数据提供给别人</p>
+<h3 id="Dome"><a href="#Dome" class="headerlink" title="Dome"></a>Dome</h3><h4 id="拖放"><a href="#拖放" class="headerlink" title="拖放"></a>拖放</h4><p>借助OC中内容完成拖放，使用as转换数据类型，NSItemProvider将数据提供给别人</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="type">Text</span>(emoji)</span><br><span class="line">	.onDrag &#123; <span class="type">NSItemProvider</span>(object: emoji <span class="keyword">as</span> <span class="type">NSString</span>) &#125;</span><br></pre></td></tr></table></figure>
 
 <p>放下时，需要将整个Vstack下放置drop</p>
 <figure class="highlight swift"><table><tr><td class="code"><pre><span class="line"><span class="comment">//of后添加可放下的类型</span></span><br><span class="line">.onDrop(of: [.plainText], isTargeted: <span class="literal">nil</span>) &#123; providers, location <span class="keyword">in</span></span><br><span class="line">	<span class="keyword">return</span> drop(providers: providers, at: location)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">drop</span>(<span class="params">providers</span>: [<span class="type">NSItemProvider</span>], <span class="params">at</span> <span class="params">location</span>: <span class="type">CGPoint</span>, <span class="params">in</span> <span class="params">geometry</span>: <span class="type">GeometryProxy</span>)</span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> providers.loadObjects(ofType: <span class="type">String</span>.<span class="keyword">self</span>) &#123; string <span class="keyword">in</span> <span class="comment">//提供者是否有字符串,将异步操作内容,因为提供者可能采用多线程提供信息,脱离主线程</span></span><br><span class="line">		<span class="keyword">if</span> <span class="keyword">let</span> emoji <span class="operator">=</span> string.first, emoji.isEmoji &#123;</span><br><span class="line">			document.addEmoji(</span><br><span class="line">				<span class="type">String</span>(emoji),</span><br><span class="line">				at: convertToEmojiCoordinates(location, in: geometry), <span class="comment">//将CGPoint转换成元组</span></span><br><span class="line">				size: defaultEmojiFontSize)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="多线程-Multithreading"><a href="#多线程-Multithreading" class="headerlink" title="多线程 Multithreading"></a>多线程 Multithreading</h2><p>从浏览器找到图片拖进去，但是从互联网下载图片可能需要几秒钟，可能会影响UI响应。</p>
+<h3 id="多线程-Multithreading"><a href="#多线程-Multithreading" class="headerlink" title="多线程 Multithreading"></a>多线程 Multithreading</h3><p>从浏览器找到图片拖进去，但是从互联网下载图片可能需要几秒钟，可能会影响UI响应。</p>
 <p>UI需要响应用户内容，但有些操作需要比较长的时间，我们需要在不同的线程上执行操作，才能保证UI响应</p>
 <h4 id="线程-treads"><a href="#线程-treads" class="headerlink" title="线程 treads"></a>线程 treads</h4><p>可以指定线程用于哪些代码，快速切换线程看起来像同时在运行。有一些线程拥有更高的优先级</p>
 <p>使用队列管理复杂的线程</p>
@@ -690,9 +690,10 @@
       </tags>
   </entry>
   <entry>
-    <title>cs193p_note11</title>
-    <url>/2022/08/03/cs193p-note11/</url>
-    <content><![CDATA[<span id="more"></span>
+    <title>cs193p_note11_Error Persistence</title>
+    <url>/2022/06/02/cs193p-note11/</url>
+    <content><![CDATA[<h2 id="Error-Handing"><a href="#Error-Handing" class="headerlink" title="Error Handing"></a>Error Handing</h2><span id="more"></span>
+
 ]]></content>
       <categories>
         <category>iOS</category>

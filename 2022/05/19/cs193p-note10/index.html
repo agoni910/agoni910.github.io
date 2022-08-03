@@ -28,7 +28,7 @@
 <meta property="og:description" content="设置图片背景接收url和image 12345678910var found &#x3D; providers.loadObjects(ofType: URL.self) &amp;#123; url in           document.setBackground(.url(url.imageURL))       &amp;#125;       if !found &amp;#123;           found">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-19T11:08:18.000Z">
-<meta property="article:modified_time" content="2022-08-03T03:37:40.163Z">
+<meta property="article:modified_time" content="2022-08-03T06:16:27.756Z">
 <meta property="article:author" content="Wenrong Jiang">
 <meta property="article:tag" content="swift">
 <meta property="article:tag" content="cs193p">
@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%9B%BE%E7%89%87%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">设置图片背景</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gestures"><span class="nav-number"></span> <span class="nav-text">Gestures</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86"><span class="nav-number">1.</span> <span class="nav-text">理论知识</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Demo"><span class="nav-number">2.</span> <span class="nav-text">Demo</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E5%9B%BE%E7%89%87%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">设置图片背景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gestures"><span class="nav-number">2.</span> <span class="nav-text">Gestures</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86"><span class="nav-number">2.1.</span> <span class="nav-text">理论知识</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Demo"><span class="nav-number">2.2.</span> <span class="nav-text">Demo</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -286,7 +286,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h4 id="设置图片背景"><a href="#设置图片背景" class="headerlink" title="设置图片背景"></a>设置图片背景</h4><p>接收url和image</p>
+        <h3 id="设置图片背景"><a href="#设置图片背景" class="headerlink" title="设置图片背景"></a>设置图片背景</h3><p>接收url和image</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> found <span class="operator">=</span> providers.loadObjects(ofType: <span class="type">URL</span>.<span class="keyword">self</span>) &#123; url <span class="keyword">in</span></span><br><span class="line">           document.setBackground(.url(url.imageURL))</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> <span class="operator">!</span>found &#123;</span><br><span class="line">           found <span class="operator">=</span> providers.loadObjects(ofType: <span class="type">UIImage</span>.<span class="keyword">self</span>) &#123; image <span class="keyword">in</span></span><br><span class="line">               <span class="keyword">if</span> <span class="keyword">let</span> data <span class="operator">=</span> image.jpegData(compressionQuality: <span class="number">1.0</span>) &#123;</span><br><span class="line">                   document.setBackground(.imageData(data))</span><br><span class="line">               &#125;<span class="comment">//如果是jpg 无损压缩</span></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
 
 <span id="more"></span>
@@ -312,7 +312,7 @@
 <p>给用户正在加载的反馈</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Published</span> <span class="keyword">var</span> backgroundImageFetchStatus <span class="operator">=</span> <span class="type">BackgroundImageFetchStatus</span>.idle <span class="comment">//监测加载状态</span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">BackgroundImageFetchStatus</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> idle <span class="comment">//闲置</span></span><br><span class="line">    <span class="keyword">case</span> fetching <span class="comment">//加载</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Gestures"><a href="#Gestures" class="headerlink" title="Gestures"></a>Gestures</h2><h4 id="理论知识"><a href="#理论知识" class="headerlink" title="理论知识"></a>理论知识</h4><ul>
+<h3 id="Gestures"><a href="#Gestures" class="headerlink" title="Gestures"></a>Gestures</h3><h4 id="理论知识"><a href="#理论知识" class="headerlink" title="理论知识"></a>理论知识</h4><ul>
 <li><p>使用手势视图修改器让视图识别手势</p>
 <p>  <code>myview.gesture(theGesture)</code>  手势协议</p>
 </li>
@@ -389,8 +389,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/08/03/cs193p-note11/" rel="next" title="cs193p_note11">
-                  cs193p_note11 <i class="fa fa-chevron-right"></i>
+                <a href="/2022/06/02/cs193p-note11/" rel="next" title="cs193p_note11_Error Persistence">
+                  cs193p_note11_Error Persistence <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>
