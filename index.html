@@ -19,7 +19,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 <meta name="description" content="一个可爱的blog">
 <meta property="og:type" content="website">
 <meta property="og:title" content="J’s blogs">
@@ -262,7 +262,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>340</span>
+      <span>329</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -281,7 +281,16 @@
     
     <div class="post-body" itemprop="articleBody">
           <h3 id="Error-Handing"><a href="#Error-Handing" class="headerlink" title="Error Handing"></a>Error Handing</h3><h4 id="Throwing-errors"><a href="#Throwing-errors" class="headerlink" title="Throwing errors"></a>Throwing errors</h4><p>很多函数都有<code>throws</code>关键字，你可以抛出错误</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">attendLecture</span>()</span> <span class="keyword">throws</span> &#123;</span><br><span class="line">	<span class="keyword">if</span> sleptIn &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="type">CS193pError</span>.missedLecture</span><br><span class="line">    &#125;</span><br><span class="line">    askQuestion() <span class="comment">//如果抛出错误，函数后续无法完成</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">CS193pError</span>: <span class="title">Error</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> <span class="type">LateHomework</span>(daysLate: <span class="type">Int</span>)</span><br><span class="line">    <span class="keyword">case</span> missedLecture</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">attendLecture</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> sleptIn <span class="token punctuation">&#123;</span>
+        <span class="token keyword">throw</span> <span class="token class-name">CS193pError</span><span class="token punctuation">.</span>missedLecture
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">askQuestion</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//如果抛出错误，函数后续无法完成</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">enum</span> <span class="token class-name">CS193pError</span><span class="token punctuation">:</span> <span class="token class-name">Error</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">case</span> <span class="token class-name">LateHomework</span><span class="token punctuation">(</span>daysLate<span class="token punctuation">:</span> <span class="token class-name">Int</span><span class="token punctuation">)</span>
+    <span class="token keyword">case</span> missedLecture
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/06/02/cs193p-note11/#more" rel="contents">
@@ -357,7 +366,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>4.1k</span>
+      <span>4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -376,7 +385,16 @@
     
     <div class="post-body" itemprop="articleBody">
           <h3 id="设置图片背景"><a href="#设置图片背景" class="headerlink" title="设置图片背景"></a>设置图片背景</h3><p>接收url和image</p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> found <span class="operator">=</span> providers.loadObjects(ofType: <span class="type">URL</span>.<span class="keyword">self</span>) &#123; url <span class="keyword">in</span></span><br><span class="line">           document.setBackground(.url(url.imageURL))</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">if</span> <span class="operator">!</span>found &#123;</span><br><span class="line">           found <span class="operator">=</span> providers.loadObjects(ofType: <span class="type">UIImage</span>.<span class="keyword">self</span>) &#123; image <span class="keyword">in</span></span><br><span class="line">               <span class="keyword">if</span> <span class="keyword">let</span> data <span class="operator">=</span> image.jpegData(compressionQuality: <span class="number">1.0</span>) &#123;</span><br><span class="line">                   document.setBackground(.imageData(data))</span><br><span class="line">               &#125;<span class="comment">//如果是jpg 无损压缩</span></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">var</span> found <span class="token operator">=</span> providers<span class="token punctuation">.</span><span class="token function">loadObjects</span><span class="token punctuation">(</span>ofType<span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> url <span class="token keyword">in</span>
+           document<span class="token punctuation">.</span><span class="token function">setBackground</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token function">url</span><span class="token punctuation">(</span>url<span class="token punctuation">.</span>imageURL<span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">&#125;</span>
+       <span class="token keyword">if</span> <span class="token operator">!</span>found <span class="token punctuation">&#123;</span>
+           found <span class="token operator">=</span> providers<span class="token punctuation">.</span><span class="token function">loadObjects</span><span class="token punctuation">(</span>ofType<span class="token punctuation">:</span> <span class="token class-name">UIImage</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> image <span class="token keyword">in</span>
+               <span class="token keyword">if</span> <span class="token keyword">let</span> data <span class="token operator">=</span> image<span class="token punctuation">.</span><span class="token function">jpegData</span><span class="token punctuation">(</span>compressionQuality<span class="token punctuation">:</span> <span class="token number">1.0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                   document<span class="token punctuation">.</span><span class="token function">setBackground</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token function">imageData</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+               <span class="token punctuation">&#125;</span><span class="token comment">//如果是jpg 无损压缩</span>
+           <span class="token punctuation">&#125;</span>
+       <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/05/19/cs193p-note10/#more" rel="contents">
@@ -452,7 +470,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.4k</span>
+      <span>3.3k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -470,7 +488,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="Collection-of-Identifiables"><a href="#Collection-of-Identifiables" class="headerlink" title="Collection of Identifiables"></a>Collection of Identifiables</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">choose</span>(<span class="keyword">_</span> <span class="params">card</span>: <span class="type">Card</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">let</span> index <span class="operator">=</span> cards.firstIndex(where: &#123; <span class="variable">$0</span>.id <span class="operator">==</span> card,id&#125;) &#123;</span><br><span class="line">        cards[index].isFaceUp <span class="operator">=</span> <span class="literal">true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h3 id="Collection-of-Identifiables"><a href="#Collection-of-Identifiables" class="headerlink" title="Collection of Identifiables"></a>Collection of Identifiables</h3><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">choose</span><span class="token punctuation">(</span><span class="token omit keyword">_</span> card<span class="token punctuation">:</span> <span class="token class-name">Card</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token keyword">let</span> index <span class="token operator">=</span> cards<span class="token punctuation">.</span><span class="token function">firstIndex</span><span class="token punctuation">(</span><span class="token keyword">where</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> <span class="token short-argument">$0</span><span class="token punctuation">.</span>id <span class="token operator">==</span> card<span class="token punctuation">,</span>id<span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        cards<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">.</span>isFaceUp <span class="token operator">=</span> <span class="token boolean">true</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>Card是一个结构体，结构体是值类型，在传递时会被复制，所以想要改变卡片的isFaceUp需要获取索引，在数组中找到修改的位置。</p>
           <!--noindex-->
@@ -548,7 +570,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>3.1k</span>
+      <span>2.9k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -566,7 +588,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><h4 id="实现洗牌动画"><a href="#实现洗牌动画" class="headerlink" title="实现洗牌动画"></a>实现洗牌动画</h4><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> shuffle: <span class="keyword">some</span> <span class="type">View</span> &#123;</span><br><span class="line">    <span class="type">Button</span>(<span class="string">&quot;Shuffle&quot;</span>) &#123;</span><br><span class="line">        withAnimation &#123;</span><br><span class="line">            game.shuffle()</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><h4 id="实现洗牌动画"><a href="#实现洗牌动画" class="headerlink" title="实现洗牌动画"></a>实现洗牌动画</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">var</span> shuffle<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Button</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"Shuffle"</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        withAnimation <span class="token punctuation">&#123;</span>
+            game<span class="token punctuation">.</span><span class="token function">shuffle</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>快速点击shuffle按钮，未完成的动画会自动暂停并继续新的操作，上面图案旋转使用的是隐式动画，独立于显示，所以能在旋转的时候完成洗牌操作。</p>
           <!--noindex-->
@@ -644,7 +672,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.3k</span>
+      <span>2.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -937,7 +965,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.5k</span>
+      <span>1.4k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
@@ -956,7 +984,11 @@
     
     <div class="post-body" itemprop="articleBody">
           <h3 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h3><p>协议是一个精简的<code>class</code>或<code>struct</code></p>
-<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">protocol</span> <span class="title">Moveable</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">func</span> <span class="title">move</span>(<span class="params">by</span>: <span class="type">Int</span>)</span></span><br><span class="line">    <span class="keyword">var</span> hasMoved: <span class="type">Bool</span> &#123; <span class="keyword">get</span> &#125;</span><br><span class="line">    <span class="keyword">var</span> distanceFromStart: <span class="type">Int</span> &#123; <span class="keyword">get</span> <span class="keyword">set</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">protocol</span> <span class="token class-name">Moveable</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">func</span> <span class="token function-definition function">move</span><span class="token punctuation">(</span>by<span class="token punctuation">:</span> <span class="token class-name">Int</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> hasMoved<span class="token punctuation">:</span> <span class="token class-name">Bool</span> <span class="token punctuation">&#123;</span> <span class="token keyword">get</span> <span class="token punctuation">&#125;</span>
+    <span class="token keyword">var</span> distanceFromStart<span class="token punctuation">:</span> <span class="token class-name">Int</span> <span class="token punctuation">&#123;</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>若协议要求一个属性为可读和可写的，那么该属性要求不能用常量存储属性或只读计算属性来满足。若协议只要求属性为可读的，那么任何种类的属性都能满足这个要求，而且如果你的代码需要的话，该属性也可以是可写的。</p>
           <!--noindex-->
@@ -1130,14 +1162,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.8k</span>
+      <span>2.7k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>3 分钟</span>
+      <span>2 分钟</span>
     </span>
 </div>
 
@@ -1148,7 +1180,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h3 id="RoundedRectangle"><a href="#RoundedRectangle" class="headerlink" title="RoundedRectangle"></a>RoundedRectangle</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">RoundedRectangle</span>(cornerRadius: <span class="number">20</span>)</span><br><span class="line">	.fill() <span class="comment">//填满</span></span><br><span class="line">	.foregroundColor(.red) <span class="comment">//前景颜色</span></span><br><span class="line">	.stroke(lineWidth: <span class="number">3</span>) <span class="comment">//边框宽度</span></span><br><span class="line">	.strokeBorder</span><br></pre></td></tr></table></figure>
+          <h3 id="RoundedRectangle"><a href="#RoundedRectangle" class="headerlink" title="RoundedRectangle"></a>RoundedRectangle</h3><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">RoundedRectangle</span><span class="token punctuation">(</span>cornerRadius<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">)</span>
+	<span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//填满</span>
+	<span class="token punctuation">.</span><span class="token function">foregroundColor</span><span class="token punctuation">(</span><span class="token punctuation">.</span>red<span class="token punctuation">)</span> <span class="token comment">//前景颜色</span>
+	<span class="token punctuation">.</span><span class="token function">stroke</span><span class="token punctuation">(</span>lineWidth<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token comment">//边框宽度</span>
+	<span class="token punctuation">.</span>strokeBorder<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/02/20/cs193-note1-2/#more" rel="contents">
@@ -1198,13 +1234,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">33k</span>
+    <span title="站点总字数">30k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">30 分钟</span>
+    <span title="站点阅读时长">27 分钟</span>
   </span>
 </div>
 
