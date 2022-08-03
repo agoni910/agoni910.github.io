@@ -28,7 +28,7 @@
 <meta property="og:description" content="设置图片背景接收url和image 12345678910var found &#x3D; providers.loadObjects(ofType: URL.self) &amp;#123; url in           document.setBackground(.url(url.imageURL))       &amp;#125;       if !found &amp;#123;           found">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-05-19T11:08:18.000Z">
-<meta property="article:modified_time" content="2022-08-02T07:20:49.165Z">
+<meta property="article:modified_time" content="2022-08-03T03:08:55.693Z">
 <meta property="article:author" content="Wenrong Jiang">
 <meta property="article:tag" content="swift">
 <meta property="article:tag" content="cs193p">
@@ -268,14 +268,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>1.9k</span>
+      <span>4.1k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>4 分钟</span>
     </span>
 </div>
 
@@ -312,7 +312,62 @@
 <p>给用户正在加载的反馈</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Published</span> <span class="keyword">var</span> backgroundImageFetchStatus <span class="operator">=</span> <span class="type">BackgroundImageFetchStatus</span>.idle <span class="comment">//监测加载状态</span></span><br><span class="line"><span class="class"><span class="keyword">enum</span> <span class="title">BackgroundImageFetchStatus</span> </span>&#123;</span><br><span class="line">    <span class="keyword">case</span> idle <span class="comment">//闲置</span></span><br><span class="line">    <span class="keyword">case</span> fetching <span class="comment">//加载</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Gestures"><a href="#Gestures" class="headerlink" title="Gestures"></a>Gestures</h2><h4 id="理论知识"><a href="#理论知识" class="headerlink" title="理论知识"></a>理论知识</h4><h4 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h4>
+<h2 id="Gestures"><a href="#Gestures" class="headerlink" title="Gestures"></a>Gestures</h2><h4 id="理论知识"><a href="#理论知识" class="headerlink" title="理论知识"></a>理论知识</h4><ul>
+<li><p>使用手势视图修改器让视图识别手势</p>
+<p>  <code>myview.gesture(theGesture)</code>  手势协议</p>
+</li>
+<li><p>创建离散型手势</p>
+<p>  通常只有一个func和var在我们的视图中，甚至只有一个局部变量</p>
+  <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> theGesture: <span class="keyword">some</span> <span class="type">Gesture</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="type">TapGesture</span>(count: <span class="number">2</span>) <span class="comment">//双击手势</span></span><br><span class="line">    	.onEnded&#123; &#125; <span class="comment">//放入需要实现的内容</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  通常离散型手势使用视图修饰符</p>
+  <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">myview.onTapGesture(count: <span class="number">2</span>) &#123;&#125;</span><br><span class="line">myview.onLongPressGesture(<span class="operator">...</span>) &#123;&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>非离散型手势</p>
+<p>  不仅需要处理手势被识别并且结束，还要监测在捏的全过程中的旋转、大小改变等。</p>
+<p>  <code>DragGesture</code>, <code>MagnificationGesture</code> ,<code>RotationGesture</code> <code>longPressGes</code>也可以看做非离散，按住是一直更新</p>
+  <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> theGesture: <span class="keyword">some</span> <span class="type">Gesture</span> &#123;</span><br><span class="line">    <span class="type">DragGesture</span>(<span class="operator">...</span>)</span><br><span class="line">    	.onEnded &#123; value <span class="keyword">in</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  value值来源于当前监听手势</p>
+<ul>
+<li>DragGesture 拖动手势，一个结构体包含开始和结束位置</li>
+<li>MagnificationGesture 放大捏合手势 手指放大了多少，多远</li>
+<li>RotationGesture 旋转手势，角度</li>
+</ul>
+</li>
+<li><p>非离散手势监听</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@GestureState var myGestureState: MyGestureType = &lt; &gt;</span><br></pre></td></tr></table></figure>
+
+<p>  可以存储任何信息让视图自动更新，并在手势进行时重绘自身</p>
+<p>  <strong>当手势结束时，var会回到初始值</strong></p>
+  <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> theGesture: <span class="keyword">some</span> <span class="type">Gesture</span> &#123;</span><br><span class="line">	<span class="type">DragGesture</span>(<span class="operator">...</span>)</span><br><span class="line">		.updating(<span class="variable">$myGestureState</span>) &#123; value, myGestureState, transaction <span class="keyword">in</span></span><br><span class="line">			myGestureState <span class="operator">=</span> </span><br><span class="line">		&#125;</span><br><span class="line">		.onEnded ( value <span class="keyword">in</span>)<span class="comment">//追踪结束时状态</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>.updating 当手指移动时被重复调用</li>
+<li>$ 放在@GestureState变量前面，告诉系统使用哪个变量</li>
+<li>value取决于哪个手势</li>
+<li>myGestureState 一个输入输出参数，唯一方式修改GestureState的值，复制值类型，反悔的时候再复制回去</li>
+<li>transaction 动画相关</li>
+</ul>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">DragGesture(...)</span><br><span class="line">	.onChanged &#123; value in </span><br><span class="line">		//无法更新状态，只提供价值</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  只能根据当前状态绘制图形，更新永久状态，手势结束之后不重置</p>
+</li>
+</ul>
+<h4 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h4><ul>
+<li><p>设置双击调整背景适应屏幕</p>
+<p>  设置双击手势效果</p>
+  <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">.gesture(doubleTapToZoom(in: geometry.size))</span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">doubleTapToZoom</span>(<span class="params">in</span> <span class="params">size</span>: <span class="type">CGSize</span>)</span> -&gt; <span class="keyword">some</span> <span class="type">Gesture</span> &#123;</span><br><span class="line">    <span class="type">TapGesture</span>(count: <span class="number">2</span>)</span><br><span class="line">    .onEnded &#123;</span><br><span class="line">        withAnimation &#123;</span><br><span class="line">            zoomToFit(document.backgroundImage, in: size)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用捏手势进行缩放</p>
+  <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">.gesture(zoomGesture())</span><br><span class="line"><span class="comment">//缩放手势</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">zoomGesture</span>()</span> -&gt; <span class="keyword">some</span> <span class="type">Gesture</span> &#123;</span><br><span class="line">	<span class="type">MagnificationGesture</span>() <span class="comment">//捏合手势</span></span><br><span class="line">		.updating(<span class="variable">$gestureZoomScale</span>) &#123; latestGestureScale, ourGestureStateInOut, transaction <span class="keyword">in</span><span class="comment">//手指分开距离</span></span><br><span class="line">			ourGestureStateInOut <span class="operator">=</span> latestGestureScale</span><br><span class="line">		&#125;</span><br><span class="line">    .onEnded &#123; gestureScaleAtEnd <span class="keyword">in</span> <span class="comment">//是开始手指距离的几倍</span></span><br><span class="line">		steadyStateZoomScale <span class="operator">*=</span> gestureScaleAtEnd</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>拖动背景</p>
+  <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">func</span> <span class="title">panGesture</span>()</span> -&gt; <span class="keyword">some</span> <span class="type">Gesture</span> &#123;</span><br><span class="line">    <span class="type">DragGesture</span>()</span><br><span class="line">        .updating(<span class="variable">$gesturePanOffset</span>) &#123; latestDragGestureValue, gesturePanOffset, <span class="keyword">_</span> <span class="keyword">in</span></span><br><span class="line">            gesturePanOffset <span class="operator">=</span> latestDragGestureValue.translation <span class="operator">/</span> zoomScale</span><br><span class="line">        &#125;</span><br><span class="line">        .onEnded &#123; finalDragGestureValue <span class="keyword">in</span></span><br><span class="line">            steadyStatePanOffset <span class="operator">=</span> steadyStatePanOffset <span class="operator">+</span> (finalDragGestureValue.translation <span class="operator">/</span> zoomScale) <span class="comment">//图片变大的时候,移动的距离小, translation 结束-开始</span></span><br><span class="line">        &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  组合两个不同手势</p>
+  <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.gesture(panGesture().simultaneously(with: zoomGesture())) <span class="comment">//组合两个不同手势</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
     </div>
 
     
@@ -365,13 +420,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">30k</span>
+    <span title="站点总字数">32k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">27 分钟</span>
+    <span title="站点阅读时长">29 分钟</span>
   </span>
 </div>
 
