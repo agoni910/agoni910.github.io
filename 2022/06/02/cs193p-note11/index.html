@@ -28,7 +28,7 @@
 <meta property="og:description" content="Error HandingThrowing errors很多函数都有throws关键字，你可以抛出错误 func attendLecture() throws &amp;#123; 	if sleptIn &amp;#123;         throw CS193pError.missedLecture     &amp;#125;     askQuestion() &#x2F;&#x2F;如果抛出错误，函数后续无法完成 &amp;#125;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-02T03:13:51.000Z">
-<meta property="article:modified_time" content="2022-08-03T09:07:22.466Z">
+<meta property="article:modified_time" content="2022-08-05T14:06:15.998Z">
 <meta property="article:author" content="Wenrong Jiang">
 <meta property="article:tag" content="swift">
 <meta property="article:tag" content="cs193p">
@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-Handing"><span class="nav-number">1.</span> <span class="nav-text">Error Handing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Throwing-errors"><span class="nav-number">1.1.</span> <span class="nav-text">Throwing errors</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%8A%9B%E5%87%BA%E9%94%99%E8%AF%AF"><span class="nav-number">1.2.</span> <span class="nav-text">处理抛出错误</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-Handing"><span class="nav-number">1.</span> <span class="nav-text">Error Handing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Throwing-errors"><span class="nav-number">1.1.</span> <span class="nav-text">Throwing errors</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%A4%84%E7%90%86%E6%8A%9B%E5%87%BA%E9%94%99%E8%AF%AF"><span class="nav-number">1.2.</span> <span class="nav-text">不处理抛出错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%8A%9B%E5%87%BA%E9%94%99%E8%AF%AF"><span class="nav-number">1.3.</span> <span class="nav-text">处理抛出错误</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Persistence"><span class="nav-number">2.</span> <span class="nav-text">Persistence</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.1.</span> <span class="nav-text">文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%BF%E9%97%AE%E6%B2%99%E7%9B%92%E7%9B%AE%E5%BD%95"><span class="nav-number">2.1.1.</span> <span class="nav-text">如何访问沙盒目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Data"><span class="nav-number">2.1.2.</span> <span class="nav-text">Data</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%98%E6%A1%A3-Archiving"><span class="nav-number">2.2.</span> <span class="nav-text">存档 Archiving</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Codable%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.2.1.</span> <span class="nav-text">Codable协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Example"><span class="nav-number">2.2.2.</span> <span class="nav-text">Example</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UserDefaults"><span class="nav-number">2.3.</span> <span class="nav-text">UserDefaults</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Property-List"><span class="nav-number">2.3.1.</span> <span class="nav-text">Property List</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Any"><span class="nav-number">2.3.2.</span> <span class="nav-text">Any</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Example-1"><span class="nav-number">2.3.3.</span> <span class="nav-text">Example</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo"><span class="nav-number">3.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E6%96%87%E6%A1%A3%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-number">3.1.</span> <span class="nav-text">使文档持久化</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -156,7 +156,7 @@
     <img class="site-author-image" itemprop="image" alt="Wenrong Jiang"
       src="/images/imga.png">
   <p class="site-author-name" itemprop="name">Wenrong Jiang</p>
-  <div class="site-description" itemprop="description">一个可爱的blog</div>
+  <div class="site-description" itemprop="description">一以贯之的努力，不得懈怠的人生．</div>
 </div>
 <div class="site-state-wrap site-overview-item animated">
   <nav class="site-state">
@@ -231,7 +231,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/imga.png">
       <meta itemprop="name" content="Wenrong Jiang">
-      <meta itemprop="description" content="一个可爱的blog">
+      <meta itemprop="description" content="一以贯之的努力，不得懈怠的人生．">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -268,14 +268,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>329</span>
+      <span>6k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>1 分钟</span>
+      <span>20 分钟</span>
     </span>
 </div>
 
@@ -301,10 +301,197 @@
 <span id="more"></span>
 
 <p>使用try调用能抛出错误的函数，<code>try head(from: url)</code></p>
-<h4 id="处理抛出错误"><a href="#处理抛出错误" class="headerlink" title="处理抛出错误"></a>处理抛出错误</h4><ul>
-<li>try? 忽略发生的任何错误，如果抛出错误只会返回nil</li>
-<li>try! 如果遇到错误，使程序崩溃</li>
+<h4 id="不处理抛出错误"><a href="#不处理抛出错误" class="headerlink" title="不处理抛出错误"></a>不处理抛出错误</h4><ul>
+<li><p>try? 忽略发生的任何错误，如果抛出错误只会返回nil</p>
+</li>
+<li><p>try! 如果遇到错误，使程序崩溃</p>
+</li>
+<li><p>try 仅适用于本身抛出的函数，如果错误被抛出会重新扔给调用foo的人</p>
+  <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">try</span> <span class="token function">somethingThatThrows</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
 </ul>
+<h4 id="处理抛出错误"><a href="#处理抛出错误" class="headerlink" title="处理抛出错误"></a>处理抛出错误</h4><p>使用do和catch包裹try</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">do</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">try</span> <span class="token function">functionThatThrows</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//可能会发生错误的内容</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"hello"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token keyword">let</span> error <span class="token punctuation">&#123;</span>
+    <span class="token comment">//捕获和处理错误</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token class-name">CS193pError</span><span class="token punctuation">.</span><span class="token function">lateHomeWork</span><span class="token punctuation">(</span><span class="token keyword">let</span> daysLate<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">//捕获相关错误，获取daysLate的值</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token keyword">let</span> cs193pError <span class="token keyword">where</span> cs193pError <span class="token keyword">is</span> <span class="token class-name">CS193pError</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//捕获所有CS193p错误</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"keep going"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Persistence"><a href="#Persistence" class="headerlink" title="Persistence"></a>Persistence</h3><p>很多种方式去永久的保存文件</p>
+<ul>
+<li>iOS有一个Unix文件系统，可以使用FileManager在系统中存取文件</li>
+<li>可以存储在SQL数据库中，有一个完整框架 CoreData</li>
+<li>iCloud 使用CloudKit将文件存入iCloud</li>
+<li>UserDefaults 轻量级，存储用户偏好（调色板）</li>
+</ul>
+<h4 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h4><p>和访问Unix文件系统一样，以&#x2F;开头。但是不能访问大部分内容，只能读写访问自己程序沙盒中目录（sandbox）沙盒，更加安全。在删除应用时，会将沙盒内容一起删除，不会有残留。</p>
+<p>沙盒中目录：Application存放可执行文件、图片等，是个只读目录；Document存储用户保存的文件内容 ；Application Support需要存储在文件系统中，但用户不视为文件eg.调色盘；Caches 不会备份</p>
+<h5 id="如何访问沙盒目录"><a href="#如何访问沙盒目录" class="headerlink" title="如何访问沙盒目录"></a>如何访问沙盒目录</h5><p>使用FileManager的URL来访问沙盒中的文件，通常使用共享的的FileManager.default，因为是线程安全的，所以适合在主队列中访问沙盒</p>
+<p>获取特定目录的url</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> manager <span class="token operator">=</span> <span class="token class-name">FileManager</span><span class="token punctuation">.</span><span class="token keyword">default</span>
+<span class="token keyword">let</span> url <span class="token operator">=</span> manager<span class="token punctuation">.</span><span class="token function">urls</span><span class="token punctuation">(</span><span class="token keyword">for</span><span class="token punctuation">:</span> <span class="token punctuation">.</span>documentDirectory<span class="token punctuation">,</span> <span class="token keyword">in</span><span class="token punctuation">:</span> userDomainMask<span class="token punctuation">)</span><span class="token punctuation">.</span>first <span class="token comment">//返回复数，只选择第一个</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>访问文件系统时，总是开始于一个特定目录的url</p>
+<p>url的函数，添加内容到指定url</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">appendingPathComponent</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token constant">URL</span> <span class="token comment">//添加组件（文件）到self 返回url</span>
+<span class="token keyword">func</span> <span class="token function-definition function">appendingPathExtension</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token constant">URL</span> <span class="token comment">//添加扩展 .jpg</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>查找特定url中内容</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">var</span> isFileURL<span class="token punctuation">:</span> <span class="token class-name">Bool</span> <span class="token comment">//指向文件</span>
+<span class="token keyword">func</span> <span class="token function-definition function">resourceValues</span><span class="token punctuation">(</span><span class="token keyword">for</span> key<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token class-name">URLResourceKey</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token operator">-></span> <span class="token punctuation">[</span><span class="token class-name">URLResourceKey</span><span class="token punctuation">:</span><span class="token keyword">Any</span><span class="token punctuation">]</span><span class="token operator">?</span>
+<span class="token comment">//.creationDataKey .isDirectoryKey .fileSizeKey</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>可以查找文件创建时间、大小等信息</p>
+<h5 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h5><p>通过Data向文件系统中的文件写入实际内容，是数据结构，以byte的方式将数据读取写入。</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">Data</span> <span class="token keyword">init</span><span class="token punctuation">(</span>contentsOf<span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token punctuation">,</span> options<span class="token punctuation">:</span> <span class="token class-name">Data</span><span class="token punctuation">.</span><span class="token class-name">ReadingOptions</span><span class="token punctuation">)</span> <span class="token keyword">throws</span>
+<span class="token comment">//根据url来获取数据二进制数据</span>
+<span class="token keyword">func</span> <span class="token function-definition function">write</span><span class="token punctuation">(</span>to url<span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token punctuation">,</span> options<span class="token punctuation">:</span> <span class="token class-name">Data</span><span class="token punctuation">.</span><span class="token class-name">WritingOptions</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token operator">-></span> <span class="token class-name">Bool</span>
+<span class="token comment">//options .atomic .withoutOverwriting</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="存档-Archiving"><a href="#存档-Archiving" class="headerlink" title="存档 Archiving"></a>存档 Archiving</h4><h5 id="Codable协议"><a href="#Codable协议" class="headerlink" title="Codable协议"></a>Codable协议</h5><p>符合Codable协议，可以变成一团放入文件系统。任何结构变量本身都可以编码，Swift可以自动实现，但是枚举有关联值的不能自动编码<strong>（Swift5.5好像可以了）</strong>，需要手动实现。</p>
+<p>标记了协议后，将数据转换成blob的方法最常用的就是将其编码成某种文件格式(JSON)。互联网上的API获取大量使用数据都是JSON格式。</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> object<span class="token punctuation">:</span> <span class="token class-name">MyType</span> <span class="token operator">=</span> <span class="token operator">...</span> <span class="token comment">//MyType要可编码</span>
+<span class="token keyword">let</span> jsonData<span class="token punctuation">:</span> <span class="token class-name">Data</span><span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">try</span><span class="token operator">?</span> <span class="token class-name">JSONEncoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">encode</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span>
+<span class="token comment">//一个使用JSON表示的Data实例作为blob</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>编码有抛出，你能通过catch方便的找到错误。</p>
+<p>JSON是一个文本格式，可以查看内容，把jsonData作为内容返回并通过string转换成字符串</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> jsonData <span class="token operator">=</span> <span class="token class-name">String</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> jsonData<span class="token operator">!</span><span class="token punctuation">,</span> encoding<span class="token punctuation">:</span> <span class="token punctuation">.</span>utf8<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>也可以写入jsonData到文件和将JSON解码成数据类型</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">try</span> jsonData<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>to<span class="token punctuation">:</span> url<span class="token punctuation">)</span> <span class="token comment">//throws</span>
+<span class="token keyword">if</span> <span class="token keyword">let</span> myObject<span class="token punctuation">:</span> <span class="token class-name">MyType</span> <span class="token operator">=</span> <span class="token keyword">try</span><span class="token operator">?</span> <span class="token class-name">JSONDecoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span><span class="token class-name">MyType</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">,</span> from<span class="token punctuation">:</span> jsonData<span class="token operator">!</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>关于解码的错误处理</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">do</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> object <span class="token operator">=</span> <span class="token keyword">try</span> <span class="token class-name">JSONDecoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span><span class="token class-name">MyType</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">,</span> from<span class="token punctuation">:</span> jsonData<span class="token operator">!</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token class-name">DecodingError</span><span class="token punctuation">.</span><span class="token function">keyNotFound</span><span class="token punctuation">(</span><span class="token keyword">let</span> key<span class="token punctuation">,</span> <span class="token keyword">let</span> context<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"couldn't find key </span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">key</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string"> in JSON: </span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">context<span class="token punctuation">.</span>debugDescription</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token class-name">DecodingError</span><span class="token punctuation">.</span><span class="token function">valueNotFound</span><span class="token punctuation">(</span><span class="token keyword">let</span> type<span class="token punctuation">,</span> <span class="token keyword">let</span> context<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token class-name">DecodingError</span><span class="token punctuation">.</span><span class="token function">typeMismatch</span><span class="token punctuation">(</span><span class="token keyword">let</span> type<span class="token punctuation">,</span> <span class="token keyword">let</span> context<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token class-name">DecodingError</span><span class="token punctuation">.</span><span class="token function">dataCorrupted</span><span class="token punctuation">(</span><span class="token keyword">let</span> context<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h5><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">struct</span> <span class="token class-name">MyType</span><span class="token punctuation">:</span> <span class="token class-name">Codable</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> someData<span class="token punctuation">:</span> <span class="token class-name">Date</span>
+    <span class="token keyword">var</span> someString<span class="token punctuation">:</span> <span class="token class-name">String</span>
+    <span class="token keyword">var</span> other<span class="token punctuation">:</span> <span class="token class-name">SomeOtherType</span>
+    <span class="token comment">//修改JSON的冒号左面的内容，在JSON中key使用的都是小写字母，单词间使用下划线分割</span>
+    <span class="token keyword">private</span> <span class="token keyword">enum</span> <span class="token class-name">CodingKeys</span><span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">CodingKey</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">case</span> someData <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"some_date"</span></span>
+        <span class="token keyword">case</span> other
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token keyword">init</span><span class="token punctuation">(</span>from decoder<span class="token punctuation">:</span> <span class="token class-name">Decoder</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span> <span class="token comment">//解码</span>
+        <span class="token keyword">let</span> container <span class="token operator">=</span> <span class="token keyword">try</span> decoder<span class="token punctuation">.</span><span class="token function">container</span><span class="token punctuation">(</span>keyedBy<span class="token punctuation">:</span> <span class="token class-name">CodingKeys</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span>
+        <span class="token comment">//抓住容器</span>
+        someDate <span class="token operator">=</span> <span class="token keyword">try</span> container<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span><span class="token class-name">Date</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">,</span> forKey<span class="token punctuation">:</span> <span class="token punctuation">.</span>someDate<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">//编码</span>
+    <span class="token keyword">func</span> <span class="token function-definition function">encode</span><span class="token punctuation">(</span>to encoder<span class="token punctuation">:</span> <span class="token class-name">Encoder</span><span class="token punctuation">)</span> <span class="token keyword">throws</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">var</span> container <span class="token operator">=</span> encoder<span class="token punctuation">.</span><span class="token function">container</span><span class="token punctuation">(</span>keyedBy<span class="token punctuation">:</span> <span class="token class-name">CodingKeys</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span>
+        <span class="token keyword">try</span> container<span class="token punctuation">.</span><span class="token function">encode</span><span class="token punctuation">(</span>someDate<span class="token punctuation">,</span> forKey<span class="token punctuation">:</span> <span class="token punctuation">.</span>someDate<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="UserDefaults"><a href="#UserDefaults" class="headerlink" title="UserDefaults"></a>UserDefaults</h4><p>用户默认值 是个强大的系统，有的时候会和文件系统结合起来。对于轻量级数据、用户偏好内容的存储。</p>
+<h5 id="Property-List"><a href="#Property-List" class="headerlink" title="Property List"></a>Property List</h5><p>UserDefaults只能在属性列表(Property List)中存储内容，列表属性不是协议或者结构体等，是个概念，只能由字符串、正数、布尔值、浮点数、日期、数据、数组或者字典组成。如果还有别的类型的内容，就不再视为属性列表，不能放进UserDefaults中。</p>
+<p>我们可以把任何可编码的内容放进Data。</p>
+<h5 id="Any"><a href="#Any" class="headerlink" title="Any"></a>Any</h5><p>Any是无类型。Swift是一个强类型语言，这个很反Swift，但是我们会尽量忽略Any。</p>
+<h5 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h5><p>使用时，首先需要一个UserDefaults的实例</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> defaults <span class="token operator">=</span> <span class="token class-name">UserDefaults</span><span class="token punctuation">.</span>standard
+<span class="token comment">//存储内容</span>
+defaults<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span>object<span class="token punctuation">,</span> forKeys<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"SomeKey"</span></span><span class="token punctuation">)</span> <span class="token comment">//object必须是Property List</span>
+<span class="token function">setDouble</span><span class="token punctuation">(</span><span class="token number">31.1</span><span class="token punctuation">,</span> forKeys<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">""</span></span><span class="token punctuation">)</span> <span class="token comment">// 可以保证存储的是double</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>获取数据</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> i<span class="token punctuation">:</span> <span class="token class-name">Int</span> <span class="token operator">=</span> defaults<span class="token punctuation">.</span><span class="token function">integer</span><span class="token punctuation">(</span>forKeys<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"MyInteger"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果返回的类型是一个数组，将会返回<code>Array&lt;Any&gt;</code>，因为Swift不能直接对Any处理，所以要把Array使用as转换成能处理的内容。</p>
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><h4 id="使文档持久化"><a href="#使文档持久化" class="headerlink" title="使文档持久化"></a>使文档持久化</h4><p>一般不在View中做持久化，大多数在ViewModel中进行持久化。也有可能在Model中，甚至做一个持久化引擎类似SQL数据库等。</p>
+<p>在viewmodel中添加save函数，函数中先得到一些数据，然后获取数据并写入到url中。需要知道将在Data中内容的类型，以JSON的格式数据化。所以我们需要把EmojiArtModel转换成JSON表示，并以某种方式放进data中，然后写到url。</p>
+<p>在Model中添加将自己转换成JSON的函数</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"> <span class="token comment">//保存文件,url为文件url,在本地系统中的某个位置</span>
+<span class="token keyword">private</span> <span class="token keyword">func</span> <span class="token function-definition function">save</span><span class="token punctuation">(</span>to url<span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token keyword">let</span> thisfunction <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation"><span class="token class-name">String</span><span class="token punctuation">(</span>describing<span class="token punctuation">:</span> <span class="token keyword">self</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">.</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation"><span class="token literal constant">#function</span></span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span> <span class="token comment">// EmojiArtDocument.save(to:)</span>
+    <span class="token keyword">do</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">let</span> data<span class="token punctuation">:</span> <span class="token class-name">Data</span> <span class="token operator">=</span> <span class="token keyword">try</span> emojiArt<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">thisfunction</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string"> json = </span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation"><span class="token class-name">String</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> data<span class="token punctuation">,</span> encoding<span class="token punctuation">:</span> <span class="token punctuation">.</span>utf8<span class="token punctuation">)</span> <span class="token operator">??</span> <span class="token string-literal"><span class="token string">"nil"</span></span></span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span> <span class="token comment">//如果是图象等 为nil</span>
+        <span class="token keyword">try</span> data<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>to<span class="token punctuation">:</span> url<span class="token punctuation">)</span>
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">thisfunction</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string"> success!"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token keyword">let</span> encodingError <span class="token keyword">where</span> encodingError <span class="token keyword">is</span> <span class="token class-name">EncodingError</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">thisfunction</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string"> coundn't encode EmojiArt as JSON because </span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">encodingError<span class="token punctuation">.</span>localizedDescription</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span> <span class="token comment">//本地化当地语言</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">thisfunction</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string"> error = </span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">error</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>实现自动保存文件</p>
+<p>获取文件目录时，在iOS中in参数的内容永远是.userDomainMask</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">private</span> <span class="token keyword">struct</span>  <span class="token class-name">Autosave</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">static</span> <span class="token keyword">let</span> filename <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"Autosaved.emojiart"</span></span> <span class="token comment">//后期做成扩展名,现在只是文件名</span>
+    <span class="token keyword">static</span> <span class="token keyword">var</span> url<span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token operator">?</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">//在iOS中 始终是.userDomainMask</span>
+        <span class="token keyword">let</span> documentDirectory <span class="token operator">=</span> <span class="token class-name">FileManager</span><span class="token punctuation">.</span><span class="token keyword">default</span><span class="token punctuation">.</span><span class="token function">urls</span><span class="token punctuation">(</span><span class="token keyword">for</span><span class="token punctuation">:</span> <span class="token punctuation">.</span>documentDirectory<span class="token punctuation">,</span> <span class="token keyword">in</span><span class="token punctuation">:</span> <span class="token punctuation">.</span>userDomainMask<span class="token punctuation">)</span><span class="token punctuation">.</span>first 
+        <span class="token comment">//在得到的url中添加组件</span>
+        <span class="token keyword">return</span> documentDirectory<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">appendingPathComponent</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span> 
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">private</span> <span class="token keyword">func</span> <span class="token function-definition function">autosave</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token keyword">let</span> url <span class="token operator">=</span> <span class="token class-name">Autosave</span><span class="token punctuation">.</span>url <span class="token punctuation">&#123;</span>
+        <span class="token function">save</span><span class="token punctuation">(</span>to<span class="token punctuation">:</span> url<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>带有关联值的枚举内，自定义编码 Swift5.5能自动编码了，不需要手动进行，但是把代码摆上吧</p>
+</blockquote>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token comment">//自定义编码...</span>
+<span class="token keyword">init</span><span class="token punctuation">(</span>from decoder<span class="token punctuation">:</span> <span class="token class-name">Decoder</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> container <span class="token operator">=</span> <span class="token keyword">try</span> decoder<span class="token punctuation">.</span><span class="token function">container</span><span class="token punctuation">(</span>keyedBy<span class="token punctuation">:</span> <span class="token class-name">CodingKeys</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token keyword">let</span> url <span class="token operator">=</span> <span class="token keyword">try</span><span class="token operator">?</span> container<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span><span class="token constant">URL</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">,</span> forKey<span class="token punctuation">:</span> <span class="token punctuation">.</span>url<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">self</span> <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token function">url</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token keyword">let</span> imageData <span class="token operator">=</span> <span class="token keyword">try</span><span class="token operator">?</span> container<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span><span class="token class-name">Data</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">,</span> forKey<span class="token punctuation">:</span> <span class="token punctuation">.</span>imageData<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">self</span> <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token function">imageData</span><span class="token punctuation">(</span>imageData<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">self</span> <span class="token operator">=</span> <span class="token punctuation">.</span>blank
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function-definition function">encode</span><span class="token punctuation">(</span>to encoder<span class="token punctuation">:</span> <span class="token class-name">Encoder</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> container <span class="token operator">=</span> encoder<span class="token punctuation">.</span><span class="token function">container</span><span class="token punctuation">(</span>keyedBy<span class="token punctuation">:</span> <span class="token class-name">CodingKeys</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span>
+    <span class="token keyword">switch</span> <span class="token keyword">self</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">case</span> <span class="token punctuation">.</span><span class="token function">url</span><span class="token punctuation">(</span><span class="token keyword">let</span> url<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">try</span> container<span class="token punctuation">.</span><span class="token function">encode</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> forKey<span class="token punctuation">:</span> <span class="token punctuation">.</span>url<span class="token punctuation">)</span>
+        <span class="token keyword">case</span> <span class="token punctuation">.</span><span class="token function">imageData</span><span class="token punctuation">(</span><span class="token keyword">let</span> data<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">try</span> container<span class="token punctuation">.</span><span class="token function">encode</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> forKey<span class="token punctuation">:</span> <span class="token punctuation">.</span>imageData<span class="token punctuation">)</span>
+        <span class="token keyword">case</span> <span class="token punctuation">.</span>blank<span class="token punctuation">:</span> <span class="token keyword">break</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">enum</span> <span class="token class-name">CodingKeys</span><span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">CodingKey</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">case</span> url <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"theURL"</span></span>
+    <span class="token keyword">case</span> imageData
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>加载自动保存的文件</p>
+<p>对model进行初始化</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">init</span><span class="token punctuation">(</span>url<span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> data <span class="token operator">=</span> <span class="token keyword">try</span> <span class="token class-name">Data</span><span class="token punctuation">(</span>contentsOf<span class="token punctuation">:</span> url<span class="token punctuation">)</span> <span class="token comment">//初始化Data,通过文件地址获取文件内Data</span>
+    <span class="token keyword">self</span> <span class="token operator">=</span> <span class="token keyword">try</span> <span class="token class-name">EmojiArtModel</span><span class="token punctuation">(</span>json<span class="token punctuation">:</span> data<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">init</span><span class="token punctuation">(</span>json<span class="token punctuation">:</span> <span class="token class-name">Data</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">self</span> <span class="token operator">=</span> <span class="token keyword">try</span> <span class="token class-name">JSONDecoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span><span class="token class-name">EmojiArtModel</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">,</span> from<span class="token punctuation">:</span> json<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
 
     </div>
 
@@ -358,13 +545,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">30k</span>
+    <span title="站点总字数">35k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:38</span>
+    <span title="站点阅读时长">1:57</span>
   </span>
 </div>
 

@@ -1,67 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>CS193p_assignment3</title>
-    <url>/2022/03/20/cs193-a3/</url>
-    <content><![CDATA[<h3 id="Task-1"><a href="#Task-1" class="headerlink" title="Task 1"></a>Task 1</h3><blockquote>
-<p>实施一个单人游戏Set</p>
-</blockquote>
-<h3 id="Task-2"><a href="#Task-2" class="headerlink" title="Task 2"></a>Task 2</h3><blockquote>
-<p>所有卡片可见，卡片尽可能的大。也可以增加一个最小尺寸，然后恢复滚动。所有的卡片都必须可识别</p>
-</blockquote>
-<span id="more"></span>
-
-<h3 id="Task-3"><a href="#Task-3" class="headerlink" title="Task 3"></a>Task 3</h3><blockquote>
-<p>有相同的长宽比</p>
-</blockquote>
-<h3 id="Task-4"><a href="#Task-4" class="headerlink" title="Task 4"></a>Task 4</h3><blockquote>
-<p>符号的大小根据卡片大小决定</p>
-</blockquote>
-<h3 id="Task-5"><a href="#Task-5" class="headerlink" title="Task 5"></a>Task 5</h3><blockquote>
-<p>选择三张牌匹配，能够看到哪些牌已经被选中</p>
-</blockquote>
-<h3 id="Task-6"><a href="#Task-6" class="headerlink" title="Task 6"></a>Task 6</h3><blockquote>
-<p>只要有三张牌被选中，要显示是否匹配，不匹配的三个和只选择1或2张牌时看起来不一样</p>
-</blockquote>
-<h3 id="Task-7"><a href="#Task-7" class="headerlink" title="Task 7"></a>Task 7</h3><blockquote>
-<p>支持点击已经选中的牌取消选中，只选择1或2时</p>
-</blockquote>
-<h3 id="Task-8"><a href="#Task-8" class="headerlink" title="Task 8"></a>Task 8</h3><blockquote>
-<p>没读明白啊，回头再说</p>
-<p>当任何一张牌被触摸到，并且已经有3张相匹配的套装牌被选中。<br>那么…<br>a. 按照 “套牌 “的规则，用新的 “套牌 “替换这3张匹配的牌。牌<br>b. 如果这副牌是空的，那么就把那些匹配的牌所空出来的位置（因为没有更多的牌，所以不能被替换）。b. 如果这副牌是空的，那么这副牌所腾出的空间（因为没有更多的牌，所以不能被替换）就应该让给剩余的 的牌（也就是说，这些牌很可能会变大）。<br>c. 如果被碰的牌不属于匹配的牌组，则选择该牌。<br>d. 如果被摸到的牌是匹配组的一部分，那么就不选择任何牌。</p>
-</blockquote>
-<h3 id="Task-9"><a href="#Task-9" class="headerlink" title="Task 9"></a>Task 9</h3><blockquote>
-<p>有三张不匹配的牌被选中，取消这三张牌，选中点击的牌</p>
-</blockquote>
-<h3 id="Task-10"><a href="#Task-10" class="headerlink" title="Task 10"></a>Task 10</h3><blockquote>
-<p>有“Deal 3 More Cards”按钮</p>
-<p>你需要有一个 “再发3张牌 “的按钮（根据Set的规则）。<br>a. 当它被触动时，如果所选的牌组成了一套牌，则替换所选的牌。<br>b. 或者，如果所选的牌不组成一套牌（或者所选的牌少于3张，包括没有），则增加3张新牌，加入屏幕上已经出现的牌（并且不影响选择）。<br>c. 如果牌组是空的，则禁用此按钮。</p>
-</blockquote>
-<h3 id="Task-11"><a href="#Task-11" class="headerlink" title="Task 11"></a>Task 11</h3><blockquote>
-<p>有一个“New Game”按钮，开始新游戏，回到12个随机卡</p>
-</blockquote>
-<h3 id="Task-12"><a href="#Task-12" class="headerlink" title="Task 12"></a>Task 12</h3><blockquote>
-<p>用长方形代替弯曲</p>
-</blockquote>
-<h3 id="Task-13"><a href="#Task-13" class="headerlink" title="Task 13"></a>Task 13</h3><blockquote>
-<p>自己编写Shape结构制作“diamond”</p>
-</blockquote>
-<h3 id="Task-14"><a href="#Task-14" class="headerlink" title="Task 14"></a>Task 14</h3><blockquote>
-<p>条纹表示为半透明，和纯色区分开</p>
-</blockquote>
-<h3 id="Task-15-amp-16"><a href="#Task-15-amp-16" class="headerlink" title="Task 15&amp;16"></a>Task 15&amp;16</h3><blockquote>
-<p>使用枚举作为方案中有意义的部分，使用闭包(一个作为参数的函数)，三个不同颜色</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>swift</tag>
-        <tag>cs193p</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CS193_note 1-4</title>
     <url>/2022/02/20/cs193-note1-2/</url>
     <content><![CDATA[<h3 id="RoundedRectangle"><a href="#RoundedRectangle" class="headerlink" title="RoundedRectangle"></a>RoundedRectangle</h3><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">RoundedRectangle</span><span class="token punctuation">(</span>cornerRadius<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">)</span>
@@ -621,6 +560,67 @@ fun <span class="token function">reportSalesNumber</span><span class="token punc
       </tags>
   </entry>
   <entry>
+    <title>CS193p_assignment3</title>
+    <url>/2022/03/20/cs193-a3/</url>
+    <content><![CDATA[<h3 id="Task-1"><a href="#Task-1" class="headerlink" title="Task 1"></a>Task 1</h3><blockquote>
+<p>实施一个单人游戏Set</p>
+</blockquote>
+<h3 id="Task-2"><a href="#Task-2" class="headerlink" title="Task 2"></a>Task 2</h3><blockquote>
+<p>所有卡片可见，卡片尽可能的大。也可以增加一个最小尺寸，然后恢复滚动。所有的卡片都必须可识别</p>
+</blockquote>
+<span id="more"></span>
+
+<h3 id="Task-3"><a href="#Task-3" class="headerlink" title="Task 3"></a>Task 3</h3><blockquote>
+<p>有相同的长宽比</p>
+</blockquote>
+<h3 id="Task-4"><a href="#Task-4" class="headerlink" title="Task 4"></a>Task 4</h3><blockquote>
+<p>符号的大小根据卡片大小决定</p>
+</blockquote>
+<h3 id="Task-5"><a href="#Task-5" class="headerlink" title="Task 5"></a>Task 5</h3><blockquote>
+<p>选择三张牌匹配，能够看到哪些牌已经被选中</p>
+</blockquote>
+<h3 id="Task-6"><a href="#Task-6" class="headerlink" title="Task 6"></a>Task 6</h3><blockquote>
+<p>只要有三张牌被选中，要显示是否匹配，不匹配的三个和只选择1或2张牌时看起来不一样</p>
+</blockquote>
+<h3 id="Task-7"><a href="#Task-7" class="headerlink" title="Task 7"></a>Task 7</h3><blockquote>
+<p>支持点击已经选中的牌取消选中，只选择1或2时</p>
+</blockquote>
+<h3 id="Task-8"><a href="#Task-8" class="headerlink" title="Task 8"></a>Task 8</h3><blockquote>
+<p>没读明白啊，回头再说</p>
+<p>当任何一张牌被触摸到，并且已经有3张相匹配的套装牌被选中。<br>那么…<br>a. 按照 “套牌 “的规则，用新的 “套牌 “替换这3张匹配的牌。牌<br>b. 如果这副牌是空的，那么就把那些匹配的牌所空出来的位置（因为没有更多的牌，所以不能被替换）。b. 如果这副牌是空的，那么这副牌所腾出的空间（因为没有更多的牌，所以不能被替换）就应该让给剩余的 的牌（也就是说，这些牌很可能会变大）。<br>c. 如果被碰的牌不属于匹配的牌组，则选择该牌。<br>d. 如果被摸到的牌是匹配组的一部分，那么就不选择任何牌。</p>
+</blockquote>
+<h3 id="Task-9"><a href="#Task-9" class="headerlink" title="Task 9"></a>Task 9</h3><blockquote>
+<p>有三张不匹配的牌被选中，取消这三张牌，选中点击的牌</p>
+</blockquote>
+<h3 id="Task-10"><a href="#Task-10" class="headerlink" title="Task 10"></a>Task 10</h3><blockquote>
+<p>有“Deal 3 More Cards”按钮</p>
+<p>你需要有一个 “再发3张牌 “的按钮（根据Set的规则）。<br>a. 当它被触动时，如果所选的牌组成了一套牌，则替换所选的牌。<br>b. 或者，如果所选的牌不组成一套牌（或者所选的牌少于3张，包括没有），则增加3张新牌，加入屏幕上已经出现的牌（并且不影响选择）。<br>c. 如果牌组是空的，则禁用此按钮。</p>
+</blockquote>
+<h3 id="Task-11"><a href="#Task-11" class="headerlink" title="Task 11"></a>Task 11</h3><blockquote>
+<p>有一个“New Game”按钮，开始新游戏，回到12个随机卡</p>
+</blockquote>
+<h3 id="Task-12"><a href="#Task-12" class="headerlink" title="Task 12"></a>Task 12</h3><blockquote>
+<p>用长方形代替弯曲</p>
+</blockquote>
+<h3 id="Task-13"><a href="#Task-13" class="headerlink" title="Task 13"></a>Task 13</h3><blockquote>
+<p>自己编写Shape结构制作“diamond”</p>
+</blockquote>
+<h3 id="Task-14"><a href="#Task-14" class="headerlink" title="Task 14"></a>Task 14</h3><blockquote>
+<p>条纹表示为半透明，和纯色区分开</p>
+</blockquote>
+<h3 id="Task-15-amp-16"><a href="#Task-15-amp-16" class="headerlink" title="Task 15&amp;16"></a>Task 15&amp;16</h3><blockquote>
+<p>使用枚举作为方案中有意义的部分，使用闭包(一个作为参数的函数)，三个不同颜色</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>swift</tag>
+        <tag>cs193p</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>cs193p_note10_Multithreading Demo Gestures</title>
     <url>/2022/05/19/cs193p-note10/</url>
     <content><![CDATA[<h3 id="设置图片背景"><a href="#设置图片背景" class="headerlink" title="设置图片背景"></a>设置图片背景</h3><p>接收url和image</p>
@@ -807,37 +807,6 @@ myview<span class="token punctuation">.</span><span class="token function">onLon
       </tags>
   </entry>
   <entry>
-    <title>cs193p_note11_Error Persistence</title>
-    <url>/2022/06/02/cs193p-note11/</url>
-    <content><![CDATA[<h3 id="Error-Handing"><a href="#Error-Handing" class="headerlink" title="Error Handing"></a>Error Handing</h3><h4 id="Throwing-errors"><a href="#Throwing-errors" class="headerlink" title="Throwing errors"></a>Throwing errors</h4><p>很多函数都有<code>throws</code>关键字，你可以抛出错误</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">attendLecture</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">if</span> sleptIn <span class="token punctuation">&#123;</span>
-        <span class="token keyword">throw</span> <span class="token class-name">CS193pError</span><span class="token punctuation">.</span>missedLecture
-    <span class="token punctuation">&#125;</span>
-    <span class="token function">askQuestion</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//如果抛出错误，函数后续无法完成</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">enum</span> <span class="token class-name">CS193pError</span><span class="token punctuation">:</span> <span class="token class-name">Error</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">case</span> <span class="token class-name">LateHomework</span><span class="token punctuation">(</span>daysLate<span class="token punctuation">:</span> <span class="token class-name">Int</span><span class="token punctuation">)</span>
-    <span class="token keyword">case</span> missedLecture
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<span id="more"></span>
-
-<p>使用try调用能抛出错误的函数，<code>try head(from: url)</code></p>
-<h4 id="处理抛出错误"><a href="#处理抛出错误" class="headerlink" title="处理抛出错误"></a>处理抛出错误</h4><ul>
-<li>try? 忽略发生的任何错误，如果抛出错误只会返回nil</li>
-<li>try! 如果遇到错误，使程序崩溃</li>
-</ul>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>swift</tag>
-        <tag>cs193p</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CS193p_note5 Properties Layout @ViewBuilder</title>
     <url>/2022/02/28/cs193p-note5/</url>
     <content><![CDATA[<h3 id="Computed-Properties-计算属性"><a href="#Computed-Properties-计算属性" class="headerlink" title="Computed Properties 计算属性"></a>Computed Properties 计算属性</h3><p>不提供存储值，提供读取器和设置器，接收和设置其他属性</p>
@@ -939,6 +908,297 @@ myview<span class="token punctuation">.</span><span class="token function">onLon
       </tags>
   </entry>
   <entry>
+    <title>cs193p_note11_Error Persistence</title>
+    <url>/2022/06/02/cs193p-note11/</url>
+    <content><![CDATA[<h3 id="Error-Handing"><a href="#Error-Handing" class="headerlink" title="Error Handing"></a>Error Handing</h3><h4 id="Throwing-errors"><a href="#Throwing-errors" class="headerlink" title="Throwing errors"></a>Throwing errors</h4><p>很多函数都有<code>throws</code>关键字，你可以抛出错误</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">attendLecture</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">if</span> sleptIn <span class="token punctuation">&#123;</span>
+        <span class="token keyword">throw</span> <span class="token class-name">CS193pError</span><span class="token punctuation">.</span>missedLecture
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">askQuestion</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//如果抛出错误，函数后续无法完成</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">enum</span> <span class="token class-name">CS193pError</span><span class="token punctuation">:</span> <span class="token class-name">Error</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">case</span> <span class="token class-name">LateHomework</span><span class="token punctuation">(</span>daysLate<span class="token punctuation">:</span> <span class="token class-name">Int</span><span class="token punctuation">)</span>
+    <span class="token keyword">case</span> missedLecture
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<p>使用try调用能抛出错误的函数，<code>try head(from: url)</code></p>
+<h4 id="不处理抛出错误"><a href="#不处理抛出错误" class="headerlink" title="不处理抛出错误"></a>不处理抛出错误</h4><ul>
+<li><p>try? 忽略发生的任何错误，如果抛出错误只会返回nil</p>
+</li>
+<li><p>try! 如果遇到错误，使程序崩溃</p>
+</li>
+<li><p>try 仅适用于本身抛出的函数，如果错误被抛出会重新扔给调用foo的人</p>
+  <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">foo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">try</span> <span class="token function">somethingThatThrows</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h4 id="处理抛出错误"><a href="#处理抛出错误" class="headerlink" title="处理抛出错误"></a>处理抛出错误</h4><p>使用do和catch包裹try</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">do</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">try</span> <span class="token function">functionThatThrows</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//可能会发生错误的内容</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"hello"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token keyword">let</span> error <span class="token punctuation">&#123;</span>
+    <span class="token comment">//捕获和处理错误</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token class-name">CS193pError</span><span class="token punctuation">.</span><span class="token function">lateHomeWork</span><span class="token punctuation">(</span><span class="token keyword">let</span> daysLate<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">//捕获相关错误，获取daysLate的值</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token keyword">let</span> cs193pError <span class="token keyword">where</span> cs193pError <span class="token keyword">is</span> <span class="token class-name">CS193pError</span> <span class="token punctuation">&#123;</span>
+    <span class="token comment">//捕获所有CS193p错误</span>
+<span class="token punctuation">&#125;</span>
+<span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"keep going"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Persistence"><a href="#Persistence" class="headerlink" title="Persistence"></a>Persistence</h3><p>很多种方式去永久的保存文件</p>
+<ul>
+<li>iOS有一个Unix文件系统，可以使用FileManager在系统中存取文件</li>
+<li>可以存储在SQL数据库中，有一个完整框架 CoreData</li>
+<li>iCloud 使用CloudKit将文件存入iCloud</li>
+<li>UserDefaults 轻量级，存储用户偏好（调色板）</li>
+</ul>
+<h4 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h4><p>和访问Unix文件系统一样，以&#x2F;开头。但是不能访问大部分内容，只能读写访问自己程序沙盒中目录（sandbox）沙盒，更加安全。在删除应用时，会将沙盒内容一起删除，不会有残留。</p>
+<p>沙盒中目录：Application存放可执行文件、图片等，是个只读目录；Document存储用户保存的文件内容 ；Application Support需要存储在文件系统中，但用户不视为文件eg.调色盘；Caches 不会备份</p>
+<h5 id="如何访问沙盒目录"><a href="#如何访问沙盒目录" class="headerlink" title="如何访问沙盒目录"></a>如何访问沙盒目录</h5><p>使用FileManager的URL来访问沙盒中的文件，通常使用共享的的FileManager.default，因为是线程安全的，所以适合在主队列中访问沙盒</p>
+<p>获取特定目录的url</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> manager <span class="token operator">=</span> <span class="token class-name">FileManager</span><span class="token punctuation">.</span><span class="token keyword">default</span>
+<span class="token keyword">let</span> url <span class="token operator">=</span> manager<span class="token punctuation">.</span><span class="token function">urls</span><span class="token punctuation">(</span><span class="token keyword">for</span><span class="token punctuation">:</span> <span class="token punctuation">.</span>documentDirectory<span class="token punctuation">,</span> <span class="token keyword">in</span><span class="token punctuation">:</span> userDomainMask<span class="token punctuation">)</span><span class="token punctuation">.</span>first <span class="token comment">//返回复数，只选择第一个</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>访问文件系统时，总是开始于一个特定目录的url</p>
+<p>url的函数，添加内容到指定url</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">appendingPathComponent</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token constant">URL</span> <span class="token comment">//添加组件（文件）到self 返回url</span>
+<span class="token keyword">func</span> <span class="token function-definition function">appendingPathExtension</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token constant">URL</span> <span class="token comment">//添加扩展 .jpg</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>查找特定url中内容</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">var</span> isFileURL<span class="token punctuation">:</span> <span class="token class-name">Bool</span> <span class="token comment">//指向文件</span>
+<span class="token keyword">func</span> <span class="token function-definition function">resourceValues</span><span class="token punctuation">(</span><span class="token keyword">for</span> key<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token class-name">URLResourceKey</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token operator">-></span> <span class="token punctuation">[</span><span class="token class-name">URLResourceKey</span><span class="token punctuation">:</span><span class="token keyword">Any</span><span class="token punctuation">]</span><span class="token operator">?</span>
+<span class="token comment">//.creationDataKey .isDirectoryKey .fileSizeKey</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>可以查找文件创建时间、大小等信息</p>
+<h5 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h5><p>通过Data向文件系统中的文件写入实际内容，是数据结构，以byte的方式将数据读取写入。</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">Data</span> <span class="token keyword">init</span><span class="token punctuation">(</span>contentsOf<span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token punctuation">,</span> options<span class="token punctuation">:</span> <span class="token class-name">Data</span><span class="token punctuation">.</span><span class="token class-name">ReadingOptions</span><span class="token punctuation">)</span> <span class="token keyword">throws</span>
+<span class="token comment">//根据url来获取数据二进制数据</span>
+<span class="token keyword">func</span> <span class="token function-definition function">write</span><span class="token punctuation">(</span>to url<span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token punctuation">,</span> options<span class="token punctuation">:</span> <span class="token class-name">Data</span><span class="token punctuation">.</span><span class="token class-name">WritingOptions</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token operator">-></span> <span class="token class-name">Bool</span>
+<span class="token comment">//options .atomic .withoutOverwriting</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="存档-Archiving"><a href="#存档-Archiving" class="headerlink" title="存档 Archiving"></a>存档 Archiving</h4><h5 id="Codable协议"><a href="#Codable协议" class="headerlink" title="Codable协议"></a>Codable协议</h5><p>符合Codable协议，可以变成一团放入文件系统。任何结构变量本身都可以编码，Swift可以自动实现，但是枚举有关联值的不能自动编码<strong>（Swift5.5好像可以了）</strong>，需要手动实现。</p>
+<p>标记了协议后，将数据转换成blob的方法最常用的就是将其编码成某种文件格式(JSON)。互联网上的API获取大量使用数据都是JSON格式。</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> object<span class="token punctuation">:</span> <span class="token class-name">MyType</span> <span class="token operator">=</span> <span class="token operator">...</span> <span class="token comment">//MyType要可编码</span>
+<span class="token keyword">let</span> jsonData<span class="token punctuation">:</span> <span class="token class-name">Data</span><span class="token operator">?</span> <span class="token operator">=</span> <span class="token keyword">try</span><span class="token operator">?</span> <span class="token class-name">JSONEncoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">encode</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span>
+<span class="token comment">//一个使用JSON表示的Data实例作为blob</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>编码有抛出，你能通过catch方便的找到错误。</p>
+<p>JSON是一个文本格式，可以查看内容，把jsonData作为内容返回并通过string转换成字符串</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> jsonData <span class="token operator">=</span> <span class="token class-name">String</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> jsonData<span class="token operator">!</span><span class="token punctuation">,</span> encoding<span class="token punctuation">:</span> <span class="token punctuation">.</span>utf8<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>也可以写入jsonData到文件和将JSON解码成数据类型</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">try</span> jsonData<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>to<span class="token punctuation">:</span> url<span class="token punctuation">)</span> <span class="token comment">//throws</span>
+<span class="token keyword">if</span> <span class="token keyword">let</span> myObject<span class="token punctuation">:</span> <span class="token class-name">MyType</span> <span class="token operator">=</span> <span class="token keyword">try</span><span class="token operator">?</span> <span class="token class-name">JSONDecoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span><span class="token class-name">MyType</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">,</span> from<span class="token punctuation">:</span> jsonData<span class="token operator">!</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>关于解码的错误处理</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">do</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> object <span class="token operator">=</span> <span class="token keyword">try</span> <span class="token class-name">JSONDecoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span><span class="token class-name">MyType</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">,</span> from<span class="token punctuation">:</span> jsonData<span class="token operator">!</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token class-name">DecodingError</span><span class="token punctuation">.</span><span class="token function">keyNotFound</span><span class="token punctuation">(</span><span class="token keyword">let</span> key<span class="token punctuation">,</span> <span class="token keyword">let</span> context<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"couldn't find key </span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">key</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string"> in JSON: </span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">context<span class="token punctuation">.</span>debugDescription</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token class-name">DecodingError</span><span class="token punctuation">.</span><span class="token function">valueNotFound</span><span class="token punctuation">(</span><span class="token keyword">let</span> type<span class="token punctuation">,</span> <span class="token keyword">let</span> context<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token class-name">DecodingError</span><span class="token punctuation">.</span><span class="token function">typeMismatch</span><span class="token punctuation">(</span><span class="token keyword">let</span> type<span class="token punctuation">,</span> <span class="token keyword">let</span> context<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    
+<span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token class-name">DecodingError</span><span class="token punctuation">.</span><span class="token function">dataCorrupted</span><span class="token punctuation">(</span><span class="token keyword">let</span> context<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h5><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">struct</span> <span class="token class-name">MyType</span><span class="token punctuation">:</span> <span class="token class-name">Codable</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> someData<span class="token punctuation">:</span> <span class="token class-name">Date</span>
+    <span class="token keyword">var</span> someString<span class="token punctuation">:</span> <span class="token class-name">String</span>
+    <span class="token keyword">var</span> other<span class="token punctuation">:</span> <span class="token class-name">SomeOtherType</span>
+    <span class="token comment">//修改JSON的冒号左面的内容，在JSON中key使用的都是小写字母，单词间使用下划线分割</span>
+    <span class="token keyword">private</span> <span class="token keyword">enum</span> <span class="token class-name">CodingKeys</span><span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">CodingKey</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">case</span> someData <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"some_date"</span></span>
+        <span class="token keyword">case</span> other
+    <span class="token punctuation">&#125;</span>
+    
+    <span class="token keyword">init</span><span class="token punctuation">(</span>from decoder<span class="token punctuation">:</span> <span class="token class-name">Decoder</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span> <span class="token comment">//解码</span>
+        <span class="token keyword">let</span> container <span class="token operator">=</span> <span class="token keyword">try</span> decoder<span class="token punctuation">.</span><span class="token function">container</span><span class="token punctuation">(</span>keyedBy<span class="token punctuation">:</span> <span class="token class-name">CodingKeys</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span>
+        <span class="token comment">//抓住容器</span>
+        someDate <span class="token operator">=</span> <span class="token keyword">try</span> container<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span><span class="token class-name">Date</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">,</span> forKey<span class="token punctuation">:</span> <span class="token punctuation">.</span>someDate<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token comment">//编码</span>
+    <span class="token keyword">func</span> <span class="token function-definition function">encode</span><span class="token punctuation">(</span>to encoder<span class="token punctuation">:</span> <span class="token class-name">Encoder</span><span class="token punctuation">)</span> <span class="token keyword">throws</span><span class="token punctuation">&#123;</span>
+        <span class="token keyword">var</span> container <span class="token operator">=</span> encoder<span class="token punctuation">.</span><span class="token function">container</span><span class="token punctuation">(</span>keyedBy<span class="token punctuation">:</span> <span class="token class-name">CodingKeys</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span>
+        <span class="token keyword">try</span> container<span class="token punctuation">.</span><span class="token function">encode</span><span class="token punctuation">(</span>someDate<span class="token punctuation">,</span> forKey<span class="token punctuation">:</span> <span class="token punctuation">.</span>someDate<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="UserDefaults"><a href="#UserDefaults" class="headerlink" title="UserDefaults"></a>UserDefaults</h4><p>用户默认值 是个强大的系统，有的时候会和文件系统结合起来。对于轻量级数据、用户偏好内容的存储。</p>
+<h5 id="Property-List"><a href="#Property-List" class="headerlink" title="Property List"></a>Property List</h5><p>UserDefaults只能在属性列表(Property List)中存储内容，列表属性不是协议或者结构体等，是个概念，只能由字符串、正数、布尔值、浮点数、日期、数据、数组或者字典组成。如果还有别的类型的内容，就不再视为属性列表，不能放进UserDefaults中。</p>
+<p>我们可以把任何可编码的内容放进Data。</p>
+<h5 id="Any"><a href="#Any" class="headerlink" title="Any"></a>Any</h5><p>Any是无类型。Swift是一个强类型语言，这个很反Swift，但是我们会尽量忽略Any。</p>
+<h5 id="Example-1"><a href="#Example-1" class="headerlink" title="Example"></a>Example</h5><p>使用时，首先需要一个UserDefaults的实例</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> defaults <span class="token operator">=</span> <span class="token class-name">UserDefaults</span><span class="token punctuation">.</span>standard
+<span class="token comment">//存储内容</span>
+defaults<span class="token punctuation">.</span><span class="token keyword">set</span><span class="token punctuation">(</span>object<span class="token punctuation">,</span> forKeys<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"SomeKey"</span></span><span class="token punctuation">)</span> <span class="token comment">//object必须是Property List</span>
+<span class="token function">setDouble</span><span class="token punctuation">(</span><span class="token number">31.1</span><span class="token punctuation">,</span> forKeys<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">""</span></span><span class="token punctuation">)</span> <span class="token comment">// 可以保证存储的是double</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>获取数据</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> i<span class="token punctuation">:</span> <span class="token class-name">Int</span> <span class="token operator">=</span> defaults<span class="token punctuation">.</span><span class="token function">integer</span><span class="token punctuation">(</span>forKeys<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"MyInteger"</span></span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>如果返回的类型是一个数组，将会返回<code>Array&lt;Any&gt;</code>，因为Swift不能直接对Any处理，所以要把Array使用as转换成能处理的内容。</p>
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><h4 id="使文档持久化"><a href="#使文档持久化" class="headerlink" title="使文档持久化"></a>使文档持久化</h4><p>一般不在View中做持久化，大多数在ViewModel中进行持久化。也有可能在Model中，甚至做一个持久化引擎类似SQL数据库等。</p>
+<p>在viewmodel中添加save函数，函数中先得到一些数据，然后获取数据并写入到url中。需要知道将在Data中内容的类型，以JSON的格式数据化。所以我们需要把EmojiArtModel转换成JSON表示，并以某种方式放进data中，然后写到url。</p>
+<p>在Model中添加将自己转换成JSON的函数</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"> <span class="token comment">//保存文件,url为文件url,在本地系统中的某个位置</span>
+<span class="token keyword">private</span> <span class="token keyword">func</span> <span class="token function-definition function">save</span><span class="token punctuation">(</span>to url<span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+
+    <span class="token keyword">let</span> thisfunction <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation"><span class="token class-name">String</span><span class="token punctuation">(</span>describing<span class="token punctuation">:</span> <span class="token keyword">self</span><span class="token punctuation">)</span></span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">.</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation"><span class="token literal constant">#function</span></span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span> <span class="token comment">// EmojiArtDocument.save(to:)</span>
+    <span class="token keyword">do</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">let</span> data<span class="token punctuation">:</span> <span class="token class-name">Data</span> <span class="token operator">=</span> <span class="token keyword">try</span> emojiArt<span class="token punctuation">.</span><span class="token function">json</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">thisfunction</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string"> json = </span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation"><span class="token class-name">String</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> data<span class="token punctuation">,</span> encoding<span class="token punctuation">:</span> <span class="token punctuation">.</span>utf8<span class="token punctuation">)</span> <span class="token operator">??</span> <span class="token string-literal"><span class="token string">"nil"</span></span></span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span> <span class="token comment">//如果是图象等 为nil</span>
+        <span class="token keyword">try</span> data<span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>to<span class="token punctuation">:</span> url<span class="token punctuation">)</span>
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">thisfunction</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string"> success!"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token keyword">let</span> encodingError <span class="token keyword">where</span> encodingError <span class="token keyword">is</span> <span class="token class-name">EncodingError</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">thisfunction</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string"> coundn't encode EmojiArt as JSON because </span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">encodingError<span class="token punctuation">.</span>localizedDescription</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span> <span class="token comment">//本地化当地语言</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">catch</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">print</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"</span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">thisfunction</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string"> error = </span><span class="token interpolation-punctuation punctuation">\(</span><span class="token interpolation">error</span><span class="token interpolation-punctuation punctuation">)</span><span class="token string">"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>实现自动保存文件</p>
+<p>获取文件目录时，在iOS中in参数的内容永远是.userDomainMask</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">private</span> <span class="token keyword">struct</span>  <span class="token class-name">Autosave</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">static</span> <span class="token keyword">let</span> filename <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"Autosaved.emojiart"</span></span> <span class="token comment">//后期做成扩展名,现在只是文件名</span>
+    <span class="token keyword">static</span> <span class="token keyword">var</span> url<span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token operator">?</span> <span class="token punctuation">&#123;</span>
+        <span class="token comment">//在iOS中 始终是.userDomainMask</span>
+        <span class="token keyword">let</span> documentDirectory <span class="token operator">=</span> <span class="token class-name">FileManager</span><span class="token punctuation">.</span><span class="token keyword">default</span><span class="token punctuation">.</span><span class="token function">urls</span><span class="token punctuation">(</span><span class="token keyword">for</span><span class="token punctuation">:</span> <span class="token punctuation">.</span>documentDirectory<span class="token punctuation">,</span> <span class="token keyword">in</span><span class="token punctuation">:</span> <span class="token punctuation">.</span>userDomainMask<span class="token punctuation">)</span><span class="token punctuation">.</span>first 
+        <span class="token comment">//在得到的url中添加组件</span>
+        <span class="token keyword">return</span> documentDirectory<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">appendingPathComponent</span><span class="token punctuation">(</span>filename<span class="token punctuation">)</span> 
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">private</span> <span class="token keyword">func</span> <span class="token function-definition function">autosave</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token keyword">let</span> url <span class="token operator">=</span> <span class="token class-name">Autosave</span><span class="token punctuation">.</span>url <span class="token punctuation">&#123;</span>
+        <span class="token function">save</span><span class="token punctuation">(</span>to<span class="token punctuation">:</span> url<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<blockquote>
+<p>带有关联值的枚举内，自定义编码 Swift5.5能自动编码了，不需要手动进行，但是把代码摆上吧</p>
+</blockquote>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token comment">//自定义编码...</span>
+<span class="token keyword">init</span><span class="token punctuation">(</span>from decoder<span class="token punctuation">:</span> <span class="token class-name">Decoder</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> container <span class="token operator">=</span> <span class="token keyword">try</span> decoder<span class="token punctuation">.</span><span class="token function">container</span><span class="token punctuation">(</span>keyedBy<span class="token punctuation">:</span> <span class="token class-name">CodingKeys</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span>
+    <span class="token keyword">if</span> <span class="token keyword">let</span> url <span class="token operator">=</span> <span class="token keyword">try</span><span class="token operator">?</span> container<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span><span class="token constant">URL</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">,</span> forKey<span class="token punctuation">:</span> <span class="token punctuation">.</span>url<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">self</span> <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token function">url</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token keyword">let</span> imageData <span class="token operator">=</span> <span class="token keyword">try</span><span class="token operator">?</span> container<span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span><span class="token class-name">Data</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">,</span> forKey<span class="token punctuation">:</span> <span class="token punctuation">.</span>imageData<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">self</span> <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token function">imageData</span><span class="token punctuation">(</span>imageData<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">self</span> <span class="token operator">=</span> <span class="token punctuation">.</span>blank
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">func</span> <span class="token function-definition function">encode</span><span class="token punctuation">(</span>to encoder<span class="token punctuation">:</span> <span class="token class-name">Encoder</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> container <span class="token operator">=</span> encoder<span class="token punctuation">.</span><span class="token function">container</span><span class="token punctuation">(</span>keyedBy<span class="token punctuation">:</span> <span class="token class-name">CodingKeys</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span>
+    <span class="token keyword">switch</span> <span class="token keyword">self</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">case</span> <span class="token punctuation">.</span><span class="token function">url</span><span class="token punctuation">(</span><span class="token keyword">let</span> url<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">try</span> container<span class="token punctuation">.</span><span class="token function">encode</span><span class="token punctuation">(</span>url<span class="token punctuation">,</span> forKey<span class="token punctuation">:</span> <span class="token punctuation">.</span>url<span class="token punctuation">)</span>
+        <span class="token keyword">case</span> <span class="token punctuation">.</span><span class="token function">imageData</span><span class="token punctuation">(</span><span class="token keyword">let</span> data<span class="token punctuation">)</span><span class="token punctuation">:</span> <span class="token keyword">try</span> container<span class="token punctuation">.</span><span class="token function">encode</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> forKey<span class="token punctuation">:</span> <span class="token punctuation">.</span>imageData<span class="token punctuation">)</span>
+        <span class="token keyword">case</span> <span class="token punctuation">.</span>blank<span class="token punctuation">:</span> <span class="token keyword">break</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">enum</span> <span class="token class-name">CodingKeys</span><span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">CodingKey</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">case</span> url <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"theURL"</span></span>
+    <span class="token keyword">case</span> imageData
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>加载自动保存的文件</p>
+<p>对model进行初始化</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">init</span><span class="token punctuation">(</span>url<span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> data <span class="token operator">=</span> <span class="token keyword">try</span> <span class="token class-name">Data</span><span class="token punctuation">(</span>contentsOf<span class="token punctuation">:</span> url<span class="token punctuation">)</span> <span class="token comment">//初始化Data,通过文件地址获取文件内Data</span>
+    <span class="token keyword">self</span> <span class="token operator">=</span> <span class="token keyword">try</span> <span class="token class-name">EmojiArtModel</span><span class="token punctuation">(</span>json<span class="token punctuation">:</span> data<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">init</span><span class="token punctuation">(</span>json<span class="token punctuation">:</span> <span class="token class-name">Data</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">self</span> <span class="token operator">=</span> <span class="token keyword">try</span> <span class="token class-name">JSONDecoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span><span class="token class-name">EmojiArtModel</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">,</span> from<span class="token punctuation">:</span> json<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>swift</tag>
+        <tag>cs193p</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CS193p_note6 Protocols Shapes</title>
+    <url>/2022/03/05/cs193p-note6/</url>
+    <content><![CDATA[<h3 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h3><p>协议是一个精简的<code>class</code>或<code>struct</code></p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">protocol</span> <span class="token class-name">Moveable</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">func</span> <span class="token function-definition function">move</span><span class="token punctuation">(</span>by<span class="token punctuation">:</span> <span class="token class-name">Int</span><span class="token punctuation">)</span>
+    <span class="token keyword">var</span> hasMoved<span class="token punctuation">:</span> <span class="token class-name">Bool</span> <span class="token punctuation">&#123;</span> <span class="token keyword">get</span> <span class="token punctuation">&#125;</span>
+    <span class="token keyword">var</span> distanceFromStart<span class="token punctuation">:</span> <span class="token class-name">Int</span> <span class="token punctuation">&#123;</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>若协议要求一个属性为可读和可写的，那么该属性要求不能用常量存储属性或只读计算属性来满足。若协议只要求属性为可读的，那么任何种类的属性都能满足这个要求，而且如果你的代码需要的话，该属性也可以是可写的。</p>
+<span id="more"></span>
+
+<p>func和var没有任何实现</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">struct</span> <span class="token class-name">ProtableThing</span><span class="token punctuation">:</span> <span class="token class-name">Moveable</span> <span class="token punctuation">&#123;</span>
+	<span class="token comment">//必须执行move(by: Int),hasMoved,distanceFromStart</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">protocol</span> <span class="token class-name">Vehicle</span><span class="token punctuation">:</span> <span class="token class-name">Moveable</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> passengerCount<span class="token punctuation">:</span> <span class="token class-name">Int</span> <span class="token punctuation">&#123;</span> <span class="token keyword">get</span> <span class="token keyword">set</span><span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+
+<span class="token keyword">class</span> <span class="token class-name">Car</span><span class="token punctuation">:</span> <span class="token class-name">Vehiche</span><span class="token punctuation">,</span> <span class="token class-name">Leasable</span> <span class="token punctuation">&#123;</span>
+    
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">travelAround</span><span class="token punctuation">(</span>using moveable<span class="token punctuation">:</span> <span class="token class-name">Moveable</span><span class="token punctuation">)</span>
+<span class="token keyword">let</span> foo <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token class-name">Moveable</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>让don’t care变得有一点在乎 <code>struct MemoryGame&lt;CardContent&gt; where CardContent: Equatable</code></p>
+<p>将extension扩展为仅使用某些事情，也可以限制个别功能</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">init</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> <span class="token class-name">Data</span><span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">Date</span><span class="token punctuation">:</span> <span class="token class-name">Collection</span><span class="token punctuation">,</span> <span class="token class-name">Data</span><span class="token punctuation">.</span><span class="token class-name">Element</span><span class="token punctuation">:</span> <span class="token class-name">Identifiable</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>只为接收到特定类型数据进行初始化</p>
+<p>&#x3D;&#x3D;协议可以通过创建extension来实施，可以在扩展中添加默认实施&#x3D;&#x3D;</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">filter</span><span class="token punctuation">(</span><span class="token omit keyword">_</span> isInclude<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token class-name">Element</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">Bool</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">Array</span><span class="token operator">&lt;</span><span class="token class-name">Element</span><span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>适用于数组、字符串、范围等，被添加到基础库中，作为Sequence协议的扩展</p>
+<h4 id="Identifiable"><a href="#Identifiable" class="headerlink" title="Identifiable"></a>Identifiable</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">protocol</span> <span class="token class-name">Identifiable</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">associatedtype</span> <span class="token constant">ID</span><span class="token punctuation">:</span> <span class="token class-name">Hashable</span> <span class="token comment">//关联类型</span>
+    <span class="token keyword">var</span> id<span class="token punctuation">:</span> <span class="token constant">ID</span> <span class="token punctuation">&#123;</span> <span class="token keyword">get</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="Hashable"><a href="#Hashable" class="headerlink" title="Hashable"></a>Hashable</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">protocol</span> <span class="token class-name">Hashable</span><span class="token punctuation">:</span> <span class="token class-name">Equatable</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">func</span> <span class="token function-definition function">hash</span><span class="token punctuation">(</span>into hasher<span class="token punctuation">:</span> <span class="token keyword">inout</span> <span class="token class-name">Hasher</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="Equatable"><a href="#Equatable" class="headerlink" title="Equatable"></a>Equatable</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">protocol</span> <span class="token class-name">Equatable</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">static</span> <span class="token keyword">func</span> <span class="token operator">==</span><span class="token punctuation">(</span>lhs<span class="token punctuation">:</span> <span class="token keyword">Self</span><span class="token punctuation">,</span> rhs<span class="token punctuation">:</span> <span class="token keyword">Self</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">Bool</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>自引用协议不能作为普通类型使用</p>
+<h3 id="Shape"><a href="#Shape" class="headerlink" title="Shape"></a>Shape</h3><p>Shape is a <code>protocol</code> that inherits from View</p>
+<p>RoundedRectangle,Circle,Capsule</p>
+<p> 默认被填满颜色，可以通过<code>.stock()</code>和<code>.fill()</code>改变</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">fill</span><span class="token operator">&lt;</span><span class="token class-name">S</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token omit keyword">_</span> whatToFillWith<span class="token punctuation">:</span> <span class="token class-name">S</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token keyword">where</span> <span class="token class-name">S</span><span class="token punctuation">:</span> <span class="token class-name">ShapeStyle</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>创建自己的Shape</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">path</span><span class="token punctuation">(</span><span class="token keyword">in</span> rect<span class="token punctuation">:</span> <span class="token class-name">CGRect</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">Path</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> a <span class="token class-name">Path</span> 
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>能添加line、arc、berzier curve</p>
+<p>绘图坐标系，非笛卡尔坐标系，零坐标在左上角，顺逆时针会相反</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>swift</tag>
+        <tag>cs193p</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>cs193p_note7 ViewModifier Animation</title>
     <url>/2022/04/15/cs193p-note7/</url>
     <content><![CDATA[<h3 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h3><ul>
@@ -1027,213 +1287,6 @@ myview<span class="token punctuation">.</span><span class="token function">onLon
 <p>创建动画时注意三个原则，可以通过opacity使内容在屏幕上隐藏。</p>
 <p>animation参考：<a href="https://juejin.cn/post/7067340603494924296">https://juejin.cn/post/7067340603494924296</a></p>
 ]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>swift</tag>
-        <tag>cs193p</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CS193p_note6 Protocols Shapes</title>
-    <url>/2022/03/05/cs193p-note6/</url>
-    <content><![CDATA[<h3 id="Protocol"><a href="#Protocol" class="headerlink" title="Protocol"></a>Protocol</h3><p>协议是一个精简的<code>class</code>或<code>struct</code></p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">protocol</span> <span class="token class-name">Moveable</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">func</span> <span class="token function-definition function">move</span><span class="token punctuation">(</span>by<span class="token punctuation">:</span> <span class="token class-name">Int</span><span class="token punctuation">)</span>
-    <span class="token keyword">var</span> hasMoved<span class="token punctuation">:</span> <span class="token class-name">Bool</span> <span class="token punctuation">&#123;</span> <span class="token keyword">get</span> <span class="token punctuation">&#125;</span>
-    <span class="token keyword">var</span> distanceFromStart<span class="token punctuation">:</span> <span class="token class-name">Int</span> <span class="token punctuation">&#123;</span> <span class="token keyword">get</span> <span class="token keyword">set</span> <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>若协议要求一个属性为可读和可写的，那么该属性要求不能用常量存储属性或只读计算属性来满足。若协议只要求属性为可读的，那么任何种类的属性都能满足这个要求，而且如果你的代码需要的话，该属性也可以是可写的。</p>
-<span id="more"></span>
-
-<p>func和var没有任何实现</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">struct</span> <span class="token class-name">ProtableThing</span><span class="token punctuation">:</span> <span class="token class-name">Moveable</span> <span class="token punctuation">&#123;</span>
-	<span class="token comment">//必须执行move(by: Int),hasMoved,distanceFromStart</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">protocol</span> <span class="token class-name">Vehicle</span><span class="token punctuation">:</span> <span class="token class-name">Moveable</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">var</span> passengerCount<span class="token punctuation">:</span> <span class="token class-name">Int</span> <span class="token punctuation">&#123;</span> <span class="token keyword">get</span> <span class="token keyword">set</span><span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-
-<span class="token keyword">class</span> <span class="token class-name">Car</span><span class="token punctuation">:</span> <span class="token class-name">Vehiche</span><span class="token punctuation">,</span> <span class="token class-name">Leasable</span> <span class="token punctuation">&#123;</span>
-    
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">travelAround</span><span class="token punctuation">(</span>using moveable<span class="token punctuation">:</span> <span class="token class-name">Moveable</span><span class="token punctuation">)</span>
-<span class="token keyword">let</span> foo <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token class-name">Moveable</span><span class="token punctuation">]</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>让don’t care变得有一点在乎 <code>struct MemoryGame&lt;CardContent&gt; where CardContent: Equatable</code></p>
-<p>将extension扩展为仅使用某些事情，也可以限制个别功能</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">init</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> <span class="token class-name">Data</span><span class="token punctuation">)</span> <span class="token keyword">where</span> <span class="token class-name">Date</span><span class="token punctuation">:</span> <span class="token class-name">Collection</span><span class="token punctuation">,</span> <span class="token class-name">Data</span><span class="token punctuation">.</span><span class="token class-name">Element</span><span class="token punctuation">:</span> <span class="token class-name">Identifiable</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>只为接收到特定类型数据进行初始化</p>
-<p>&#x3D;&#x3D;协议可以通过创建extension来实施，可以在扩展中添加默认实施&#x3D;&#x3D;</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">filter</span><span class="token punctuation">(</span><span class="token omit keyword">_</span> isInclude<span class="token punctuation">:</span> <span class="token punctuation">(</span><span class="token class-name">Element</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">Bool</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">Array</span><span class="token operator">&lt;</span><span class="token class-name">Element</span><span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>适用于数组、字符串、范围等，被添加到基础库中，作为Sequence协议的扩展</p>
-<h4 id="Identifiable"><a href="#Identifiable" class="headerlink" title="Identifiable"></a>Identifiable</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">protocol</span> <span class="token class-name">Identifiable</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">associatedtype</span> <span class="token constant">ID</span><span class="token punctuation">:</span> <span class="token class-name">Hashable</span> <span class="token comment">//关联类型</span>
-    <span class="token keyword">var</span> id<span class="token punctuation">:</span> <span class="token constant">ID</span> <span class="token punctuation">&#123;</span> <span class="token keyword">get</span> <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="Hashable"><a href="#Hashable" class="headerlink" title="Hashable"></a>Hashable</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">protocol</span> <span class="token class-name">Hashable</span><span class="token punctuation">:</span> <span class="token class-name">Equatable</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">func</span> <span class="token function-definition function">hash</span><span class="token punctuation">(</span>into hasher<span class="token punctuation">:</span> <span class="token keyword">inout</span> <span class="token class-name">Hasher</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="Equatable"><a href="#Equatable" class="headerlink" title="Equatable"></a>Equatable</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">protocol</span> <span class="token class-name">Equatable</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">static</span> <span class="token keyword">func</span> <span class="token operator">==</span><span class="token punctuation">(</span>lhs<span class="token punctuation">:</span> <span class="token keyword">Self</span><span class="token punctuation">,</span> rhs<span class="token punctuation">:</span> <span class="token keyword">Self</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">Bool</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>自引用协议不能作为普通类型使用</p>
-<h3 id="Shape"><a href="#Shape" class="headerlink" title="Shape"></a>Shape</h3><p>Shape is a <code>protocol</code> that inherits from View</p>
-<p>RoundedRectangle,Circle,Capsule</p>
-<p> 默认被填满颜色，可以通过<code>.stock()</code>和<code>.fill()</code>改变</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">fill</span><span class="token operator">&lt;</span><span class="token class-name">S</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token omit keyword">_</span> whatToFillWith<span class="token punctuation">:</span> <span class="token class-name">S</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token keyword">where</span> <span class="token class-name">S</span><span class="token punctuation">:</span> <span class="token class-name">ShapeStyle</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>创建自己的Shape</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">path</span><span class="token punctuation">(</span><span class="token keyword">in</span> rect<span class="token punctuation">:</span> <span class="token class-name">CGRect</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">Path</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> a <span class="token class-name">Path</span> 
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>能添加line、arc、berzier curve</p>
-<p>绘图坐标系，非笛卡尔坐标系，零坐标在左上角，顺逆时针会相反</p>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>swift</tag>
-        <tag>cs193p</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cs193p_note9_EmojiArt Drag and Drop Multithreading</title>
-    <url>/2022/05/04/cs193p-note9/</url>
-    <content><![CDATA[<h3 id="Collection-of-Identifiables"><a href="#Collection-of-Identifiables" class="headerlink" title="Collection of Identifiables"></a>Collection of Identifiables</h3><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">choose</span><span class="token punctuation">(</span><span class="token omit keyword">_</span> card<span class="token punctuation">:</span> <span class="token class-name">Card</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">if</span> <span class="token keyword">let</span> index <span class="token operator">=</span> cards<span class="token punctuation">.</span><span class="token function">firstIndex</span><span class="token punctuation">(</span><span class="token keyword">where</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> <span class="token short-argument">$0</span><span class="token punctuation">.</span>id <span class="token operator">==</span> card<span class="token punctuation">,</span>id<span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        cards<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">.</span>isFaceUp <span class="token operator">=</span> <span class="token boolean">true</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>Card是一个结构体，结构体是值类型，在传递时会被复制，所以想要改变卡片的isFaceUp需要获取索引，在数组中找到修改的位置。</p>
-<span id="more"></span>
-
-<p>在数组中存结构体时很常见，可以利用一个小函数解决。</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">index</span><span class="token punctuation">(</span>matching element<span class="token punctuation">:</span> <span class="token class-name">Element</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">Int</span><span class="token operator">?</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">return</span> <span class="token function">firstIndex</span><span class="token punctuation">(</span><span class="token keyword">where</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> <span class="token short-argument">$0</span><span class="token punctuation">.</span>id <span class="token operator">==</span> element<span class="token punctuation">.</span>id <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
-card<span class="token punctuation">.</span><span class="token function">index</span><span class="token punctuation">(</span>matching<span class="token punctuation">:</span> card<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>将函数放在扩展Array中（也适用于Set）</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">extension</span> <span class="token class-name">Array</span> <span class="token keyword">where</span> <span class="token class-name">Element</span><span class="token punctuation">:</span> <span class="token class-name">Identifiable</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">func</span> <span class="token function-definition function">index</span><span class="token punctuation">(</span>matching element<span class="token punctuation">:</span> <span class="token class-name">Element</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">Int</span><span class="token operator">?</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token function">firstIndex</span><span class="token punctuation">(</span><span class="token keyword">where</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> <span class="token short-argument">$0</span><span class="token punctuation">.</span>id <span class="token operator">==</span> element<span class="token punctuation">.</span>id <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>当然，我们也可以把代码放在Collection协议中，Set和Array都实现</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">extension</span> <span class="token class-name">Collection</span> <span class="token keyword">where</span> <span class="token class-name">Element</span><span class="token punctuation">:</span> <span class="token class-name">Identifiable</span> <span class="token punctuation">&#123;</span><span class="token comment">//不可变集合</span>
-    <span class="token keyword">func</span> <span class="token function-definition function">index</span><span class="token punctuation">(</span>matching element<span class="token punctuation">:</span> <span class="token class-name">Element</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">Self</span><span class="token punctuation">.</span><span class="token class-name">Index</span><span class="token operator">?</span> <span class="token punctuation">&#123;</span><span class="token comment">//索引不一定是Int，是个泛型</span>
-        <span class="token function">firstIndex</span><span class="token punctuation">(</span><span class="token keyword">where</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> <span class="token short-argument">$0</span><span class="token punctuation">.</span>id <span class="token operator">==</span> element<span class="token punctuation">.</span>id <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-    <span class="token comment">//Collection中不包括remove，所以把内容添加到RangeReplaceableCollection</span>
-<span class="token keyword">extension</span> <span class="token class-name">RangeReplaceableCollection</span> <span class="token keyword">where</span> <span class="token class-name">Element</span><span class="token punctuation">:</span> <span class="token class-name">Identifiable</span> <span class="token punctuation">&#123;</span><span class="token comment">//可变集合</span>
-    <span class="token keyword">mutating</span> <span class="token keyword">func</span> <span class="token function-definition function">remove</span><span class="token punctuation">(</span><span class="token omit keyword">_</span> element<span class="token punctuation">:</span> <span class="token class-name">Element</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> <span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token function">index</span><span class="token punctuation">(</span>matching<span class="token punctuation">:</span> element<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-            <span class="token function">remove</span><span class="token punctuation">(</span>at<span class="token punctuation">:</span> index<span class="token punctuation">)</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>RangeReplaceCollection可以添加下标，可以使用数组下标或可识别的集合变成可识别的，<code>cards[card].isFaceUp = true</code></p>
-<h3 id="Color-amp-UIColor-amp-CGColor"><a href="#Color-amp-UIColor-amp-CGColor" class="headerlink" title="Color&amp;UIColor&amp;CGColor"></a>Color&amp;UIColor&amp;CGColor</h3><h4 id="Color"><a href="#Color" class="headerlink" title="Color"></a>Color</h4><ul>
-<li>用来指定颜色 <code>.foregroundColor(Color.green)</code></li>
-<li>作为ShapeStyle，填充，<code>.fill(Color.blue)</code></li>
-<li>像视图一样，<code>Color.white</code></li>
-</ul>
-<h4 id="UIColor"><a href="#UIColor" class="headerlink" title="UIColor"></a>UIColor</h4><ul>
-<li>有很多API，能获取并调整RGB，颜色饱和度，亮度</li>
-<li>拥有UIColor，可以用Color使用，<code>Color(uiColor: )</code></li>
-</ul>
-<h4 id="CGColor"><a href="#CGColor" class="headerlink" title="CGColor"></a>CGColor</h4><ul>
-<li>Core Graphic中基础的颜色表示</li>
-<li>使用<code>color.cgColor</code>表示 不能保证每一个都能被表示</li>
-<li>如果将Color变成UIColor可能会使用</li>
-</ul>
-<h3 id="Image-amp-UIImage"><a href="#Image-amp-UIImage" class="headerlink" title="Image&amp;UIImage"></a>Image&amp;UIImage</h3><h4 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h4><ul>
-<li>主要是一个视图</li>
-<li>不是容纳图片的类型，是显示图片的视图</li>
-<li>可以在Assets.xcassets中访问图片 <code>Image(_ name: String)</code></li>
-<li>使用<code>Image(systemName:)</code>创建SF符号，使用<code>.imageScale()</code>调整SF符号大小，SF视图受字体影响，可以当蒙版使用</li>
-</ul>
-<h4 id="UIImage"><a href="#UIImage" class="headerlink" title="UIImage"></a>UIImage</h4><ul>
-<li>能缩放调整大小等，是用来存储图片的变量</li>
-<li>使用<code>Image(uiImage:)</code>来显示</li>
-</ul>
-<h3 id="Drag-and-Drop"><a href="#Drag-and-Drop" class="headerlink" title="Drag and Drop"></a>Drag and Drop</h3><p>从一个应用拖到另一个应用传输数据，从Safari拖动图片到app。核心类是<code>NSItemProvider</code>类，进程之间的数据传输。</p>
-<p>便利地转移不同数据类型</p>
-<ul>
-<li>NSAttributedString具有格式的字符串  NSString</li>
-<li>NSURL</li>
-<li>UIImage UIColor</li>
-</ul>
-<p>使用连接数据类型和NS类型，String as NSString</p>
-<h3 id="Dome"><a href="#Dome" class="headerlink" title="Dome"></a>Dome</h3><h4 id="拖放"><a href="#拖放" class="headerlink" title="拖放"></a>拖放</h4><p>借助OC中内容完成拖放，使用as转换数据类型，NSItemProvider将数据提供给别人</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">Text</span><span class="token punctuation">(</span>emoji<span class="token punctuation">)</span>
-	<span class="token punctuation">.</span>onDrag <span class="token punctuation">&#123;</span> <span class="token class-name">NSItemProvider</span><span class="token punctuation">(</span>object<span class="token punctuation">:</span> emoji <span class="token keyword">as</span> <span class="token class-name">NSString</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>放下时，需要将整个Vstack下放置drop</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token comment">//of后添加可放下的类型</span>
-<span class="token punctuation">.</span><span class="token function">onDrop</span><span class="token punctuation">(</span>of<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">.</span>plainText<span class="token punctuation">]</span><span class="token punctuation">,</span> isTargeted<span class="token punctuation">:</span> <span class="token nil constant">nil</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> providers<span class="token punctuation">,</span> location <span class="token keyword">in</span>
-	<span class="token keyword">return</span> <span class="token function">drop</span><span class="token punctuation">(</span>providers<span class="token punctuation">:</span> providers<span class="token punctuation">,</span> at<span class="token punctuation">:</span> location<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span>
-<span class="token keyword">private</span> <span class="token keyword">func</span> <span class="token function-definition function">drop</span><span class="token punctuation">(</span>providers<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token class-name">NSItemProvider</span><span class="token punctuation">]</span><span class="token punctuation">,</span> at location<span class="token punctuation">:</span> <span class="token class-name">CGPoint</span><span class="token punctuation">,</span> <span class="token keyword">in</span> geometry<span class="token punctuation">:</span> <span class="token class-name">GeometryProxy</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">Bool</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">return</span> providers<span class="token punctuation">.</span><span class="token function">loadObjects</span><span class="token punctuation">(</span>ofType<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> string <span class="token keyword">in</span> <span class="token comment">//提供者是否有字符串,将异步操作内容,因为提供者可能采用多线程提供信息,脱离主线程</span>
-		<span class="token keyword">if</span> <span class="token keyword">let</span> emoji <span class="token operator">=</span> string<span class="token punctuation">.</span>first<span class="token punctuation">,</span> emoji<span class="token punctuation">.</span>isEmoji <span class="token punctuation">&#123;</span>
-			document<span class="token punctuation">.</span><span class="token function">addEmoji</span><span class="token punctuation">(</span>
-				<span class="token class-name">String</span><span class="token punctuation">(</span>emoji<span class="token punctuation">)</span><span class="token punctuation">,</span>
-				at<span class="token punctuation">:</span> <span class="token function">convertToEmojiCoordinates</span><span class="token punctuation">(</span>location<span class="token punctuation">,</span> <span class="token keyword">in</span><span class="token punctuation">:</span> geometry<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">//将CGPoint转换成元组</span>
-				size<span class="token punctuation">:</span> defaultEmojiFontSize<span class="token punctuation">)</span>
-		<span class="token punctuation">&#125;</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="多线程-Multithreading"><a href="#多线程-Multithreading" class="headerlink" title="多线程 Multithreading"></a>多线程 Multithreading</h3><p>从浏览器找到图片拖进去，但是从互联网下载图片可能需要几秒钟，可能会影响UI响应。</p>
-<p>UI需要响应用户内容，但有些操作需要比较长的时间，我们需要在不同的线程上执行操作，才能保证UI响应</p>
-<h4 id="线程-treads"><a href="#线程-treads" class="headerlink" title="线程 treads"></a>线程 treads</h4><p>可以指定线程用于哪些代码，快速切换线程看起来像同时在运行。有一些线程拥有更高的优先级</p>
-<p>使用队列管理复杂的线程</p>
-<h4 id="Queues-Closures"><a href="#Queues-Closures" class="headerlink" title="Queues Closures"></a>Queues Closures</h4><p>队列只是一堆排队等待线程执行的代码块。指定在队列里等待的代码块是闭包。</p>
-<p>多线程API的核心是&#x3D;&#x3D;将闭包放进队列&#x3D;&#x3D;</p>
-<h4 id="Main-Queue"><a href="#Main-Queue" class="headerlink" title="Main Queue"></a>Main Queue</h4><p>最重要的队列是main queue，是包含所有可能破坏UI界面的代码块，所有的UI的操作都需要主队列</p>
-<p>系统使用单线程执行处理所有在主队列中的代码块，所以可以使用主队列作为同步点(synchronize)。可以对数据结构的写入在主队列，你的读取可以发生在任何队列。</p>
-<h4 id="Background-Queues"><a href="#Background-Queues" class="headerlink" title="Background Queues"></a>Background Queues</h4><p>有一堆后台队列用来执行长期的、非UI任务，例如请求网络、机器学习。</p>
-<p>系统有一堆可用的线程执行后台队列上的代码块，可以并行执行</p>
-<h4 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h4><p>处理队列的基础API是GCD(Grand Central Dispatch)</p>
-<p>基础功能</p>
-<ul>
-<li>访问队列</li>
-<li>将一段代码添加到队列中</li>
-</ul>
-<h4 id="创建一个队列"><a href="#创建一个队列" class="headerlink" title="创建一个队列"></a>创建一个队列</h4><p>main queue是DispatchQueue上的静态变量</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span>main <span class="token comment">//所有的UI代码必须放在这里发布</span>
-<span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span><span class="token function">global</span><span class="token punctuation">(</span>qos<span class="token punctuation">:</span> <span class="token class-name">QoS</span><span class="token punctuation">)</span> <span class="token comment">//服务质量</span>
-qos
-	<span class="token punctuation">.</span>userInteractive <span class="token comment">//几乎和主队列一样重要，与用户进行实时交互，计算内容更新到UI上，速度最快</span>
-	<span class="token punctuation">.</span>userInitiated   <span class="token comment">//用户触发级，用户点击按钮，在网上点击下载等现在马上要做的内容 UI界面依然活跃</span>
-	<span class="token punctuation">.</span>utility	  	 <span class="token comment">//实用级 清理数据库等，不需要马上去做</span>
-	<span class="token punctuation">.</span>background		 <span class="token comment">//背景级 自动任务或定时处理任务等</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="在队列上放置闭包"><a href="#在队列上放置闭包" class="headerlink" title="在队列上放置闭包"></a>在队列上放置闭包</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> queue <span class="token operator">=</span> <span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span>main
-queue<span class="token punctuation">.</span><span class="token keyword">async</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">&#125;</span> <span class="token comment">//异步</span>
-queue<span class="token punctuation">.</span>sync <span class="token punctuation">&#123;</span> <span class="token punctuation">&#125;</span><span class="token comment">//同步</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>同步，代码执行完才会返回，阻塞当前线程，不在主队列中使用</p>
-<p>异步，将代码块放到队列中，立刻返回</p>
-<p>可以把延时放在队列中</p>
-<h4 id="URLSession"><a href="#URLSession" class="headerlink" title="URLSession"></a>URLSession</h4>]]></content>
       <categories>
         <category>iOS</category>
       </categories>
@@ -1371,6 +1424,140 @@ queue<span class="token punctuation">.</span>sync <span class="token punctuation
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 ]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>swift</tag>
+        <tag>cs193p</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs193p_note9_EmojiArt Drag and Drop Multithreading</title>
+    <url>/2022/05/04/cs193p-note9/</url>
+    <content><![CDATA[<h3 id="Collection-of-Identifiables"><a href="#Collection-of-Identifiables" class="headerlink" title="Collection of Identifiables"></a>Collection of Identifiables</h3><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">choose</span><span class="token punctuation">(</span><span class="token omit keyword">_</span> card<span class="token punctuation">:</span> <span class="token class-name">Card</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token keyword">let</span> index <span class="token operator">=</span> cards<span class="token punctuation">.</span><span class="token function">firstIndex</span><span class="token punctuation">(</span><span class="token keyword">where</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> <span class="token short-argument">$0</span><span class="token punctuation">.</span>id <span class="token operator">==</span> card<span class="token punctuation">,</span>id<span class="token punctuation">&#125;</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        cards<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">.</span>isFaceUp <span class="token operator">=</span> <span class="token boolean">true</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>Card是一个结构体，结构体是值类型，在传递时会被复制，所以想要改变卡片的isFaceUp需要获取索引，在数组中找到修改的位置。</p>
+<span id="more"></span>
+
+<p>在数组中存结构体时很常见，可以利用一个小函数解决。</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">index</span><span class="token punctuation">(</span>matching element<span class="token punctuation">:</span> <span class="token class-name">Element</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">Int</span><span class="token operator">?</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">return</span> <span class="token function">firstIndex</span><span class="token punctuation">(</span><span class="token keyword">where</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> <span class="token short-argument">$0</span><span class="token punctuation">.</span>id <span class="token operator">==</span> element<span class="token punctuation">.</span>id <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+card<span class="token punctuation">.</span><span class="token function">index</span><span class="token punctuation">(</span>matching<span class="token punctuation">:</span> card<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>将函数放在扩展Array中（也适用于Set）</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">extension</span> <span class="token class-name">Array</span> <span class="token keyword">where</span> <span class="token class-name">Element</span><span class="token punctuation">:</span> <span class="token class-name">Identifiable</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">func</span> <span class="token function-definition function">index</span><span class="token punctuation">(</span>matching element<span class="token punctuation">:</span> <span class="token class-name">Element</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">Int</span><span class="token operator">?</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token function">firstIndex</span><span class="token punctuation">(</span><span class="token keyword">where</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> <span class="token short-argument">$0</span><span class="token punctuation">.</span>id <span class="token operator">==</span> element<span class="token punctuation">.</span>id <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>当然，我们也可以把代码放在Collection协议中，Set和Array都实现</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">extension</span> <span class="token class-name">Collection</span> <span class="token keyword">where</span> <span class="token class-name">Element</span><span class="token punctuation">:</span> <span class="token class-name">Identifiable</span> <span class="token punctuation">&#123;</span><span class="token comment">//不可变集合</span>
+    <span class="token keyword">func</span> <span class="token function-definition function">index</span><span class="token punctuation">(</span>matching element<span class="token punctuation">:</span> <span class="token class-name">Element</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">Self</span><span class="token punctuation">.</span><span class="token class-name">Index</span><span class="token operator">?</span> <span class="token punctuation">&#123;</span><span class="token comment">//索引不一定是Int，是个泛型</span>
+        <span class="token function">firstIndex</span><span class="token punctuation">(</span><span class="token keyword">where</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> <span class="token short-argument">$0</span><span class="token punctuation">.</span>id <span class="token operator">==</span> element<span class="token punctuation">.</span>id <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+    <span class="token comment">//Collection中不包括remove，所以把内容添加到RangeReplaceableCollection</span>
+<span class="token keyword">extension</span> <span class="token class-name">RangeReplaceableCollection</span> <span class="token keyword">where</span> <span class="token class-name">Element</span><span class="token punctuation">:</span> <span class="token class-name">Identifiable</span> <span class="token punctuation">&#123;</span><span class="token comment">//可变集合</span>
+    <span class="token keyword">mutating</span> <span class="token keyword">func</span> <span class="token function-definition function">remove</span><span class="token punctuation">(</span><span class="token omit keyword">_</span> element<span class="token punctuation">:</span> <span class="token class-name">Element</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> <span class="token keyword">let</span> index <span class="token operator">=</span> <span class="token function">index</span><span class="token punctuation">(</span>matching<span class="token punctuation">:</span> element<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+            <span class="token function">remove</span><span class="token punctuation">(</span>at<span class="token punctuation">:</span> index<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>RangeReplaceCollection可以添加下标，可以使用数组下标或可识别的集合变成可识别的，<code>cards[card].isFaceUp = true</code></p>
+<h3 id="Color-amp-UIColor-amp-CGColor"><a href="#Color-amp-UIColor-amp-CGColor" class="headerlink" title="Color&amp;UIColor&amp;CGColor"></a>Color&amp;UIColor&amp;CGColor</h3><h4 id="Color"><a href="#Color" class="headerlink" title="Color"></a>Color</h4><ul>
+<li>用来指定颜色 <code>.foregroundColor(Color.green)</code></li>
+<li>作为ShapeStyle，填充，<code>.fill(Color.blue)</code></li>
+<li>像视图一样，<code>Color.white</code></li>
+</ul>
+<h4 id="UIColor"><a href="#UIColor" class="headerlink" title="UIColor"></a>UIColor</h4><ul>
+<li>有很多API，能获取并调整RGB，颜色饱和度，亮度</li>
+<li>拥有UIColor，可以用Color使用，<code>Color(uiColor: )</code></li>
+</ul>
+<h4 id="CGColor"><a href="#CGColor" class="headerlink" title="CGColor"></a>CGColor</h4><ul>
+<li>Core Graphic中基础的颜色表示</li>
+<li>使用<code>color.cgColor</code>表示 不能保证每一个都能被表示</li>
+<li>如果将Color变成UIColor可能会使用</li>
+</ul>
+<h3 id="Image-amp-UIImage"><a href="#Image-amp-UIImage" class="headerlink" title="Image&amp;UIImage"></a>Image&amp;UIImage</h3><h4 id="Image"><a href="#Image" class="headerlink" title="Image"></a>Image</h4><ul>
+<li>主要是一个视图</li>
+<li>不是容纳图片的类型，是显示图片的视图</li>
+<li>可以在Assets.xcassets中访问图片 <code>Image(_ name: String)</code></li>
+<li>使用<code>Image(systemName:)</code>创建SF符号，使用<code>.imageScale()</code>调整SF符号大小，SF视图受字体影响，可以当蒙版使用</li>
+</ul>
+<h4 id="UIImage"><a href="#UIImage" class="headerlink" title="UIImage"></a>UIImage</h4><ul>
+<li>能缩放调整大小等，是用来存储图片的变量</li>
+<li>使用<code>Image(uiImage:)</code>来显示</li>
+</ul>
+<h3 id="Drag-and-Drop"><a href="#Drag-and-Drop" class="headerlink" title="Drag and Drop"></a>Drag and Drop</h3><p>从一个应用拖到另一个应用传输数据，从Safari拖动图片到app。核心类是<code>NSItemProvider</code>类，进程之间的数据传输。</p>
+<p>便利地转移不同数据类型</p>
+<ul>
+<li>NSAttributedString具有格式的字符串  NSString</li>
+<li>NSURL</li>
+<li>UIImage UIColor</li>
+</ul>
+<p>使用连接数据类型和NS类型，String as NSString</p>
+<h3 id="Dome"><a href="#Dome" class="headerlink" title="Dome"></a>Dome</h3><h4 id="拖放"><a href="#拖放" class="headerlink" title="拖放"></a>拖放</h4><p>借助OC中内容完成拖放，使用as转换数据类型，NSItemProvider将数据提供给别人</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">Text</span><span class="token punctuation">(</span>emoji<span class="token punctuation">)</span>
+	<span class="token punctuation">.</span>onDrag <span class="token punctuation">&#123;</span> <span class="token class-name">NSItemProvider</span><span class="token punctuation">(</span>object<span class="token punctuation">:</span> emoji <span class="token keyword">as</span> <span class="token class-name">NSString</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>放下时，需要将整个Vstack下放置drop</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token comment">//of后添加可放下的类型</span>
+<span class="token punctuation">.</span><span class="token function">onDrop</span><span class="token punctuation">(</span>of<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">.</span>plainText<span class="token punctuation">]</span><span class="token punctuation">,</span> isTargeted<span class="token punctuation">:</span> <span class="token nil constant">nil</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> providers<span class="token punctuation">,</span> location <span class="token keyword">in</span>
+	<span class="token keyword">return</span> <span class="token function">drop</span><span class="token punctuation">(</span>providers<span class="token punctuation">:</span> providers<span class="token punctuation">,</span> at<span class="token punctuation">:</span> location<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">private</span> <span class="token keyword">func</span> <span class="token function-definition function">drop</span><span class="token punctuation">(</span>providers<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token class-name">NSItemProvider</span><span class="token punctuation">]</span><span class="token punctuation">,</span> at location<span class="token punctuation">:</span> <span class="token class-name">CGPoint</span><span class="token punctuation">,</span> <span class="token keyword">in</span> geometry<span class="token punctuation">:</span> <span class="token class-name">GeometryProxy</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">Bool</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> providers<span class="token punctuation">.</span><span class="token function">loadObjects</span><span class="token punctuation">(</span>ofType<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> string <span class="token keyword">in</span> <span class="token comment">//提供者是否有字符串,将异步操作内容,因为提供者可能采用多线程提供信息,脱离主线程</span>
+		<span class="token keyword">if</span> <span class="token keyword">let</span> emoji <span class="token operator">=</span> string<span class="token punctuation">.</span>first<span class="token punctuation">,</span> emoji<span class="token punctuation">.</span>isEmoji <span class="token punctuation">&#123;</span>
+			document<span class="token punctuation">.</span><span class="token function">addEmoji</span><span class="token punctuation">(</span>
+				<span class="token class-name">String</span><span class="token punctuation">(</span>emoji<span class="token punctuation">)</span><span class="token punctuation">,</span>
+				at<span class="token punctuation">:</span> <span class="token function">convertToEmojiCoordinates</span><span class="token punctuation">(</span>location<span class="token punctuation">,</span> <span class="token keyword">in</span><span class="token punctuation">:</span> geometry<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token comment">//将CGPoint转换成元组</span>
+				size<span class="token punctuation">:</span> defaultEmojiFontSize<span class="token punctuation">)</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="多线程-Multithreading"><a href="#多线程-Multithreading" class="headerlink" title="多线程 Multithreading"></a>多线程 Multithreading</h3><p>从浏览器找到图片拖进去，但是从互联网下载图片可能需要几秒钟，可能会影响UI响应。</p>
+<p>UI需要响应用户内容，但有些操作需要比较长的时间，我们需要在不同的线程上执行操作，才能保证UI响应</p>
+<h4 id="线程-treads"><a href="#线程-treads" class="headerlink" title="线程 treads"></a>线程 treads</h4><p>可以指定线程用于哪些代码，快速切换线程看起来像同时在运行。有一些线程拥有更高的优先级</p>
+<p>使用队列管理复杂的线程</p>
+<h4 id="Queues-Closures"><a href="#Queues-Closures" class="headerlink" title="Queues Closures"></a>Queues Closures</h4><p>队列只是一堆排队等待线程执行的代码块。指定在队列里等待的代码块是闭包。</p>
+<p>多线程API的核心是&#x3D;&#x3D;将闭包放进队列&#x3D;&#x3D;</p>
+<h4 id="Main-Queue"><a href="#Main-Queue" class="headerlink" title="Main Queue"></a>Main Queue</h4><p>最重要的队列是main queue，是包含所有可能破坏UI界面的代码块，所有的UI的操作都需要主队列</p>
+<p>系统使用单线程执行处理所有在主队列中的代码块，所以可以使用主队列作为同步点(synchronize)。可以对数据结构的写入在主队列，你的读取可以发生在任何队列。</p>
+<h4 id="Background-Queues"><a href="#Background-Queues" class="headerlink" title="Background Queues"></a>Background Queues</h4><p>有一堆后台队列用来执行长期的、非UI任务，例如请求网络、机器学习。</p>
+<p>系统有一堆可用的线程执行后台队列上的代码块，可以并行执行</p>
+<h4 id="GCD"><a href="#GCD" class="headerlink" title="GCD"></a>GCD</h4><p>处理队列的基础API是GCD(Grand Central Dispatch)</p>
+<p>基础功能</p>
+<ul>
+<li>访问队列</li>
+<li>将一段代码添加到队列中</li>
+</ul>
+<h4 id="创建一个队列"><a href="#创建一个队列" class="headerlink" title="创建一个队列"></a>创建一个队列</h4><p>main queue是DispatchQueue上的静态变量</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span>main <span class="token comment">//所有的UI代码必须放在这里发布</span>
+<span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span><span class="token function">global</span><span class="token punctuation">(</span>qos<span class="token punctuation">:</span> <span class="token class-name">QoS</span><span class="token punctuation">)</span> <span class="token comment">//服务质量</span>
+qos
+	<span class="token punctuation">.</span>userInteractive <span class="token comment">//几乎和主队列一样重要，与用户进行实时交互，计算内容更新到UI上，速度最快</span>
+	<span class="token punctuation">.</span>userInitiated   <span class="token comment">//用户触发级，用户点击按钮，在网上点击下载等现在马上要做的内容 UI界面依然活跃</span>
+	<span class="token punctuation">.</span>utility	  	 <span class="token comment">//实用级 清理数据库等，不需要马上去做</span>
+	<span class="token punctuation">.</span>background		 <span class="token comment">//背景级 自动任务或定时处理任务等</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="在队列上放置闭包"><a href="#在队列上放置闭包" class="headerlink" title="在队列上放置闭包"></a>在队列上放置闭包</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> queue <span class="token operator">=</span> <span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span>main
+queue<span class="token punctuation">.</span><span class="token keyword">async</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">&#125;</span> <span class="token comment">//异步</span>
+queue<span class="token punctuation">.</span>sync <span class="token punctuation">&#123;</span> <span class="token punctuation">&#125;</span><span class="token comment">//同步</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>同步，代码执行完才会返回，阻塞当前线程，不在主队列中使用</p>
+<p>异步，将代码块放到队列中，立刻返回</p>
+<p>可以把延时放在队列中</p>
+<h4 id="URLSession"><a href="#URLSession" class="headerlink" title="URLSession"></a>URLSession</h4>]]></content>
       <categories>
         <category>iOS</category>
       </categories>
