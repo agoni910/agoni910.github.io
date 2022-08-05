@@ -1,6 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>CS193p_assignment3</title>
+    <url>/2022/03/20/cs193-a3/</url>
+    <content><![CDATA[<h3 id="Task-1"><a href="#Task-1" class="headerlink" title="Task 1"></a>Task 1</h3><blockquote>
+<p>实施一个单人游戏Set</p>
+</blockquote>
+<h3 id="Task-2"><a href="#Task-2" class="headerlink" title="Task 2"></a>Task 2</h3><blockquote>
+<p>所有卡片可见，卡片尽可能的大。也可以增加一个最小尺寸，然后恢复滚动。所有的卡片都必须可识别</p>
+</blockquote>
+<span id="more"></span>
+
+<h3 id="Task-3"><a href="#Task-3" class="headerlink" title="Task 3"></a>Task 3</h3><blockquote>
+<p>有相同的长宽比</p>
+</blockquote>
+<h3 id="Task-4"><a href="#Task-4" class="headerlink" title="Task 4"></a>Task 4</h3><blockquote>
+<p>符号的大小根据卡片大小决定</p>
+</blockquote>
+<h3 id="Task-5"><a href="#Task-5" class="headerlink" title="Task 5"></a>Task 5</h3><blockquote>
+<p>选择三张牌匹配，能够看到哪些牌已经被选中</p>
+</blockquote>
+<h3 id="Task-6"><a href="#Task-6" class="headerlink" title="Task 6"></a>Task 6</h3><blockquote>
+<p>只要有三张牌被选中，要显示是否匹配，不匹配的三个和只选择1或2张牌时看起来不一样</p>
+</blockquote>
+<h3 id="Task-7"><a href="#Task-7" class="headerlink" title="Task 7"></a>Task 7</h3><blockquote>
+<p>支持点击已经选中的牌取消选中，只选择1或2时</p>
+</blockquote>
+<h3 id="Task-8"><a href="#Task-8" class="headerlink" title="Task 8"></a>Task 8</h3><blockquote>
+<p>没读明白啊，回头再说</p>
+<p>当任何一张牌被触摸到，并且已经有3张相匹配的套装牌被选中。<br>那么…<br>a. 按照 “套牌 “的规则，用新的 “套牌 “替换这3张匹配的牌。牌<br>b. 如果这副牌是空的，那么就把那些匹配的牌所空出来的位置（因为没有更多的牌，所以不能被替换）。b. 如果这副牌是空的，那么这副牌所腾出的空间（因为没有更多的牌，所以不能被替换）就应该让给剩余的 的牌（也就是说，这些牌很可能会变大）。<br>c. 如果被碰的牌不属于匹配的牌组，则选择该牌。<br>d. 如果被摸到的牌是匹配组的一部分，那么就不选择任何牌。</p>
+</blockquote>
+<h3 id="Task-9"><a href="#Task-9" class="headerlink" title="Task 9"></a>Task 9</h3><blockquote>
+<p>有三张不匹配的牌被选中，取消这三张牌，选中点击的牌</p>
+</blockquote>
+<h3 id="Task-10"><a href="#Task-10" class="headerlink" title="Task 10"></a>Task 10</h3><blockquote>
+<p>有“Deal 3 More Cards”按钮</p>
+<p>你需要有一个 “再发3张牌 “的按钮（根据Set的规则）。<br>a. 当它被触动时，如果所选的牌组成了一套牌，则替换所选的牌。<br>b. 或者，如果所选的牌不组成一套牌（或者所选的牌少于3张，包括没有），则增加3张新牌，加入屏幕上已经出现的牌（并且不影响选择）。<br>c. 如果牌组是空的，则禁用此按钮。</p>
+</blockquote>
+<h3 id="Task-11"><a href="#Task-11" class="headerlink" title="Task 11"></a>Task 11</h3><blockquote>
+<p>有一个“New Game”按钮，开始新游戏，回到12个随机卡</p>
+</blockquote>
+<h3 id="Task-12"><a href="#Task-12" class="headerlink" title="Task 12"></a>Task 12</h3><blockquote>
+<p>用长方形代替弯曲</p>
+</blockquote>
+<h3 id="Task-13"><a href="#Task-13" class="headerlink" title="Task 13"></a>Task 13</h3><blockquote>
+<p>自己编写Shape结构制作“diamond”</p>
+</blockquote>
+<h3 id="Task-14"><a href="#Task-14" class="headerlink" title="Task 14"></a>Task 14</h3><blockquote>
+<p>条纹表示为半透明，和纯色区分开</p>
+</blockquote>
+<h3 id="Task-15-amp-16"><a href="#Task-15-amp-16" class="headerlink" title="Task 15&amp;16"></a>Task 15&amp;16</h3><blockquote>
+<p>使用枚举作为方案中有意义的部分，使用闭包(一个作为参数的函数)，三个不同颜色</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>swift</tag>
+        <tag>cs193p</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CS193_note 1-4</title>
     <url>/2022/02/20/cs193-note1-2/</url>
     <content><![CDATA[<h3 id="RoundedRectangle"><a href="#RoundedRectangle" class="headerlink" title="RoundedRectangle"></a>RoundedRectangle</h3><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">RoundedRectangle</span><span class="token punctuation">(</span>cornerRadius<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">)</span>
@@ -560,67 +621,6 @@ fun <span class="token function">reportSalesNumber</span><span class="token punc
       </tags>
   </entry>
   <entry>
-    <title>CS193p_assignment3</title>
-    <url>/2022/03/20/cs193-a3/</url>
-    <content><![CDATA[<h3 id="Task-1"><a href="#Task-1" class="headerlink" title="Task 1"></a>Task 1</h3><blockquote>
-<p>实施一个单人游戏Set</p>
-</blockquote>
-<h3 id="Task-2"><a href="#Task-2" class="headerlink" title="Task 2"></a>Task 2</h3><blockquote>
-<p>所有卡片可见，卡片尽可能的大。也可以增加一个最小尺寸，然后恢复滚动。所有的卡片都必须可识别</p>
-</blockquote>
-<span id="more"></span>
-
-<h3 id="Task-3"><a href="#Task-3" class="headerlink" title="Task 3"></a>Task 3</h3><blockquote>
-<p>有相同的长宽比</p>
-</blockquote>
-<h3 id="Task-4"><a href="#Task-4" class="headerlink" title="Task 4"></a>Task 4</h3><blockquote>
-<p>符号的大小根据卡片大小决定</p>
-</blockquote>
-<h3 id="Task-5"><a href="#Task-5" class="headerlink" title="Task 5"></a>Task 5</h3><blockquote>
-<p>选择三张牌匹配，能够看到哪些牌已经被选中</p>
-</blockquote>
-<h3 id="Task-6"><a href="#Task-6" class="headerlink" title="Task 6"></a>Task 6</h3><blockquote>
-<p>只要有三张牌被选中，要显示是否匹配，不匹配的三个和只选择1或2张牌时看起来不一样</p>
-</blockquote>
-<h3 id="Task-7"><a href="#Task-7" class="headerlink" title="Task 7"></a>Task 7</h3><blockquote>
-<p>支持点击已经选中的牌取消选中，只选择1或2时</p>
-</blockquote>
-<h3 id="Task-8"><a href="#Task-8" class="headerlink" title="Task 8"></a>Task 8</h3><blockquote>
-<p>没读明白啊，回头再说</p>
-<p>当任何一张牌被触摸到，并且已经有3张相匹配的套装牌被选中。<br>那么…<br>a. 按照 “套牌 “的规则，用新的 “套牌 “替换这3张匹配的牌。牌<br>b. 如果这副牌是空的，那么就把那些匹配的牌所空出来的位置（因为没有更多的牌，所以不能被替换）。b. 如果这副牌是空的，那么这副牌所腾出的空间（因为没有更多的牌，所以不能被替换）就应该让给剩余的 的牌（也就是说，这些牌很可能会变大）。<br>c. 如果被碰的牌不属于匹配的牌组，则选择该牌。<br>d. 如果被摸到的牌是匹配组的一部分，那么就不选择任何牌。</p>
-</blockquote>
-<h3 id="Task-9"><a href="#Task-9" class="headerlink" title="Task 9"></a>Task 9</h3><blockquote>
-<p>有三张不匹配的牌被选中，取消这三张牌，选中点击的牌</p>
-</blockquote>
-<h3 id="Task-10"><a href="#Task-10" class="headerlink" title="Task 10"></a>Task 10</h3><blockquote>
-<p>有“Deal 3 More Cards”按钮</p>
-<p>你需要有一个 “再发3张牌 “的按钮（根据Set的规则）。<br>a. 当它被触动时，如果所选的牌组成了一套牌，则替换所选的牌。<br>b. 或者，如果所选的牌不组成一套牌（或者所选的牌少于3张，包括没有），则增加3张新牌，加入屏幕上已经出现的牌（并且不影响选择）。<br>c. 如果牌组是空的，则禁用此按钮。</p>
-</blockquote>
-<h3 id="Task-11"><a href="#Task-11" class="headerlink" title="Task 11"></a>Task 11</h3><blockquote>
-<p>有一个“New Game”按钮，开始新游戏，回到12个随机卡</p>
-</blockquote>
-<h3 id="Task-12"><a href="#Task-12" class="headerlink" title="Task 12"></a>Task 12</h3><blockquote>
-<p>用长方形代替弯曲</p>
-</blockquote>
-<h3 id="Task-13"><a href="#Task-13" class="headerlink" title="Task 13"></a>Task 13</h3><blockquote>
-<p>自己编写Shape结构制作“diamond”</p>
-</blockquote>
-<h3 id="Task-14"><a href="#Task-14" class="headerlink" title="Task 14"></a>Task 14</h3><blockquote>
-<p>条纹表示为半透明，和纯色区分开</p>
-</blockquote>
-<h3 id="Task-15-amp-16"><a href="#Task-15-amp-16" class="headerlink" title="Task 15&amp;16"></a>Task 15&amp;16</h3><blockquote>
-<p>使用枚举作为方案中有意义的部分，使用闭包(一个作为参数的函数)，三个不同颜色</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>swift</tag>
-        <tag>cs193p</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>cs193p_note10_Multithreading Demo Gestures</title>
     <url>/2022/05/19/cs193p-note10/</url>
     <content><![CDATA[<h3 id="设置图片背景"><a href="#设置图片背景" class="headerlink" title="设置图片背景"></a>设置图片背景</h3><p>接收url和image</p>
@@ -807,107 +807,6 @@ myview<span class="token punctuation">.</span><span class="token function">onLon
       </tags>
   </entry>
   <entry>
-    <title>CS193p_note5 Properties Layout @ViewBuilder</title>
-    <url>/2022/02/28/cs193p-note5/</url>
-    <content><![CDATA[<h3 id="Computed-Properties-计算属性"><a href="#Computed-Properties-计算属性" class="headerlink" title="Computed Properties 计算属性"></a>Computed Properties 计算属性</h3><p>不提供存储值，提供读取器和设置器，接收和设置其他属性</p>
-<p>get用来接收数据，并且返回值，set用来设置其他属性或值</p>
-<h3 id="State"><a href="#State" class="headerlink" title="@State"></a>@State</h3><p>变化会在必要时重新绘制，相当于@ObservedObject</p>
-<span id="more"></span>
-
-<h3 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h3><p>屏幕的空间如何分配给所有视图</p>
-<ol>
-<li>视图容器为其中的视图提供空间</li>
-<li>视图根据提供给他们的空间选择自己的尺寸，不是被分配</li>
-<li>一旦视图调整了自己的大小，将视图放置在视图容器里</li>
-<li>视图容器选择大小，基于里面的视图</li>
-</ol>
-<h4 id="HStack-amp-VStack"><a href="#HStack-amp-VStack" class="headerlink" title="HStack &amp; VStack"></a>HStack &amp; VStack</h4><p>最不灵活的视图</p>
-<p>例如，Image和Text有固定大小，Image的自然大小，Text将字符串放进去，不灵活；RoundedRectangle非常灵活，如果你给他空间，他会占据全部空间，填满。</p>
-<p>从最不灵活的视图先分配，text如果空间不够会自动省略，如果stack里面的视图非常灵活，那么本身就会变灵活</p>
-<ul>
-<li><p><code>Spacer(miniLength: CGFloat)</code>非常灵活，需要尽可能多的空间</p>
-</li>
-<li><p><code>Divide()</code> 画一条线分割视图</p>
-</li>
-<li><p><code>.layoutPriority()</code> 先获得视图的分配，默认是0</p>
-</li>
-</ul>
-<p>Vstack生成一列视图，默认居中     </p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">VStack</span><span class="token punctuation">(</span>alignment<span class="token punctuation">:</span> <span class="token punctuation">.</span>leading<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span> <span class="token comment">//.leading .trailing</span>
-<span class="token class-name">VStack</span><span class="token punctuation">(</span>alignment<span class="token punctuation">:</span> <span class="token punctuation">.</span>firstTextBaseline<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">//文本基线</span>
-<span class="token comment">//定义自己的排列方式</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-swiftUI" data-language="swiftUI"><code class="language-swiftUI">Hstack &#123;
-	ForEach(viewModel.cards)&#123; card in
-		CardView(card: card).aspectRatio(2&#x2F;3, contentMode: .fit)
-	&#125;
-&#125;
-.foregroundColor(Color.orange)
-.padding(10)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h4 id="LazyHStack-amp-LazyVStack"><a href="#LazyHStack-amp-LazyVStack" class="headerlink" title="LazyHStack &amp; LazyVStack"></a>LazyHStack &amp; LazyVStack</h4><ul>
-<li><p>不构建不在屏幕上显示的视图，只构建ScrollView中显示在屏幕上的</p>
-</li>
-<li><p>不灵活，如果有灵活视图，不能给所有空间，会尽可能的小</p>
-</li>
-</ul>
-<h4 id="ScrollView"><a href="#ScrollView" class="headerlink" title="ScrollView"></a>ScrollView</h4><p>接收任何视图在其中滚动</p>
-<h4 id="LazyHGrid-amp-LazyVGrid"><a href="#LazyHGrid-amp-LazyVGrid" class="headerlink" title="LazyHGrid &amp; LazyVGrid"></a>LazyHGrid &amp; LazyVGrid</h4><p>控制多少列或者多少行</p>
-<h4 id="ZStack"><a href="#ZStack" class="headerlink" title="ZStack"></a>ZStack</h4><p>调整自己的大小合适子项</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"hello"</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">background</span><span class="token punctuation">(</span><span class="token class-name">Rectangle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">foregroundColor</span><span class="token punctuation">(</span><span class="token punctuation">.</span>red<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token comment">//背景大小取决于文字，不是灵活的尺寸</span>
-<span class="token class-name">Circle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">overlay</span><span class="token punctuation">(</span><span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"hello"</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span> alignment<span class="token punctuation">:</span> <span class="token punctuation">.</span>center<span class="token punctuation">)</span>
-<span class="token comment">//文字不重要，很灵活</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">Hstack</span><span class="token punctuation">&#123;</span>
-    <span class="token class-name">ForEach</span><span class="token punctuation">(</span>viewmodel<span class="token punctuation">.</span>cards<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> card <span class="token keyword">in</span>
-    	<span class="token class-name">CardView</span><span class="token punctuation">(</span>card<span class="token punctuation">:</span> card<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">aspectRatio</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">/</span><span class="token number">3</span><span class="token punctuation">,</span> contentMode<span class="token punctuation">:</span> <span class="token punctuation">.</span>fit<span class="token punctuation">)</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token punctuation">.</span><span class="token function">foregroundColor</span><span class="token punctuation">(</span><span class="token class-name">Color</span><span class="token punctuation">.</span>orange<span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol>
-<li>首先提供padding的空间，容器最外层的空间，将空间-10后提供给foregroundColor</li>
-<li>foregroundColor提供相同的空间给Hstack</li>
-<li>Hstack将空间平均分给aspectRatio</li>
-<li>提供空间给CardView</li>
-</ol>
-<h4 id="GeometryReader"><a href="#GeometryReader" class="headerlink" title="GeometryReader"></a>GeometryReader</h4><p>本身总是适应提供的空间</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">GeometryReader</span><span class="token punctuation">&#123;</span> geometry <span class="token keyword">in</span> 
-		<span class="token operator">...</span>
-<span class="token punctuation">&#125;</span><span class="token comment">//放在视图里 计算视图大小</span>
-<span class="token keyword">struct</span> <span class="token class-name">GrometryProxy</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">var</span> size<span class="token punctuation">:</span> <span class="token class-name">CGSize</span> <span class="token comment">//提供视图大小</span>
-    <span class="token keyword">func</span> <span class="token function-definition function">frame</span><span class="token punctuation">(</span><span class="token keyword">in</span><span class="token punctuation">:</span> <span class="token class-name">CoordinateSpace</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">CGRect</span>
-    <span class="token keyword">var</span> safeAreaInsets<span class="token punctuation">:</span> <span class="token class-name">EdgeInsets</span>
-<span class="token punctuation">&#125;</span>
-<span class="token class-name">ZStack</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">edgesIgnoringSafeArea</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">.</span>top<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">//画入安全区域</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="ViewBuilder"><a href="#ViewBuilder" class="headerlink" title="@ViewBuilder"></a>@ViewBuilder</h3><p>将函数返回成很对个视图组成的一个视图，创建的视图被称为TupleView</p>
-<p>任意<code>func</code>或<code>只读的计算属性</code>都可以标识为<code>@ViewBuilder</code>，一旦标识，它里面的内容将会被解析为<code>a list of Views</code></p>
-<h3 id="零散的东西"><a href="#零散的东西" class="headerlink" title="零散的东西"></a>零散的东西</h3><p>函数式编程</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> faceUpCardIndices <span class="token operator">=</span> cards<span class="token punctuation">.</span>indices<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> cards<span class="token punctuation">[</span><span class="token short-argument">$0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>isFaceUp <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token comment">//cards.indices是0..&lt;cards.count filter返回一个满足条件的数组</span>
-<span class="token keyword">var</span> faceUpCardIndices <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token class-name">Int</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">for</span> index <span class="token keyword">in</span> cards<span class="token punctuation">.</span>indices <span class="token punctuation">&#123;</span>
-		<span class="token keyword">if</span> cards<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">.</span>isFaceUp <span class="token punctuation">&#123;</span>
-		faceUpCardIndices<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span>
-		<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>swift</tag>
-        <tag>cs193p</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>cs193p_note11_Error Persistence</title>
     <url>/2022/06/02/cs193p-note11/</url>
     <content><![CDATA[<h3 id="Error-Handing"><a href="#Error-Handing" class="headerlink" title="Error Handing"></a>Error Handing</h3><h4 id="Throwing-errors"><a href="#Throwing-errors" class="headerlink" title="Throwing errors"></a>Throwing errors</h4><p>很多函数都有<code>throws</code>关键字，你可以抛出错误</p>
@@ -1062,8 +961,7 @@ defaults<span class="token punctuation">.</span><span class="token keyword">set<
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>实现自动保存文件</p>
-<p>获取文件目录时，在iOS中in参数的内容永远是.userDomainMask</p>
+<h6 id="实现自动保存文件"><a href="#实现自动保存文件" class="headerlink" title="实现自动保存文件"></a>实现自动保存文件</h6><p>获取文件目录时，在iOS中in参数的内容永远是.userDomainMask</p>
 <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">private</span> <span class="token keyword">struct</span>  <span class="token class-name">Autosave</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">static</span> <span class="token keyword">let</span> filename <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"Autosaved.emojiart"</span></span> <span class="token comment">//后期做成扩展名,现在只是文件名</span>
     <span class="token keyword">static</span> <span class="token keyword">var</span> url<span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token operator">?</span> <span class="token punctuation">&#123;</span>
@@ -1079,6 +977,16 @@ defaults<span class="token punctuation">.</span><span class="token keyword">set<
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>自动保存的频率太过频繁，优化自动保存函数，改为不操作一段时间后自动保存</p>
+<p>使用self，如果安排保存时不小心关闭界面，在内存中保留self，直到有机会自动保存</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">private</span> <span class="token keyword">func</span> <span class="token function-definition function">scheduleAutosave</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    autosaveTimer<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">invalidate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//取消前一个Timer</span>
+	autosaveTimer <span class="token operator">=</span> <span class="token class-name">Timer</span><span class="token punctuation">.</span><span class="token function">scheduledTimer</span><span class="token punctuation">(</span>withTimeInterval<span class="token punctuation">:</span> <span class="token class-name">Autosave</span><span class="token punctuation">.</span>coalescingInterval<span class="token punctuation">,</span> repeats<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> timer <span class="token keyword">in</span>
+		<span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">autosave</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>self</p>
 <blockquote>
 <p>带有关联值的枚举内，自定义编码 Swift5.5能自动编码了，不需要手动进行，但是把代码摆上吧</p>
 </blockquote>
@@ -1106,8 +1014,7 @@ defaults<span class="token punctuation">.</span><span class="token keyword">set<
     <span class="token keyword">case</span> imageData
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>加载自动保存的文件</p>
-<p>对model进行初始化</p>
+<h6 id="加载自动保存的文件"><a href="#加载自动保存的文件" class="headerlink" title="加载自动保存的文件"></a>加载自动保存的文件</h6><p>对model进行初始化</p>
 <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">init</span><span class="token punctuation">(</span>url<span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">let</span> data <span class="token operator">=</span> <span class="token keyword">try</span> <span class="token class-name">Data</span><span class="token punctuation">(</span>contentsOf<span class="token punctuation">:</span> url<span class="token punctuation">)</span> <span class="token comment">//初始化Data,通过文件地址获取文件内Data</span>
     <span class="token keyword">self</span> <span class="token operator">=</span> <span class="token keyword">try</span> <span class="token class-name">EmojiArtModel</span><span class="token punctuation">(</span>json<span class="token punctuation">:</span> data<span class="token punctuation">)</span>
@@ -1115,6 +1022,118 @@ defaults<span class="token punctuation">.</span><span class="token keyword">set<
 <span class="token keyword">init</span><span class="token punctuation">(</span>json<span class="token punctuation">:</span> <span class="token class-name">Data</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">self</span> <span class="token operator">=</span> <span class="token keyword">try</span> <span class="token class-name">JSONDecoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span><span class="token class-name">EmojiArtModel</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">,</span> from<span class="token punctuation">:</span> json<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在viewmodel中，进行初始化</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token keyword">let</span> url <span class="token operator">=</span> <span class="token class-name">Autosave</span><span class="token punctuation">.</span>url<span class="token punctuation">,</span> <span class="token keyword">let</span> autosavedEmojiArt <span class="token operator">=</span> <span class="token keyword">try</span><span class="token operator">?</span> <span class="token class-name">EmojiArtModel</span><span class="token punctuation">(</span>url<span class="token punctuation">:</span> url<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        emojiArt <span class="token operator">=</span> autosavedEmojiArt
+        <span class="token function">fetchBackgroundImageDataIfNecessary</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        emojiArt <span class="token operator">=</span> <span class="token class-name">EmojiArtModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="调色板的独立MVVM"><a href="#调色板的独立MVVM" class="headerlink" title="调色板的独立MVVM"></a>调色板的独立MVVM</h4><p>创建调色板ViewModel</p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>swift</tag>
+        <tag>cs193p</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CS193p_note5 Properties Layout @ViewBuilder</title>
+    <url>/2022/02/28/cs193p-note5/</url>
+    <content><![CDATA[<h3 id="Computed-Properties-计算属性"><a href="#Computed-Properties-计算属性" class="headerlink" title="Computed Properties 计算属性"></a>Computed Properties 计算属性</h3><p>不提供存储值，提供读取器和设置器，接收和设置其他属性</p>
+<p>get用来接收数据，并且返回值，set用来设置其他属性或值</p>
+<h3 id="State"><a href="#State" class="headerlink" title="@State"></a>@State</h3><p>变化会在必要时重新绘制，相当于@ObservedObject</p>
+<span id="more"></span>
+
+<h3 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h3><p>屏幕的空间如何分配给所有视图</p>
+<ol>
+<li>视图容器为其中的视图提供空间</li>
+<li>视图根据提供给他们的空间选择自己的尺寸，不是被分配</li>
+<li>一旦视图调整了自己的大小，将视图放置在视图容器里</li>
+<li>视图容器选择大小，基于里面的视图</li>
+</ol>
+<h4 id="HStack-amp-VStack"><a href="#HStack-amp-VStack" class="headerlink" title="HStack &amp; VStack"></a>HStack &amp; VStack</h4><p>最不灵活的视图</p>
+<p>例如，Image和Text有固定大小，Image的自然大小，Text将字符串放进去，不灵活；RoundedRectangle非常灵活，如果你给他空间，他会占据全部空间，填满。</p>
+<p>从最不灵活的视图先分配，text如果空间不够会自动省略，如果stack里面的视图非常灵活，那么本身就会变灵活</p>
+<ul>
+<li><p><code>Spacer(miniLength: CGFloat)</code>非常灵活，需要尽可能多的空间</p>
+</li>
+<li><p><code>Divide()</code> 画一条线分割视图</p>
+</li>
+<li><p><code>.layoutPriority()</code> 先获得视图的分配，默认是0</p>
+</li>
+</ul>
+<p>Vstack生成一列视图，默认居中     </p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">VStack</span><span class="token punctuation">(</span>alignment<span class="token punctuation">:</span> <span class="token punctuation">.</span>leading<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span> <span class="token comment">//.leading .trailing</span>
+<span class="token class-name">VStack</span><span class="token punctuation">(</span>alignment<span class="token punctuation">:</span> <span class="token punctuation">.</span>firstTextBaseline<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">//文本基线</span>
+<span class="token comment">//定义自己的排列方式</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-swiftUI" data-language="swiftUI"><code class="language-swiftUI">Hstack &#123;
+	ForEach(viewModel.cards)&#123; card in
+		CardView(card: card).aspectRatio(2&#x2F;3, contentMode: .fit)
+	&#125;
+&#125;
+.foregroundColor(Color.orange)
+.padding(10)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="LazyHStack-amp-LazyVStack"><a href="#LazyHStack-amp-LazyVStack" class="headerlink" title="LazyHStack &amp; LazyVStack"></a>LazyHStack &amp; LazyVStack</h4><ul>
+<li><p>不构建不在屏幕上显示的视图，只构建ScrollView中显示在屏幕上的</p>
+</li>
+<li><p>不灵活，如果有灵活视图，不能给所有空间，会尽可能的小</p>
+</li>
+</ul>
+<h4 id="ScrollView"><a href="#ScrollView" class="headerlink" title="ScrollView"></a>ScrollView</h4><p>接收任何视图在其中滚动</p>
+<h4 id="LazyHGrid-amp-LazyVGrid"><a href="#LazyHGrid-amp-LazyVGrid" class="headerlink" title="LazyHGrid &amp; LazyVGrid"></a>LazyHGrid &amp; LazyVGrid</h4><p>控制多少列或者多少行</p>
+<h4 id="ZStack"><a href="#ZStack" class="headerlink" title="ZStack"></a>ZStack</h4><p>调整自己的大小合适子项</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"hello"</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">background</span><span class="token punctuation">(</span><span class="token class-name">Rectangle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">foregroundColor</span><span class="token punctuation">(</span><span class="token punctuation">.</span>red<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">//背景大小取决于文字，不是灵活的尺寸</span>
+<span class="token class-name">Circle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">overlay</span><span class="token punctuation">(</span><span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"hello"</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span> alignment<span class="token punctuation">:</span> <span class="token punctuation">.</span>center<span class="token punctuation">)</span>
+<span class="token comment">//文字不重要，很灵活</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">Hstack</span><span class="token punctuation">&#123;</span>
+    <span class="token class-name">ForEach</span><span class="token punctuation">(</span>viewmodel<span class="token punctuation">.</span>cards<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> card <span class="token keyword">in</span>
+    	<span class="token class-name">CardView</span><span class="token punctuation">(</span>card<span class="token punctuation">:</span> card<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">aspectRatio</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">/</span><span class="token number">3</span><span class="token punctuation">,</span> contentMode<span class="token punctuation">:</span> <span class="token punctuation">.</span>fit<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token punctuation">.</span><span class="token function">foregroundColor</span><span class="token punctuation">(</span><span class="token class-name">Color</span><span class="token punctuation">.</span>orange<span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li>首先提供padding的空间，容器最外层的空间，将空间-10后提供给foregroundColor</li>
+<li>foregroundColor提供相同的空间给Hstack</li>
+<li>Hstack将空间平均分给aspectRatio</li>
+<li>提供空间给CardView</li>
+</ol>
+<h4 id="GeometryReader"><a href="#GeometryReader" class="headerlink" title="GeometryReader"></a>GeometryReader</h4><p>本身总是适应提供的空间</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">GeometryReader</span><span class="token punctuation">&#123;</span> geometry <span class="token keyword">in</span> 
+		<span class="token operator">...</span>
+<span class="token punctuation">&#125;</span><span class="token comment">//放在视图里 计算视图大小</span>
+<span class="token keyword">struct</span> <span class="token class-name">GrometryProxy</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> size<span class="token punctuation">:</span> <span class="token class-name">CGSize</span> <span class="token comment">//提供视图大小</span>
+    <span class="token keyword">func</span> <span class="token function-definition function">frame</span><span class="token punctuation">(</span><span class="token keyword">in</span><span class="token punctuation">:</span> <span class="token class-name">CoordinateSpace</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">CGRect</span>
+    <span class="token keyword">var</span> safeAreaInsets<span class="token punctuation">:</span> <span class="token class-name">EdgeInsets</span>
+<span class="token punctuation">&#125;</span>
+<span class="token class-name">ZStack</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">edgesIgnoringSafeArea</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">.</span>top<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">//画入安全区域</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="ViewBuilder"><a href="#ViewBuilder" class="headerlink" title="@ViewBuilder"></a>@ViewBuilder</h3><p>将函数返回成很对个视图组成的一个视图，创建的视图被称为TupleView</p>
+<p>任意<code>func</code>或<code>只读的计算属性</code>都可以标识为<code>@ViewBuilder</code>，一旦标识，它里面的内容将会被解析为<code>a list of Views</code></p>
+<h3 id="零散的东西"><a href="#零散的东西" class="headerlink" title="零散的东西"></a>零散的东西</h3><p>函数式编程</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> faceUpCardIndices <span class="token operator">=</span> cards<span class="token punctuation">.</span>indices<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> cards<span class="token punctuation">[</span><span class="token short-argument">$0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>isFaceUp <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token comment">//cards.indices是0..&lt;cards.count filter返回一个满足条件的数组</span>
+<span class="token keyword">var</span> faceUpCardIndices <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token class-name">Int</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> index <span class="token keyword">in</span> cards<span class="token punctuation">.</span>indices <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> cards<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">.</span>isFaceUp <span class="token punctuation">&#123;</span>
+		faceUpCardIndices<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span>
+		<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 ]]></content>
       <categories>

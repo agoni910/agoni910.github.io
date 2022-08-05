@@ -28,7 +28,7 @@
 <meta property="og:description" content="Error HandingThrowing errors很多函数都有throws关键字，你可以抛出错误 func attendLecture() throws &amp;#123; 	if sleptIn &amp;#123;         throw CS193pError.missedLecture     &amp;#125;     askQuestion() &#x2F;&#x2F;如果抛出错误，函数后续无法完成 &amp;#125;">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-06-02T03:13:51.000Z">
-<meta property="article:modified_time" content="2022-08-05T14:06:15.998Z">
+<meta property="article:modified_time" content="2022-08-05T15:59:31.311Z">
 <meta property="article:author" content="Wenrong Jiang">
 <meta property="article:tag" content="swift">
 <meta property="article:tag" content="cs193p">
@@ -147,7 +147,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-Handing"><span class="nav-number">1.</span> <span class="nav-text">Error Handing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Throwing-errors"><span class="nav-number">1.1.</span> <span class="nav-text">Throwing errors</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%A4%84%E7%90%86%E6%8A%9B%E5%87%BA%E9%94%99%E8%AF%AF"><span class="nav-number">1.2.</span> <span class="nav-text">不处理抛出错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%8A%9B%E5%87%BA%E9%94%99%E8%AF%AF"><span class="nav-number">1.3.</span> <span class="nav-text">处理抛出错误</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Persistence"><span class="nav-number">2.</span> <span class="nav-text">Persistence</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.1.</span> <span class="nav-text">文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%BF%E9%97%AE%E6%B2%99%E7%9B%92%E7%9B%AE%E5%BD%95"><span class="nav-number">2.1.1.</span> <span class="nav-text">如何访问沙盒目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Data"><span class="nav-number">2.1.2.</span> <span class="nav-text">Data</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%98%E6%A1%A3-Archiving"><span class="nav-number">2.2.</span> <span class="nav-text">存档 Archiving</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Codable%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.2.1.</span> <span class="nav-text">Codable协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Example"><span class="nav-number">2.2.2.</span> <span class="nav-text">Example</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UserDefaults"><span class="nav-number">2.3.</span> <span class="nav-text">UserDefaults</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Property-List"><span class="nav-number">2.3.1.</span> <span class="nav-text">Property List</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Any"><span class="nav-number">2.3.2.</span> <span class="nav-text">Any</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Example-1"><span class="nav-number">2.3.3.</span> <span class="nav-text">Example</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo"><span class="nav-number">3.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E6%96%87%E6%A1%A3%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-number">3.1.</span> <span class="nav-text">使文档持久化</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Error-Handing"><span class="nav-number">1.</span> <span class="nav-text">Error Handing</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Throwing-errors"><span class="nav-number">1.1.</span> <span class="nav-text">Throwing errors</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%A4%84%E7%90%86%E6%8A%9B%E5%87%BA%E9%94%99%E8%AF%AF"><span class="nav-number">1.2.</span> <span class="nav-text">不处理抛出错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E6%8A%9B%E5%87%BA%E9%94%99%E8%AF%AF"><span class="nav-number">1.3.</span> <span class="nav-text">处理抛出错误</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Persistence"><span class="nav-number">2.</span> <span class="nav-text">Persistence</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.1.</span> <span class="nav-text">文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E8%AE%BF%E9%97%AE%E6%B2%99%E7%9B%92%E7%9B%AE%E5%BD%95"><span class="nav-number">2.1.1.</span> <span class="nav-text">如何访问沙盒目录</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Data"><span class="nav-number">2.1.2.</span> <span class="nav-text">Data</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%98%E6%A1%A3-Archiving"><span class="nav-number">2.2.</span> <span class="nav-text">存档 Archiving</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Codable%E5%8D%8F%E8%AE%AE"><span class="nav-number">2.2.1.</span> <span class="nav-text">Codable协议</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Example"><span class="nav-number">2.2.2.</span> <span class="nav-text">Example</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UserDefaults"><span class="nav-number">2.3.</span> <span class="nav-text">UserDefaults</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Property-List"><span class="nav-number">2.3.1.</span> <span class="nav-text">Property List</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Any"><span class="nav-number">2.3.2.</span> <span class="nav-text">Any</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Example-1"><span class="nav-number">2.3.3.</span> <span class="nav-text">Example</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo"><span class="nav-number">3.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E6%96%87%E6%A1%A3%E6%8C%81%E4%B9%85%E5%8C%96"><span class="nav-number">3.1.</span> <span class="nav-text">使文档持久化</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E8%87%AA%E5%8A%A8%E4%BF%9D%E5%AD%98%E6%96%87%E4%BB%B6"><span class="nav-number">3.1.0.1.</span> <span class="nav-text">实现自动保存文件</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E8%87%AA%E5%8A%A8%E4%BF%9D%E5%AD%98%E7%9A%84%E6%96%87%E4%BB%B6"><span class="nav-number">3.1.0.2.</span> <span class="nav-text">加载自动保存的文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%83%E8%89%B2%E6%9D%BF%E7%9A%84%E7%8B%AC%E7%AB%8BMVVM"><span class="nav-number">3.2.</span> <span class="nav-text">调色板的独立MVVM</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -184,12 +184,6 @@
       </span>
       <span class="links-of-author-item">
         <a href="mailto:selever2002@163.com" title="E-Mail → mailto:selever2002@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://weibo.com/selever2" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;selever2" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://space.bilibili.com/91777499" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;91777499" rel="noopener" target="_blank"><i class="fab fa-bilibili fa-fw"></i>Bilibili</a>
       </span>
   </div>
 
@@ -268,14 +262,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>6k</span>
+      <span>6.5k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>20 分钟</span>
+      <span>22 分钟</span>
     </span>
 </div>
 
@@ -438,8 +432,7 @@ defaults<span class="token punctuation">.</span><span class="token keyword">set<
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>实现自动保存文件</p>
-<p>获取文件目录时，在iOS中in参数的内容永远是.userDomainMask</p>
+<h6 id="实现自动保存文件"><a href="#实现自动保存文件" class="headerlink" title="实现自动保存文件"></a>实现自动保存文件</h6><p>获取文件目录时，在iOS中in参数的内容永远是.userDomainMask</p>
 <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">private</span> <span class="token keyword">struct</span>  <span class="token class-name">Autosave</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">static</span> <span class="token keyword">let</span> filename <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"Autosaved.emojiart"</span></span> <span class="token comment">//后期做成扩展名,现在只是文件名</span>
     <span class="token keyword">static</span> <span class="token keyword">var</span> url<span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token operator">?</span> <span class="token punctuation">&#123;</span>
@@ -455,6 +448,16 @@ defaults<span class="token punctuation">.</span><span class="token keyword">set<
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>自动保存的频率太过频繁，优化自动保存函数，改为不操作一段时间后自动保存</p>
+<p>使用self，如果安排保存时不小心关闭界面，在内存中保留self，直到有机会自动保存</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">private</span> <span class="token keyword">func</span> <span class="token function-definition function">scheduleAutosave</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    autosaveTimer<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">invalidate</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//取消前一个Timer</span>
+	autosaveTimer <span class="token operator">=</span> <span class="token class-name">Timer</span><span class="token punctuation">.</span><span class="token function">scheduledTimer</span><span class="token punctuation">(</span>withTimeInterval<span class="token punctuation">:</span> <span class="token class-name">Autosave</span><span class="token punctuation">.</span>coalescingInterval<span class="token punctuation">,</span> repeats<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> timer <span class="token keyword">in</span>
+		<span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">autosave</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>self</p>
 <blockquote>
 <p>带有关联值的枚举内，自定义编码 Swift5.5能自动编码了，不需要手动进行，但是把代码摆上吧</p>
 </blockquote>
@@ -482,8 +485,7 @@ defaults<span class="token punctuation">.</span><span class="token keyword">set<
     <span class="token keyword">case</span> imageData
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-<p>加载自动保存的文件</p>
-<p>对model进行初始化</p>
+<h6 id="加载自动保存的文件"><a href="#加载自动保存的文件" class="headerlink" title="加载自动保存的文件"></a>加载自动保存的文件</h6><p>对model进行初始化</p>
 <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">init</span><span class="token punctuation">(</span>url<span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token punctuation">&#123;</span>
     <span class="token keyword">let</span> data <span class="token operator">=</span> <span class="token keyword">try</span> <span class="token class-name">Data</span><span class="token punctuation">(</span>contentsOf<span class="token punctuation">:</span> url<span class="token punctuation">)</span> <span class="token comment">//初始化Data,通过文件地址获取文件内Data</span>
     <span class="token keyword">self</span> <span class="token operator">=</span> <span class="token keyword">try</span> <span class="token class-name">EmojiArtModel</span><span class="token punctuation">(</span>json<span class="token punctuation">:</span> data<span class="token punctuation">)</span>
@@ -492,6 +494,17 @@ defaults<span class="token punctuation">.</span><span class="token keyword">set<
     <span class="token keyword">self</span> <span class="token operator">=</span> <span class="token keyword">try</span> <span class="token class-name">JSONDecoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span><span class="token class-name">EmojiArtModel</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">,</span> from<span class="token punctuation">:</span> json<span class="token punctuation">)</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
+<p>在viewmodel中，进行初始化</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token keyword">let</span> url <span class="token operator">=</span> <span class="token class-name">Autosave</span><span class="token punctuation">.</span>url<span class="token punctuation">,</span> <span class="token keyword">let</span> autosavedEmojiArt <span class="token operator">=</span> <span class="token keyword">try</span><span class="token operator">?</span> <span class="token class-name">EmojiArtModel</span><span class="token punctuation">(</span>url<span class="token punctuation">:</span> url<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        emojiArt <span class="token operator">=</span> autosavedEmojiArt
+        <span class="token function">fetchBackgroundImageDataIfNecessary</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+        emojiArt <span class="token operator">=</span> <span class="token class-name">EmojiArtModel</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="调色板的独立MVVM"><a href="#调色板的独立MVVM" class="headerlink" title="调色板的独立MVVM"></a>调色板的独立MVVM</h4><p>创建调色板ViewModel</p>
 
     </div>
 
@@ -545,13 +558,13 @@ defaults<span class="token punctuation">.</span><span class="token keyword">set<
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">35k</span>
+    <span title="站点总字数">36k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:57</span>
+    <span title="站点阅读时长">1:59</span>
   </span>
 </div>
 
