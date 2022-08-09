@@ -214,6 +214,114 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/05/cs193p-note12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/imga.png">
+      <meta itemprop="name" content="Wenrong Jiang">
+      <meta itemprop="description" content="一以贯之的努力，不得懈怠的人生。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="J’s blogs">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/06/05/cs193p-note12/" class="post-title-link" itemprop="url">cs193p_note12_Bindings Sheet Navigation EditMode</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-06-05 11:27:34" itemprop="dateCreated datePublished" datetime="2022-06-05T11:27:34+08:00">2022-06-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>7.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>26 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="Property-Wrappers"><a href="#Property-Wrappers" class="headerlink" title="Property Wrappers"></a>Property Wrappers</h3><p>属性包装器，含有@something的语句。属性包装器只是一个结构，结构中封装了应用于变量的某种模板行为。例如@State、@Published、@ObservedObject等</p>
+<h4 id="Published"><a href="#Published" class="headerlink" title="Published"></a>Published</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token attribute atrule">@Published</span> <span class="token keyword">var</span> emojiArt<span class="token punctuation">:</span> <span class="token class-name">EmojiArt</span> <span class="token operator">=</span> <span class="token class-name">EmojiArt</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">//具体实现</span>
+<span class="token keyword">struct</span> <span class="token class-name">Published</span> <span class="token punctuation">&#123;</span><span class="token comment">//创建一个结构体</span>
+    <span class="token keyword">var</span> wrappedValue<span class="token punctuation">:</span> <span class="token class-name">EmojiArt</span>
+    <span class="token comment">//发生变化时，在信息流中发布变化</span>
+    <span class="token keyword">var</span> projectedValue<span class="token punctuation">:</span> <span class="token class-name">Publisher</span><span class="token operator">&lt;</span><span class="token class-name">EmojiArt</span><span class="token punctuation">,</span> <span class="token class-name">Never</span><span class="token operator">></span> <span class="token comment">//可以访问使用$emojiArt获取投影值</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//还提供了其他变量,任何@的内容都可以制作下划线变量</span>
+<span class="token keyword">var</span> _emojiArt<span class="token punctuation">:</span> <span class="token class-name">Published</span> <span class="token operator">=</span> <span class="token class-name">Published</span><span class="token punctuation">(</span>wrappedValue<span class="token punctuation">:</span> <span class="token class-name">EmojiArt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">//数据类型是已发布类型</span>
+<span class="token comment">//包装之后，变成计算属性</span>
+<span class="token keyword">var</span> emojiArt<span class="token punctuation">:</span> <span class="token class-name">EmojiArt</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">get</span> <span class="token punctuation">&#123;</span> _emojiArt<span class="token punctuation">.</span>wrappedValue <span class="token punctuation">&#125;</span>
+    <span class="token keyword">set</span> <span class="token punctuation">&#123;</span> _emojiArt<span class="token punctuation">.</span>wrappedValue <span class="token operator">=</span> newvalue <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/06/05/cs193p-note12/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/02/cs193p-note11/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1106,104 +1214,6 @@
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/02/20/cs193-note1-2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/imga.png">
-      <meta itemprop="name" content="Wenrong Jiang">
-      <meta itemprop="description" content="一以贯之的努力，不得懈怠的人生。">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="J’s blogs">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/20/cs193-note1-2/" class="post-title-link" itemprop="url">CS193_note 1-4</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-02-20 10:19:40" itemprop="dateCreated datePublished" datetime="2022-02-20T10:19:40+08:00">2022-02-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-item" title="本文字数">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">本文字数：</span>
-      <span>2.7k</span>
-    </span>
-    <span class="post-meta-item" title="阅读时长">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>9 分钟</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="RoundedRectangle"><a href="#RoundedRectangle" class="headerlink" title="RoundedRectangle"></a>RoundedRectangle</h3><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">RoundedRectangle</span><span class="token punctuation">(</span>cornerRadius<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">)</span>
-	<span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//填满</span>
-	<span class="token punctuation">.</span><span class="token function">foregroundColor</span><span class="token punctuation">(</span><span class="token punctuation">.</span>red<span class="token punctuation">)</span> <span class="token comment">//前景颜色</span>
-	<span class="token punctuation">.</span><span class="token function">stroke</span><span class="token punctuation">(</span>lineWidth<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">)</span> <span class="token comment">//边框宽度</span>
-	<span class="token punctuation">.</span>strokeBorder<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/20/cs193-note1-2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
     <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
@@ -1228,13 +1238,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="站点总字数">37k</span>
+    <span title="站点总字数">44k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:02</span>
+    <span title="站点阅读时长">2:27</span>
   </span>
 </div>
 

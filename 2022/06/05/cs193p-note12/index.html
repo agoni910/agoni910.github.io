@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic%7CRoboto+Slab:300,300italic,400,400italic,700,700italic%7CPT+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Property Wrappers属性包装器，含有@something的语句。属性包装器只是一个结构，结构中封装了应用于变量的某种模板行为。例如@State、@Published、@ObservedObject等 Published@Published var emojiArt: EmojiArt &#x3D; EmojiArt() &#x2F;&#x2F;具体实现 struct Published &amp;#123;&#x2F;&#x2F;创建一个结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs193p_note12_Bindings Sheet Navigation EditMode">
+<meta property="og:url" content="http://example.com/2022/06/05/cs193p-note12/index.html">
+<meta property="og:site_name" content="J’s blogs">
+<meta property="og:description" content="Property Wrappers属性包装器，含有@something的语句。属性包装器只是一个结构，结构中封装了应用于变量的某种模板行为。例如@State、@Published、@ObservedObject等 Published@Published var emojiArt: EmojiArt &#x3D; EmojiArt() &#x2F;&#x2F;具体实现 struct Published &amp;#123;&#x2F;&#x2F;创建一个结">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-05T03:27:34.000Z">
+<meta property="article:modified_time" content="2022-08-09T14:24:15.359Z">
+<meta property="article:author" content="Wenrong Jiang">
+<meta property="article:tag" content="swift">
+<meta property="article:tag" content="cs193p">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/06/05/cs193p-note12/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/06/05/cs193p-note12/","path":"2022/06/05/cs193p-note12/","title":"cs193p_note12_Bindings Sheet Navigation EditMode"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>cs193p_note12_Bindings Sheet Navigation EditMode | J’s blogs</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">J’s blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives" rel="section">归档</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories" rel="section">分类</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags" rel="section">标签</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Property-Wrappers"><span class="nav-number">1.</span> <span class="nav-text">Property Wrappers</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Published"><span class="nav-number">1.1.</span> <span class="nav-text">Published</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#State"><span class="nav-number">1.2.</span> <span class="nav-text">@State</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#StateObject"><span class="nav-number">1.3.</span> <span class="nav-text">@StateObject</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#StateObject-%E5%92%8C-ObservedObject"><span class="nav-number">1.4.</span> <span class="nav-text">@StateObject 和 @ObservedObject</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Binding"><span class="nav-number">1.5.</span> <span class="nav-text">@Binding</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#EnvironmentObject"><span class="nav-number">1.6.</span> <span class="nav-text">@EnvironmentObject</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Environment"><span class="nav-number">1.7.</span> <span class="nav-text">@Environment</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo"><span class="nav-number">2.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E6%A8%A1%E5%9E%8B%E4%B8%AD%E6%8F%90%E5%8F%96%E4%BF%A1%E6%81%AF"><span class="nav-number">2.1.</span> <span class="nav-text">从模型中提取信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%B0%83%E8%89%B2%E6%9D%BF%E7%9A%84%E5%8A%A8%E7%94%BB"><span class="nav-number">2.2.</span> <span class="nav-text">添加调色板的动画</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E8%8F%9C%E5%8D%95"><span class="nav-number">2.3.</span> <span class="nav-text">上下文菜单</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#go-to"><span class="nav-number">2.4.</span> <span class="nav-text">go to</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%B0%E7%9A%84%E7%BC%96%E8%BE%91%E8%A7%86%E5%9B%BE"><span class="nav-number">2.5.</span> <span class="nav-text">创建新的编辑视图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%A1%E7%90%86%E7%95%8C%E9%9D%A2"><span class="nav-number">2.6.</span> <span class="nav-text">管理界面</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A0%E9%99%A4%E7%AE%A1%E7%90%86%E5%88%97%E8%A1%A8"><span class="nav-number">2.7.</span> <span class="nav-text">删除管理列表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AD%A6%E5%91%8A"><span class="nav-number">2.8.</span> <span class="nav-text">警告</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.9.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Wenrong Jiang"
+      src="/images/imga.png">
+  <p class="site-author-name" itemprop="name">Wenrong Jiang</p>
+  <div class="site-description" itemprop="description">一以贯之的努力，不得懈怠的人生。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/agoni910" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;agoni910" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:selever2002@163.com" title="E-Mail → mailto:selever2002@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/05/cs193p-note12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/imga.png">
+      <meta itemprop="name" content="Wenrong Jiang">
+      <meta itemprop="description" content="一以贯之的努力，不得懈怠的人生。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="J’s blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cs193p_note12_Bindings Sheet Navigation EditMode
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-06-05 11:27:34" itemprop="dateCreated datePublished" datetime="2022-06-05T11:27:34+08:00">2022-06-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>7.9k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>26 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="Property-Wrappers"><a href="#Property-Wrappers" class="headerlink" title="Property Wrappers"></a>Property Wrappers</h3><p>属性包装器，含有@something的语句。属性包装器只是一个结构，结构中封装了应用于变量的某种模板行为。例如@State、@Published、@ObservedObject等</p>
+<h4 id="Published"><a href="#Published" class="headerlink" title="Published"></a>Published</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token attribute atrule">@Published</span> <span class="token keyword">var</span> emojiArt<span class="token punctuation">:</span> <span class="token class-name">EmojiArt</span> <span class="token operator">=</span> <span class="token class-name">EmojiArt</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token comment">//具体实现</span>
+<span class="token keyword">struct</span> <span class="token class-name">Published</span> <span class="token punctuation">&#123;</span><span class="token comment">//创建一个结构体</span>
+    <span class="token keyword">var</span> wrappedValue<span class="token punctuation">:</span> <span class="token class-name">EmojiArt</span>
+    <span class="token comment">//发生变化时，在信息流中发布变化</span>
+    <span class="token keyword">var</span> projectedValue<span class="token punctuation">:</span> <span class="token class-name">Publisher</span><span class="token operator">&lt;</span><span class="token class-name">EmojiArt</span><span class="token punctuation">,</span> <span class="token class-name">Never</span><span class="token operator">></span> <span class="token comment">//可以访问使用$emojiArt获取投影值</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//还提供了其他变量,任何@的内容都可以制作下划线变量</span>
+<span class="token keyword">var</span> _emojiArt<span class="token punctuation">:</span> <span class="token class-name">Published</span> <span class="token operator">=</span> <span class="token class-name">Published</span><span class="token punctuation">(</span>wrappedValue<span class="token punctuation">:</span> <span class="token class-name">EmojiArt</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">//数据类型是已发布类型</span>
+<span class="token comment">//包装之后，变成计算属性</span>
+<span class="token keyword">var</span> emojiArt<span class="token punctuation">:</span> <span class="token class-name">EmojiArt</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">get</span> <span class="token punctuation">&#123;</span> _emojiArt<span class="token punctuation">.</span>wrappedValue <span class="token punctuation">&#125;</span>
+    <span class="token keyword">set</span> <span class="token punctuation">&#123;</span> _emojiArt<span class="token punctuation">.</span>wrappedValue <span class="token operator">=</span> newvalue <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<p>当wrappedValue发生变化时，通过projectedValue($emojiArt)发布更改。有代码在封闭的ObservableObject中调用<code>objectWillChange.send()</code></p>
+<h4 id="State"><a href="#State" class="headerlink" title="@State"></a>@State</h4><p>wrappedValue类型是任何值类型。在堆中存储wrappedValue，当值发生变化时使视图无效，重建body。随着视图的创建和销毁，只要视图主体在屏幕上，值保持不变一直指向堆中的同一个东西。</p>
+<p>projected value $ 是一个Binding 绑定，这个值在堆中的绑定。</p>
+<p>如果使用<code>@State</code>声明，但并没有赋值，想要在init中初始化。_是State结构，通过<code>.init</code>实现，使其有初始值。</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token attribute atrule">@State</span> <span class="token keyword">private</span> <span class="token keyword">var</span> foo<span class="token punctuation">:</span> <span class="token class-name">Int</span>
+<span class="token keyword">init</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+	_foo <span class="token operator">=</span> <span class="token punctuation">.</span><span class="token keyword">init</span><span class="token punctuation">(</span>initialValue<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="StateObject"><a href="#StateObject" class="headerlink" title="@StateObject"></a>@StateObject</h4><p>和@State很相似，将数据保存在内存中，但是它用用于ObservableObjects（ViewModel）。视图和验证等行为类似于@ObservedObject。用在Apps、View、Scenes中。</p>
+<p>@StateObject是一个数据的真实的来源，就像state对于view本地的值一样。所有需要带有初始化值的方式创建<code>@StateObject var foo = SomeObservableObject()</code>。@ObservedObject不是真实来源，是对真实来源的引用，所以后面不会跟上“&#x3D;”。ObservedObject可以存在于StateObject中，可以拥有一个ViewModel数组，viewmodel会被固定到view的声明周期。</p>
+<p>如果把StateObject放进视图中，生命周期和屏幕上视图的生命周期一致，一旦视图离开屏幕ViewModel会被破坏，所有的存储都会消失。如果你有一个接受url的viewmodel，去拿去内容，一旦离开屏幕就销毁拿来的内容。</p>
+<h4 id="StateObject-和-ObservedObject"><a href="#StateObject-和-ObservedObject" class="headerlink" title="@StateObject 和 @ObservedObject"></a>@StateObject 和 @ObservedObject</h4><p>wrappedValue是实现ObservableObject协议的东西，基本上是ViewModel。当wrappedValue发生改变时，使试图失效。ProjectValue的值是一个对ViewModel中变量的Binding，这个投影值可以是任何变量的表达式，甚至做下标 <code>$myViewModel.data.stuff[3]</code>。</p>
+<h4 id="Binding"><a href="#Binding" class="headerlink" title="@Binding"></a>@Binding</h4><p>wrappedValue是绑定到别的东西的值，内容来源主要是@State、@StateObject、@ObservedObject。当绑定内容改变时，使视图无效。ProjectedValue是一个绑定到自己的Binding，如果绑定某物并调用接受另一个绑定的函数，可以使用。作用是上级视图传递到子视图的数据可修改版本。</p>
+<p>从TextField中获取文本，使用Toggle或其他状态修改UI元素，查找NavigationView中哪个项目被选中，手势状态中的 .updating……</p>
+<p>Binding能让我们拥有单一的真实来源，拥有不需要复制状态，或将其复制到View，能使用@Binding到数据的真实来源。</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">struct</span> <span class="token class-name">MyView</span><span class="token punctuation">:</span> <span class="token class-name">View</span><span class="token punctuation">&#123;</span>
+    <span class="token attribute atrule">@State</span> <span class="token keyword">var</span> myString <span class="token operator">=</span> <span class="token string-literal"><span class="token string">"Hello"</span></span> <span class="token comment">//来源</span>
+    <span class="token keyword">var</span> body<span class="token punctuation">:</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+        <span class="token function">otherView</span><span class="token punctuation">(</span>sharedText<span class="token punctuation">:</span> $myString<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">struct</span> <span class="token class-name">OtherView</span><span class="token punctuation">:</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+    <span class="token attribute atrule">@Binding</span> <span class="token keyword">var</span> sharedText<span class="token punctuation">:</span> <span class="token class-name">String</span> <span class="token comment">//绑定 </span>
+    <span class="token keyword">var</span> body<span class="token punctuation">:</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Text</span><span class="token punctuation">(</span>sharedText<span class="token punctuation">)</span>
+        <span class="token class-name">TextField</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"Shared"</span></span><span class="token punctuation">,</span> text<span class="token punctuation">:</span> $sharedText<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>常量绑定，绑定一个常量每次询问时都不会改变。预览时常用<code>Binding.constant(value)</code>。<code>OtherView(sharedText: .constant(&quot;Howdy&quot;))</code>。计算绑定<code>Binding(get:, set:)</code> </p>
+<h4 id="EnvironmentObject"><a href="#EnvironmentObject" class="headerlink" title="@EnvironmentObject"></a>@EnvironmentObject</h4><p>和@ObservedObject完全相同，是ObservedObject的引用，以不同的方式传递给视图，不是通过参数传递，通过视图修改器传递。如果我们的整个View层次结构中的所有视图都需要使用这个数据，就需要通过EnvironmentObject来传递。这样我们就可以省略到各种视图的参数了(偷懒专用代码)。所以我们可以把EnvironmentObject认为是将数据注入到所有的视图中去。只能拥有一个@EnvironmentObject。</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> myView <span class="token operator">=</span> <span class="token class-name">MyView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">environmentObject</span><span class="token punctuation">(</span>theViewModel<span class="token punctuation">)</span> <span class="token comment">//传递数据</span>
+<span class="token attribute atrule">@EnvironmentObject</span> <span class="token keyword">var</span> viewModel<span class="token punctuation">:</span> <span class="token class-name">ViewModelClass</span> <span class="token comment">//接受数据</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>wrappedValue是ObservableObject获得通过.environmentObject()被注入到视图</p>
+<h4 id="Environment"><a href="#Environment" class="headerlink" title="@Environment"></a>@Environment</h4><p>和@EnvironmentObject没关系。属性包装器在创建时可以有参数，使用()指定参数<code>@Environment(\.colorScheme) var colorScheme</code>。内容是当视图正在绘制的时候，一堆正在发生的事情的变量。</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift">view<span class="token punctuation">.</span><span class="token function">environment</span><span class="token punctuation">(</span><span class="token punctuation">\</span><span class="token punctuation">.</span>colorScheme<span class="token punctuation">,</span> <span class="token punctuation">.</span>dark<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>wrappedValue是EnvironmentValues中的一些变量。</p>
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><h4 id="从模型中提取信息"><a href="#从模型中提取信息" class="headerlink" title="从模型中提取信息"></a>从模型中提取信息</h4><p>将store设置成EnvironmentObject，方便注入到所有视图。</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">struct</span> <span class="token class-name">PaletteChooser</span><span class="token punctuation">:</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> emojiFontSize<span class="token punctuation">:</span> <span class="token class-name">CGFloat</span> <span class="token operator">=</span> <span class="token number">40</span>
+    <span class="token keyword">var</span> emojiFont<span class="token punctuation">:</span> <span class="token class-name">Font</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">.</span><span class="token function">system</span><span class="token punctuation">(</span>size<span class="token punctuation">:</span> emojiFontSize<span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
+    
+    <span class="token attribute atrule">@EnvironmentObject</span> <span class="token keyword">var</span> store<span class="token punctuation">:</span> <span class="token class-name">PaletteStore</span> <span class="token comment">//数据源在app</span>
+    
+    <span class="token attribute atrule">@State</span> <span class="token keyword">private</span> <span class="token keyword">var</span> chosenPaletteIndex <span class="token operator">=</span> <span class="token number">0</span> <span class="token comment">//选择的调色板下标</span>
+    
+    <span class="token keyword">var</span> body<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">HStack</span> <span class="token punctuation">&#123;</span>
+            paletteControlButton
+            <span class="token function">body</span><span class="token punctuation">(</span><span class="token keyword">for</span><span class="token punctuation">:</span> store<span class="token punctuation">.</span><span class="token function">palette</span><span class="token punctuation">(</span>at<span class="token punctuation">:</span> chosenPaletteIndex<span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">var</span> paletteControlButton<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Button</span> <span class="token punctuation">&#123;</span>
+            chosenPaletteIndex <span class="token operator">=</span> <span class="token punctuation">(</span>chosenPaletteIndex <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">%</span> store<span class="token punctuation">.</span>palettes<span class="token punctuation">.</span>count
+        <span class="token punctuation">&#125;</span> label<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">Image</span><span class="token punctuation">(</span>systemName<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"paintpalette"</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">.</span><span class="token function">font</span><span class="token punctuation">(</span>emojiFont<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">func</span> <span class="token function-definition function">body</span><span class="token punctuation">(</span><span class="token keyword">for</span> palette<span class="token punctuation">:</span> <span class="token class-name">Palette</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">HStack</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">Text</span><span class="token punctuation">(</span>palette<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+            <span class="token class-name">ScrollingEmojisView</span><span class="token punctuation">(</span>emojis<span class="token punctuation">:</span> palette<span class="token punctuation">.</span>emojis<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">font</span><span class="token punctuation">(</span>emojiFont<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="添加调色板的动画"><a href="#添加调色板的动画" class="headerlink" title="添加调色板的动画"></a>添加调色板的动画</h4><p>点击调色板按钮时，平滑滚动切换调色板，新内容从底部往上滑动，就内容向上滑行到顶部离开，使用过渡动画。</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">body</span><span class="token punctuation">(</span><span class="token keyword">for</span> palette<span class="token punctuation">:</span> <span class="token class-name">Palette</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">HStack</span> <span class="token punctuation">&#123;</span>
+        <span class="token operator">...</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">.</span><span class="token function">id</span><span class="token punctuation">(</span>palette<span class="token punctuation">.</span>id<span class="token punctuation">)</span> <span class="token comment">//类似于变成可是别的,发生变化的时候,删除旧的创建新的代替</span>
+    <span class="token punctuation">.</span><span class="token function">transition</span><span class="token punctuation">(</span>rollTransition<span class="token punctuation">)</span> <span class="token comment">//不能实现,只是改变了试图并没有在过渡</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//过渡动画</span>
+<span class="token keyword">var</span> rollTransition<span class="token punctuation">:</span> <span class="token class-name">AnyTransition</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">AnyTransition</span><span class="token punctuation">.</span><span class="token function">asymmetric</span><span class="token punctuation">(</span>insertion<span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token function">offset</span><span class="token punctuation">(</span>x<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> emojiFontSize<span class="token punctuation">)</span><span class="token punctuation">,</span> removal<span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token function">offset</span><span class="token punctuation">(</span>x<span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">,</span> y<span class="token punctuation">:</span> <span class="token operator">-</span>emojiFontSize<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">// 不对称过渡</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="上下文菜单"><a href="#上下文菜单" class="headerlink" title="上下文菜单"></a>上下文菜单</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">Button</span><span class="token punctuation">.</span>contextMenu <span class="token punctuation">&#123;</span> contextMenu <span class="token punctuation">&#125;</span> <span class="token comment">//上下文菜单栏,只需要列出要放下的按钮</span>
+<span class="token attribute atrule">@ViewBuilder</span>
+<span class="token keyword">var</span> contextMenu<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">AnimatedActionButton</span><span class="token punctuation">(</span>title<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"New"</span></span><span class="token punctuation">,</span> systemImage<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"plus"</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        store<span class="token punctuation">.</span><span class="token function">insertPalette</span><span class="token punctuation">(</span>named<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"New"</span></span><span class="token punctuation">,</span> emojis<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">""</span></span><span class="token punctuation">,</span> at<span class="token punctuation">:</span> chosenPaletteIndex<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token class-name">AnimatedActionButton</span><span class="token punctuation">(</span>title<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"Delete"</span></span><span class="token punctuation">,</span> systemImage<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"minus.circle"</span></span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        chosenPaletteIndex <span class="token operator">=</span> store<span class="token punctuation">.</span><span class="token function">removePalette</span><span class="token punctuation">(</span>at<span class="token punctuation">:</span> chosenPaletteIndex<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="go-to"><a href="#go-to" class="headerlink" title="go to"></a>go to</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">var</span> gotoMenu<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">Menu</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">ForEach</span><span class="token punctuation">(</span>store<span class="token punctuation">.</span>palettes<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> palette <span class="token keyword">in</span>
+            <span class="token class-name">AnimatedActionButton</span><span class="token punctuation">(</span>title<span class="token punctuation">:</span> palette<span class="token punctuation">.</span>name<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token keyword">if</span> <span class="token keyword">let</span> index <span class="token operator">=</span> store<span class="token punctuation">.</span>palettes<span class="token punctuation">.</span><span class="token function">index</span><span class="token punctuation">(</span>matching<span class="token punctuation">:</span> palette<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                    chosenPaletteIndex <span class="token operator">=</span> index
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span> label<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Label</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"Go To"</span></span><span class="token punctuation">,</span> systemImage<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"text.insert"</span></span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="创建新的编辑视图"><a href="#创建新的编辑视图" class="headerlink" title="创建新的编辑视图"></a>创建新的编辑视图</h4><p>使编辑窗口出现在页面上</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span><span class="token function">popover</span><span class="token punctuation">(</span>isPresented<span class="token punctuation">:</span> $editing<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token comment">//给定条件为真时显示弹出框 .sheet</span>
+	<span class="token class-name">PaletteEditor</span><span class="token punctuation">(</span>palette<span class="token punctuation">:</span> $store<span class="token punctuation">.</span>palettes<span class="token punctuation">[</span>chosenPaletteIndex<span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span>
+<span class="token comment">//由实际要改变的调色板驱动</span>
+body<span class="token punctuation">.</span><span class="token function">popover</span><span class="token punctuation">(</span>item<span class="token punctuation">:</span> $paletteToEdit<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> palette <span class="token keyword">in</span> <span class="token comment">//nil不出现在屏幕上</span>
+	<span class="token class-name">PaletteEditor</span><span class="token punctuation">(</span>palette<span class="token punctuation">:</span> $store<span class="token punctuation">.</span>palettes<span class="token punctuation">[</span>palette<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">//用调色板索引</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>TextField 输入文本框 还有自动大小写，禁止自动更正，转义城市地址等功能</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">struct</span> <span class="token class-name">PaletteEditor</span><span class="token punctuation">:</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+    <span class="token attribute atrule">@Binding</span> <span class="token keyword">var</span> palette<span class="token punctuation">:</span> <span class="token class-name">Palette</span> <span class="token comment">//编辑位于其他地方的调色板   </span>
+    <span class="token keyword">var</span> body<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Form</span> <span class="token punctuation">&#123;</span>
+            <span class="token comment">//正式部分</span>
+<span class="token comment">//            Section(header: Text("N")) &#123;</span>
+<span class="token comment">//                TextField("Name", text: $palette.name)</span>
+<span class="token comment">//            &#125;</span>
+            nameSection
+            addEmojiSection
+            removeEmojiSection
+            
+        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">.</span><span class="token function">frame</span><span class="token punctuation">(</span>minWidth<span class="token punctuation">:</span> <span class="token number">300</span><span class="token punctuation">,</span> minHeight<span class="token punctuation">:</span> <span class="token number">350</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">var</span> nameSection<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Section</span><span class="token punctuation">(</span>content<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> <span class="token class-name">TextField</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"Name"</span></span><span class="token punctuation">,</span> text<span class="token punctuation">:</span> $palette<span class="token punctuation">.</span>name<span class="token punctuation">)</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> header<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"Name"</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token attribute atrule">@State</span> <span class="token keyword">private</span> <span class="token keyword">var</span> emojiToAdd <span class="token operator">=</span> <span class="token string-literal"><span class="token string">""</span></span>
+    <span class="token keyword">var</span> addEmojiSection<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Section</span><span class="token punctuation">(</span>content<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">TextField</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">""</span></span><span class="token punctuation">,</span> text<span class="token punctuation">:</span> $emojiToAdd<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span><span class="token function">onChange</span><span class="token punctuation">(</span>of<span class="token punctuation">:</span> emojiToAdd<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> emojis <span class="token keyword">in</span>   <span class="token comment">//值发生改变时操作</span>
+                    <span class="token function">addEmojis</span><span class="token punctuation">(</span>emojis<span class="token punctuation">)</span>
+                <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> header<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"Add Emojis"</span></span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">func</span> <span class="token function-definition function">addEmojis</span><span class="token punctuation">(</span><span class="token omit keyword">_</span> emojis<span class="token punctuation">:</span> <span class="token class-name">String</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        withAnimation <span class="token punctuation">&#123;</span>
+            palette<span class="token punctuation">.</span>emojis <span class="token operator">=</span> <span class="token punctuation">(</span>emojis <span class="token operator">+</span> palette<span class="token punctuation">.</span>emojis<span class="token punctuation">)</span>
+                <span class="token punctuation">.</span>filter <span class="token punctuation">&#123;</span> <span class="token short-argument">$0</span><span class="token punctuation">.</span>isEmoji <span class="token punctuation">&#125;</span> <span class="token comment">//过滤不是表情符号的内容</span>
+                <span class="token punctuation">.</span>removingDuplicateCharacters <span class="token comment">//如果存在不想复制</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">var</span> removeEmojiSection<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">Section</span><span class="token punctuation">(</span>content<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">let</span> emojis <span class="token operator">=</span> palette<span class="token punctuation">.</span>emojis<span class="token punctuation">.</span>removingDuplicateCharacters<span class="token punctuation">.</span>map <span class="token punctuation">&#123;</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token short-argument">$0</span><span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
+            <span class="token class-name">LazyVGrid</span><span class="token punctuation">(</span>columns<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token class-name">GridItem</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token function">adaptive</span><span class="token punctuation">(</span>minimum<span class="token punctuation">:</span> <span class="token number">40</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                <span class="token class-name">ForEach</span><span class="token punctuation">(</span>emojis<span class="token punctuation">,</span> id<span class="token punctuation">:</span> <span class="token punctuation">\</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> emoji <span class="token keyword">in</span>
+                    <span class="token class-name">Text</span><span class="token punctuation">(</span>emoji<span class="token punctuation">)</span>
+                        <span class="token punctuation">.</span>onTapGesture <span class="token punctuation">&#123;</span>
+                            withAnimation <span class="token punctuation">&#123;</span>
+                                palette<span class="token punctuation">.</span>emojis<span class="token punctuation">.</span><span class="token function">removeAll</span><span class="token punctuation">(</span><span class="token keyword">where</span><span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> <span class="token class-name">String</span><span class="token punctuation">(</span><span class="token short-argument">$0</span><span class="token punctuation">)</span> <span class="token operator">==</span> emoji <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+                            <span class="token punctuation">&#125;</span>
+                        <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">.</span><span class="token function">font</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token function">system</span><span class="token punctuation">(</span>size<span class="token punctuation">:</span> <span class="token number">40</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span><span class="token punctuation">,</span> header<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"Remove Emoji"</span></span><span class="token punctuation">)</span><span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="管理界面"><a href="#管理界面" class="headerlink" title="管理界面"></a>管理界面</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">struct</span> <span class="token class-name">PaletteManager</span><span class="token punctuation">:</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+    <span class="token attribute atrule">@EnvironmentObject</span> <span class="token keyword">var</span> store<span class="token punctuation">:</span> <span class="token class-name">PaletteStore</span>
+    <span class="token keyword">var</span> body<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">NavigationView</span> <span class="token punctuation">&#123;</span>
+            <span class="token class-name">List</span> <span class="token punctuation">&#123;</span>
+                <span class="token class-name">ForEach</span><span class="token punctuation">(</span>store<span class="token punctuation">.</span>palettes<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> palette <span class="token keyword">in</span>
+                    <span class="token comment">//点击之后跳转目的地 导航链接</span>
+                    <span class="token comment">//必需在NavifationView中使用</span>
+                    <span class="token comment">//顶部有更多空间,为了放置标题</span>
+                    <span class="token class-name">NavigationLink</span><span class="token punctuation">(</span>destination<span class="token punctuation">:</span> <span class="token class-name">PaletteEditor</span><span class="token punctuation">(</span>palette<span class="token punctuation">:</span> $store<span class="token punctuation">.</span>palettes<span class="token punctuation">[</span>palette<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token comment">//内部的标题在editor修改</span>
+                        <span class="token class-name">VStack</span><span class="token punctuation">(</span>alignment<span class="token punctuation">:</span> <span class="token punctuation">.</span>leading<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                            <span class="token class-name">Text</span><span class="token punctuation">(</span>palette<span class="token punctuation">.</span>name<span class="token punctuation">)</span>
+                            <span class="token class-name">Text</span><span class="token punctuation">(</span>palette<span class="token punctuation">.</span>emojis<span class="token punctuation">)</span>
+                        <span class="token punctuation">&#125;</span>
+                    <span class="token punctuation">&#125;</span>
+                <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">&#125;</span>
+            <span class="token punctuation">.</span><span class="token function">navigationTitle</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"Manager Palettes"</span></span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">navigationBarTitleDisplayMode</span><span class="token punctuation">(</span><span class="token punctuation">.</span>inline<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token keyword">struct</span> <span class="token class-name">PaletteManager_Previews</span><span class="token punctuation">:</span> <span class="token class-name">PreviewProvider</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">static</span> <span class="token keyword">var</span> previews<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">PaletteManager</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">environmentObject</span><span class="token punctuation">(</span><span class="token class-name">PaletteStore</span><span class="token punctuation">(</span>named<span class="token punctuation">:</span> <span class="token string-literal"><span class="token string">"preview"</span></span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="删除管理列表"><a href="#删除管理列表" class="headerlink" title="删除管理列表"></a>删除管理列表</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span>onDelete <span class="token punctuation">&#123;</span> indexSet <span class="token keyword">in</span> <span class="token comment">//数组索引</span>
+    store<span class="token punctuation">.</span>palettes<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>atOffsets<span class="token punctuation">:</span> indexSet<span class="token punctuation">)</span> <span class="token comment">//删除指定偏移量的所有元素</span>
+<span class="token punctuation">&#125;</span>
+<span class="token punctuation">.</span>onMove <span class="token punctuation">&#123;</span> indexSet<span class="token punctuation">,</span> newOffset <span class="token keyword">in</span>
+    store<span class="token punctuation">.</span>palettes<span class="token punctuation">.</span><span class="token function">move</span><span class="token punctuation">(</span>fromOffsets<span class="token punctuation">:</span> indexSet<span class="token punctuation">,</span> toOffset<span class="token punctuation">:</span> newOffset<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h4><p>提醒用户出现问题</p>
+<pre class="line-numbers language-none"><code class="language-none">@State private var alertToShow: IdentifiableAlert?
+
+private func showBackgroundImageFetchFailedAlert(_ url: URL) &#123;
+    alertToShow &#x3D; IdentifiableAlert(id: &quot;fetch failed: &quot; + url.absoluteString, alert: &#123;
+        Alert(
+            title: Text(&quot;Background Image Fetch&quot;),
+            message: Text(&quot;Couldn&#39;t load from \(url).&quot;),
+            dismissButton: .default(Text(&quot;OK&quot;))
+        )
+    &#125;)
+&#125;
+
+&#x2F;&#x2F;好像现在最好不用,但是还没改
+&#x2F;&#x2F;放在文件主体
+.alert(item: $alertToShow) &#123; alertToShow in
+    alertToShow.alert()
+&#125;
+.onChange(of: document.backgroundImageFetchStatus) &#123; status in
+    switch status &#123;
+    case .failed(let url):
+        showBackgroundImageFetchFailedAlert(url)
+    default:
+        break
+    &#125;
+&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><p>学习了使用EnvironmentObject机制传递ViewModel，对执行过渡时使用id让视图可识别实现过渡，在按钮上制作菜单，使用Binding从视图一直返回到模型、决定视图什么时候出现，Form、List、在ForEach中的onDelete和onMove，放置工具栏，EditButton()会设置EditMode，警告</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/swift/" rel="tag"># swift</a>
+              <a href="/tags/cs193p/" rel="tag"># cs193p</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/06/02/cs193p-note11/" rel="prev" title="cs193p_note11_Error Persistence">
+                  <i class="fa fa-chevron-left"></i> cs193p_note11_Error Persistence
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wenrong Jiang</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">44k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:27</span>
+  </span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+-->
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
