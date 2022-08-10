@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic%7CRoboto+Slab:300,300italic,400,400italic,700,700italic%7CPT+Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":true,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Publisher协议。实现发出值的对象。 Publisher&lt;Output, Failure&gt;，Output是发布者发布的内容的类型，Failure通常是一个枚举，必须实现Error，失败后不会抛出。对于发布者，我们可以订阅它、即时转换它的值、把值传送到一些地方。属于Combine框架（可能会后补详细内容） 订阅发布者当发布没有订阅者，会停止发布 cancellable &#x3D; myPu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="cs193p_note13_Published More Persistence">
+<meta property="og:url" content="http://example.com/2022/06/09/cs193p-note13/index.html">
+<meta property="og:site_name" content="J’s blogs">
+<meta property="og:description" content="Publisher协议。实现发出值的对象。 Publisher&lt;Output, Failure&gt;，Output是发布者发布的内容的类型，Failure通常是一个枚举，必须实现Error，失败后不会抛出。对于发布者，我们可以订阅它、即时转换它的值、把值传送到一些地方。属于Combine框架（可能会后补详细内容） 订阅发布者当发布没有订阅者，会停止发布 cancellable &#x3D; myPu">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-06-09T03:27:34.000Z">
+<meta property="article:modified_time" content="2022-08-10T12:15:47.186Z">
+<meta property="article:author" content="Wenrong Jiang">
+<meta property="article:tag" content="swift">
+<meta property="article:tag" content="cs193p">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/06/09/cs193p-note13/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/06/09/cs193p-note13/","path":"2022/06/09/cs193p-note13/","title":"cs193p_note13_Published More Persistence"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>cs193p_note13_Published More Persistence | J’s blogs</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">J’s blogs</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section">首页</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives" rel="section">归档</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories" rel="section">分类</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags" rel="section">标签</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Publisher"><span class="nav-number">1.</span> <span class="nav-text">Publisher</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A2%E9%98%85%E5%8F%91%E5%B8%83%E8%80%85"><span class="nav-number">1.1.</span> <span class="nav-text">订阅发布者</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E7%9B%91%E5%90%AC%E5%8F%91%E5%B8%83%E5%86%85%E5%AE%B9"><span class="nav-number">1.2.</span> <span class="nav-text">视图监听发布内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%8F%91%E5%B8%83%E8%80%85"><span class="nav-number">1.3.</span> <span class="nav-text">获取发布者</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#More-Pesistence"><span class="nav-number">2.</span> <span class="nav-text">More Pesistence</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Cloud-Kit"><span class="nav-number">2.1.</span> <span class="nav-text">Cloud Kit</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Core-Data"><span class="nav-number">2.2.</span> <span class="nav-text">Core Data</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Demo"><span class="nav-number">3.</span> <span class="nav-text">Demo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8URLSession"><span class="nav-number">3.1.</span> <span class="nav-text">使用URLSession</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%86%E5%9B%BE%E8%87%AA%E9%80%82%E5%BA%94%E5%A4%A7%E5%B0%8F"><span class="nav-number">3.2.</span> <span class="nav-text">视图自适应大小</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Wenrong Jiang"
+      src="/images/imga.png">
+  <p class="site-author-name" itemprop="name">Wenrong Jiang</p>
+  <div class="site-description" itemprop="description">一以贯之的努力，不得懈怠的人生。</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives">
+          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/agoni910" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;agoni910" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:selever2002@163.com" title="E-Mail → mailto:selever2002@163.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/06/09/cs193p-note13/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/imga.png">
+      <meta itemprop="name" content="Wenrong Jiang">
+      <meta itemprop="description" content="一以贯之的努力，不得懈怠的人生。">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="J’s blogs">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          cs193p_note13_Published More Persistence
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-06-09 11:27:34" itemprop="dateCreated datePublished" datetime="2022-06-09T11:27:34+08:00">2022-06-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/iOS/" itemprop="url" rel="index"><span itemprop="name">iOS</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>7 分钟</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="Publisher"><a href="#Publisher" class="headerlink" title="Publisher"></a>Publisher</h3><p>协议。实现发出值的对象。</p>
+<p><code>Publisher&lt;Output, Failure&gt;</code>，Output是发布者发布的内容的类型，Failure通常是一个枚举，必须实现Error，失败后不会抛出。对于发布者，我们可以订阅它、即时转换它的值、把值传送到一些地方。属于Combine框架（可能会后补详细内容）</p>
+<h4 id="订阅发布者"><a href="#订阅发布者" class="headerlink" title="订阅发布者"></a>订阅发布者</h4><p>当发布没有订阅者，会停止发布</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift">cancellable <span class="token operator">=</span> myPublisher<span class="token punctuation">.</span><span class="token function">sink</span><span class="token punctuation">(</span>
+	receiveCompletion<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> result <span class="token keyword">in</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>	<span class="token comment">//完成、失败或其他方式</span>
+	receiveValue<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> thingThePublisherPublishes <span class="token keyword">in</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span> <span class="token comment">//随着发布者发布信息被反复调用，获得发布的最新内容</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果调用.sink，发布者是Never，可以忽略 receiveCompletion。</p>
+<p>返回的内容实现了可取消协议 Cancellable，通常使用类型擦出将它处理成AnyCancellable。不需要发布内容时可以使用<code>.cancel()</code>取消，还可以让.sink()订阅者保持活力。当返回cancellable值时.sink将在内存常跓，这是因为.sink指向了cancellable变量。</p>
+<p>当把cancellable设置为nil时它将不会指向.sink返回的任何内容。这也会导致.sink停止工作（内存回收），所以它的生命周期是绑定在一起的。就像@State与视图的关系，是相互依赖的。如果我们希望.sink继续订阅，就需要一直使用一个变量来接收.sink的返回值。</p>
+<p>.assign()内容类似，但需要失败类型为Never</p>
+<h4 id="视图监听发布内容"><a href="#视图监听发布内容" class="headerlink" title="视图监听发布内容"></a>视图监听发布内容</h4><p>通过视图修改器onReceive，订阅发布内容</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span><span class="token function">onReceive</span><span class="token punctuation">(</span>publisher<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> thingThePublisherPublishes <span class="token keyword">in</span> <span class="token comment">//每次发布的值</span>
+    <span class="token comment">//发布时执行的闭包</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>会使视图重建，但更多的时候使用onChange</p>
+<h4 id="获取发布者"><a href="#获取发布者" class="headerlink" title="获取发布者"></a>获取发布者</h4><p>上面说到的发布者是由Combine框架提供的，这里的<strong>Foundation</strong>发布商（也可以叫<strong>Foundation</strong>发布者），是由<strong>Foundation</strong>框架提供。</p>
+<ul>
+<li>在@Published变量前面使用$</li>
+<li>多线程获取背景图片使用原始的GCD，但在URLSession，提供dataTaskPublisher发布最终来自互联网上的数据</li>
+<li>Timer类有一个publish(every:)的函数，每秒或几秒发布一次，发布当前日期和时间的发布者</li>
+<li>NotificationCenter通知中心发布器，系统给用户和发布通知</li>
+</ul>
+<h3 id="More-Pesistence"><a href="#More-Pesistence" class="headerlink" title="More Pesistence"></a>More Pesistence</h3><h4 id="Cloud-Kit"><a href="#Cloud-Kit" class="headerlink" title="Cloud Kit"></a>Cloud Kit</h4><p>在云数据库存储内容，数据会出现在用户的全部设备中。包含一种网络上的UserDefaults，在CoreData上表现的很好。任何使用网络的内容都是异步执行的。</p>
+<h4 id="Core-Data"><a href="#Core-Data" class="headerlink" title="Core Data"></a>Core Data</h4><p>是一个面向对象的层，基本上位于关系数据库之上。为数据库中所有的行和表都创建了小的ViewModel。</p>
+<p>具体内容在去年，我会补上的。（又一个坑）</p>
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><h4 id="使用URLSession"><a href="#使用URLSession" class="headerlink" title="使用URLSession"></a>使用URLSession</h4><p>用URLSession替换掉原本使用GCD获取背景图片的代码</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift">backgroundImageFetchStatus <span class="token operator">=</span> <span class="token punctuation">.</span>fetching
+backgroundImageFetchCancellable<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment">//如果来新的,马上取消旧的</span>
+<span class="token keyword">let</span> session <span class="token operator">=</span> <span class="token class-name">URLSession</span><span class="token punctuation">.</span>shared <span class="token comment">//使用shared初始化url请求器</span>
+<span class="token comment">//Publisher在后台线程执行,UI要在主线程解决</span>
+<span class="token comment">//Output是一个元组,data查找url返回的数据,response会共享请求时的一些数据</span>
+<span class="token keyword">let</span> publisher <span class="token operator">=</span> session<span class="token punctuation">.</span><span class="token function">dataTaskPublisher</span><span class="token punctuation">(</span><span class="token keyword">for</span><span class="token punctuation">:</span> url<span class="token punctuation">)</span> <span class="token comment">//使用映射将数据转换成UIImage</span>
+    <span class="token punctuation">.</span>map <span class="token punctuation">&#123;</span> <span class="token punctuation">(</span>data<span class="token punctuation">,</span> urlResponse<span class="token punctuation">)</span> <span class="token keyword">in</span> <span class="token class-name">UIImage</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> data<span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">.</span><span class="token function">replaceError</span><span class="token punctuation">(</span>with<span class="token punctuation">:</span> <span class="token nil constant">nil</span><span class="token punctuation">)</span>    <span class="token comment">//出现错误时,不报告错误,将值替换成nil</span>
+    <span class="token punctuation">.</span><span class="token function">receive</span><span class="token punctuation">(</span>on<span class="token punctuation">:</span> <span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span>main<span class="token punctuation">)</span> <span class="token comment">//发布给主队列的订阅者,所以后面的.sink发生在主队列</span>
+<span class="token comment">//完成获取时处理图象,并将照片发布</span>
+<span class="token comment">//关闭文档自动停止</span>
+backgroundImageFetchCancellable <span class="token operator">=</span> publisher <span class="token comment">//随时使用cancellable.cancel()取消订阅,离开函数也会局部变量消失也会结束</span>
+    <span class="token comment">//.assign(to: \EmojiArtDocument.backgroundImage, on: self) //发布的失败类型为Never</span>
+    <span class="token punctuation">.</span>sink <span class="token punctuation">&#123;</span> <span class="token punctuation">[</span><span class="token keyword">weak</span> <span class="token keyword">self</span><span class="token punctuation">]</span> image <span class="token keyword">in</span>
+        <span class="token keyword">self</span><span class="token operator">?</span><span class="token punctuation">.</span>backgroundImage <span class="token operator">=</span> image
+        <span class="token keyword">self</span><span class="token operator">?</span><span class="token punctuation">.</span>backgroundImageFetchStatus <span class="token operator">=</span> <span class="token punctuation">(</span>image <span class="token operator">!=</span> <span class="token nil constant">nil</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token punctuation">.</span>idle <span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token function">failed</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="视图自适应大小"><a href="#视图自适应大小" class="headerlink" title="视图自适应大小"></a>视图自适应大小</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span><span class="token function">onReceive</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span>$backgroundImage<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> image <span class="token keyword">in</span> <span class="token comment">//$document.backgroundImage是绑定值,不是发布者</span>
+    <span class="token function">zoomToFit</span><span class="token punctuation">(</span>image<span class="token punctuation">,</span> <span class="token keyword">in</span><span class="token punctuation">:</span> geometry<span class="token punctuation">.</span>size <span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/swift/" rel="tag"># swift</a>
+              <a href="/tags/cs193p/" rel="tag"># cs193p</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/06/05/cs193p-note12/" rel="prev" title="cs193p_note12_Bindings Sheet Navigation EditMode">
+                  <i class="fa fa-chevron-left"></i> cs193p_note12_Bindings Sheet Navigation EditMode
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Wenrong Jiang</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="站点总字数">46k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">2:34</span>
+  </span>
+</div>
+
+<!--
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+-->
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/hexo-generator-searchdb@1.4.0/dist/search.js" integrity="sha256-vXZMYLEqsROAXkEw93GGIvaB2ab+QW6w3+1ahD9nXXA=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

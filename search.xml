@@ -1928,4 +1928,67 @@ queue<span class="token punctuation">.</span>sync <span class="token punctuation
         <tag>信息搜集</tag>
       </tags>
   </entry>
+  <entry>
+    <title>cs193p_note13_Published More Persistence</title>
+    <url>/2022/06/09/cs193p-note13/</url>
+    <content><![CDATA[<h3 id="Publisher"><a href="#Publisher" class="headerlink" title="Publisher"></a>Publisher</h3><p>协议。实现发出值的对象。</p>
+<p><code>Publisher&lt;Output, Failure&gt;</code>，Output是发布者发布的内容的类型，Failure通常是一个枚举，必须实现Error，失败后不会抛出。对于发布者，我们可以订阅它、即时转换它的值、把值传送到一些地方。属于Combine框架（可能会后补详细内容）</p>
+<h4 id="订阅发布者"><a href="#订阅发布者" class="headerlink" title="订阅发布者"></a>订阅发布者</h4><p>当发布没有订阅者，会停止发布</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift">cancellable <span class="token operator">=</span> myPublisher<span class="token punctuation">.</span><span class="token function">sink</span><span class="token punctuation">(</span>
+	receiveCompletion<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> result <span class="token keyword">in</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>	<span class="token comment">//完成、失败或其他方式</span>
+	receiveValue<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> thingThePublisherPublishes <span class="token keyword">in</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span> <span class="token comment">//随着发布者发布信息被反复调用，获得发布的最新内容</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果调用.sink，发布者是Never，可以忽略 receiveCompletion。</p>
+<p>返回的内容实现了可取消协议 Cancellable，通常使用类型擦出将它处理成AnyCancellable。不需要发布内容时可以使用<code>.cancel()</code>取消，还可以让.sink()订阅者保持活力。当返回cancellable值时.sink将在内存常跓，这是因为.sink指向了cancellable变量。</p>
+<p>当把cancellable设置为nil时它将不会指向.sink返回的任何内容。这也会导致.sink停止工作（内存回收），所以它的生命周期是绑定在一起的。就像@State与视图的关系，是相互依赖的。如果我们希望.sink继续订阅，就需要一直使用一个变量来接收.sink的返回值。</p>
+<p>.assign()内容类似，但需要失败类型为Never</p>
+<h4 id="视图监听发布内容"><a href="#视图监听发布内容" class="headerlink" title="视图监听发布内容"></a>视图监听发布内容</h4><p>通过视图修改器onReceive，订阅发布内容</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span><span class="token function">onReceive</span><span class="token punctuation">(</span>publisher<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> thingThePublisherPublishes <span class="token keyword">in</span> <span class="token comment">//每次发布的值</span>
+    <span class="token comment">//发布时执行的闭包</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>会使视图重建，但更多的时候使用onChange</p>
+<h4 id="获取发布者"><a href="#获取发布者" class="headerlink" title="获取发布者"></a>获取发布者</h4><p>上面说到的发布者是由Combine框架提供的，这里的<strong>Foundation</strong>发布商（也可以叫<strong>Foundation</strong>发布者），是由<strong>Foundation</strong>框架提供。</p>
+<ul>
+<li>在@Published变量前面使用$</li>
+<li>多线程获取背景图片使用原始的GCD，但在URLSession，提供dataTaskPublisher发布最终来自互联网上的数据</li>
+<li>Timer类有一个publish(every:)的函数，每秒或几秒发布一次，发布当前日期和时间的发布者</li>
+<li>NotificationCenter通知中心发布器，系统给用户和发布通知</li>
+</ul>
+<h3 id="More-Pesistence"><a href="#More-Pesistence" class="headerlink" title="More Pesistence"></a>More Pesistence</h3><h4 id="Cloud-Kit"><a href="#Cloud-Kit" class="headerlink" title="Cloud Kit"></a>Cloud Kit</h4><p>在云数据库存储内容，数据会出现在用户的全部设备中。包含一种网络上的UserDefaults，在CoreData上表现的很好。任何使用网络的内容都是异步执行的。</p>
+<h4 id="Core-Data"><a href="#Core-Data" class="headerlink" title="Core Data"></a>Core Data</h4><p>是一个面向对象的层，基本上位于关系数据库之上。为数据库中所有的行和表都创建了小的ViewModel。</p>
+<p>具体内容在去年，我会补上的。（又一个坑）</p>
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><h4 id="使用URLSession"><a href="#使用URLSession" class="headerlink" title="使用URLSession"></a>使用URLSession</h4><p>用URLSession替换掉原本使用GCD获取背景图片的代码</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift">backgroundImageFetchStatus <span class="token operator">=</span> <span class="token punctuation">.</span>fetching
+backgroundImageFetchCancellable<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment">//如果来新的,马上取消旧的</span>
+<span class="token keyword">let</span> session <span class="token operator">=</span> <span class="token class-name">URLSession</span><span class="token punctuation">.</span>shared <span class="token comment">//使用shared初始化url请求器</span>
+<span class="token comment">//Publisher在后台线程执行,UI要在主线程解决</span>
+<span class="token comment">//Output是一个元组,data查找url返回的数据,response会共享请求时的一些数据</span>
+<span class="token keyword">let</span> publisher <span class="token operator">=</span> session<span class="token punctuation">.</span><span class="token function">dataTaskPublisher</span><span class="token punctuation">(</span><span class="token keyword">for</span><span class="token punctuation">:</span> url<span class="token punctuation">)</span> <span class="token comment">//使用映射将数据转换成UIImage</span>
+    <span class="token punctuation">.</span>map <span class="token punctuation">&#123;</span> <span class="token punctuation">(</span>data<span class="token punctuation">,</span> urlResponse<span class="token punctuation">)</span> <span class="token keyword">in</span> <span class="token class-name">UIImage</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> data<span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">.</span><span class="token function">replaceError</span><span class="token punctuation">(</span>with<span class="token punctuation">:</span> <span class="token nil constant">nil</span><span class="token punctuation">)</span>    <span class="token comment">//出现错误时,不报告错误,将值替换成nil</span>
+    <span class="token punctuation">.</span><span class="token function">receive</span><span class="token punctuation">(</span>on<span class="token punctuation">:</span> <span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span>main<span class="token punctuation">)</span> <span class="token comment">//发布给主队列的订阅者,所以后面的.sink发生在主队列</span>
+<span class="token comment">//完成获取时处理图象,并将照片发布</span>
+<span class="token comment">//关闭文档自动停止</span>
+backgroundImageFetchCancellable <span class="token operator">=</span> publisher <span class="token comment">//随时使用cancellable.cancel()取消订阅,离开函数也会局部变量消失也会结束</span>
+    <span class="token comment">//.assign(to: \EmojiArtDocument.backgroundImage, on: self) //发布的失败类型为Never</span>
+    <span class="token punctuation">.</span>sink <span class="token punctuation">&#123;</span> <span class="token punctuation">[</span><span class="token keyword">weak</span> <span class="token keyword">self</span><span class="token punctuation">]</span> image <span class="token keyword">in</span>
+        <span class="token keyword">self</span><span class="token operator">?</span><span class="token punctuation">.</span>backgroundImage <span class="token operator">=</span> image
+        <span class="token keyword">self</span><span class="token operator">?</span><span class="token punctuation">.</span>backgroundImageFetchStatus <span class="token operator">=</span> <span class="token punctuation">(</span>image <span class="token operator">!=</span> <span class="token nil constant">nil</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token punctuation">.</span>idle <span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token function">failed</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="视图自适应大小"><a href="#视图自适应大小" class="headerlink" title="视图自适应大小"></a>视图自适应大小</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span><span class="token function">onReceive</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span>$backgroundImage<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> image <span class="token keyword">in</span> <span class="token comment">//$document.backgroundImage是绑定值,不是发布者</span>
+    <span class="token function">zoomToFit</span><span class="token punctuation">(</span>image<span class="token punctuation">,</span> <span class="token keyword">in</span><span class="token punctuation">:</span> geometry<span class="token punctuation">.</span>size <span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>swift</tag>
+        <tag>cs193p</tag>
+      </tags>
+  </entry>
 </search>
