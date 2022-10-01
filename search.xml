@@ -62,7 +62,7 @@
       </tags>
   </entry>
   <entry>
-    <title>CS193_note 1-4</title>
+    <title>CS193p_note 1-4</title>
     <url>/2022/02/20/cs193-note1-2/</url>
     <content><![CDATA[<h3 id="RoundedRectangle"><a href="#RoundedRectangle" class="headerlink" title="RoundedRectangle"></a>RoundedRectangle</h3><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">RoundedRectangle</span><span class="token punctuation">(</span>cornerRadius<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">)</span>
 	<span class="token punctuation">.</span><span class="token function">fill</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//填满</span>
@@ -1341,107 +1341,6 @@ private func showBackgroundImageFetchFailedAlert(_ url: URL) &#123;
       </tags>
   </entry>
   <entry>
-    <title>CS193p_note5 Properties Layout @ViewBuilder</title>
-    <url>/2022/02/28/cs193p-note5/</url>
-    <content><![CDATA[<h3 id="Computed-Properties-计算属性"><a href="#Computed-Properties-计算属性" class="headerlink" title="Computed Properties 计算属性"></a>Computed Properties 计算属性</h3><p>不提供存储值，提供读取器和设置器，接收和设置其他属性</p>
-<p>get用来接收数据，并且返回值，set用来设置其他属性或值</p>
-<h3 id="State"><a href="#State" class="headerlink" title="@State"></a>@State</h3><p>变化会在必要时重新绘制，相当于@ObservedObject</p>
-<span id="more"></span>
-
-<h3 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h3><p>屏幕的空间如何分配给所有视图</p>
-<ol>
-<li>视图容器为其中的视图提供空间</li>
-<li>视图根据提供给他们的空间选择自己的尺寸，不是被分配</li>
-<li>一旦视图调整了自己的大小，将视图放置在视图容器里</li>
-<li>视图容器选择大小，基于里面的视图</li>
-</ol>
-<h4 id="HStack-amp-VStack"><a href="#HStack-amp-VStack" class="headerlink" title="HStack &amp; VStack"></a>HStack &amp; VStack</h4><p>最不灵活的视图</p>
-<p>例如，Image和Text有固定大小，Image的自然大小，Text将字符串放进去，不灵活；RoundedRectangle非常灵活，如果你给他空间，他会占据全部空间，填满。</p>
-<p>从最不灵活的视图先分配，text如果空间不够会自动省略，如果stack里面的视图非常灵活，那么本身就会变灵活</p>
-<ul>
-<li><p><code>Spacer(miniLength: CGFloat)</code>非常灵活，需要尽可能多的空间</p>
-</li>
-<li><p><code>Divide()</code> 画一条线分割视图</p>
-</li>
-<li><p><code>.layoutPriority()</code> 先获得视图的分配，默认是0</p>
-</li>
-</ul>
-<p>Vstack生成一列视图，默认居中     </p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">VStack</span><span class="token punctuation">(</span>alignment<span class="token punctuation">:</span> <span class="token punctuation">.</span>leading<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span> <span class="token comment">//.leading .trailing</span>
-<span class="token class-name">VStack</span><span class="token punctuation">(</span>alignment<span class="token punctuation">:</span> <span class="token punctuation">.</span>firstTextBaseline<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">//文本基线</span>
-<span class="token comment">//定义自己的排列方式</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-swiftUI" data-language="swiftUI"><code class="language-swiftUI">Hstack &#123;
-	ForEach(viewModel.cards)&#123; card in
-		CardView(card: card).aspectRatio(2&#x2F;3, contentMode: .fit)
-	&#125;
-&#125;
-.foregroundColor(Color.orange)
-.padding(10)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<h4 id="LazyHStack-amp-LazyVStack"><a href="#LazyHStack-amp-LazyVStack" class="headerlink" title="LazyHStack &amp; LazyVStack"></a>LazyHStack &amp; LazyVStack</h4><ul>
-<li><p>不构建不在屏幕上显示的视图，只构建ScrollView中显示在屏幕上的</p>
-</li>
-<li><p>不灵活，如果有灵活视图，不能给所有空间，会尽可能的小</p>
-</li>
-</ul>
-<h4 id="ScrollView"><a href="#ScrollView" class="headerlink" title="ScrollView"></a>ScrollView</h4><p>接收任何视图在其中滚动</p>
-<h4 id="LazyHGrid-amp-LazyVGrid"><a href="#LazyHGrid-amp-LazyVGrid" class="headerlink" title="LazyHGrid &amp; LazyVGrid"></a>LazyHGrid &amp; LazyVGrid</h4><p>控制多少列或者多少行</p>
-<h4 id="ZStack"><a href="#ZStack" class="headerlink" title="ZStack"></a>ZStack</h4><p>调整自己的大小合适子项</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"hello"</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">background</span><span class="token punctuation">(</span><span class="token class-name">Rectangle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">foregroundColor</span><span class="token punctuation">(</span><span class="token punctuation">.</span>red<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token comment">//背景大小取决于文字，不是灵活的尺寸</span>
-<span class="token class-name">Circle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">overlay</span><span class="token punctuation">(</span><span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"hello"</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span> alignment<span class="token punctuation">:</span> <span class="token punctuation">.</span>center<span class="token punctuation">)</span>
-<span class="token comment">//文字不重要，很灵活</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">Hstack</span><span class="token punctuation">&#123;</span>
-    <span class="token class-name">ForEach</span><span class="token punctuation">(</span>viewmodel<span class="token punctuation">.</span>cards<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> card <span class="token keyword">in</span>
-    	<span class="token class-name">CardView</span><span class="token punctuation">(</span>card<span class="token punctuation">:</span> card<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">aspectRatio</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">/</span><span class="token number">3</span><span class="token punctuation">,</span> contentMode<span class="token punctuation">:</span> <span class="token punctuation">.</span>fit<span class="token punctuation">)</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token punctuation">.</span><span class="token function">foregroundColor</span><span class="token punctuation">(</span><span class="token class-name">Color</span><span class="token punctuation">.</span>orange<span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ol>
-<li>首先提供padding的空间，容器最外层的空间，将空间-10后提供给foregroundColor</li>
-<li>foregroundColor提供相同的空间给Hstack</li>
-<li>Hstack将空间平均分给aspectRatio</li>
-<li>提供空间给CardView</li>
-</ol>
-<h4 id="GeometryReader"><a href="#GeometryReader" class="headerlink" title="GeometryReader"></a>GeometryReader</h4><p>本身总是适应提供的空间</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">GeometryReader</span><span class="token punctuation">&#123;</span> geometry <span class="token keyword">in</span> 
-		<span class="token operator">...</span>
-<span class="token punctuation">&#125;</span><span class="token comment">//放在视图里 计算视图大小</span>
-<span class="token keyword">struct</span> <span class="token class-name">GrometryProxy</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">var</span> size<span class="token punctuation">:</span> <span class="token class-name">CGSize</span> <span class="token comment">//提供视图大小</span>
-    <span class="token keyword">func</span> <span class="token function-definition function">frame</span><span class="token punctuation">(</span><span class="token keyword">in</span><span class="token punctuation">:</span> <span class="token class-name">CoordinateSpace</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">CGRect</span>
-    <span class="token keyword">var</span> safeAreaInsets<span class="token punctuation">:</span> <span class="token class-name">EdgeInsets</span>
-<span class="token punctuation">&#125;</span>
-<span class="token class-name">ZStack</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">edgesIgnoringSafeArea</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">.</span>top<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">//画入安全区域</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="ViewBuilder"><a href="#ViewBuilder" class="headerlink" title="@ViewBuilder"></a>@ViewBuilder</h3><p>将函数返回成很对个视图组成的一个视图，创建的视图被称为TupleView</p>
-<p>任意<code>func</code>或<code>只读的计算属性</code>都可以标识为<code>@ViewBuilder</code>，一旦标识，它里面的内容将会被解析为<code>a list of Views</code></p>
-<h3 id="零散的东西"><a href="#零散的东西" class="headerlink" title="零散的东西"></a>零散的东西</h3><p>函数式编程</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> faceUpCardIndices <span class="token operator">=</span> cards<span class="token punctuation">.</span>indices<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> cards<span class="token punctuation">[</span><span class="token short-argument">$0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>isFaceUp <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
-<span class="token comment">//cards.indices是0..&lt;cards.count filter返回一个满足条件的数组</span>
-<span class="token keyword">var</span> faceUpCardIndices <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token class-name">Int</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token keyword">for</span> index <span class="token keyword">in</span> cards<span class="token punctuation">.</span>indices <span class="token punctuation">&#123;</span>
-		<span class="token keyword">if</span> cards<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">.</span>isFaceUp <span class="token punctuation">&#123;</span>
-		faceUpCardIndices<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span>
-		<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>swift</tag>
-        <tag>cs193p</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>cs193p_note13_Published More Persistence</title>
     <url>/2022/06/09/cs193p-note13/</url>
     <content><![CDATA[<h3 id="Publisher"><a href="#Publisher" class="headerlink" title="Publisher"></a>Publisher</h3><p>协议。实现发出值的对象。</p>
@@ -1580,6 +1479,204 @@ backgroundImageFetchCancellable <span class="token operator">=</span> publisher 
       </tags>
   </entry>
   <entry>
+    <title>CS193p_note5 Properties Layout @ViewBuilder</title>
+    <url>/2022/02/28/cs193p-note5/</url>
+    <content><![CDATA[<h3 id="Computed-Properties-计算属性"><a href="#Computed-Properties-计算属性" class="headerlink" title="Computed Properties 计算属性"></a>Computed Properties 计算属性</h3><p>不提供存储值，提供读取器和设置器，接收和设置其他属性</p>
+<p>get用来接收数据，并且返回值，set用来设置其他属性或值</p>
+<h3 id="State"><a href="#State" class="headerlink" title="@State"></a>@State</h3><p>变化会在必要时重新绘制，相当于@ObservedObject</p>
+<span id="more"></span>
+
+<h3 id="Layout"><a href="#Layout" class="headerlink" title="Layout"></a>Layout</h3><p>屏幕的空间如何分配给所有视图</p>
+<ol>
+<li>视图容器为其中的视图提供空间</li>
+<li>视图根据提供给他们的空间选择自己的尺寸，不是被分配</li>
+<li>一旦视图调整了自己的大小，将视图放置在视图容器里</li>
+<li>视图容器选择大小，基于里面的视图</li>
+</ol>
+<h4 id="HStack-amp-VStack"><a href="#HStack-amp-VStack" class="headerlink" title="HStack &amp; VStack"></a>HStack &amp; VStack</h4><p>最不灵活的视图</p>
+<p>例如，Image和Text有固定大小，Image的自然大小，Text将字符串放进去，不灵活；RoundedRectangle非常灵活，如果你给他空间，他会占据全部空间，填满。</p>
+<p>从最不灵活的视图先分配，text如果空间不够会自动省略，如果stack里面的视图非常灵活，那么本身就会变灵活</p>
+<ul>
+<li><p><code>Spacer(miniLength: CGFloat)</code>非常灵活，需要尽可能多的空间</p>
+</li>
+<li><p><code>Divide()</code> 画一条线分割视图</p>
+</li>
+<li><p><code>.layoutPriority()</code> 先获得视图的分配，默认是0</p>
+</li>
+</ul>
+<p>Vstack生成一列视图，默认居中     </p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">VStack</span><span class="token punctuation">(</span>alignment<span class="token punctuation">:</span> <span class="token punctuation">.</span>leading<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span> <span class="token comment">//.leading .trailing</span>
+<span class="token class-name">VStack</span><span class="token punctuation">(</span>alignment<span class="token punctuation">:</span> <span class="token punctuation">.</span>firstTextBaseline<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span> <span class="token comment">//文本基线</span>
+<span class="token comment">//定义自己的排列方式</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-swiftUI" data-language="swiftUI"><code class="language-swiftUI">Hstack &#123;
+	ForEach(viewModel.cards)&#123; card in
+		CardView(card: card).aspectRatio(2&#x2F;3, contentMode: .fit)
+	&#125;
+&#125;
+.foregroundColor(Color.orange)
+.padding(10)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<h4 id="LazyHStack-amp-LazyVStack"><a href="#LazyHStack-amp-LazyVStack" class="headerlink" title="LazyHStack &amp; LazyVStack"></a>LazyHStack &amp; LazyVStack</h4><ul>
+<li><p>不构建不在屏幕上显示的视图，只构建ScrollView中显示在屏幕上的</p>
+</li>
+<li><p>不灵活，如果有灵活视图，不能给所有空间，会尽可能的小</p>
+</li>
+</ul>
+<h4 id="ScrollView"><a href="#ScrollView" class="headerlink" title="ScrollView"></a>ScrollView</h4><p>接收任何视图在其中滚动</p>
+<h4 id="LazyHGrid-amp-LazyVGrid"><a href="#LazyHGrid-amp-LazyVGrid" class="headerlink" title="LazyHGrid &amp; LazyVGrid"></a>LazyHGrid &amp; LazyVGrid</h4><p>控制多少列或者多少行</p>
+<h4 id="ZStack"><a href="#ZStack" class="headerlink" title="ZStack"></a>ZStack</h4><p>调整自己的大小合适子项</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"hello"</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">background</span><span class="token punctuation">(</span><span class="token class-name">Rectangle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">foregroundColor</span><span class="token punctuation">(</span><span class="token punctuation">.</span>red<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">//背景大小取决于文字，不是灵活的尺寸</span>
+<span class="token class-name">Circle</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">overlay</span><span class="token punctuation">(</span><span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"hello"</span></span><span class="token punctuation">)</span><span class="token punctuation">,</span> alignment<span class="token punctuation">:</span> <span class="token punctuation">.</span>center<span class="token punctuation">)</span>
+<span class="token comment">//文字不重要，很灵活</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">Hstack</span><span class="token punctuation">&#123;</span>
+    <span class="token class-name">ForEach</span><span class="token punctuation">(</span>viewmodel<span class="token punctuation">.</span>cards<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> card <span class="token keyword">in</span>
+    	<span class="token class-name">CardView</span><span class="token punctuation">(</span>card<span class="token punctuation">:</span> card<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">aspectRatio</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token operator">/</span><span class="token number">3</span><span class="token punctuation">,</span> contentMode<span class="token punctuation">:</span> <span class="token punctuation">.</span>fit<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token punctuation">.</span><span class="token function">foregroundColor</span><span class="token punctuation">(</span><span class="token class-name">Color</span><span class="token punctuation">.</span>orange<span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">padding</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ol>
+<li>首先提供padding的空间，容器最外层的空间，将空间-10后提供给foregroundColor</li>
+<li>foregroundColor提供相同的空间给Hstack</li>
+<li>Hstack将空间平均分给aspectRatio</li>
+<li>提供空间给CardView</li>
+</ol>
+<h4 id="GeometryReader"><a href="#GeometryReader" class="headerlink" title="GeometryReader"></a>GeometryReader</h4><p>本身总是适应提供的空间</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">GeometryReader</span><span class="token punctuation">&#123;</span> geometry <span class="token keyword">in</span> 
+		<span class="token operator">...</span>
+<span class="token punctuation">&#125;</span><span class="token comment">//放在视图里 计算视图大小</span>
+<span class="token keyword">struct</span> <span class="token class-name">GrometryProxy</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> size<span class="token punctuation">:</span> <span class="token class-name">CGSize</span> <span class="token comment">//提供视图大小</span>
+    <span class="token keyword">func</span> <span class="token function-definition function">frame</span><span class="token punctuation">(</span><span class="token keyword">in</span><span class="token punctuation">:</span> <span class="token class-name">CoordinateSpace</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token class-name">CGRect</span>
+    <span class="token keyword">var</span> safeAreaInsets<span class="token punctuation">:</span> <span class="token class-name">EdgeInsets</span>
+<span class="token punctuation">&#125;</span>
+<span class="token class-name">ZStack</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span class="token punctuation">.</span><span class="token function">edgesIgnoringSafeArea</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">.</span>top<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token comment">//画入安全区域</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="ViewBuilder"><a href="#ViewBuilder" class="headerlink" title="@ViewBuilder"></a>@ViewBuilder</h3><p>将函数返回成很对个视图组成的一个视图，创建的视图被称为TupleView</p>
+<p>任意<code>func</code>或<code>只读的计算属性</code>都可以标识为<code>@ViewBuilder</code>，一旦标识，它里面的内容将会被解析为<code>a list of Views</code></p>
+<h3 id="零散的东西"><a href="#零散的东西" class="headerlink" title="零散的东西"></a>零散的东西</h3><p>函数式编程</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">let</span> faceUpCardIndices <span class="token operator">=</span> cards<span class="token punctuation">.</span>indices<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">&#123;</span> cards<span class="token punctuation">[</span><span class="token short-argument">$0</span><span class="token punctuation">]</span><span class="token punctuation">.</span>isFaceUp <span class="token punctuation">&#125;</span><span class="token punctuation">)</span>
+<span class="token comment">//cards.indices是0..&lt;cards.count filter返回一个满足条件的数组</span>
+<span class="token keyword">var</span> faceUpCardIndices <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token class-name">Int</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword">for</span> index <span class="token keyword">in</span> cards<span class="token punctuation">.</span>indices <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> cards<span class="token punctuation">[</span>index<span class="token punctuation">]</span><span class="token punctuation">.</span>isFaceUp <span class="token punctuation">&#123;</span>
+		faceUpCardIndices<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span>
+		<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>swift</tag>
+        <tag>cs193p</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs193p_note7 ViewModifier Animation</title>
+    <url>/2022/04/15/cs193p-note7/</url>
+    <content><![CDATA[<h3 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h3><ul>
+<li>为Shape设置动画</li>
+<li>使用ViewModifier做动画</li>
+</ul>
+<p>只有改变可以被动画化，改变ViewModifier的参数，Shape的参数，UI中是否存在视图</p>
+<p>动画显示给用户已经发生的变化</p>
+<span id="more"></span>
+
+<p>ViewModifier是主要的变更代理，更改参数必须在View放入UI之后</p>
+<p>视图加入或离开一个已经在用户界面的容器时，才会被动画。如果一个视图带着容器一起出现在屏幕上，容器会被动画化，而不是视图</p>
+<h4 id="如何制作动画"><a href="#如何制作动画" class="headerlink" title="如何制作动画"></a>如何制作动画</h4><ol>
+<li><p>Implicitly 隐含的自动的，通过使用<code>.animation(Animation)</code> </p>
+</li>
+<li><p>Explicitly 想要整个UI协调变化的动画 <code>withAnimation(Animation) &#123;&#125;</code> </p>
+</li>
+<li><p>从UI中包括或排除视图，做独立视图</p>
+<p> 所有的只发生在视图已经存在于UI中或或容器在UI中</p>
+</li>
+</ol>
+<h4 id="Implicit-Animation"><a href="#Implicit-Animation" class="headerlink" title="Implicit Animation"></a>Implicit Animation</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">" "</span></span><span class="token punctuation">)</span>
+	<span class="token punctuation">.</span><span class="token function">opacity</span><span class="token punctuation">(</span>scary <span class="token operator">?</span> <span class="token number">1</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">)</span>
+	<span class="token punctuation">.</span><span class="token function">rotationEffect</span><span class="token punctuation">(</span><span class="token class-name">Angle</span><span class="token punctuation">.</span><span class="token function">degrees</span><span class="token punctuation">(</span>upsideDown <span class="token operator">?</span> <span class="token number">180</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+	<span class="token punctuation">.</span><span class="token function">animation</span><span class="token punctuation">(</span><span class="token class-name">Animation</span><span class="token punctuation">.</span>easeInOut<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>让上面的变化变成动画</p>
+<ul>
+<li>不适用于任何容器，容器会传播到里面的视图中</li>
+<li>其中的参数是一个Animation结构，duration持续时间，delay调用一个小函数，repeat重复一定次数或永久重复(repeatForever)，curve动画曲线</li>
+</ul>
+<h5 id="Animation-Curve"><a href="#Animation-Curve" class="headerlink" title="Animation Curve"></a>Animation Curve</h5><ul>
+<li>linear线性的方式旋转或淡入淡出</li>
+<li>easeInOut 开始和结束放慢速度</li>
+<li>spring 结束时震荡，提供自然的落地效果</li>
+</ul>
+<h4 id="Explicit-Animation"><a href="#Explicit-Animation" class="headerlink" title="Explicit Animation"></a>Explicit Animation</h4><p>创建一个动画事务(transaction)，所有符合条件的更改一起制作动画</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token function">withAnimation</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token function">linear</span><span class="token punctuation">(</span>dutation<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>显式动画总是围绕着ViewModel Intent functions，很有可能改变模型。</p>
+<p>&#x3D;&#x3D;<strong>显式动画不会覆盖隐式动画</strong>&#x3D;&#x3D;</p>
+<h4 id="transition"><a href="#transition" class="headerlink" title="transition"></a>transition</h4><p>视图的来去，仅适用于已经出现在屏幕上的视图</p>
+<p>大多数情况使用预先罐装(opacity, scaling, moving across the screen)，是在AnyTransition结构上的静态函数和变量</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">if</span> isFaceUp <span class="token punctuation">&#123;</span>
+    <span class="token class-name">RoundedRectangle</span><span class="token punctuation">(</span>cornerRadius<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">stroke</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"👻"</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">transition</span><span class="token punctuation">(</span><span class="token class-name">AnyTransition</span><span class="token punctuation">.</span>scale<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">RoundedRectangle</span><span class="token punctuation">(</span>cornerRadius<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">transition</span><span class="token punctuation">(</span><span class="token class-name">AnyTransition</span><span class="token punctuation">.</span>identity<span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h5 id="onAppear"><a href="#onAppear" class="headerlink" title=".onAppear"></a>.onAppear</h5><p>当视图出现在屏幕时执行一个闭包，在容器视图上使用<code>.onAppear&#123;&#125;</code>，当视图出现在屏幕时可以执行一系列代码</p>
+<h3 id="ViewModifier"><a href="#ViewModifier" class="headerlink" title="ViewModifier"></a>ViewModifier</h3><p>修改视图的小功能，例如<code>.aspectRatio(2/3)</code></p>
+<p>唯一的工作就是修改视图</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">protocol</span> <span class="token class-name">ViewModifier</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">typealias</span> <span class="token class-name">Content</span><span class="token comment">//正在修改的视图</span>
+    <span class="token keyword">func</span> <span class="token function-definition function">body</span><span class="token punctuation">(</span>content<span class="token punctuation">:</span> <span class="token class-name">Content</span><span class="token punctuation">)</span> <span class="token operator">-></span> someView <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">some</span> <span class="token class-name">View</span> that almost certainly contains the <span class="token class-name">View</span> content
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>特殊的ViewModifier，是GeometryEffect，只修改几何，如缩放、平行、旋转</li>
+</ul>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">struct</span> <span class="token class-name">Cardify</span><span class="token punctuation">:</span> <span class="token class-name">ViewModifier</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">var</span> isFaceUp<span class="token punctuation">:</span> <span class="token class-name">Bool</span>
+    <span class="token keyword">func</span> <span class="token function-definition function">body</span><span class="token punctuation">(</span>content<span class="token punctuation">:</span> <span class="token class-name">Content</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+        <span class="token class-name">ZStack</span> <span class="token punctuation">&#123;</span>
+            <span class="token operator">...</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">" "</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">modifier</span><span class="token punctuation">(</span><span class="token class-name">Cardify</span><span class="token punctuation">(</span>isFaceUp<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">extension</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">func</span> <span class="token function-definition function">cardify</span><span class="token punctuation">(</span>isFaceUp<span class="token punctuation">:</span> <span class="token class-name">Bool</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">return</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">modifier</span><span class="token punctuation">(</span><span class="token class-name">Cardify</span><span class="token punctuation">(</span>isFaceUp<span class="token punctuation">:</span> isFaceUp<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><h4 id="GeometryEffect"><a href="#GeometryEffect" class="headerlink" title="GeometryEffect"></a>GeometryEffect</h4><p>使事物旋转，移动物体，调整物体大小等</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span><span class="token function">rotationEffect</span><span class="token punctuation">(</span><span class="token class-name">Angle</span><span class="token punctuation">.</span><span class="token function">degrees</span><span class="token punctuation">(</span>card<span class="token punctuation">.</span>isMatched <span class="token operator">?</span> <span class="token number">360</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token punctuation">.</span><span class="token function">animation</span><span class="token punctuation">(</span><span class="token class-name">Animation</span><span class="token punctuation">.</span><span class="token function">easeInOut</span><span class="token punctuation">(</span>duration<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">repeatForever</span><span class="token punctuation">(</span>autoreverses<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">//不会自动反转</span>
+<span class="token punctuation">.</span><span class="token function">animation</span><span class="token punctuation">(</span><span class="token class-name">Animation</span><span class="token punctuation">.</span><span class="token function">linear</span><span class="token punctuation">(</span>duration<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">repeatForever</span><span class="token punctuation">(</span>autoreverses<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">,</span> value<span class="token punctuation">:</span> card<span class="token punctuation">.</span>isMatched<span class="token punctuation">)</span> <span class="token comment">//iOS15.0推荐用法</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>旋转匹配成功的内容，，这么只会旋转第一个内容，而且旋转时字体大小改变，字体不能进行动画，旋转时有多个动画一起发生，要使用固定大小字体。</p>
+<p>创建动画时注意三个原则，可以通过opacity使内容在屏幕上隐藏。</p>
+<p>animation参考：<a href="https://juejin.cn/post/7067340603494924296">https://juejin.cn/post/7067340603494924296</a></p>
+]]></content>
+      <categories>
+        <category>iOS</category>
+      </categories>
+      <tags>
+        <tag>swift</tag>
+        <tag>cs193p</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>cs193p_note8 Animation Demostrastion</title>
     <url>/2022/05/02/cs193p-note8/</url>
     <content><![CDATA[<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><h4 id="实现洗牌动画"><a href="#实现洗牌动画" class="headerlink" title="实现洗牌动画"></a>实现洗牌动画</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">var</span> shuffle<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
@@ -1707,103 +1804,6 @@ backgroundImageFetchCancellable <span class="token operator">=</span> publisher 
     <span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
-]]></content>
-      <categories>
-        <category>iOS</category>
-      </categories>
-      <tags>
-        <tag>swift</tag>
-        <tag>cs193p</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cs193p_note7 ViewModifier Animation</title>
-    <url>/2022/04/15/cs193p-note7/</url>
-    <content><![CDATA[<h3 id="Animation"><a href="#Animation" class="headerlink" title="Animation"></a>Animation</h3><ul>
-<li>为Shape设置动画</li>
-<li>使用ViewModifier做动画</li>
-</ul>
-<p>只有改变可以被动画化，改变ViewModifier的参数，Shape的参数，UI中是否存在视图</p>
-<p>动画显示给用户已经发生的变化</p>
-<span id="more"></span>
-
-<p>ViewModifier是主要的变更代理，更改参数必须在View放入UI之后</p>
-<p>视图加入或离开一个已经在用户界面的容器时，才会被动画。如果一个视图带着容器一起出现在屏幕上，容器会被动画化，而不是视图</p>
-<h4 id="如何制作动画"><a href="#如何制作动画" class="headerlink" title="如何制作动画"></a>如何制作动画</h4><ol>
-<li><p>Implicitly 隐含的自动的，通过使用<code>.animation(Animation)</code> </p>
-</li>
-<li><p>Explicitly 想要整个UI协调变化的动画 <code>withAnimation(Animation) &#123;&#125;</code> </p>
-</li>
-<li><p>从UI中包括或排除视图，做独立视图</p>
-<p> 所有的只发生在视图已经存在于UI中或或容器在UI中</p>
-</li>
-</ol>
-<h4 id="Implicit-Animation"><a href="#Implicit-Animation" class="headerlink" title="Implicit Animation"></a>Implicit Animation</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">" "</span></span><span class="token punctuation">)</span>
-	<span class="token punctuation">.</span><span class="token function">opacity</span><span class="token punctuation">(</span>scary <span class="token operator">?</span> <span class="token number">1</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">)</span>
-	<span class="token punctuation">.</span><span class="token function">rotationEffect</span><span class="token punctuation">(</span><span class="token class-name">Angle</span><span class="token punctuation">.</span><span class="token function">degrees</span><span class="token punctuation">(</span>upsideDown <span class="token operator">?</span> <span class="token number">180</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-	<span class="token punctuation">.</span><span class="token function">animation</span><span class="token punctuation">(</span><span class="token class-name">Animation</span><span class="token punctuation">.</span>easeInOut<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>让上面的变化变成动画</p>
-<ul>
-<li>不适用于任何容器，容器会传播到里面的视图中</li>
-<li>其中的参数是一个Animation结构，duration持续时间，delay调用一个小函数，repeat重复一定次数或永久重复(repeatForever)，curve动画曲线</li>
-</ul>
-<h5 id="Animation-Curve"><a href="#Animation-Curve" class="headerlink" title="Animation Curve"></a>Animation Curve</h5><ul>
-<li>linear线性的方式旋转或淡入淡出</li>
-<li>easeInOut 开始和结束放慢速度</li>
-<li>spring 结束时震荡，提供自然的落地效果</li>
-</ul>
-<h4 id="Explicit-Animation"><a href="#Explicit-Animation" class="headerlink" title="Explicit Animation"></a>Explicit Animation</h4><p>创建一个动画事务(transaction)，所有符合条件的更改一起制作动画</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token function">withAnimation</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token function">linear</span><span class="token punctuation">(</span>dutation<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>显式动画总是围绕着ViewModel Intent functions，很有可能改变模型。</p>
-<p>&#x3D;&#x3D;<strong>显式动画不会覆盖隐式动画</strong>&#x3D;&#x3D;</p>
-<h4 id="transition"><a href="#transition" class="headerlink" title="transition"></a>transition</h4><p>视图的来去，仅适用于已经出现在屏幕上的视图</p>
-<p>大多数情况使用预先罐装(opacity, scaling, moving across the screen)，是在AnyTransition结构上的静态函数和变量</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">if</span> isFaceUp <span class="token punctuation">&#123;</span>
-    <span class="token class-name">RoundedRectangle</span><span class="token punctuation">(</span>cornerRadius<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">stroke</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">"👻"</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">transition</span><span class="token punctuation">(</span><span class="token class-name">AnyTransition</span><span class="token punctuation">.</span>scale<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span> <span class="token keyword">else</span> <span class="token punctuation">&#123;</span>
-    <span class="token class-name">RoundedRectangle</span><span class="token punctuation">(</span>cornerRadius<span class="token punctuation">:</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">transition</span><span class="token punctuation">(</span><span class="token class-name">AnyTransition</span><span class="token punctuation">.</span>identity<span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h5 id="onAppear"><a href="#onAppear" class="headerlink" title=".onAppear"></a>.onAppear</h5><p>当视图出现在屏幕时执行一个闭包，在容器视图上使用<code>.onAppear&#123;&#125;</code>，当视图出现在屏幕时可以执行一系列代码</p>
-<h3 id="ViewModifier"><a href="#ViewModifier" class="headerlink" title="ViewModifier"></a>ViewModifier</h3><p>修改视图的小功能，例如<code>.aspectRatio(2/3)</code></p>
-<p>唯一的工作就是修改视图</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">protocol</span> <span class="token class-name">ViewModifier</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">typealias</span> <span class="token class-name">Content</span><span class="token comment">//正在修改的视图</span>
-    <span class="token keyword">func</span> <span class="token function-definition function">body</span><span class="token punctuation">(</span>content<span class="token punctuation">:</span> <span class="token class-name">Content</span><span class="token punctuation">)</span> <span class="token operator">-></span> someView <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token keyword">some</span> <span class="token class-name">View</span> that almost certainly contains the <span class="token class-name">View</span> content
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li>特殊的ViewModifier，是GeometryEffect，只修改几何，如缩放、平行、旋转</li>
-</ul>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">struct</span> <span class="token class-name">Cardify</span><span class="token punctuation">:</span> <span class="token class-name">ViewModifier</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">var</span> isFaceUp<span class="token punctuation">:</span> <span class="token class-name">Bool</span>
-    <span class="token keyword">func</span> <span class="token function-definition function">body</span><span class="token punctuation">(</span>content<span class="token punctuation">:</span> <span class="token class-name">Content</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
-        <span class="token class-name">ZStack</span> <span class="token punctuation">&#123;</span>
-            <span class="token operator">...</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span class="token class-name">Text</span><span class="token punctuation">(</span><span class="token string-literal"><span class="token string">" "</span></span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">modifier</span><span class="token punctuation">(</span><span class="token class-name">Cardify</span><span class="token punctuation">(</span>isFaceUp<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-
-<span class="token keyword">extension</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">func</span> <span class="token function-definition function">cardify</span><span class="token punctuation">(</span>isFaceUp<span class="token punctuation">:</span> <span class="token class-name">Bool</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">some</span> <span class="token class-name">View</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">return</span> <span class="token keyword">self</span><span class="token punctuation">.</span><span class="token function">modifier</span><span class="token punctuation">(</span><span class="token class-name">Cardify</span><span class="token punctuation">(</span>isFaceUp<span class="token punctuation">:</span> isFaceUp<span class="token punctuation">)</span><span class="token punctuation">)</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><h4 id="GeometryEffect"><a href="#GeometryEffect" class="headerlink" title="GeometryEffect"></a>GeometryEffect</h4><p>使事物旋转，移动物体，调整物体大小等</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span><span class="token function">rotationEffect</span><span class="token punctuation">(</span><span class="token class-name">Angle</span><span class="token punctuation">.</span><span class="token function">degrees</span><span class="token punctuation">(</span>card<span class="token punctuation">.</span>isMatched <span class="token operator">?</span> <span class="token number">360</span> <span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token punctuation">.</span><span class="token function">animation</span><span class="token punctuation">(</span><span class="token class-name">Animation</span><span class="token punctuation">.</span><span class="token function">easeInOut</span><span class="token punctuation">(</span>duration<span class="token punctuation">:</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">repeatForever</span><span class="token punctuation">(</span>autoreverses<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token comment">//不会自动反转</span>
-<span class="token punctuation">.</span><span class="token function">animation</span><span class="token punctuation">(</span><span class="token class-name">Animation</span><span class="token punctuation">.</span><span class="token function">linear</span><span class="token punctuation">(</span>duration<span class="token punctuation">:</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">repeatForever</span><span class="token punctuation">(</span>autoreverses<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">,</span> value<span class="token punctuation">:</span> card<span class="token punctuation">.</span>isMatched<span class="token punctuation">)</span> <span class="token comment">//iOS15.0推荐用法</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>旋转匹配成功的内容，，这么只会旋转第一个内容，而且旋转时字体大小改变，字体不能进行动画，旋转时有多个动画一起发生，要使用固定大小字体。</p>
-<p>创建动画时注意三个原则，可以通过opacity使内容在屏幕上隐藏。</p>
-<p>animation参考：<a href="https://juejin.cn/post/7067340603494924296">https://juejin.cn/post/7067340603494924296</a></p>
 ]]></content>
       <categories>
         <category>iOS</category>
