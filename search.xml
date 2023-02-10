@@ -94,6 +94,15 @@ SEL s1 <span class="token operator">=</span> <span class="token keyword">@select
     <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">self</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">super</span> init<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>  <span class="token punctuation">&#125;</span>
     <span class="token keyword">return</span> <span class="token keyword">self</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>自定义init，需要写声明</p>
+<pre class="line-numbers language-objectivec" data-language="objectivec"><code class="language-objectivec"><span class="token operator">-</span> <span class="token punctuation">(</span>instancetype<span class="token punctuation">)</span>initWith<span class="token punctuation">:</span><span class="token punctuation">(</span>NSString <span class="token operator">*</span><span class="token punctuation">)</span>name andAge<span class="token punctuation">:</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span>age<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token keyword">self</span> <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token keyword">super</span> init<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name <span class="token punctuation">;</span>
+        <span class="token keyword">self</span><span class="token punctuation">.</span>age <span class="token operator">=</span> age<span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">return</span> <span class="token keyword">self</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 ]]></content>
       <categories>
         <category>ios</category>
@@ -723,192 +732,6 @@ fun <span class="token function">reportSalesNumber</span><span class="token punc
       </tags>
   </entry>
   <entry>
-    <title>cs193p_note10_Multithreading Demo Gestures</title>
-    <url>/2022/05/19/cs193p-note10/</url>
-    <content><![CDATA[<h3 id="设置图片背景"><a href="#设置图片背景" class="headerlink" title="设置图片背景"></a>设置图片背景</h3><p>接收url和image</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">var</span> found <span class="token operator">=</span> providers<span class="token punctuation">.</span><span class="token function">loadObjects</span><span class="token punctuation">(</span>ofType<span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> url <span class="token keyword">in</span>
-           document<span class="token punctuation">.</span><span class="token function">setBackground</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token function">url</span><span class="token punctuation">(</span>url<span class="token punctuation">.</span>imageURL<span class="token punctuation">)</span><span class="token punctuation">)</span>
-       <span class="token punctuation">&#125;</span>
-       <span class="token keyword">if</span> <span class="token operator">!</span>found <span class="token punctuation">&#123;</span>
-           found <span class="token operator">=</span> providers<span class="token punctuation">.</span><span class="token function">loadObjects</span><span class="token punctuation">(</span>ofType<span class="token punctuation">:</span> <span class="token class-name">UIImage</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> image <span class="token keyword">in</span>
-               <span class="token keyword">if</span> <span class="token keyword">let</span> data <span class="token operator">=</span> image<span class="token punctuation">.</span><span class="token function">jpegData</span><span class="token punctuation">(</span>compressionQuality<span class="token punctuation">:</span> <span class="token number">1.0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-                   document<span class="token punctuation">.</span><span class="token function">setBackground</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token function">imageData</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
-               <span class="token punctuation">&#125;</span><span class="token comment">//如果是jpg 无损压缩</span>
-           <span class="token punctuation">&#125;</span>
-       <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<span id="more"></span>
-
-<p>更新背景图片，不能把backgroundImage变成计算属性，因为在缓慢地网络被获取需要几秒或许一分钟</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token attribute atrule">@Published</span> <span class="token keyword">private</span><span class="token punctuation">(</span><span class="token keyword">set</span><span class="token punctuation">)</span> <span class="token keyword">var</span> emojiArt<span class="token punctuation">:</span> <span class="token class-name">EmojiArtModel</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">didSet</span> <span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> emojiArt<span class="token punctuation">.</span>background <span class="token operator">!=</span> oldValue<span class="token punctuation">.</span>background <span class="token punctuation">&#123;</span>
-            <span class="token function">fetchBackgroundImageDataIfNecessary</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span>
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>使用try来解决抛出错误</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">private</span> <span class="token keyword">func</span> <span class="token function-definition function">fetchBackgroundImageDataIfNecessary</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-    backgroundImage <span class="token operator">=</span> <span class="token nil constant">nil</span>
-    <span class="token keyword">switch</span> emojiArt<span class="token punctuation">.</span>background <span class="token punctuation">&#123;</span>
-        <span class="token keyword">case</span> <span class="token punctuation">.</span><span class="token function">url</span><span class="token punctuation">(</span><span class="token keyword">let</span> url<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        <span class="token comment">//获取url</span>
-        <span class="token keyword">let</span> imageData <span class="token operator">=</span> <span class="token keyword">try</span><span class="token operator">?</span> <span class="token class-name">Data</span><span class="token punctuation">(</span>contentsOf<span class="token punctuation">:</span> url<span class="token punctuation">)</span> <span class="token comment">//会阻塞UI</span>
-        <span class="token keyword">if</span> imageData <span class="token operator">!=</span> <span class="token nil constant">nil</span> <span class="token punctuation">&#123;</span>
-            backgroundImage <span class="token operator">=</span> <span class="token class-name">UIImage</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> imageData<span class="token operator">!</span><span class="token punctuation">)</span>
-        <span class="token punctuation">&#125;</span>
-        <span class="token keyword">case</span> <span class="token punctuation">.</span><span class="token function">imageData</span><span class="token punctuation">(</span><span class="token keyword">let</span> image<span class="token punctuation">)</span><span class="token punctuation">:</span>
-        backgroundImage <span class="token operator">=</span> <span class="token class-name">UIImage</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> image<span class="token punctuation">)</span>
-        <span class="token keyword">case</span> <span class="token punctuation">.</span>blank<span class="token punctuation">:</span>
-        <span class="token keyword">break</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-<p>但是，url耗时很长，要使用多线程解决问题</p>
-<ul>
-<li>self:内部是一个闭包，被放入内存并且坚持到这件事完成运行，闭包是引用类型。通过self把闭包存入内存并指向viewmodel，被保存在堆中，即使关闭文档也无法退出</li>
-</ul>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span><span class="token function">global</span><span class="token punctuation">(</span>qos<span class="token punctuation">:</span> <span class="token punctuation">.</span>userInitiated<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">async</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">let</span> imageData <span class="token operator">=</span> <span class="token keyword">try</span><span class="token operator">?</span> <span class="token class-name">Data</span><span class="token punctuation">(</span>contentsOf<span class="token punctuation">:</span> url<span class="token punctuation">)</span> <span class="token comment">//会阻塞UI</span>
-    <span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span>main<span class="token punctuation">.</span>asunc<span class="token punctuation">&#123;</span>
-        <span class="token keyword">if</span> imageData <span class="token operator">!=</span> <span class="token nil constant">nil</span> <span class="token punctuation">&#123;</span>
-            <span class="token keyword">self</span><span class="token punctuation">.</span>backgroundImage <span class="token operator">=</span> <span class="token class-name">UIImage</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> imageData<span class="token operator">!</span><span class="token punctuation">)</span> <span class="token comment">//不在后台线程中修改UI</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li>弱引用:不强制self在堆中，没有其他人把它放入堆中就会消失，变成nil</li>
-</ul>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span>main<span class="token punctuation">.</span>asunc<span class="token punctuation">&#123;</span> <span class="token punctuation">[</span><span class="token keyword">weak</span> <span class="token keyword">self</span><span class="token punctuation">]</span> <span class="token keyword">in</span> 
-    <span class="token keyword">if</span> imageData <span class="token operator">!=</span> <span class="token nil constant">nil</span> <span class="token punctuation">&#123;</span>
-   		<span class="token keyword">self</span><span class="token operator">?</span><span class="token punctuation">.</span>backgroundImage <span class="token operator">=</span> <span class="token class-name">UIImage</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> imageData<span class="token operator">!</span><span class="token punctuation">)</span> <span class="token comment">//如果self为nil不进行语句操作</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>如果图片加载时间过长，用户可能会拖动别的图片进入，代码会被再次运行，等第一个图片加载完成时，可能会加载第一张图片。关于异步多线程编程，需要注意每当你从某事回来需要很长知识时，检查世界还是不是你离开时的亚子。</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span>main<span class="token punctuation">.</span><span class="token keyword">async</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">[</span><span class="token keyword">weak</span> <span class="token keyword">self</span><span class="token punctuation">]</span> <span class="token keyword">in</span>
-	<span class="token keyword">if</span> <span class="token keyword">self</span><span class="token operator">?</span><span class="token punctuation">.</span>emojiArt<span class="token punctuation">.</span>background <span class="token operator">==</span> <span class="token class-name">EmojiArtModel</span><span class="token punctuation">.</span><span class="token class-name">Background</span><span class="token punctuation">.</span><span class="token function">url</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
-		<span class="token keyword">if</span> imageData <span class="token operator">!=</span> <span class="token nil constant">nil</span> <span class="token punctuation">&#123;</span>
-			<span class="token keyword">self</span><span class="token operator">?</span><span class="token punctuation">.</span>backgroundImage <span class="token operator">=</span> <span class="token class-name">UIImage</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> imageData<span class="token operator">!</span><span class="token punctuation">)</span>
-		<span class="token punctuation">&#125;</span>
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>给用户正在加载的反馈</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token attribute atrule">@Published</span> <span class="token keyword">var</span> backgroundImageFetchStatus <span class="token operator">=</span> <span class="token class-name">BackgroundImageFetchStatus</span><span class="token punctuation">.</span>idle <span class="token comment">//监测加载状态</span>
-<span class="token keyword">enum</span> <span class="token class-name">BackgroundImageFetchStatus</span> <span class="token punctuation">&#123;</span>
-    <span class="token keyword">case</span> idle <span class="token comment">//闲置</span>
-    <span class="token keyword">case</span> fetching <span class="token comment">//加载</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h3 id="Gestures"><a href="#Gestures" class="headerlink" title="Gestures"></a>Gestures</h3><h4 id="理论知识"><a href="#理论知识" class="headerlink" title="理论知识"></a>理论知识</h4><ul>
-<li><p>使用手势视图修改器让视图识别手势</p>
-<p>  <code>myview.gesture(theGesture)</code>  手势协议</p>
-</li>
-<li><p>创建离散型手势</p>
-<p>  通常只有一个func和var在我们的视图中，甚至只有一个局部变量</p>
-  <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">var</span> theGesture<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">Gesture</span> <span class="token punctuation">&#123;</span>
-	<span class="token keyword">return</span> <span class="token class-name">TapGesture</span><span class="token punctuation">(</span>count<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">//双击手势</span>
-    	<span class="token punctuation">.</span>onEnded<span class="token punctuation">&#123;</span> <span class="token punctuation">&#125;</span> <span class="token comment">//放入需要实现的内容</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-<p>  通常离散型手势使用视图修饰符</p>
-  <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift">myview<span class="token punctuation">.</span><span class="token function">onTapGesture</span><span class="token punctuation">(</span>count<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
-myview<span class="token punctuation">.</span><span class="token function">onLongPressGesture</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-</li>
-<li><p>非离散型手势</p>
-<p>  不仅需要处理手势被识别并且结束，还要监测在捏的全过程中的旋转、大小改变等。</p>
-<p>  <code>DragGesture</code>, <code>MagnificationGesture</code> ,<code>RotationGesture</code> <code>longPressGesture</code>也可以看做非离散，按住是一直更新</p>
-  <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">var</span> theGesture<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">Gesture</span> <span class="token punctuation">&#123;</span>
-    <span class="token class-name">DragGesture</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span>
-    	<span class="token punctuation">.</span>onEnded <span class="token punctuation">&#123;</span> value <span class="token keyword">in</span> <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>  value值来源于当前监听手势</p>
-<ul>
-<li>DragGesture 拖动手势，一个结构体包含开始和结束位置</li>
-<li>MagnificationGesture 放大捏合手势 手指放大了多少，多远</li>
-<li>RotationGesture 旋转手势，角度</li>
-</ul>
-</li>
-<li><p>非离散手势监听</p>
-  <pre class="line-numbers language-none"><code class="language-none">@GestureState var myGestureState: MyGestureType &#x3D; &lt; &gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>  可以存储任何信息让视图自动更新，并在手势进行时重绘自身</p>
-<p>  <strong>当手势结束时，var会回到初始值</strong></p>
-  <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">var</span> theGesture<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">Gesture</span> <span class="token punctuation">&#123;</span>
-	<span class="token class-name">DragGesture</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span>
-		<span class="token punctuation">.</span><span class="token function">updating</span><span class="token punctuation">(</span>$myGestureState<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> value<span class="token punctuation">,</span> myGestureState<span class="token punctuation">,</span> transaction <span class="token keyword">in</span>
-			myGestureState <span class="token operator">=</span> 
-		<span class="token punctuation">&#125;</span>
-		<span class="token punctuation">.</span><span class="token function">onEnded</span> <span class="token punctuation">(</span> value <span class="token keyword">in</span><span class="token punctuation">)</span><span class="token comment">//追踪结束时状态</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<ul>
-<li>.updating 当手指移动时被重复调用</li>
-<li>$ 放在@GestureState变量前面，告诉系统使用哪个变量</li>
-<li>value取决于哪个手势</li>
-<li>myGestureState 一个输入输出参数，唯一方式修改GestureState的值，复制值类型，反悔的时候再复制回去</li>
-<li>transaction 动画相关</li>
-</ul>
-  <pre class="line-numbers language-none"><code class="language-none">DragGesture(...)
-	.onChanged &#123; value in 
-		&#x2F;&#x2F;无法更新状态，只提供价值
-	&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>  只能根据当前状态绘制图形，更新永久状态，手势结束之后不重置</p>
-</li>
-</ul>
-<h4 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h4><ul>
-<li><p>设置双击调整背景适应屏幕</p>
-<p>  设置双击手势效果</p>
-  <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span><span class="token function">gesture</span><span class="token punctuation">(</span><span class="token function">doubleTapToZoom</span><span class="token punctuation">(</span><span class="token keyword">in</span><span class="token punctuation">:</span> geometry<span class="token punctuation">.</span>size<span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token keyword">private</span> <span class="token keyword">func</span> <span class="token function-definition function">doubleTapToZoom</span><span class="token punctuation">(</span><span class="token keyword">in</span> size<span class="token punctuation">:</span> <span class="token class-name">CGSize</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">some</span> <span class="token class-name">Gesture</span> <span class="token punctuation">&#123;</span>
-    <span class="token class-name">TapGesture</span><span class="token punctuation">(</span>count<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">)</span>
-    <span class="token punctuation">.</span>onEnded <span class="token punctuation">&#123;</span>
-        withAnimation <span class="token punctuation">&#123;</span>
-            <span class="token function">zoomToFit</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span>backgroundImage<span class="token punctuation">,</span> <span class="token keyword">in</span><span class="token punctuation">:</span> size<span class="token punctuation">)</span>
-        <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>使用捏手势进行缩放</p>
-  <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span><span class="token function">gesture</span><span class="token punctuation">(</span><span class="token function">zoomGesture</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
-<span class="token comment">//缩放手势</span>
-<span class="token keyword">private</span> <span class="token keyword">func</span> <span class="token function-definition function">zoomGesture</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">some</span> <span class="token class-name">Gesture</span> <span class="token punctuation">&#123;</span>
-	<span class="token class-name">MagnificationGesture</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//捏合手势</span>
-		<span class="token punctuation">.</span><span class="token function">updating</span><span class="token punctuation">(</span>$gestureZoomScale<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> latestGestureScale<span class="token punctuation">,</span> ourGestureStateInOut<span class="token punctuation">,</span> transaction <span class="token keyword">in</span><span class="token comment">//手指分开距离</span>
-			ourGestureStateInOut <span class="token operator">=</span> latestGestureScale
-		<span class="token punctuation">&#125;</span>
-    <span class="token punctuation">.</span>onEnded <span class="token punctuation">&#123;</span> gestureScaleAtEnd <span class="token keyword">in</span> <span class="token comment">//是开始手指距离的几倍</span>
-		steadyStateZoomScale <span class="token operator">*=</span> gestureScaleAtEnd
-	<span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-</li>
-<li><p>拖动背景</p>
-  <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">private</span> <span class="token keyword">func</span> <span class="token function-definition function">panGesture</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">some</span> <span class="token class-name">Gesture</span> <span class="token punctuation">&#123;</span>
-    <span class="token class-name">DragGesture</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-        <span class="token punctuation">.</span><span class="token function">updating</span><span class="token punctuation">(</span>$gesturePanOffset<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> latestDragGestureValue<span class="token punctuation">,</span> gesturePanOffset<span class="token punctuation">,</span> <span class="token omit keyword">_</span> <span class="token keyword">in</span>
-            gesturePanOffset <span class="token operator">=</span> latestDragGestureValue<span class="token punctuation">.</span>translation <span class="token operator">/</span> zoomScale
-        <span class="token punctuation">&#125;</span>
-        <span class="token punctuation">.</span>onEnded <span class="token punctuation">&#123;</span> finalDragGestureValue <span class="token keyword">in</span>
-            steadyStatePanOffset <span class="token operator">=</span> steadyStatePanOffset <span class="token operator">+</span> <span class="token punctuation">(</span>finalDragGestureValue<span class="token punctuation">.</span>translation <span class="token operator">/</span> zoomScale<span class="token punctuation">)</span> <span class="token comment">//图片变大的时候,移动的距离小, translation 结束-开始</span>
-        <span class="token punctuation">&#125;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>  组合两个不同手势</p>
-  <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span><span class="token function">gesture</span><span class="token punctuation">(</span><span class="token function">panGesture</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">simultaneously</span><span class="token punctuation">(</span>with<span class="token punctuation">:</span> <span class="token function">zoomGesture</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">//组合两个不同手势</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-</ul>
-]]></content>
-      <categories>
-        <category>ios</category>
-      </categories>
-      <tags>
-        <tag>swift</tag>
-        <tag>cs193p</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>cs193p_note11_Error Persistence</title>
     <url>/2022/06/02/cs193p-note11/</url>
     <content><![CDATA[<h3 id="Error-Handing"><a href="#Error-Handing" class="headerlink" title="Error Handing"></a>Error Handing</h3><h4 id="Throwing-errors"><a href="#Throwing-errors" class="headerlink" title="Throwing errors"></a>Throwing errors</h4><p>很多函数都有<code>throws</code>关键字，你可以抛出错误</p>
@@ -1159,71 +982,6 @@ defaults<span class="token punctuation">.</span><span class="token keyword">set<
 	<span class="token keyword">let</span> decodedPalettes <span class="token operator">=</span> <span class="token keyword">try</span><span class="token operator">?</span> <span class="token class-name">JSONDecoder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">decode</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token class-name">Palette</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">,</span> from<span class="token punctuation">:</span> jsonData<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
 	palettes <span class="token operator">=</span> decodedPalettes
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-]]></content>
-      <categories>
-        <category>ios</category>
-      </categories>
-      <tags>
-        <tag>swift</tag>
-        <tag>cs193p</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>cs193p_note13_Published More Persistence</title>
-    <url>/2022/06/09/cs193p-note13/</url>
-    <content><![CDATA[<h3 id="Publisher"><a href="#Publisher" class="headerlink" title="Publisher"></a>Publisher</h3><p>协议。实现发出值的对象。</p>
-<p><code>Publisher&lt;Output, Failure&gt;</code>，Output是发布者发布的内容的类型，Failure通常是一个枚举，必须实现Error，失败后不会抛出。对于发布者，我们可以订阅它、即时转换它的值、把值传送到一些地方。属于Combine框架（可能会后补详细内容）</p>
-<span id="more"></span>
-
-<h4 id="订阅发布者"><a href="#订阅发布者" class="headerlink" title="订阅发布者"></a>订阅发布者</h4><p>当发布没有订阅者，会停止发布</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift">cancellable <span class="token operator">=</span> myPublisher<span class="token punctuation">.</span><span class="token function">sink</span><span class="token punctuation">(</span>
-	receiveCompletion<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> result <span class="token keyword">in</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>	<span class="token comment">//完成、失败或其他方式</span>
-	receiveValue<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> thingThePublisherPublishes <span class="token keyword">in</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span> <span class="token comment">//随着发布者发布信息被反复调用，获得发布的最新内容</span>
-<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>如果调用.sink，发布者是Never，可以忽略 receiveCompletion。</p>
-<p>返回的内容实现了可取消协议 Cancellable，通常使用类型擦出将它处理成AnyCancellable。不需要发布内容时可以使用<code>.cancel()</code>取消，还可以让.sink()订阅者保持活力。当返回cancellable值时.sink将在内存常跓，这是因为.sink指向了cancellable变量。</p>
-<p>当把cancellable设置为nil时它将不会指向.sink返回的任何内容。这也会导致.sink停止工作（内存回收），所以它的生命周期是绑定在一起的。就像@State与视图的关系，是相互依赖的。如果我们希望.sink继续订阅，就需要一直使用一个变量来接收.sink的返回值。</p>
-<p>.assign()内容类似，但需要失败类型为Never</p>
-<h4 id="视图监听发布内容"><a href="#视图监听发布内容" class="headerlink" title="视图监听发布内容"></a>视图监听发布内容</h4><p>通过视图修改器onReceive，订阅发布内容</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span><span class="token function">onReceive</span><span class="token punctuation">(</span>publisher<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> thingThePublisherPublishes <span class="token keyword">in</span> <span class="token comment">//每次发布的值</span>
-    <span class="token comment">//发布时执行的闭包</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>会使视图重建，但更多的时候使用onChange</p>
-<h4 id="获取发布者"><a href="#获取发布者" class="headerlink" title="获取发布者"></a>获取发布者</h4><p>上面说到的发布者是由Combine框架提供的，这里的<strong>Foundation</strong>发布商（也可以叫<strong>Foundation</strong>发布者），是由<strong>Foundation</strong>框架提供。</p>
-<ul>
-<li>在@Published变量前面使用$</li>
-<li>多线程获取背景图片使用原始的GCD，但在URLSession，提供dataTaskPublisher发布最终来自互联网上的数据</li>
-<li>Timer类有一个publish(every:)的函数，每秒或几秒发布一次，发布当前日期和时间的发布者</li>
-<li>NotificationCenter通知中心发布器，系统给用户和发布通知</li>
-</ul>
-<h3 id="More-Pesistence"><a href="#More-Pesistence" class="headerlink" title="More Pesistence"></a>More Pesistence</h3><h4 id="Cloud-Kit"><a href="#Cloud-Kit" class="headerlink" title="Cloud Kit"></a>Cloud Kit</h4><p>在云数据库存储内容，数据会出现在用户的全部设备中。包含一种网络上的UserDefaults，在CoreData上表现的很好。任何使用网络的内容都是异步执行的。</p>
-<h4 id="Core-Data"><a href="#Core-Data" class="headerlink" title="Core Data"></a>Core Data</h4><p>是一个面向对象的层，基本上位于关系数据库之上。为数据库中所有的行和表都创建了小的ViewModel。</p>
-<p>具体内容在去年，我会补上的。（又一个坑）</p>
-<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><h4 id="使用URLSession"><a href="#使用URLSession" class="headerlink" title="使用URLSession"></a>使用URLSession</h4><p>用URLSession替换掉原本使用GCD获取背景图片的代码</p>
-<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift">backgroundImageFetchStatus <span class="token operator">=</span> <span class="token punctuation">.</span>fetching
-backgroundImageFetchCancellable<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment">//如果来新的,马上取消旧的</span>
-<span class="token keyword">let</span> session <span class="token operator">=</span> <span class="token class-name">URLSession</span><span class="token punctuation">.</span>shared <span class="token comment">//使用shared初始化url请求器</span>
-<span class="token comment">//Publisher在后台线程执行,UI要在主线程解决</span>
-<span class="token comment">//Output是一个元组,data查找url返回的数据,response会共享请求时的一些数据</span>
-<span class="token keyword">let</span> publisher <span class="token operator">=</span> session<span class="token punctuation">.</span><span class="token function">dataTaskPublisher</span><span class="token punctuation">(</span><span class="token keyword">for</span><span class="token punctuation">:</span> url<span class="token punctuation">)</span> <span class="token comment">//使用映射将数据转换成UIImage</span>
-    <span class="token punctuation">.</span>map <span class="token punctuation">&#123;</span> <span class="token punctuation">(</span>data<span class="token punctuation">,</span> urlResponse<span class="token punctuation">)</span> <span class="token keyword">in</span> <span class="token class-name">UIImage</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> data<span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
-    <span class="token punctuation">.</span><span class="token function">replaceError</span><span class="token punctuation">(</span>with<span class="token punctuation">:</span> <span class="token nil constant">nil</span><span class="token punctuation">)</span>    <span class="token comment">//出现错误时,不报告错误,将值替换成nil</span>
-    <span class="token punctuation">.</span><span class="token function">receive</span><span class="token punctuation">(</span>on<span class="token punctuation">:</span> <span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span>main<span class="token punctuation">)</span> <span class="token comment">//发布给主队列的订阅者,所以后面的.sink发生在主队列</span>
-<span class="token comment">//完成获取时处理图象,并将照片发布</span>
-<span class="token comment">//关闭文档自动停止</span>
-backgroundImageFetchCancellable <span class="token operator">=</span> publisher <span class="token comment">//随时使用cancellable.cancel()取消订阅,离开函数也会局部变量消失也会结束</span>
-    <span class="token comment">//.assign(to: \EmojiArtDocument.backgroundImage, on: self) //发布的失败类型为Never</span>
-    <span class="token punctuation">.</span>sink <span class="token punctuation">&#123;</span> <span class="token punctuation">[</span><span class="token keyword">weak</span> <span class="token keyword">self</span><span class="token punctuation">]</span> image <span class="token keyword">in</span>
-        <span class="token keyword">self</span><span class="token operator">?</span><span class="token punctuation">.</span>backgroundImage <span class="token operator">=</span> image
-        <span class="token keyword">self</span><span class="token operator">?</span><span class="token punctuation">.</span>backgroundImageFetchStatus <span class="token operator">=</span> <span class="token punctuation">(</span>image <span class="token operator">!=</span> <span class="token nil constant">nil</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token punctuation">.</span>idle <span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token function">failed</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
-    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h4 id="视图自适应大小"><a href="#视图自适应大小" class="headerlink" title="视图自适应大小"></a>视图自适应大小</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span><span class="token function">onReceive</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span>$backgroundImage<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> image <span class="token keyword">in</span> <span class="token comment">//$document.backgroundImage是绑定值,不是发布者</span>
-    <span class="token function">zoomToFit</span><span class="token punctuation">(</span>image<span class="token punctuation">,</span> <span class="token keyword">in</span><span class="token punctuation">:</span> geometry<span class="token punctuation">.</span>size <span class="token punctuation">)</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 ]]></content>
       <categories>
@@ -1508,6 +1266,192 @@ private func showBackgroundImageFetchFailedAlert(_ url: URL) &#123;
       </tags>
   </entry>
   <entry>
+    <title>cs193p_note10_Multithreading Demo Gestures</title>
+    <url>/2022/05/19/cs193p-note10/</url>
+    <content><![CDATA[<h3 id="设置图片背景"><a href="#设置图片背景" class="headerlink" title="设置图片背景"></a>设置图片背景</h3><p>接收url和image</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">var</span> found <span class="token operator">=</span> providers<span class="token punctuation">.</span><span class="token function">loadObjects</span><span class="token punctuation">(</span>ofType<span class="token punctuation">:</span> <span class="token constant">URL</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> url <span class="token keyword">in</span>
+           document<span class="token punctuation">.</span><span class="token function">setBackground</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token function">url</span><span class="token punctuation">(</span>url<span class="token punctuation">.</span>imageURL<span class="token punctuation">)</span><span class="token punctuation">)</span>
+       <span class="token punctuation">&#125;</span>
+       <span class="token keyword">if</span> <span class="token operator">!</span>found <span class="token punctuation">&#123;</span>
+           found <span class="token operator">=</span> providers<span class="token punctuation">.</span><span class="token function">loadObjects</span><span class="token punctuation">(</span>ofType<span class="token punctuation">:</span> <span class="token class-name">UIImage</span><span class="token punctuation">.</span><span class="token keyword">self</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> image <span class="token keyword">in</span>
+               <span class="token keyword">if</span> <span class="token keyword">let</span> data <span class="token operator">=</span> image<span class="token punctuation">.</span><span class="token function">jpegData</span><span class="token punctuation">(</span>compressionQuality<span class="token punctuation">:</span> <span class="token number">1.0</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+                   document<span class="token punctuation">.</span><span class="token function">setBackground</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token function">imageData</span><span class="token punctuation">(</span>data<span class="token punctuation">)</span><span class="token punctuation">)</span>
+               <span class="token punctuation">&#125;</span><span class="token comment">//如果是jpg 无损压缩</span>
+           <span class="token punctuation">&#125;</span>
+       <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<p>更新背景图片，不能把backgroundImage变成计算属性，因为在缓慢地网络被获取需要几秒或许一分钟</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token attribute atrule">@Published</span> <span class="token keyword">private</span><span class="token punctuation">(</span><span class="token keyword">set</span><span class="token punctuation">)</span> <span class="token keyword">var</span> emojiArt<span class="token punctuation">:</span> <span class="token class-name">EmojiArtModel</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">didSet</span> <span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> emojiArt<span class="token punctuation">.</span>background <span class="token operator">!=</span> oldValue<span class="token punctuation">.</span>background <span class="token punctuation">&#123;</span>
+            <span class="token function">fetchBackgroundImageDataIfNecessary</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span>
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>使用try来解决抛出错误</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">private</span> <span class="token keyword">func</span> <span class="token function-definition function">fetchBackgroundImageDataIfNecessary</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    backgroundImage <span class="token operator">=</span> <span class="token nil constant">nil</span>
+    <span class="token keyword">switch</span> emojiArt<span class="token punctuation">.</span>background <span class="token punctuation">&#123;</span>
+        <span class="token keyword">case</span> <span class="token punctuation">.</span><span class="token function">url</span><span class="token punctuation">(</span><span class="token keyword">let</span> url<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        <span class="token comment">//获取url</span>
+        <span class="token keyword">let</span> imageData <span class="token operator">=</span> <span class="token keyword">try</span><span class="token operator">?</span> <span class="token class-name">Data</span><span class="token punctuation">(</span>contentsOf<span class="token punctuation">:</span> url<span class="token punctuation">)</span> <span class="token comment">//会阻塞UI</span>
+        <span class="token keyword">if</span> imageData <span class="token operator">!=</span> <span class="token nil constant">nil</span> <span class="token punctuation">&#123;</span>
+            backgroundImage <span class="token operator">=</span> <span class="token class-name">UIImage</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> imageData<span class="token operator">!</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+        <span class="token keyword">case</span> <span class="token punctuation">.</span><span class="token function">imageData</span><span class="token punctuation">(</span><span class="token keyword">let</span> image<span class="token punctuation">)</span><span class="token punctuation">:</span>
+        backgroundImage <span class="token operator">=</span> <span class="token class-name">UIImage</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> image<span class="token punctuation">)</span>
+        <span class="token keyword">case</span> <span class="token punctuation">.</span>blank<span class="token punctuation">:</span>
+        <span class="token keyword">break</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>但是，url耗时很长，要使用多线程解决问题</p>
+<ul>
+<li>self:内部是一个闭包，被放入内存并且坚持到这件事完成运行，闭包是引用类型。通过self把闭包存入内存并指向viewmodel，被保存在堆中，即使关闭文档也无法退出</li>
+</ul>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span><span class="token function">global</span><span class="token punctuation">(</span>qos<span class="token punctuation">:</span> <span class="token punctuation">.</span>userInitiated<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token keyword">async</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">let</span> imageData <span class="token operator">=</span> <span class="token keyword">try</span><span class="token operator">?</span> <span class="token class-name">Data</span><span class="token punctuation">(</span>contentsOf<span class="token punctuation">:</span> url<span class="token punctuation">)</span> <span class="token comment">//会阻塞UI</span>
+    <span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span>main<span class="token punctuation">.</span>asunc<span class="token punctuation">&#123;</span>
+        <span class="token keyword">if</span> imageData <span class="token operator">!=</span> <span class="token nil constant">nil</span> <span class="token punctuation">&#123;</span>
+            <span class="token keyword">self</span><span class="token punctuation">.</span>backgroundImage <span class="token operator">=</span> <span class="token class-name">UIImage</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> imageData<span class="token operator">!</span><span class="token punctuation">)</span> <span class="token comment">//不在后台线程中修改UI</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>弱引用:不强制self在堆中，没有其他人把它放入堆中就会消失，变成nil</li>
+</ul>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span>main<span class="token punctuation">.</span>asunc<span class="token punctuation">&#123;</span> <span class="token punctuation">[</span><span class="token keyword">weak</span> <span class="token keyword">self</span><span class="token punctuation">]</span> <span class="token keyword">in</span> 
+    <span class="token keyword">if</span> imageData <span class="token operator">!=</span> <span class="token nil constant">nil</span> <span class="token punctuation">&#123;</span>
+   		<span class="token keyword">self</span><span class="token operator">?</span><span class="token punctuation">.</span>backgroundImage <span class="token operator">=</span> <span class="token class-name">UIImage</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> imageData<span class="token operator">!</span><span class="token punctuation">)</span> <span class="token comment">//如果self为nil不进行语句操作</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果图片加载时间过长，用户可能会拖动别的图片进入，代码会被再次运行，等第一个图片加载完成时，可能会加载第一张图片。关于异步多线程编程，需要注意每当你从某事回来需要很长知识时，检查世界还是不是你离开时的亚子。</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span>main<span class="token punctuation">.</span><span class="token keyword">async</span> <span class="token punctuation">&#123;</span> <span class="token punctuation">[</span><span class="token keyword">weak</span> <span class="token keyword">self</span><span class="token punctuation">]</span> <span class="token keyword">in</span>
+	<span class="token keyword">if</span> <span class="token keyword">self</span><span class="token operator">?</span><span class="token punctuation">.</span>emojiArt<span class="token punctuation">.</span>background <span class="token operator">==</span> <span class="token class-name">EmojiArtModel</span><span class="token punctuation">.</span><span class="token class-name">Background</span><span class="token punctuation">.</span><span class="token function">url</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+		<span class="token keyword">if</span> imageData <span class="token operator">!=</span> <span class="token nil constant">nil</span> <span class="token punctuation">&#123;</span>
+			<span class="token keyword">self</span><span class="token operator">?</span><span class="token punctuation">.</span>backgroundImage <span class="token operator">=</span> <span class="token class-name">UIImage</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> imageData<span class="token operator">!</span><span class="token punctuation">)</span>
+		<span class="token punctuation">&#125;</span>
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>给用户正在加载的反馈</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token attribute atrule">@Published</span> <span class="token keyword">var</span> backgroundImageFetchStatus <span class="token operator">=</span> <span class="token class-name">BackgroundImageFetchStatus</span><span class="token punctuation">.</span>idle <span class="token comment">//监测加载状态</span>
+<span class="token keyword">enum</span> <span class="token class-name">BackgroundImageFetchStatus</span> <span class="token punctuation">&#123;</span>
+    <span class="token keyword">case</span> idle <span class="token comment">//闲置</span>
+    <span class="token keyword">case</span> fetching <span class="token comment">//加载</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Gestures"><a href="#Gestures" class="headerlink" title="Gestures"></a>Gestures</h3><h4 id="理论知识"><a href="#理论知识" class="headerlink" title="理论知识"></a>理论知识</h4><ul>
+<li><p>使用手势视图修改器让视图识别手势</p>
+<p>  <code>myview.gesture(theGesture)</code>  手势协议</p>
+</li>
+<li><p>创建离散型手势</p>
+<p>  通常只有一个func和var在我们的视图中，甚至只有一个局部变量</p>
+  <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">var</span> theGesture<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">Gesture</span> <span class="token punctuation">&#123;</span>
+	<span class="token keyword">return</span> <span class="token class-name">TapGesture</span><span class="token punctuation">(</span>count<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">//双击手势</span>
+    	<span class="token punctuation">.</span>onEnded<span class="token punctuation">&#123;</span> <span class="token punctuation">&#125;</span> <span class="token comment">//放入需要实现的内容</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<p>  通常离散型手势使用视图修饰符</p>
+  <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift">myview<span class="token punctuation">.</span><span class="token function">onTapGesture</span><span class="token punctuation">(</span>count<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>
+myview<span class="token punctuation">.</span><span class="token function">onLongPressGesture</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+</li>
+<li><p>非离散型手势</p>
+<p>  不仅需要处理手势被识别并且结束，还要监测在捏的全过程中的旋转、大小改变等。</p>
+<p>  <code>DragGesture</code>, <code>MagnificationGesture</code> ,<code>RotationGesture</code> <code>longPressGesture</code>也可以看做非离散，按住是一直更新</p>
+  <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">var</span> theGesture<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">Gesture</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">DragGesture</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span>
+    	<span class="token punctuation">.</span>onEnded <span class="token punctuation">&#123;</span> value <span class="token keyword">in</span> <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>  value值来源于当前监听手势</p>
+<ul>
+<li>DragGesture 拖动手势，一个结构体包含开始和结束位置</li>
+<li>MagnificationGesture 放大捏合手势 手指放大了多少，多远</li>
+<li>RotationGesture 旋转手势，角度</li>
+</ul>
+</li>
+<li><p>非离散手势监听</p>
+  <pre class="line-numbers language-none"><code class="language-none">@GestureState var myGestureState: MyGestureType &#x3D; &lt; &gt;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>  可以存储任何信息让视图自动更新，并在手势进行时重绘自身</p>
+<p>  <strong>当手势结束时，var会回到初始值</strong></p>
+  <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">var</span> theGesture<span class="token punctuation">:</span> <span class="token keyword">some</span> <span class="token class-name">Gesture</span> <span class="token punctuation">&#123;</span>
+	<span class="token class-name">DragGesture</span><span class="token punctuation">(</span><span class="token operator">...</span><span class="token punctuation">)</span>
+		<span class="token punctuation">.</span><span class="token function">updating</span><span class="token punctuation">(</span>$myGestureState<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> value<span class="token punctuation">,</span> myGestureState<span class="token punctuation">,</span> transaction <span class="token keyword">in</span>
+			myGestureState <span class="token operator">=</span> 
+		<span class="token punctuation">&#125;</span>
+		<span class="token punctuation">.</span><span class="token function">onEnded</span> <span class="token punctuation">(</span> value <span class="token keyword">in</span><span class="token punctuation">)</span><span class="token comment">//追踪结束时状态</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<ul>
+<li>.updating 当手指移动时被重复调用</li>
+<li>$ 放在@GestureState变量前面，告诉系统使用哪个变量</li>
+<li>value取决于哪个手势</li>
+<li>myGestureState 一个输入输出参数，唯一方式修改GestureState的值，复制值类型，反悔的时候再复制回去</li>
+<li>transaction 动画相关</li>
+</ul>
+  <pre class="line-numbers language-none"><code class="language-none">DragGesture(...)
+	.onChanged &#123; value in 
+		&#x2F;&#x2F;无法更新状态，只提供价值
+	&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>  只能根据当前状态绘制图形，更新永久状态，手势结束之后不重置</p>
+</li>
+</ul>
+<h4 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h4><ul>
+<li><p>设置双击调整背景适应屏幕</p>
+<p>  设置双击手势效果</p>
+  <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span><span class="token function">gesture</span><span class="token punctuation">(</span><span class="token function">doubleTapToZoom</span><span class="token punctuation">(</span><span class="token keyword">in</span><span class="token punctuation">:</span> geometry<span class="token punctuation">.</span>size<span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword">private</span> <span class="token keyword">func</span> <span class="token function-definition function">doubleTapToZoom</span><span class="token punctuation">(</span><span class="token keyword">in</span> size<span class="token punctuation">:</span> <span class="token class-name">CGSize</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">some</span> <span class="token class-name">Gesture</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">TapGesture</span><span class="token punctuation">(</span>count<span class="token punctuation">:</span> <span class="token number">2</span><span class="token punctuation">)</span>
+    <span class="token punctuation">.</span>onEnded <span class="token punctuation">&#123;</span>
+        withAnimation <span class="token punctuation">&#123;</span>
+            <span class="token function">zoomToFit</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span>backgroundImage<span class="token punctuation">,</span> <span class="token keyword">in</span><span class="token punctuation">:</span> size<span class="token punctuation">)</span>
+        <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>使用捏手势进行缩放</p>
+  <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span><span class="token function">gesture</span><span class="token punctuation">(</span><span class="token function">zoomGesture</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token comment">//缩放手势</span>
+<span class="token keyword">private</span> <span class="token keyword">func</span> <span class="token function-definition function">zoomGesture</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">some</span> <span class="token class-name">Gesture</span> <span class="token punctuation">&#123;</span>
+	<span class="token class-name">MagnificationGesture</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//捏合手势</span>
+		<span class="token punctuation">.</span><span class="token function">updating</span><span class="token punctuation">(</span>$gestureZoomScale<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> latestGestureScale<span class="token punctuation">,</span> ourGestureStateInOut<span class="token punctuation">,</span> transaction <span class="token keyword">in</span><span class="token comment">//手指分开距离</span>
+			ourGestureStateInOut <span class="token operator">=</span> latestGestureScale
+		<span class="token punctuation">&#125;</span>
+    <span class="token punctuation">.</span>onEnded <span class="token punctuation">&#123;</span> gestureScaleAtEnd <span class="token keyword">in</span> <span class="token comment">//是开始手指距离的几倍</span>
+		steadyStateZoomScale <span class="token operator">*=</span> gestureScaleAtEnd
+	<span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+</li>
+<li><p>拖动背景</p>
+  <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">private</span> <span class="token keyword">func</span> <span class="token function-definition function">panGesture</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">some</span> <span class="token class-name">Gesture</span> <span class="token punctuation">&#123;</span>
+    <span class="token class-name">DragGesture</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">.</span><span class="token function">updating</span><span class="token punctuation">(</span>$gesturePanOffset<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> latestDragGestureValue<span class="token punctuation">,</span> gesturePanOffset<span class="token punctuation">,</span> <span class="token omit keyword">_</span> <span class="token keyword">in</span>
+            gesturePanOffset <span class="token operator">=</span> latestDragGestureValue<span class="token punctuation">.</span>translation <span class="token operator">/</span> zoomScale
+        <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">.</span>onEnded <span class="token punctuation">&#123;</span> finalDragGestureValue <span class="token keyword">in</span>
+            steadyStatePanOffset <span class="token operator">=</span> steadyStatePanOffset <span class="token operator">+</span> <span class="token punctuation">(</span>finalDragGestureValue<span class="token punctuation">.</span>translation <span class="token operator">/</span> zoomScale<span class="token punctuation">)</span> <span class="token comment">//图片变大的时候,移动的距离小, translation 结束-开始</span>
+        <span class="token punctuation">&#125;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>  组合两个不同手势</p>
+  <pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span><span class="token function">gesture</span><span class="token punctuation">(</span><span class="token function">panGesture</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">simultaneously</span><span class="token punctuation">(</span>with<span class="token punctuation">:</span> <span class="token function">zoomGesture</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token comment">//组合两个不同手势</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ul>
+]]></content>
+      <categories>
+        <category>ios</category>
+      </categories>
+      <tags>
+        <tag>swift</tag>
+        <tag>cs193p</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CS193p_note5 Properties Layout @ViewBuilder</title>
     <url>/2022/02/28/cs193p-note5/</url>
     <content><![CDATA[<h3 id="Computed-Properties-计算属性"><a href="#Computed-Properties-计算属性" class="headerlink" title="Computed Properties 计算属性"></a>Computed Properties 计算属性</h3><p>不提供存储值，提供读取器和设置器，接收和设置其他属性</p>
@@ -1598,6 +1542,71 @@ private func showBackgroundImageFetchFailedAlert(_ url: URL) &#123;
 		faceUpCardIndices<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>index<span class="token punctuation">)</span>
 		<span class="token punctuation">&#125;</span>
 <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+]]></content>
+      <categories>
+        <category>ios</category>
+      </categories>
+      <tags>
+        <tag>swift</tag>
+        <tag>cs193p</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>cs193p_note13_Published More Persistence</title>
+    <url>/2022/06/09/cs193p-note13/</url>
+    <content><![CDATA[<h3 id="Publisher"><a href="#Publisher" class="headerlink" title="Publisher"></a>Publisher</h3><p>协议。实现发出值的对象。</p>
+<p><code>Publisher&lt;Output, Failure&gt;</code>，Output是发布者发布的内容的类型，Failure通常是一个枚举，必须实现Error，失败后不会抛出。对于发布者，我们可以订阅它、即时转换它的值、把值传送到一些地方。属于Combine框架（可能会后补详细内容）</p>
+<span id="more"></span>
+
+<h4 id="订阅发布者"><a href="#订阅发布者" class="headerlink" title="订阅发布者"></a>订阅发布者</h4><p>当发布没有订阅者，会停止发布</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift">cancellable <span class="token operator">=</span> myPublisher<span class="token punctuation">.</span><span class="token function">sink</span><span class="token punctuation">(</span>
+	receiveCompletion<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> result <span class="token keyword">in</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span><span class="token punctuation">,</span>	<span class="token comment">//完成、失败或其他方式</span>
+	receiveValue<span class="token punctuation">:</span> <span class="token punctuation">&#123;</span> thingThePublisherPublishes <span class="token keyword">in</span> <span class="token operator">...</span> <span class="token punctuation">&#125;</span> <span class="token comment">//随着发布者发布信息被反复调用，获得发布的最新内容</span>
+<span class="token punctuation">)</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>如果调用.sink，发布者是Never，可以忽略 receiveCompletion。</p>
+<p>返回的内容实现了可取消协议 Cancellable，通常使用类型擦出将它处理成AnyCancellable。不需要发布内容时可以使用<code>.cancel()</code>取消，还可以让.sink()订阅者保持活力。当返回cancellable值时.sink将在内存常跓，这是因为.sink指向了cancellable变量。</p>
+<p>当把cancellable设置为nil时它将不会指向.sink返回的任何内容。这也会导致.sink停止工作（内存回收），所以它的生命周期是绑定在一起的。就像@State与视图的关系，是相互依赖的。如果我们希望.sink继续订阅，就需要一直使用一个变量来接收.sink的返回值。</p>
+<p>.assign()内容类似，但需要失败类型为Never</p>
+<h4 id="视图监听发布内容"><a href="#视图监听发布内容" class="headerlink" title="视图监听发布内容"></a>视图监听发布内容</h4><p>通过视图修改器onReceive，订阅发布内容</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span><span class="token function">onReceive</span><span class="token punctuation">(</span>publisher<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> thingThePublisherPublishes <span class="token keyword">in</span> <span class="token comment">//每次发布的值</span>
+    <span class="token comment">//发布时执行的闭包</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>会使视图重建，但更多的时候使用onChange</p>
+<h4 id="获取发布者"><a href="#获取发布者" class="headerlink" title="获取发布者"></a>获取发布者</h4><p>上面说到的发布者是由Combine框架提供的，这里的<strong>Foundation</strong>发布商（也可以叫<strong>Foundation</strong>发布者），是由<strong>Foundation</strong>框架提供。</p>
+<ul>
+<li>在@Published变量前面使用$</li>
+<li>多线程获取背景图片使用原始的GCD，但在URLSession，提供dataTaskPublisher发布最终来自互联网上的数据</li>
+<li>Timer类有一个publish(every:)的函数，每秒或几秒发布一次，发布当前日期和时间的发布者</li>
+<li>NotificationCenter通知中心发布器，系统给用户和发布通知</li>
+</ul>
+<h3 id="More-Pesistence"><a href="#More-Pesistence" class="headerlink" title="More Pesistence"></a>More Pesistence</h3><h4 id="Cloud-Kit"><a href="#Cloud-Kit" class="headerlink" title="Cloud Kit"></a>Cloud Kit</h4><p>在云数据库存储内容，数据会出现在用户的全部设备中。包含一种网络上的UserDefaults，在CoreData上表现的很好。任何使用网络的内容都是异步执行的。</p>
+<h4 id="Core-Data"><a href="#Core-Data" class="headerlink" title="Core Data"></a>Core Data</h4><p>是一个面向对象的层，基本上位于关系数据库之上。为数据库中所有的行和表都创建了小的ViewModel。</p>
+<p>具体内容在去年，我会补上的。（又一个坑）</p>
+<h3 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h3><h4 id="使用URLSession"><a href="#使用URLSession" class="headerlink" title="使用URLSession"></a>使用URLSession</h4><p>用URLSession替换掉原本使用GCD获取背景图片的代码</p>
+<pre class="line-numbers language-swift" data-language="swift"><code class="language-swift">backgroundImageFetchStatus <span class="token operator">=</span> <span class="token punctuation">.</span>fetching
+backgroundImageFetchCancellable<span class="token operator">?</span><span class="token punctuation">.</span><span class="token function">cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token comment">//如果来新的,马上取消旧的</span>
+<span class="token keyword">let</span> session <span class="token operator">=</span> <span class="token class-name">URLSession</span><span class="token punctuation">.</span>shared <span class="token comment">//使用shared初始化url请求器</span>
+<span class="token comment">//Publisher在后台线程执行,UI要在主线程解决</span>
+<span class="token comment">//Output是一个元组,data查找url返回的数据,response会共享请求时的一些数据</span>
+<span class="token keyword">let</span> publisher <span class="token operator">=</span> session<span class="token punctuation">.</span><span class="token function">dataTaskPublisher</span><span class="token punctuation">(</span><span class="token keyword">for</span><span class="token punctuation">:</span> url<span class="token punctuation">)</span> <span class="token comment">//使用映射将数据转换成UIImage</span>
+    <span class="token punctuation">.</span>map <span class="token punctuation">&#123;</span> <span class="token punctuation">(</span>data<span class="token punctuation">,</span> urlResponse<span class="token punctuation">)</span> <span class="token keyword">in</span> <span class="token class-name">UIImage</span><span class="token punctuation">(</span>data<span class="token punctuation">:</span> data<span class="token punctuation">)</span> <span class="token punctuation">&#125;</span>
+    <span class="token punctuation">.</span><span class="token function">replaceError</span><span class="token punctuation">(</span>with<span class="token punctuation">:</span> <span class="token nil constant">nil</span><span class="token punctuation">)</span>    <span class="token comment">//出现错误时,不报告错误,将值替换成nil</span>
+    <span class="token punctuation">.</span><span class="token function">receive</span><span class="token punctuation">(</span>on<span class="token punctuation">:</span> <span class="token class-name">DispatchQueue</span><span class="token punctuation">.</span>main<span class="token punctuation">)</span> <span class="token comment">//发布给主队列的订阅者,所以后面的.sink发生在主队列</span>
+<span class="token comment">//完成获取时处理图象,并将照片发布</span>
+<span class="token comment">//关闭文档自动停止</span>
+backgroundImageFetchCancellable <span class="token operator">=</span> publisher <span class="token comment">//随时使用cancellable.cancel()取消订阅,离开函数也会局部变量消失也会结束</span>
+    <span class="token comment">//.assign(to: \EmojiArtDocument.backgroundImage, on: self) //发布的失败类型为Never</span>
+    <span class="token punctuation">.</span>sink <span class="token punctuation">&#123;</span> <span class="token punctuation">[</span><span class="token keyword">weak</span> <span class="token keyword">self</span><span class="token punctuation">]</span> image <span class="token keyword">in</span>
+        <span class="token keyword">self</span><span class="token operator">?</span><span class="token punctuation">.</span>backgroundImage <span class="token operator">=</span> image
+        <span class="token keyword">self</span><span class="token operator">?</span><span class="token punctuation">.</span>backgroundImageFetchStatus <span class="token operator">=</span> <span class="token punctuation">(</span>image <span class="token operator">!=</span> <span class="token nil constant">nil</span><span class="token punctuation">)</span> <span class="token operator">?</span> <span class="token punctuation">.</span>idle <span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token function">failed</span><span class="token punctuation">(</span>url<span class="token punctuation">)</span>
+    <span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h4 id="视图自适应大小"><a href="#视图自适应大小" class="headerlink" title="视图自适应大小"></a>视图自适应大小</h4><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token punctuation">.</span><span class="token function">onReceive</span><span class="token punctuation">(</span>document<span class="token punctuation">.</span>$backgroundImage<span class="token punctuation">)</span> <span class="token punctuation">&#123;</span> image <span class="token keyword">in</span> <span class="token comment">//$document.backgroundImage是绑定值,不是发布者</span>
+    <span class="token function">zoomToFit</span><span class="token punctuation">(</span>image<span class="token punctuation">,</span> <span class="token keyword">in</span><span class="token punctuation">:</span> geometry<span class="token punctuation">.</span>size <span class="token punctuation">)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
 
 ]]></content>
       <categories>
@@ -1916,52 +1925,6 @@ private func showBackgroundImageFetchFailedAlert(_ url: URL) &#123;
       </tags>
   </entry>
   <entry>
-    <title>信息搜集</title>
-    <url>/2022/03/08/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/</url>
-    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>信息收集的方法有很多，例如不与攻击目标直接接触，从公开信息入手了解攻击，称为被动信息收集，也可以使用网络扫描等手段主动与攻击对象发生接触，称主动信息收集。</p>
-<p>信息收集内容，技术相关信息：IP地址、子域名、数据库的类型、开放的端口，非技术信息：公司信息、个人信息、习惯、发表的东西</p>
-<span id="more"></span>
-
-<h3 id="目标基本信息"><a href="#目标基本信息" class="headerlink" title="目标基本信息"></a>目标基本信息</h3><p>目标基本信息指企业概况、企业理念、规模、产品、工商注册等信息。通过对目标基本信息的收集，攻击者可以对目标形成初步了解，定位其核心价值资产</p>
-<p>公司的官网会介绍公司的组织结构、核心成员、地理位置等信息，“关于”、“了解”、ICP备案证书等，获取了公司地址可以尝试连接无认证或采用WEP加密的wifi热点，准备假wifi让员工加入等。获取法人代表信息，查询同一人名的多个公司，进行突破，可以用来钓鱼</p>
-<h3 id="目标组织架构"><a href="#目标组织架构" class="headerlink" title="目标组织架构"></a>目标组织架构</h3><p>目标组织架构是进行企业流程运转、部门设置及职能规划等最基本的结构依据，对子公司、母公司等进行信息收集，可以扩大攻击面，增加成功率</p>
-<h3 id="目标其他公开信息"><a href="#目标其他公开信息" class="headerlink" title="目标其他公开信息"></a>目标其他公开信息</h3><p>包括新闻、招投标信息</p>
-<h3 id="目标域名信息"><a href="#目标域名信息" class="headerlink" title="目标域名信息"></a>目标域名信息</h3><p>目标域名信息收集包括对目标域名的whois信息、域名历史信息收集、注册人&#x2F;注册邮箱&#x2F;注册电话反查等。技术手段信息等第一个步骤。</p>
-<p>通过whois反查可以通过邮箱查找到同一个邮箱备案的多个域名</p>
-<h3 id="目标子域名"><a href="#目标子域名" class="headerlink" title="目标子域名"></a>目标子域名</h3><p>目标子域名收集包括对目标的二级域名、三级域名、四级域名等进行收集。发现隐藏的、被遗忘的子域名上的应用程序可能意味着发现关键漏洞。子域名收集深度和广度决定了进行攻击时的范围，在一定程度上也决定是否可以成功突破目标边界系统。</p>
-<p>常见的子域名收集手段：</p>
-<ul>
-<li>搜索引擎接口查询，表达式： site:example.com</li>
-<li>一些网站 如dnsdb提供查询子域名的服务</li>
-<li>Ssl证书的Subject Alternative Name字段提供对应的子域名 如 <a href="http://censys.io.certificates/">http://censys.io.certificates</a></li>
-<li>子域名暴力破解，使用暴力破解工具遍历各种子域名</li>
-</ul>
-<h3 id="目标IP"><a href="#目标IP" class="headerlink" title="目标IP"></a>目标IP</h3><p>目标IP即测试目标对外开放的应用于对外服务的IP地址。当子域名无法突破目标时，通过对ip及其开放端口和服务进行攻击，甚至有些不在管理及保护范围内的地址。</p>
-<h3 id="邮件信息收集"><a href="#邮件信息收集" class="headerlink" title="邮件信息收集"></a>邮件信息收集</h3><p>利用邮件系统对目标口令暴力破解或钓鱼</p>
-<h3 id="聊天群组"><a href="#聊天群组" class="headerlink" title="聊天群组"></a>聊天群组</h3><p>群文件等关键信息 搜索公司关键字</p>
-<h3 id="历史漏洞"><a href="#历史漏洞" class="headerlink" title="历史漏洞"></a>历史漏洞</h3><p>以往在互联网公开的目标的各系统漏洞信息。可收集域名信息、IP信息、系统结构等</p>
-<p>通过搜索引擎收集</p>
-<h3 id="网络扫描"><a href="#网络扫描" class="headerlink" title="网络扫描"></a>网络扫描</h3><p>![image-20220311182005093](&#x2F;Users&#x2F;jiangwenrong&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20220311182005093.png)</p>
-<ul>
-<li><p>主机发现</p>
-<p>  ![image-20220311182552226](&#x2F;Users&#x2F;jiangwenrong&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20220311182552226.png)</p>
-</li>
-<li><p>主机识别</p>
-</li>
-<li><p>端口扫描</p>
-</li>
-<li><p>服务识别</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>网络攻击与防护</category>
-      </categories>
-      <tags>
-        <tag>信息搜集</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>cs193p_note9_EmojiArt Drag and Drop Multithreading</title>
     <url>/2022/05/04/cs193p-note9/</url>
     <content><![CDATA[<h3 id="Collection-of-Identifiables"><a href="#Collection-of-Identifiables" class="headerlink" title="Collection of Identifiables"></a>Collection of Identifiables</h3><pre class="line-numbers language-swift" data-language="swift"><code class="language-swift"><span class="token keyword">func</span> <span class="token function-definition function">choose</span><span class="token punctuation">(</span><span class="token omit keyword">_</span> card<span class="token punctuation">:</span> <span class="token class-name">Card</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
@@ -2093,6 +2056,52 @@ queue<span class="token punctuation">.</span>sync <span class="token punctuation
       <tags>
         <tag>swift</tag>
         <tag>cs193p</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>信息搜集</title>
+    <url>/2022/03/08/%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86/</url>
+    <content><![CDATA[<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>信息收集的方法有很多，例如不与攻击目标直接接触，从公开信息入手了解攻击，称为被动信息收集，也可以使用网络扫描等手段主动与攻击对象发生接触，称主动信息收集。</p>
+<p>信息收集内容，技术相关信息：IP地址、子域名、数据库的类型、开放的端口，非技术信息：公司信息、个人信息、习惯、发表的东西</p>
+<span id="more"></span>
+
+<h3 id="目标基本信息"><a href="#目标基本信息" class="headerlink" title="目标基本信息"></a>目标基本信息</h3><p>目标基本信息指企业概况、企业理念、规模、产品、工商注册等信息。通过对目标基本信息的收集，攻击者可以对目标形成初步了解，定位其核心价值资产</p>
+<p>公司的官网会介绍公司的组织结构、核心成员、地理位置等信息，“关于”、“了解”、ICP备案证书等，获取了公司地址可以尝试连接无认证或采用WEP加密的wifi热点，准备假wifi让员工加入等。获取法人代表信息，查询同一人名的多个公司，进行突破，可以用来钓鱼</p>
+<h3 id="目标组织架构"><a href="#目标组织架构" class="headerlink" title="目标组织架构"></a>目标组织架构</h3><p>目标组织架构是进行企业流程运转、部门设置及职能规划等最基本的结构依据，对子公司、母公司等进行信息收集，可以扩大攻击面，增加成功率</p>
+<h3 id="目标其他公开信息"><a href="#目标其他公开信息" class="headerlink" title="目标其他公开信息"></a>目标其他公开信息</h3><p>包括新闻、招投标信息</p>
+<h3 id="目标域名信息"><a href="#目标域名信息" class="headerlink" title="目标域名信息"></a>目标域名信息</h3><p>目标域名信息收集包括对目标域名的whois信息、域名历史信息收集、注册人&#x2F;注册邮箱&#x2F;注册电话反查等。技术手段信息等第一个步骤。</p>
+<p>通过whois反查可以通过邮箱查找到同一个邮箱备案的多个域名</p>
+<h3 id="目标子域名"><a href="#目标子域名" class="headerlink" title="目标子域名"></a>目标子域名</h3><p>目标子域名收集包括对目标的二级域名、三级域名、四级域名等进行收集。发现隐藏的、被遗忘的子域名上的应用程序可能意味着发现关键漏洞。子域名收集深度和广度决定了进行攻击时的范围，在一定程度上也决定是否可以成功突破目标边界系统。</p>
+<p>常见的子域名收集手段：</p>
+<ul>
+<li>搜索引擎接口查询，表达式： site:example.com</li>
+<li>一些网站 如dnsdb提供查询子域名的服务</li>
+<li>Ssl证书的Subject Alternative Name字段提供对应的子域名 如 <a href="http://censys.io.certificates/">http://censys.io.certificates</a></li>
+<li>子域名暴力破解，使用暴力破解工具遍历各种子域名</li>
+</ul>
+<h3 id="目标IP"><a href="#目标IP" class="headerlink" title="目标IP"></a>目标IP</h3><p>目标IP即测试目标对外开放的应用于对外服务的IP地址。当子域名无法突破目标时，通过对ip及其开放端口和服务进行攻击，甚至有些不在管理及保护范围内的地址。</p>
+<h3 id="邮件信息收集"><a href="#邮件信息收集" class="headerlink" title="邮件信息收集"></a>邮件信息收集</h3><p>利用邮件系统对目标口令暴力破解或钓鱼</p>
+<h3 id="聊天群组"><a href="#聊天群组" class="headerlink" title="聊天群组"></a>聊天群组</h3><p>群文件等关键信息 搜索公司关键字</p>
+<h3 id="历史漏洞"><a href="#历史漏洞" class="headerlink" title="历史漏洞"></a>历史漏洞</h3><p>以往在互联网公开的目标的各系统漏洞信息。可收集域名信息、IP信息、系统结构等</p>
+<p>通过搜索引擎收集</p>
+<h3 id="网络扫描"><a href="#网络扫描" class="headerlink" title="网络扫描"></a>网络扫描</h3><p>![image-20220311182005093](&#x2F;Users&#x2F;jiangwenrong&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20220311182005093.png)</p>
+<ul>
+<li><p>主机发现</p>
+<p>  ![image-20220311182552226](&#x2F;Users&#x2F;jiangwenrong&#x2F;Library&#x2F;Application Support&#x2F;typora-user-images&#x2F;image-20220311182552226.png)</p>
+</li>
+<li><p>主机识别</p>
+</li>
+<li><p>端口扫描</p>
+</li>
+<li><p>服务识别</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>网络攻击与防护</category>
+      </categories>
+      <tags>
+        <tag>信息搜集</tag>
       </tags>
   </entry>
 </search>
